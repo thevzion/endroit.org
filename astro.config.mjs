@@ -1,6 +1,8 @@
 // @ts-check
 // @ts-expect-error Astro runs this config in Node; the site does not need Node types.
 import { existsSync, readdirSync } from 'node:fs';
+import react from '@astrojs/react';
+import tailwindcss from '@tailwindcss/vite';
 import { defineConfig } from 'astro/config';
 
 /** @type {import('astro').AstroIntegration} */
@@ -39,7 +41,10 @@ const iterationLab = {
 // https://astro.build/config
 export default defineConfig({
   site: 'https://hairness.dev',
-  integrations: [iterationLab],
+  integrations: [iterationLab, react()],
+  vite: {
+    plugins: [tailwindcss()],
+  },
   devToolbar: {
     enabled: false,
   },

@@ -1,0 +1,853 @@
+<figure class="shift" data-shift-root data-mode="target" aria-labelledby="shift-title">
+	<header class="shift-header">
+		<div>
+			<p>Flagship interactive explainer</p>
+			<h2 id="shift-title">Same system. Clear ownership.</h2>
+		</div>
+		<div class="shift-switch" role="group" aria-label="Agentic organization paradigm">
+			<button type="button" data-shift-mode="target" aria-pressed="true">
+				<span>Current default</span>
+				Target-first
+			</button>
+			<button type="button" data-shift-mode="home" aria-pressed="false">
+				<span>New paradigm</span>
+				Home-first
+			</button>
+		</div>
+	</header>
+
+	<div class="shift-status" aria-live="polite">
+		<span data-shift-state>Target-first</span>
+		<strong data-shift-headline>The Targets own the agentic plumbing.</strong>
+		<p data-shift-description>
+			Methods, agent definitions and working outputs accumulate around each
+			product.
+		</p>
+	</div>
+
+	<div class="shift-stage">
+		<section class="provider-band" aria-label="Providers and generic utilities">
+			<div>
+				<small>Providers host sessions</small>
+				<strong>Codex</strong>
+				<strong>Claude</strong>
+			</div>
+			<p>
+				<span>GitHub</span>
+				<span>Slack</span>
+				<span>Ponytail</span>
+				<small>Generic utilities can stay Provider-managed</small>
+			</p>
+		</section>
+
+		<div class="workspace">
+			<section class="home-space" aria-label="Hairness Home">
+				<header>
+					<div>
+						<small>Source-owned environment</small>
+						<strong>Hairness Home</strong>
+					</div>
+					<span>Front Door</span>
+				</header>
+
+				<div class="home-source">
+					<p><span>SHARED SOURCE</span>Agentic Assets</p>
+					<div class="asset-shelf" id="shift-home-assets"></div>
+					<small>Reusable products for work</small>
+				</div>
+
+				<div class="home-desk">
+					<p><span>PRIVATE CONTINUITY</span>Your Desk</p>
+					<div class="artifact-shelf" id="shift-desk-artifacts"></div>
+					<small>Drafts and working Artifacts stay local until selected</small>
+				</div>
+
+				<footer>
+					<span>Owned</span>
+					<span>Inspectable</span>
+					<span>Versioned</span>
+					<span>Portable</span>
+				</footer>
+			</section>
+
+			<div class="binding-bridge" aria-hidden="true">
+				<span>Bindings</span>
+				<i></i>
+			</div>
+
+			<section class="targets-space" aria-label="Independent product Targets">
+				<article class="repo">
+					<header>
+						<i aria-hidden="true"></i>
+						<div><small>Target A</small><strong>storefront/</strong></div>
+					</header>
+					<div class="repo-tree">
+						<span class="product">src/</span>
+						<span class="product">tests/</span>
+						<span class="product">docs/</span>
+						<div class="token-slot" data-token-slot>
+							<span
+								class="move-token asset-token"
+								data-destination="#shift-home-assets"
+								data-target-label=".agents/review/"
+								data-home-label="Review method"
+							>.agents/review/</span>
+							<span
+								class="move-token asset-token"
+								data-destination="#shift-home-assets"
+								data-target-label="commands/ship.md"
+								data-home-label="Ship workflow"
+							>commands/ship.md</span>
+						</div>
+						<div class="token-slot" data-token-slot>
+							<span
+								class="move-token artifact-token"
+								data-destination="#shift-desk-artifacts"
+								data-target-label="plans/launch.md"
+								data-home-label="Launch plan · Artifact"
+							>plans/launch.md</span>
+						</div>
+					</div>
+					<footer>code · history · delivery</footer>
+				</article>
+
+				<article class="repo">
+					<header>
+						<i aria-hidden="true"></i>
+						<div><small>Target B</small><strong>platform-api/</strong></div>
+					</header>
+					<div class="repo-tree">
+						<span class="product">app/</span>
+						<span class="product">tests/</span>
+						<span class="product">openapi/</span>
+						<div class="token-slot" data-token-slot>
+							<span
+								class="move-token asset-token"
+								data-destination="#shift-home-assets"
+								data-target-label=".claude/researcher.md"
+								data-home-label="Research agent"
+							>.claude/researcher.md</span>
+							<span
+								class="move-token asset-token"
+								data-destination="#shift-home-assets"
+								data-target-label=".specify/memory/"
+								data-home-label="Product method"
+							>.specify/memory/</span>
+						</div>
+						<div class="token-slot" data-token-slot>
+							<span
+								class="move-token artifact-token"
+								data-destination="#shift-desk-artifacts"
+								data-target-label="research/notes.md"
+								data-home-label="Research notes · Artifact"
+							>research/notes.md</span>
+						</div>
+					</div>
+					<footer>code · history · delivery</footer>
+				</article>
+			</section>
+		</div>
+	</div>
+
+	<div class="shift-ledger" aria-label="What changes between paradigms">
+		<p>
+			<span>Product source</span>
+			<strong data-ledger-product>Mixed with agentic infrastructure</strong>
+		</p>
+		<p>
+			<span>Business Assets</span>
+			<strong data-ledger-assets>Copied between Targets</strong>
+		</p>
+		<p>
+			<span>Working outputs</span>
+			<strong data-ledger-artifacts>Scattered through repositories</strong>
+		</p>
+		<p>
+			<span>Providers</span>
+			<strong data-ledger-providers>Formats become implicit sources</strong>
+		</p>
+	</div>
+
+	<figcaption>
+		<strong data-shift-caption-lead>Target-first makes experimentation invasive.</strong>
+		<span data-shift-caption>
+			The repository becomes an accidental Home for every method and Provider
+			you try.
+		</span>
+	</figcaption>
+</figure>
+
+<script>
+	const root = document.querySelector<HTMLElement>('[data-shift-root]');
+
+	if (root) {
+		const buttons = root.querySelectorAll<HTMLButtonElement>('[data-shift-mode]');
+		const tokens = root.querySelectorAll<HTMLElement>('.move-token');
+		const state = root.querySelector<HTMLElement>('[data-shift-state]');
+		const headline = root.querySelector<HTMLElement>('[data-shift-headline]');
+		const description = root.querySelector<HTMLElement>('[data-shift-description]');
+		const captionLead = root.querySelector<HTMLElement>('[data-shift-caption-lead]');
+		const caption = root.querySelector<HTMLElement>('[data-shift-caption]');
+		const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
+
+		const content = {
+			target: {
+				state: 'Target-first',
+				headline: 'The Targets own the agentic plumbing.',
+				description:
+					'Methods, agent definitions and working outputs accumulate around each product.',
+				captionLead: 'Target-first makes experimentation invasive.',
+				caption:
+					'The repository becomes an accidental Home for every method and Provider you try.',
+				ledger: [
+					'Mixed with agentic infrastructure',
+					'Copied between Targets',
+					'Scattered through repositories',
+					'Formats become implicit sources',
+				],
+			},
+			home: {
+				state: 'Home-first',
+				headline: 'The Home owns the agentic environment.',
+				description:
+					'The same system is reorganized around explicit Assets, private continuity and independent Targets.',
+				captionLead: 'Home-first makes experimentation reversible.',
+				caption:
+					'Keep the tools and repositories you already use. Change what owns the environment.',
+				ledger: [
+					'Stays clean and product-owned',
+					'Explicit, canonical and reusable',
+					'Return to the Desk as Artifacts',
+					'Become replaceable projections',
+				],
+			},
+		};
+
+		const ledger = [
+			root.querySelector<HTMLElement>('[data-ledger-product]'),
+			root.querySelector<HTMLElement>('[data-ledger-assets]'),
+			root.querySelector<HTMLElement>('[data-ledger-artifacts]'),
+			root.querySelector<HTMLElement>('[data-ledger-providers]'),
+		];
+
+		tokens.forEach((token, index) => {
+			const origin = token.parentElement;
+			if (!origin) return;
+			origin.id ||= `shift-origin-${index}`;
+			token.dataset.origin = `#${origin.id}`;
+		});
+
+		const move = (mode: keyof typeof content) => {
+			const next = content[mode];
+			if (!next || root.dataset.mode === mode) return;
+
+			const before = new Map(
+				[...tokens].map((token) => [token, token.getBoundingClientRect()]),
+			);
+
+			root.dataset.mode = mode;
+
+			tokens.forEach((token) => {
+				const selector =
+					mode === 'home' ? token.dataset.destination : token.dataset.origin;
+				const destination = selector ? root.querySelector(selector) : null;
+				if (!destination) return;
+				destination.append(token);
+				token.textContent =
+					mode === 'home'
+						? token.dataset.homeLabel ?? token.textContent
+						: token.dataset.targetLabel ?? token.textContent;
+			});
+
+			if (state) state.textContent = next.state;
+			if (headline) headline.textContent = next.headline;
+			if (description) description.textContent = next.description;
+			if (captionLead) captionLead.textContent = next.captionLead;
+			if (caption) caption.textContent = next.caption;
+			ledger.forEach((item, index) => {
+				if (item) item.textContent = next.ledger[index] ?? '';
+			});
+
+			buttons.forEach((button) => {
+				button.setAttribute(
+					'aria-pressed',
+					String(button.dataset.shiftMode === mode),
+				);
+			});
+
+			requestAnimationFrame(() => {
+				tokens.forEach((token) => {
+					const first = before.get(token);
+					if (!first) return;
+					const last = token.getBoundingClientRect();
+					const deltaX = first.left - last.left;
+					const deltaY = first.top - last.top;
+					if (reducedMotion.matches) return;
+
+					token.animate(
+						[
+							{ transform: `translate(${deltaX}px, ${deltaY}px)`, zIndex: 20 },
+							{ transform: 'translate(0, 0)', zIndex: 20 },
+						],
+						{
+							duration: 620,
+							easing: 'cubic-bezier(.2,.8,.2,1)',
+						},
+					);
+				});
+			});
+		};
+
+		buttons.forEach((button) => {
+			button.addEventListener('click', () => {
+				const mode = button.dataset.shiftMode;
+				if (mode === 'target' || mode === 'home') move(mode);
+			});
+		});
+	}
+</script>
+
+<style>
+	.shift {
+		margin: 0;
+		border-top: 1px solid var(--v3-line-strong);
+		border-bottom: 1px solid var(--v3-line-strong);
+		background: var(--v3-paper-soft);
+	}
+
+	.shift-header {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 2rem;
+		padding: 1.25rem var(--v3-gutter);
+		border-bottom: 1px solid var(--v3-line);
+	}
+
+	.shift-header p,
+	.shift-header h2 {
+		margin: 0;
+	}
+
+	.shift-header p {
+		color: var(--v3-copper);
+		font-size: 0.62rem;
+		font-weight: 850;
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+	}
+
+	.shift-header h2 {
+		margin-top: 0.2rem;
+		font-size: 1rem;
+		letter-spacing: -0.02em;
+	}
+
+	.shift-switch {
+		display: flex;
+		padding: 0.25rem;
+		border: 1px solid var(--v3-line-strong);
+		border-radius: 0.55rem;
+		background: var(--v3-paper);
+	}
+
+	.shift-switch button {
+		min-width: 128px;
+		padding: 0.55rem 0.8rem;
+		border: 0;
+		border-radius: 0.35rem;
+		background: transparent;
+		color: var(--v3-muted);
+		font: inherit;
+		font-size: 0.7rem;
+		font-weight: 780;
+		text-align: left;
+		cursor: pointer;
+	}
+
+	.shift-switch button span {
+		display: block;
+		font-size: 0.5rem;
+		font-weight: 700;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+		opacity: 0.65;
+	}
+
+	.shift-switch button[aria-pressed="true"] {
+		background: var(--v3-ink);
+		color: white;
+		box-shadow: 0 5px 14px rgba(21, 26, 24, 0.16);
+	}
+
+	.shift-status {
+		display: grid;
+		grid-template-columns: 120px minmax(260px, 0.8fr) minmax(300px, 1fr);
+		gap: 1.5rem;
+		align-items: baseline;
+		padding: 1.25rem var(--v3-gutter);
+		border-bottom: 1px solid var(--v3-line);
+	}
+
+	.shift-status span {
+		color: var(--v3-copper);
+		font: 750 0.65rem var(--v3-mono);
+	}
+
+	.shift-status strong {
+		font-size: 1rem;
+	}
+
+	.shift-status p {
+		margin: 0;
+		color: var(--v3-muted);
+		font-size: 0.75rem;
+	}
+
+	.shift-stage {
+		padding: var(--v3-gutter);
+	}
+
+	.provider-band {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 1.5rem;
+		padding: 0.9rem 1rem;
+		border: 1px solid var(--v3-line);
+		background: rgba(255, 255, 255, 0.48);
+	}
+
+	.provider-band > div,
+	.provider-band > p {
+		display: flex;
+		align-items: center;
+		gap: 0.75rem;
+		margin: 0;
+	}
+
+	.provider-band small {
+		color: var(--v3-muted);
+		font-size: 0.56rem;
+	}
+
+	.provider-band strong {
+		font-size: 0.72rem;
+	}
+
+	.provider-band p span {
+		color: var(--v3-muted);
+		font: 650 0.61rem var(--v3-mono);
+	}
+
+	.workspace {
+		display: grid;
+		grid-template-columns: 0fr 0 1fr;
+		gap: 0;
+		align-items: stretch;
+		min-height: 470px;
+		padding-top: 1rem;
+		transition: grid-template-columns 520ms cubic-bezier(.2,.8,.2,1), gap 520ms ease;
+	}
+
+	.shift[data-mode="home"] .workspace {
+		grid-template-columns: minmax(400px, 1.15fr) 78px minmax(280px, 0.85fr);
+		gap: 1rem;
+	}
+
+	.home-space {
+		min-width: 0;
+		overflow: hidden;
+		border: 0 solid var(--v3-ink);
+		background: var(--v3-ink);
+		color: white;
+		opacity: 0;
+		transform: scale(0.97);
+		transition: opacity 380ms ease, transform 520ms ease, border-width 0ms 380ms;
+	}
+
+	.shift[data-mode="home"] .home-space {
+		border-width: 1px;
+		opacity: 1;
+		transform: scale(1);
+		transition-delay: 90ms, 0ms, 0ms;
+	}
+
+	.home-space > header {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 1rem;
+		padding: 1rem;
+		border-bottom: 1px solid rgba(255, 255, 255, 0.13);
+	}
+
+	.home-space > header small,
+	.home-space > header strong {
+		display: block;
+	}
+
+	.home-space > header small {
+		color: var(--v3-sand);
+		font-size: 0.54rem;
+		font-weight: 750;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+	}
+
+	.home-space > header strong {
+		font-size: 1rem;
+	}
+
+	.home-space > header > span {
+		padding: 0.35rem 0.55rem;
+		border: 1px solid rgba(255, 255, 255, 0.18);
+		color: rgba(255, 255, 255, 0.62);
+		font-size: 0.54rem;
+	}
+
+	.home-source,
+	.home-desk {
+		margin: 1rem;
+		padding: 0.85rem;
+		border: 1px solid rgba(255, 255, 255, 0.13);
+	}
+
+	.home-source p,
+	.home-desk p {
+		margin: 0 0 0.75rem;
+		font-size: 0.76rem;
+		font-weight: 780;
+	}
+
+	.home-source p span,
+	.home-desk p span {
+		display: block;
+		color: var(--v3-sand);
+		font-size: 0.5rem;
+		letter-spacing: 0.1em;
+	}
+
+	.home-source > small,
+	.home-desk > small {
+		display: block;
+		margin-top: 0.65rem;
+		color: rgba(255, 255, 255, 0.44);
+		font-size: 0.52rem;
+	}
+
+	.home-desk {
+		background: rgba(255, 255, 255, 0.055);
+	}
+
+	.asset-shelf,
+	.artifact-shelf {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.4rem;
+		min-height: 2rem;
+	}
+
+	.home-space > footer {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.45rem;
+		padding: 0 1rem 1rem;
+	}
+
+	.home-space > footer span {
+		color: rgba(255, 255, 255, 0.52);
+		font: 600 0.52rem var(--v3-mono);
+	}
+
+	.binding-bridge {
+		position: relative;
+		display: grid;
+		min-width: 0;
+		place-content: center;
+		overflow: hidden;
+		opacity: 0;
+		transition: opacity 200ms ease;
+	}
+
+	.shift[data-mode="home"] .binding-bridge {
+		opacity: 1;
+		transition-delay: 360ms;
+	}
+
+	.binding-bridge i {
+		position: absolute;
+		top: 50%;
+		right: 0;
+		left: 0;
+		height: 1px;
+		background: var(--v3-line-strong);
+	}
+
+	.binding-bridge i::after {
+		content: "";
+		position: absolute;
+		top: -3px;
+		right: 0;
+		width: 7px;
+		height: 7px;
+		border-top: 1px solid var(--v3-ink);
+		border-right: 1px solid var(--v3-ink);
+		transform: rotate(45deg);
+	}
+
+	.binding-bridge span {
+		z-index: 1;
+		padding: 0.2rem 0.35rem;
+		background: var(--v3-paper-soft);
+		color: var(--v3-muted);
+		font: 700 0.52rem var(--v3-mono);
+	}
+
+	.targets-space {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 1rem;
+		min-width: 0;
+		transition: grid-template-columns 420ms ease;
+	}
+
+	.shift[data-mode="home"] .targets-space {
+		grid-template-columns: 1fr;
+	}
+
+	.repo {
+		display: flex;
+		min-width: 0;
+		flex-direction: column;
+		border: 1px solid var(--v3-line-strong);
+		background: var(--v3-paper);
+		box-shadow: 5px 5px 0 rgba(203, 189, 166, 0.35);
+	}
+
+	.repo > header {
+		display: flex;
+		align-items: center;
+		gap: 0.65rem;
+		padding: 0.85rem 1rem;
+		border-bottom: 1px solid var(--v3-line);
+	}
+
+	.repo > header i {
+		width: 0.65rem;
+		height: 0.48rem;
+		background: var(--v3-copper);
+	}
+
+	.repo > header small,
+	.repo > header strong {
+		display: block;
+	}
+
+	.repo > header small {
+		color: var(--v3-muted);
+		font-size: 0.5rem;
+		text-transform: uppercase;
+	}
+
+	.repo > header strong {
+		font: 700 0.68rem var(--v3-mono);
+	}
+
+	.repo-tree {
+		display: grid;
+		align-content: start;
+		gap: 0.3rem;
+		flex: 1;
+		padding: 1rem;
+	}
+
+	.repo-tree > .product {
+		color: var(--v3-muted);
+		font: 600 0.63rem var(--v3-mono);
+	}
+
+	.token-slot {
+		display: grid;
+		gap: 0.3rem;
+		min-height: 0.3rem;
+	}
+
+	.token-slot:first-of-type {
+		margin-top: 0.45rem;
+		padding-top: 0.55rem;
+		border-top: 1px dashed var(--v3-line);
+	}
+
+	.move-token {
+		position: relative;
+		display: inline-flex;
+		width: max-content;
+		max-width: 100%;
+		padding: 0.3rem 0.45rem;
+		border-left: 2px solid var(--v3-copper);
+		background: rgba(183, 91, 54, 0.08);
+		color: var(--v3-copper-dark);
+		font: 650 0.58rem var(--v3-mono);
+		white-space: nowrap;
+	}
+
+	.artifact-token {
+		border-left-color: var(--v3-blue);
+		background: rgba(73, 116, 132, 0.09);
+		color: var(--v3-blue);
+	}
+
+	.shift[data-mode="home"] .asset-shelf .move-token,
+	.shift[data-mode="home"] .artifact-shelf .move-token {
+		border: 1px solid rgba(255, 255, 255, 0.14);
+		border-left: 2px solid var(--v3-sand);
+		background: rgba(255, 255, 255, 0.07);
+		color: white;
+	}
+
+	.shift[data-mode="home"] .artifact-shelf .move-token {
+		border-left-color: var(--v3-sky);
+	}
+
+	.repo > footer {
+		padding: 0.65rem 1rem;
+		border-top: 1px solid var(--v3-line);
+		color: var(--v3-muted);
+		font: 600 0.51rem var(--v3-mono);
+	}
+
+	.shift-ledger {
+		display: grid;
+		grid-template-columns: repeat(4, 1fr);
+		border-top: 1px solid var(--v3-line);
+	}
+
+	.shift-ledger p {
+		min-height: 92px;
+		margin: 0;
+		padding: 1rem;
+		border-right: 1px solid var(--v3-line);
+	}
+
+	.shift-ledger p:last-child {
+		border-right: 0;
+	}
+
+	.shift-ledger span,
+	.shift-ledger strong {
+		display: block;
+	}
+
+	.shift-ledger span {
+		color: var(--v3-muted);
+		font-size: 0.53rem;
+		letter-spacing: 0.06em;
+		text-transform: uppercase;
+	}
+
+	.shift-ledger strong {
+		margin-top: 0.4rem;
+		font-size: 0.68rem;
+		line-height: 1.35;
+	}
+
+	.shift figcaption {
+		display: grid;
+		grid-template-columns: minmax(240px, 0.7fr) 1fr;
+		gap: 2rem;
+		padding: 1.2rem var(--v3-gutter);
+		border-top: 1px solid var(--v3-line);
+	}
+
+	.shift figcaption strong {
+		color: var(--v3-copper);
+		font-size: 0.82rem;
+	}
+
+	.shift figcaption span {
+		color: var(--v3-muted);
+		font-size: 0.75rem;
+	}
+
+	@media (max-width: 820px) {
+		.shift-header,
+		.shift-status,
+		.shift figcaption {
+			display: grid;
+			grid-template-columns: 1fr;
+		}
+
+		.shift-switch {
+			width: 100%;
+		}
+
+		.shift-switch button {
+			flex: 1;
+		}
+
+		.workspace,
+		.shift[data-mode="home"] .workspace {
+			grid-template-columns: 1fr;
+			gap: 1rem;
+		}
+
+		.home-space {
+			display: none;
+		}
+
+		.shift[data-mode="home"] .home-space {
+			display: block;
+		}
+
+		.binding-bridge {
+			display: none;
+		}
+
+		.targets-space,
+		.shift[data-mode="home"] .targets-space {
+			grid-template-columns: 1fr;
+		}
+
+		.shift-ledger {
+			grid-template-columns: 1fr 1fr;
+		}
+
+		.shift-ledger p:nth-child(2) {
+			border-right: 0;
+		}
+
+		.shift-ledger p:nth-child(-n + 2) {
+			border-bottom: 1px solid var(--v3-line);
+		}
+	}
+
+	@media (max-width: 520px) {
+		.provider-band {
+			align-items: flex-start;
+			flex-direction: column;
+		}
+
+		.provider-band > p {
+			flex-wrap: wrap;
+		}
+
+		.shift-ledger {
+			grid-template-columns: 1fr;
+		}
+
+		.shift-ledger p {
+			border-right: 0;
+			border-bottom: 1px solid var(--v3-line);
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.workspace,
+		.home-space,
+		.binding-bridge,
+		.targets-space {
+			transition: none;
+		}
+	}
+</style>
