@@ -1,0 +1,823 @@
+---
+import HomeFlow from '../../../components/HomeFlow.astro';
+import '../../../styles/global.css';
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="robots" content="noindex, nofollow" />
+		<title>Hairness Diagram Lab</title>
+	</head>
+	<body>
+		<main class="lab">
+			<header class="lab-header">
+				<div>
+					<p class="kicker">Local design surface</p>
+					<h1>Hairness diagram lab</h1>
+				</div>
+				<p>
+					One system, three reading priorities. Compare the hierarchy, the
+					ownership model and the compounding loop before promoting one.
+				</p>
+			</header>
+
+			<section class="iteration" aria-labelledby="baseline-title">
+				<div class="iteration-heading">
+					<div>
+						<p class="version">00 · Current baseline</p>
+						<h2 id="baseline-title">Topology first</h2>
+					</div>
+					<p>
+						Clear separation, weak story. The return loop reads like a note
+						instead of the reason the system exists.
+					</p>
+				</div>
+				<HomeFlow />
+			</section>
+
+			<section class="iteration" aria-labelledby="machine-title">
+				<div class="iteration-heading">
+					<div>
+						<p class="version">01 · Candidate</p>
+						<h2 id="machine-title">The living Home</h2>
+					</div>
+					<p>
+						The complete topology stays visible while the Artifact → human
+						curation → better Asset loop becomes part of the machine.
+					</p>
+				</div>
+
+				<figure class="diagram diagram-machine" aria-labelledby="machine-caption">
+					<div class="machine-grid">
+						<div class="outside outside-providers">
+							<p class="zone-label">Replaceable providers</p>
+							<div class="chips">
+								<span>Codex</span>
+								<span>Claude</span>
+							</div>
+						</div>
+
+						<div class="rail rail-enter" aria-hidden="true">
+							<i class="packet packet-agent"></i>
+						</div>
+
+						<div class="home">
+							<div class="home-title">
+								<div>
+									<p>Source-owned environment</p>
+									<strong>Hairness Home</strong>
+								</div>
+								<span class="door">Front Door</span>
+							</div>
+
+							<div class="home-floor">
+								<div class="room desk">
+									<span>01</span>
+									<strong>Desk</strong>
+									<small>orients</small>
+								</div>
+								<div class="room assets">
+									<span>02</span>
+									<strong>Assets <i>v2</i></strong>
+									<small>equips</small>
+								</div>
+								<div class="room artifacts">
+									<span>04</span>
+									<strong>Artifacts</strong>
+									<small>retain evidence</small>
+								</div>
+								<div class="room curator">
+									<span>05</span>
+									<strong>Human curation</strong>
+									<small>selects what compounds</small>
+								</div>
+							</div>
+
+							<div class="inner-loop" aria-label="Curated compounding loop">
+								<span>Artifact</span>
+								<i aria-hidden="true">→</i>
+								<span>Human judgment</span>
+								<i aria-hidden="true">→</i>
+								<span>Better Asset</span>
+								<b class="packet packet-return" aria-hidden="true"></b>
+							</div>
+						</div>
+
+						<div class="rail rail-binding" aria-hidden="true">
+							<span>Binding</span>
+							<i class="packet packet-work"></i>
+						</div>
+
+						<div class="outside outside-targets">
+							<p class="zone-label">Independent Targets</p>
+							<div class="target-stack">
+								<span>Application</span>
+								<span>API</span>
+								<span>Documentation</span>
+							</div>
+							<small>code · history · delivery</small>
+						</div>
+					</div>
+
+					<div class="return-rail" aria-hidden="true">
+						<span>work returns as an Artifact</span>
+						<i class="packet packet-artifact"></i>
+					</div>
+
+					<figcaption id="machine-caption">
+						Agents come and go. Targets stay independent. The Home retains
+						what human judgment chooses to make reusable.
+					</figcaption>
+				</figure>
+			</section>
+
+			<section class="iteration" aria-labelledby="loop-title">
+				<div class="iteration-heading">
+					<div>
+						<p class="version">02 · Candidate</p>
+						<h2 id="loop-title">The compounding loop</h2>
+					</div>
+					<p>
+						The value story dominates: each pass through a Target can leave
+						the next agent better equipped.
+					</p>
+				</div>
+
+				<figure class="diagram diagram-loop" aria-labelledby="loop-caption">
+					<div class="loop-stage">
+						<div class="loop-entry">
+							<p class="zone-label">Any provider</p>
+							<div class="chips">
+								<span>Codex</span>
+								<span>Claude</span>
+							</div>
+							<i aria-hidden="true">↓</i>
+						</div>
+
+						<div class="loop-home">
+							<div class="loop-home-title">
+								<p>Hairness Home</p>
+								<strong>Own the learning loop.</strong>
+							</div>
+
+							<ol class="cycle">
+								<li class="cycle-step step-desk">
+									<span>1</span>
+									<div><strong>Desk</strong><small>Orient</small></div>
+								</li>
+								<li class="cycle-step step-assets">
+									<span>2</span>
+									<div><strong>Assets</strong><small>Equip</small></div>
+								</li>
+								<li class="cycle-step step-target">
+									<span>3</span>
+									<div><strong>Target</strong><small>Work through a Binding</small></div>
+								</li>
+								<li class="cycle-step step-artifact">
+									<span>4</span>
+									<div><strong>Artifact</strong><small>Return evidence</small></div>
+								</li>
+								<li class="cycle-step step-human">
+									<span>5</span>
+									<div><strong>Human</strong><small>Curate</small></div>
+								</li>
+							</ol>
+
+							<div class="capital">
+								<span>Owned agentic capital</span>
+								<strong>Assets get better, not just bigger.</strong>
+							</div>
+						</div>
+					</div>
+
+					<figcaption id="loop-caption">
+						The provider supplies the agent. The Target supplies the work.
+						The Home owns what can improve the next pass.
+					</figcaption>
+				</figure>
+			</section>
+		</main>
+	</body>
+</html>
+
+<style>
+	:global(body) {
+		background:
+			linear-gradient(rgba(244, 239, 229, 0.96), rgba(244, 239, 229, 0.96)),
+			repeating-linear-gradient(90deg, transparent 0 47px, rgba(23, 25, 22, 0.06) 48px);
+	}
+
+	.lab {
+		width: min(1480px, calc(100% - 2rem));
+		margin-inline: auto;
+		padding: clamp(2rem, 6vw, 6rem) 0 8rem;
+	}
+
+	.lab-header,
+	.iteration-heading {
+		display: grid;
+		grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr);
+		gap: 3rem;
+		align-items: end;
+	}
+
+	.lab-header {
+		padding-bottom: 4rem;
+		border-bottom: 1px solid var(--line-strong);
+	}
+
+	.lab-header h1 {
+		margin: 0;
+		font-size: clamp(3rem, 7vw, 7rem);
+	}
+
+	.lab-header > p,
+	.iteration-heading > p {
+		max-width: 48rem;
+		margin: 0;
+		color: var(--muted);
+	}
+
+	.kicker,
+	.version,
+	.zone-label {
+		margin: 0 0 0.75rem;
+		color: var(--copper-dark);
+		font-size: 0.7rem;
+		font-weight: 850;
+		letter-spacing: 0.13em;
+		text-transform: uppercase;
+	}
+
+	.iteration {
+		padding: 5rem 0;
+		border-bottom: 1px solid var(--line-strong);
+	}
+
+	.iteration-heading h2 {
+		margin: 0;
+		font-size: clamp(2.3rem, 5vw, 4.8rem);
+	}
+
+	.diagram {
+		position: relative;
+		margin: 3rem 0 0;
+		padding: clamp(1rem, 2.5vw, 2.5rem);
+		overflow: hidden;
+		border: 1px solid var(--line-strong);
+		border-radius: 2rem;
+		background: rgba(255, 250, 240, 0.86);
+		box-shadow: var(--shadow-soft);
+	}
+
+	.machine-grid {
+		display: grid;
+		grid-template-columns: minmax(140px, 0.7fr) 72px minmax(480px, 2.5fr) 90px minmax(160px, 0.85fr);
+		align-items: center;
+	}
+
+	.outside {
+		padding: 1.25rem;
+		border: 1px solid var(--line);
+		border-radius: 1rem;
+		background: var(--paper-strong);
+	}
+
+	.chips,
+	.target-stack {
+		display: grid;
+		gap: 0.5rem;
+	}
+
+	.chips span,
+	.target-stack span {
+		padding: 0.6rem 0.7rem;
+		border: 1px solid var(--line);
+		border-radius: 0.6rem;
+		background: white;
+		font-size: 0.78rem;
+		font-weight: 760;
+	}
+
+	.target-stack span {
+		box-shadow: 3px 3px 0 var(--sand);
+	}
+
+	.outside small {
+		display: block;
+		margin-top: 0.9rem;
+		color: var(--muted);
+		font-size: 0.67rem;
+	}
+
+	.rail {
+		position: relative;
+		height: 2px;
+		background: var(--line-strong);
+	}
+
+	.rail::after {
+		content: "";
+		position: absolute;
+		top: -4px;
+		right: 0;
+		width: 8px;
+		height: 8px;
+		border-top: 2px solid var(--ink);
+		border-right: 2px solid var(--ink);
+		transform: rotate(45deg);
+	}
+
+	.rail-binding span {
+		position: absolute;
+		top: 0.8rem;
+		left: 50%;
+		transform: translateX(-50%);
+		color: var(--muted);
+		font-size: 0.62rem;
+		font-weight: 850;
+		letter-spacing: 0.1em;
+		text-transform: uppercase;
+	}
+
+	.home {
+		position: relative;
+		padding: 1.25rem;
+		border-radius: 1.35rem;
+		background: var(--night);
+		color: var(--cream);
+		box-shadow: 0 24px 70px rgba(28, 34, 33, 0.28);
+	}
+
+	.home-title {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 1rem;
+		padding: 0.25rem 0.25rem 1.1rem;
+	}
+
+	.home-title p,
+	.home-title strong {
+		display: block;
+		margin: 0;
+	}
+
+	.home-title p {
+		color: var(--sand);
+		font-size: 0.65rem;
+		font-weight: 800;
+		letter-spacing: 0.09em;
+		text-transform: uppercase;
+	}
+
+	.home-title strong {
+		font-size: 1.35rem;
+	}
+
+	.door {
+		padding: 0.45rem 0.75rem;
+		border-radius: 999px;
+		background: var(--copper);
+		font-size: 0.65rem;
+		font-weight: 850;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+	}
+
+	.home-floor {
+		display: grid;
+		grid-template-columns: repeat(4, 1fr);
+		gap: 0.6rem;
+	}
+
+	.room {
+		min-height: 116px;
+		padding: 0.8rem;
+		border: 1px solid rgba(249, 246, 239, 0.16);
+		border-radius: 0.75rem;
+		background: rgba(249, 246, 239, 0.06);
+	}
+
+	.room > span {
+		display: block;
+		margin-bottom: 1.65rem;
+		color: var(--sand);
+		font: 700 0.65rem "SFMono-Regular", Consolas, monospace;
+	}
+
+	.room strong,
+	.room small {
+		display: block;
+	}
+
+	.room strong {
+		font-size: 0.78rem;
+	}
+
+	.room strong i {
+		color: var(--sand);
+		font-style: normal;
+	}
+
+	.room small {
+		color: rgba(249, 246, 239, 0.55);
+		font-size: 0.65rem;
+	}
+
+	.curator {
+		border-color: rgba(227, 195, 159, 0.48);
+		background: rgba(183, 91, 54, 0.17);
+	}
+
+	.inner-loop {
+		position: relative;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 0.6rem;
+		margin-top: 0.7rem;
+		padding: 0.65rem 1rem;
+		border: 1px solid rgba(249, 246, 239, 0.14);
+		border-radius: 999px;
+		color: rgba(249, 246, 239, 0.68);
+		font-size: 0.67rem;
+		font-weight: 700;
+	}
+
+	.inner-loop i {
+		color: var(--sand);
+		font-style: normal;
+	}
+
+	.return-rail {
+		position: relative;
+		width: 70%;
+		height: 2.2rem;
+		margin: 1.4rem 8% 0 auto;
+		border: 1px solid var(--line-strong);
+		border-top: 0;
+		border-radius: 0 0 999px 999px;
+	}
+
+	.return-rail::before {
+		content: "";
+		position: absolute;
+		top: -5px;
+		left: -1px;
+		width: 8px;
+		height: 8px;
+		border-bottom: 2px solid var(--ink);
+		border-left: 2px solid var(--ink);
+		transform: rotate(45deg);
+	}
+
+	.return-rail span {
+		position: absolute;
+		top: 0.55rem;
+		left: 50%;
+		transform: translateX(-50%);
+		padding-inline: 0.55rem;
+		background: var(--paper-strong);
+		color: var(--muted);
+		font-size: 0.65rem;
+		font-weight: 750;
+		white-space: nowrap;
+	}
+
+	.packet {
+		position: absolute;
+		z-index: 2;
+		width: 9px;
+		height: 9px;
+		border-radius: 50%;
+		background: var(--copper);
+		box-shadow: 0 0 0 5px rgba(183, 91, 54, 0.15);
+	}
+
+	.packet-agent {
+		top: -4px;
+		left: 0;
+		animation: enter 7s ease-in-out infinite;
+	}
+
+	.packet-work {
+		top: -4px;
+		left: 0;
+		animation: enter 7s 2s ease-in-out infinite;
+	}
+
+	.packet-artifact {
+		top: -4px;
+		right: 0;
+		border-radius: 2px;
+		background: var(--sky-dark);
+		animation: return 7s 3.7s ease-in-out infinite;
+	}
+
+	.packet-return {
+		top: calc(50% - 4px);
+		left: 24%;
+		width: 7px;
+		height: 7px;
+		animation: compound 7s 5.4s ease-in-out infinite;
+	}
+
+	.diagram figcaption {
+		margin-top: 1.5rem;
+		padding-top: 1rem;
+		border-top: 1px solid var(--line);
+		color: var(--muted);
+		font-size: 0.75rem;
+		text-align: center;
+	}
+
+	.loop-stage {
+		display: grid;
+		grid-template-columns: 180px minmax(520px, 1fr);
+		gap: 2rem;
+		align-items: center;
+	}
+
+	.loop-entry {
+		text-align: center;
+	}
+
+	.loop-entry i {
+		display: block;
+		margin-top: 1rem;
+		color: var(--copper);
+		font-size: 1.5rem;
+		font-style: normal;
+	}
+
+	.loop-home {
+		position: relative;
+		min-height: 480px;
+		padding: 2rem;
+		overflow: hidden;
+		border-radius: 50%;
+		background:
+			radial-gradient(circle, rgba(183, 91, 54, 0.14) 0 25%, transparent 26%),
+			var(--night);
+		color: var(--cream);
+		box-shadow: 0 30px 90px rgba(28, 34, 33, 0.25);
+	}
+
+	.loop-home-title {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		z-index: 2;
+		width: 210px;
+		transform: translate(-50%, -50%);
+		text-align: center;
+	}
+
+	.loop-home-title p {
+		margin: 0 0 0.5rem;
+		color: var(--sand);
+		font-size: 0.7rem;
+		font-weight: 850;
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+	}
+
+	.loop-home-title strong {
+		display: block;
+		font-size: 1.55rem;
+		line-height: 1.05;
+	}
+
+	.cycle {
+		position: absolute;
+		inset: 1.5rem;
+		margin: 0;
+		padding: 0;
+		list-style: none;
+		animation: halo 7s ease-in-out infinite;
+	}
+
+	.cycle::before {
+		content: "";
+		position: absolute;
+		inset: 13%;
+		border: 1px dashed rgba(227, 195, 159, 0.42);
+		border-radius: 50%;
+	}
+
+	.cycle-step {
+		position: absolute;
+		display: flex;
+		gap: 0.55rem;
+		align-items: center;
+		min-width: 145px;
+		padding: 0.65rem;
+		border: 1px solid rgba(249, 246, 239, 0.18);
+		border-radius: 0.75rem;
+		background: #252c2b;
+	}
+
+	.cycle-step > span {
+		display: grid;
+		flex: 0 0 1.65rem;
+		height: 1.65rem;
+		place-items: center;
+		border-radius: 50%;
+		background: var(--copper);
+		font-size: 0.68rem;
+		font-weight: 850;
+	}
+
+	.cycle-step strong,
+	.cycle-step small {
+		display: block;
+	}
+
+	.cycle-step strong {
+		font-size: 0.75rem;
+	}
+
+	.cycle-step small {
+		color: rgba(249, 246, 239, 0.58);
+		font-size: 0.62rem;
+	}
+
+	.step-desk {
+		top: 0;
+		left: 50%;
+		transform: translateX(-50%);
+	}
+
+	.step-assets {
+		top: 25%;
+		right: 0;
+	}
+
+	.step-target {
+		right: 8%;
+		bottom: 3%;
+	}
+
+	.step-artifact {
+		bottom: 3%;
+		left: 8%;
+	}
+
+	.step-human {
+		top: 25%;
+		left: 0;
+	}
+
+	.capital {
+		position: absolute;
+		right: 2rem;
+		bottom: 45%;
+		display: none;
+	}
+
+	@keyframes enter {
+		0%, 8% { left: 0; opacity: 0; }
+		14% { opacity: 1; }
+		34% { left: calc(100% - 9px); opacity: 1; }
+		42%, 100% { left: calc(100% - 9px); opacity: 0; }
+	}
+
+	@keyframes return {
+		0%, 8% { right: 0; opacity: 0; }
+		14% { opacity: 1; }
+		34% { right: calc(100% - 9px); opacity: 1; }
+		42%, 100% { right: calc(100% - 9px); opacity: 0; }
+	}
+
+	@keyframes compound {
+		0%, 8% { left: 24%; opacity: 0; }
+		14% { opacity: 1; }
+		34% { left: 78%; opacity: 1; }
+		42%, 100% { left: 78%; opacity: 0; }
+	}
+
+	@keyframes halo {
+		0%, 68%, 100% { filter: drop-shadow(0 0 0 transparent); }
+		76%, 88% { filter: drop-shadow(0 0 16px rgba(183, 91, 54, 0.28)); }
+	}
+
+	@media (max-width: 980px) {
+		.machine-grid,
+		.loop-stage {
+			grid-template-columns: 1fr;
+			gap: 0.8rem;
+		}
+
+		.rail {
+			width: 2px;
+			height: 42px;
+			margin-inline: auto;
+		}
+
+		.rail::after {
+			top: auto;
+			right: -4px;
+			bottom: 0;
+			transform: rotate(135deg);
+		}
+
+		.rail-binding span {
+			top: 50%;
+			left: 1rem;
+			transform: translateY(-50%);
+		}
+
+		.packet-agent,
+		.packet-work {
+			top: 0;
+			left: -4px;
+			animation-name: enterVertical;
+		}
+
+		.return-rail {
+			display: none;
+		}
+
+		.loop-entry i {
+			margin-bottom: 0.5rem;
+		}
+
+		.loop-home {
+			border-radius: 2rem;
+		}
+	}
+
+	@media (max-width: 720px) {
+		.lab-header,
+		.iteration-heading {
+			grid-template-columns: 1fr;
+			gap: 1.25rem;
+		}
+
+		.home-floor {
+			grid-template-columns: 1fr 1fr;
+		}
+
+		.inner-loop {
+			flex-wrap: wrap;
+			border-radius: 0.75rem;
+		}
+
+		.loop-home {
+			display: grid;
+			min-height: auto;
+			gap: 1rem;
+			padding: 1rem;
+			background: var(--night);
+		}
+
+		.loop-home-title,
+		.cycle,
+		.cycle-step {
+			position: static;
+			width: auto;
+			transform: none;
+		}
+
+		.loop-home-title {
+			padding: 1rem;
+			text-align: left;
+		}
+
+		.cycle {
+			display: grid;
+			gap: 0.5rem;
+			animation: none;
+		}
+
+		.cycle::before {
+			display: none;
+		}
+
+		.cycle-step {
+			min-width: 0;
+		}
+	}
+
+	@keyframes enterVertical {
+		0%, 8% { top: 0; opacity: 0; }
+		14% { opacity: 1; }
+		34% { top: calc(100% - 9px); opacity: 1; }
+		42%, 100% { top: calc(100% - 9px); opacity: 0; }
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.packet,
+		.cycle {
+			animation: none;
+		}
+
+		.packet {
+			display: none;
+		}
+	}
+</style>

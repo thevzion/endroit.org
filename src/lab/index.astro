@@ -1,0 +1,150 @@
+---
+import '../styles/global.css';
+
+const iterations = Object.keys(import.meta.glob('./iterations/*/Page.astro'))
+	.map((path) => {
+		const slug = path.split('/').at(-2) ?? '';
+		const title = slug
+			.replace(/^\d+-/, '')
+			.split('-')
+			.map((word) => word[0]?.toUpperCase() + word.slice(1))
+			.join(' ');
+
+		return { slug, title };
+	})
+	.sort((a, b) => b.slug.localeCompare(a.slug));
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="robots" content="noindex, nofollow" />
+		<title>Hairness Iteration Lab</title>
+	</head>
+	<body>
+		<main>
+			<header>
+				<p>Local only · Hairness.dev</p>
+				<h1>Iteration lab</h1>
+				<span>
+					Each page is a preserved direction. Add a numbered Astro file to
+					<code>src/lab/iterations</code> to start the next one. Each iteration
+					can keep its own components, styles and approach.
+				</span>
+			</header>
+
+			<nav aria-label="Landing iterations">
+				{
+					iterations.map(({ slug, title }, index) => (
+						<a href={`/lab/${slug}`}>
+							<small>{slug.split('-')[0]}</small>
+							<div>
+								<strong>{title}</strong>
+								<span>{index === 0 ? 'Latest iteration' : 'Preserved exploration'}</span>
+							</div>
+							<i aria-hidden="true">↗</i>
+						</a>
+					))
+				}
+			</nav>
+		</main>
+	</body>
+</html>
+
+<style>
+	:global(body) {
+		min-height: 100svh;
+		background:
+			radial-gradient(circle at 12% 8%, rgba(183, 91, 54, 0.14), transparent 28rem),
+			var(--paper);
+	}
+
+	main {
+		width: min(980px, calc(100% - 2rem));
+		margin-inline: auto;
+		padding: clamp(4rem, 10vw, 9rem) 0;
+	}
+
+	header {
+		display: grid;
+		grid-template-columns: 1fr minmax(280px, 0.55fr);
+		gap: 2rem;
+		align-items: end;
+		padding-bottom: 3rem;
+		border-bottom: 1px solid var(--line-strong);
+	}
+
+	header p {
+		grid-column: 1 / -1;
+		margin: 0;
+		color: var(--copper-dark);
+		font-size: 0.7rem;
+		font-weight: 850;
+		letter-spacing: 0.14em;
+		text-transform: uppercase;
+	}
+
+	h1 {
+		margin: 0;
+		font-size: clamp(4rem, 11vw, 8.5rem);
+	}
+
+	header > span {
+		color: var(--muted);
+	}
+
+	code {
+		font-size: 0.78em;
+	}
+
+	nav {
+		display: grid;
+	}
+
+	nav a {
+		display: grid;
+		grid-template-columns: 4rem 1fr auto;
+		gap: 1rem;
+		align-items: center;
+		padding: 1.5rem 0;
+		border-bottom: 1px solid var(--line);
+		text-decoration: none;
+		transition: padding 160ms ease, color 160ms ease;
+	}
+
+	nav a:hover {
+		padding-inline: 0.8rem;
+		color: var(--copper-dark);
+	}
+
+	nav small {
+		font: 750 0.72rem "SFMono-Regular", Consolas, monospace;
+		color: var(--muted);
+	}
+
+	nav strong,
+	nav span {
+		display: block;
+	}
+
+	nav strong {
+		font-size: clamp(1.15rem, 3vw, 1.65rem);
+	}
+
+	nav span {
+		color: var(--muted);
+		font-size: 0.78rem;
+	}
+
+	nav i {
+		font-style: normal;
+	}
+
+	@media (max-width: 680px) {
+		header {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>
