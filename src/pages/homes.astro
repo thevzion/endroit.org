@@ -1,0 +1,117 @@
+---
+import SiteFooter from '../components/SiteFooter.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+	title="What is a Home? | Hairness"
+	description="A Home is a coherent, source-owned environment for human-agent work. Skills are one part of it."
+	path="/homes/"
+>
+	<SiteHeader />
+	<main>
+		<header class="learn-hero shell">
+			<p class="eyebrow">Learn · Homes</p>
+			<h1>A Home is an environment. <br />Not a bag of Skills.</h1>
+			<p>
+				It organizes how people and agents approach a domain while keeping
+				providers replaceable and product repositories independent.
+			</p>
+		</header>
+
+		<article class="learn-content shell">
+			<section>
+				<p class="section-index">01 · Anatomy</p>
+				<h2>A coherent Home answers seven questions.</h2>
+				<div class="anatomy-grid">
+					<article><span>01</span><h3>Inhabitants</h3><p>Who collaborates here?</p></article>
+					<article><span>02</span><h3>Conventions</h3><p>How is judgment exercised?</p></article>
+					<article><span>03</span><h3>Continuity</h3><p>What deserves to survive sessions?</p></article>
+					<article><span>04</span><h3>Assets</h3><p>What equips the work?</p></article>
+					<article><span>05</span><h3>Artifacts</h3><p>What results are worth governing?</p></article>
+					<article><span>06</span><h3>Targets</h3><p>Where does work land without being absorbed?</p></article>
+					<article><span>07</span><h3>Providers</h3><p>What remains when the provider changes?</p></article>
+				</div>
+			</section>
+
+			<section>
+				<p class="section-index">02 · More than the low level</p>
+				<h2>Skills are useful. They are not the organizing idea.</h2>
+				<div class="definition-stack">
+					<div><strong>Skill</strong><span>A model-facing entrypoint to a capability.</span></div>
+					<div><strong>Asset</strong><span>A reusable product for work: instructions, tools, knowledge, workflows or runtime.</span></div>
+					<div><strong>Home</strong><span>A coherent environment that owns and composes Assets for people, agents and Targets.</span></div>
+					<div><strong>Hairness</strong><span>The framework that makes the environment portable, inspectable and source-owned.</span></div>
+				</div>
+			</section>
+
+			<section>
+				<p class="section-index">03 · Be precise about reality</p>
+				<h2>Ideas, concepts and products are different promises.</h2>
+				<div class="maturity-grid">
+					<article>
+						<p class="concept-status">Imagined usage</p>
+						<h3>Make the paradigm visible</h3>
+						<p>A thought experiment reveals what becomes possible without claiming an implementation.</p>
+					</article>
+					<article>
+						<p class="concept-status">Conceptual Home</p>
+						<h3>Describe a coherent composition</h3>
+						<p>The inhabitants, Assets, Artifacts and Targets fit together, but the Home is not installable.</p>
+					</article>
+					<article class="maturity-live">
+						<p class="concept-status">Installable Home</p>
+						<h3>Deliver the composition</h3>
+						<p>Sources, contracts and runtime exist and can be inspected before use.</p>
+					</article>
+				</div>
+			</section>
+
+			<section>
+				<p class="section-index">04 · Three thought experiments</p>
+				<h2>Start with the work, then design its Home.</h2>
+				<div class="home-experiments">
+					<article>
+						<header><p>Concept · Not installable yet</p><h3>Game Development Home</h3></header>
+						<ul>
+							<li>Engine and studio conventions as shared Assets</li>
+							<li>Playtest reports and design decisions as Artifacts</li>
+							<li>Games, tools and documentation as independent Targets</li>
+						</ul>
+					</article>
+					<article>
+						<header><p>Concept · Not installable yet</p><h3>Designer Home</h3></header>
+						<ul>
+							<li>Research and critique methods that survive clients</li>
+							<li>Design-system knowledge without trapping it in one app</li>
+							<li>Deliverables that keep evidence and lineage</li>
+						</ul>
+					</article>
+					<article>
+						<header><p>Concept · Not installable yet</p><h3>Research Home</h3></header>
+						<ul>
+							<li>Evidence standards and reading practices as Assets</li>
+							<li>Claims, syntheses and decisions as governed Artifacts</li>
+							<li>Projects and publications as separate Targets</li>
+						</ul>
+					</article>
+				</div>
+			</section>
+
+			<section class="home-question">
+				<p class="eyebrow">A thought experiment</p>
+				<h2>If your agents had a Home, what would yours be built for?</h2>
+				<p>
+					What would you preserve across sessions? What would you equip every
+					agent with? And what would you finally remove from your repositories?
+				</p>
+				<div class="hero-actions">
+					<a class="button button-primary" href="/#create-home">Create a Home</a>
+					<a class="button button-secondary" href="https://github.com/thevzion/hairness">Inspect the framework ↗</a>
+				</div>
+			</section>
+		</article>
+	</main>
+	<SiteFooter />
+</BaseLayout>

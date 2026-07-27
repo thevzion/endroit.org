@@ -1,0 +1,114 @@
+---
+import { Image } from 'astro:assets';
+import SiteFooter from '../components/SiteFooter.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import homeFirst from '../assets/hairness-home-first.webp';
+import targetFirst from '../assets/hairness-target-first.webp';
+---
+
+<BaseLayout
+	title="Home-first | Hairness"
+	description="Why agentic work needs an environment owned independently from providers and product repositories."
+	path="/home-first/"
+>
+	<SiteHeader />
+	<main>
+		<header class="learn-hero shell">
+			<p class="eyebrow">Learn · Home-first</p>
+			<h1>Your repository is a Target. <br />It is not a Home.</h1>
+			<p>
+				Home-first gives the agentic environment its own owner, source and
+				lifecycle, independent from every provider and repository it serves.
+			</p>
+		</header>
+
+		<article class="learn-content shell">
+			<section>
+				<p class="section-index">01 · The accidental model</p>
+				<h2>Target-first makes every repository rebuild the environment.</h2>
+				<p>
+					Most agent sessions begin inside a product repository. Local
+					instructions, skills, methods, memories and provider configuration
+					accumulate there because the session needs somewhere to put them.
+					The Target becomes an accidental Home.
+				</p>
+				<div class="topology">Provider → agent inside one repository → context rebuilt → work</div>
+				<Image
+					class="learn-illustration"
+					src={targetFirst}
+					alt="Three separate repositories each contain their own provider session and copied agent methods."
+					widths={[640, 1000, 1400]}
+					sizes="(max-width: 760px) 94vw, 1000px"
+				/>
+			</section>
+
+			<section>
+				<p class="section-index">02 · The shift</p>
+				<h2>Home-first gives the environment an independent place to live.</h2>
+				<p>
+					Providers bring agents to a Front Door. The Home supplies stable
+					orientation, the active Desk and reusable Assets. Explicit Bindings
+					reach independent Targets without installing Hairness inside them.
+				</p>
+				<div class="topology topology-home">Provider → Front Door → Home + Desk + Assets → Binding → Target</div>
+				<Image
+					class="learn-illustration"
+					src={homeFirst}
+					alt="A source-owned Home contains a Front Door, personal Desks, reusable Assets and governed Artifacts connected to independent Targets through Bindings."
+					widths={[640, 1000, 1400]}
+					sizes="(max-width: 760px) 94vw, 1000px"
+					loading="lazy"
+				/>
+			</section>
+
+			<section>
+				<p class="section-index">03 · The ownership law</p>
+				<h2>A thing should not be owned by the system that only hosts, runs or consumes it.</h2>
+				<div class="separation-grid">
+					<div><code>Home ≠ Target</code><p>The environment is not a product repository.</p></div>
+					<div><code>Asset ≠ Artifact</code><p>Equipment is not an outcome of work.</p></div>
+					<div><code>Capability ≠ Skill</code><p>A model entrypoint is not the whole product.</p></div>
+					<div><code>Source ≠ Projection</code><p>Generated provider files are not canonical.</p></div>
+					<div><code>Provider ≠ Owner</code><p>The session host does not own the environment.</p></div>
+					<div><code>Conversation ≠ Memory</code><p>A chat is not durable, governed continuity.</p></div>
+				</div>
+			</section>
+
+			<section>
+				<p class="section-index">04 · What becomes unacceptable</p>
+				<h2>A paradigm is also defined by what it refuses.</h2>
+				<ul class="doctrine-list">
+					<li>Turning every Target into a store for skills, workflows and personal continuity.</li>
+					<li>Maintaining generated provider files as canonical sources.</li>
+					<li>Treating a Skill as the complete abstraction for a reusable capability.</li>
+					<li>Letting one proprietary client become indispensable to the environment.</li>
+					<li>Promoting session output into reusable equipment without human curation.</li>
+					<li>Mixing private continuity, shared material and product documents under one owner.</li>
+				</ul>
+			</section>
+
+			<section>
+				<p class="section-index">05 · Framework and paradigm</p>
+				<h2>Hairness is the framework. Home-first is the wider model.</h2>
+				<p>
+					Hairness provides a working implementation of Home-first contracts:
+					Homes, Desks, Assets, Artifacts, Targets, Bindings, Projections and a
+					Front Door. The paradigm is deliberately larger than one framework.
+					Other systems may one day implement Home-first with different
+					contracts and experiences.
+				</p>
+				<blockquote>
+					A provider can host the agent. It shouldn’t own the Home.
+				</blockquote>
+			</section>
+
+			<div class="learn-next">
+				<p class="eyebrow">Continue</p>
+				<h2>What could a Home be built for?</h2>
+				<a class="button button-primary" href="/homes/">Explore conceptual Homes</a>
+			</div>
+		</article>
+	</main>
+	<SiteFooter />
+</BaseLayout>

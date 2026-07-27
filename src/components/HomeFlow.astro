@@ -1,0 +1,395 @@
+<figure class="home-flow" aria-labelledby="home-flow-caption">
+	<div class="flow-grid">
+		<section class="flow-node provider-node">
+			<p class="node-label">Providers</p>
+			<div class="node-list">
+				<span><i class="provider-dot provider-dot-codex"></i>Codex</span>
+				<span><i class="provider-dot provider-dot-claude"></i>Claude</span>
+			</div>
+			<small>Qualified today</small>
+		</section>
+
+		<div class="connector connector-in" aria-hidden="true">
+			<span class="connector-line"></span>
+			<span class="flow-packet packet-in"></span>
+			<i class="arrow"></i>
+		</div>
+
+		<section class="home-node">
+			<div class="home-roof" aria-hidden="true"></div>
+			<div class="front-door"><span>Front Door</span></div>
+			<p class="node-label">Hairness Home</p>
+			<div class="home-rooms">
+				<span>Desk</span>
+				<span>Assets</span>
+				<span>Artifacts</span>
+			</div>
+			<small>Source-owned and versioned</small>
+		</section>
+
+		<div class="connector connector-out" aria-hidden="true">
+			<span class="connector-line"></span>
+			<span class="binding-label">Binding</span>
+			<span class="flow-packet packet-out"></span>
+			<i class="arrow"></i>
+		</div>
+
+		<section class="flow-node target-node">
+			<p class="node-label">Independent Targets</p>
+			<div class="node-list target-list">
+				<span>Application</span>
+				<span>API</span>
+				<span>Documentation</span>
+			</div>
+			<small>Code, history and delivery stay here</small>
+		</section>
+	</div>
+
+	<div class="curation-loop">
+		<span class="curation-line" aria-hidden="true"></span>
+		<span class="artifact-packet" aria-hidden="true"></span>
+		<p><strong>Artifact</strong> returns with evidence <span aria-hidden="true">→</span> human curation can improve an <strong>Asset</strong></p>
+	</div>
+
+	<figcaption id="home-flow-caption">
+		Providers host sessions. The Home owns the environment. Bindings reach
+		Targets without moving agent infrastructure into them.
+	</figcaption>
+</figure>
+
+<style>
+	.home-flow {
+		margin: 3rem 0 0;
+		padding: clamp(1.25rem, 3vw, 2.5rem);
+		border: 1px solid var(--line);
+		border-radius: var(--radius-xl);
+		background:
+			linear-gradient(rgba(255, 250, 240, 0.82), rgba(255, 250, 240, 0.94)),
+			repeating-linear-gradient(90deg, transparent 0 39px, rgba(28, 34, 33, 0.04) 40px);
+		box-shadow: var(--shadow-soft);
+		overflow: hidden;
+	}
+
+	.flow-grid {
+		display: grid;
+		grid-template-columns: minmax(150px, 0.82fr) 90px minmax(280px, 1.45fr) 90px minmax(170px, 0.9fr);
+		align-items: center;
+		gap: 0.8rem;
+	}
+
+	.flow-node,
+	.home-node {
+		position: relative;
+		min-height: 220px;
+		border: 1px solid var(--line-strong);
+		border-radius: var(--radius-lg);
+		background: rgba(255, 252, 245, 0.9);
+	}
+
+	.flow-node {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		padding: 1.2rem;
+	}
+
+	.node-label {
+		margin: 0 0 1rem;
+		font-size: 0.72rem;
+		font-weight: 800;
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+		color: var(--copper-dark);
+	}
+
+	.node-list {
+		display: grid;
+		gap: 0.55rem;
+	}
+
+	.node-list span {
+		display: flex;
+		align-items: center;
+		gap: 0.6rem;
+		padding: 0.7rem 0.75rem;
+		border: 1px solid var(--line);
+		border-radius: 0.65rem;
+		background: var(--paper-strong);
+		font-weight: 720;
+	}
+
+	.provider-dot {
+		width: 0.55rem;
+		height: 0.55rem;
+		border-radius: 50%;
+		background: var(--copper);
+		box-shadow: 0 0 0 4px rgba(183, 91, 54, 0.1);
+	}
+
+	.provider-dot-claude {
+		background: var(--sky-dark);
+		box-shadow: 0 0 0 4px rgba(73, 116, 132, 0.12);
+	}
+
+	small {
+		display: block;
+		margin-top: 1rem;
+		color: var(--muted);
+		line-height: 1.4;
+	}
+
+	.home-node {
+		padding: 3.2rem 1.2rem 1.25rem;
+		background: var(--night);
+		border-color: var(--night);
+		color: var(--cream);
+		box-shadow: 0 18px 45px rgba(28, 34, 33, 0.2);
+		animation: homeBreath 8s ease-in-out infinite;
+	}
+
+	.home-node .node-label {
+		color: var(--sand);
+	}
+
+	.home-node small {
+		color: rgba(249, 246, 239, 0.66);
+	}
+
+	.home-roof {
+		position: absolute;
+		top: -1.35rem;
+		left: 12%;
+		width: 76%;
+		height: 2.7rem;
+		border: 1px solid rgba(244, 239, 229, 0.5);
+		border-bottom: 0;
+		border-radius: 50% 50% 0 0;
+		background: var(--night);
+	}
+
+	.front-door {
+		position: absolute;
+		top: -0.15rem;
+		left: 50%;
+		z-index: 2;
+		transform: translateX(-50%);
+		padding: 0.35rem 0.7rem;
+		border-radius: 999px;
+		background: var(--copper);
+		color: white;
+		font-size: 0.65rem;
+		font-weight: 800;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+	}
+
+	.home-rooms {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 0.55rem;
+	}
+
+	.home-rooms span {
+		padding: 1.4rem 0.4rem;
+		border: 1px solid rgba(244, 239, 229, 0.19);
+		border-radius: 0.7rem;
+		background: rgba(244, 239, 229, 0.06);
+		text-align: center;
+		font-size: 0.78rem;
+		font-weight: 760;
+	}
+
+	.connector {
+		position: relative;
+		height: 2rem;
+	}
+
+	.connector-line {
+		position: absolute;
+		top: 50%;
+		right: 0;
+		left: 0;
+		height: 1px;
+		background: var(--line-strong);
+	}
+
+	.arrow {
+		position: absolute;
+		top: calc(50% - 4px);
+		right: -1px;
+		width: 8px;
+		height: 8px;
+		border-top: 1.5px solid var(--ink);
+		border-right: 1.5px solid var(--ink);
+		transform: rotate(45deg);
+	}
+
+	.flow-packet {
+		position: absolute;
+		top: calc(50% - 5px);
+		left: 0;
+		z-index: 2;
+		width: 10px;
+		height: 10px;
+		border-radius: 50%;
+		background: var(--copper);
+		box-shadow: 0 0 0 5px rgba(183, 91, 54, 0.12);
+	}
+
+	.packet-in {
+		animation: packetTravel 8s 0s ease-in-out infinite;
+	}
+
+	.packet-out {
+		animation: packetTravel 8s 2.3s ease-in-out infinite;
+	}
+
+	.binding-label {
+		position: absolute;
+		top: calc(50% + 0.6rem);
+		left: 50%;
+		transform: translateX(-50%);
+		color: var(--muted);
+		font-size: 0.62rem;
+		font-weight: 800;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+	}
+
+	.curation-loop {
+		position: relative;
+		margin: 2rem auto 0;
+		max-width: 620px;
+		padding-top: 1.4rem;
+		text-align: center;
+	}
+
+	.curation-loop p {
+		margin: 0;
+		color: var(--muted);
+		font-size: 0.82rem;
+	}
+
+	.curation-line {
+		position: absolute;
+		top: 0;
+		left: 15%;
+		width: 70%;
+		height: 0.8rem;
+		border: 1px solid var(--line-strong);
+		border-top: 0;
+		border-radius: 0 0 999px 999px;
+	}
+
+	.artifact-packet {
+		position: absolute;
+		top: 0.35rem;
+		left: 75%;
+		width: 8px;
+		height: 8px;
+		border-radius: 2px;
+		background: var(--sky-dark);
+		animation: artifactReturn 8s 4.6s ease-in-out infinite;
+	}
+
+	figcaption {
+		margin-top: 1.6rem;
+		padding-top: 1.2rem;
+		border-top: 1px solid var(--line);
+		color: var(--muted);
+		font-size: 0.78rem;
+		text-align: center;
+	}
+
+	@keyframes packetTravel {
+		0%, 12% { transform: translateX(0); opacity: 0; }
+		18% { opacity: 1; }
+		38% { transform: translateX(76px); opacity: 1; }
+		46%, 100% { transform: translateX(76px); opacity: 0; }
+	}
+
+	@keyframes artifactReturn {
+		0%, 12% { transform: translateX(0); opacity: 0; }
+		18% { opacity: 1; }
+		40% { transform: translateX(-360px); opacity: 1; }
+		48%, 100% { transform: translateX(-360px); opacity: 0; }
+	}
+
+	@keyframes homeBreath {
+		0%, 22%, 100% { box-shadow: 0 18px 45px rgba(28, 34, 33, 0.2); }
+		30%, 45% { box-shadow: 0 18px 52px rgba(183, 91, 54, 0.3); }
+	}
+
+	@media (max-width: 900px) {
+		.flow-grid {
+			grid-template-columns: 1fr;
+			gap: 0.6rem;
+		}
+
+		.flow-node,
+		.home-node {
+			min-height: auto;
+		}
+
+		.connector {
+			width: 2rem;
+			height: 52px;
+			margin: auto;
+		}
+
+		.connector-line {
+			top: 0;
+			bottom: 0;
+			left: 50%;
+			width: 1px;
+			height: auto;
+		}
+
+		.arrow {
+			top: auto;
+			right: calc(50% - 4px);
+			bottom: 0;
+			transform: rotate(135deg);
+		}
+
+		.flow-packet {
+			top: 0;
+			left: calc(50% - 5px);
+		}
+
+		.packet-in,
+		.packet-out {
+			animation-name: packetTravelVertical;
+		}
+
+		.binding-label {
+			top: 50%;
+			left: calc(50% + 2.4rem);
+			white-space: nowrap;
+		}
+
+		.curation-loop {
+			display: none;
+		}
+
+		@keyframes packetTravelVertical {
+			0%, 12% { transform: translateY(0); opacity: 0; }
+			18% { opacity: 1; }
+			38% { transform: translateY(45px); opacity: 1; }
+			46%, 100% { transform: translateY(45px); opacity: 0; }
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.home-node,
+		.flow-packet,
+		.artifact-packet {
+			animation: none;
+		}
+
+		.flow-packet,
+		.artifact-packet {
+			display: none;
+		}
+	}
+</style>
