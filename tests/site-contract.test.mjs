@@ -24,3 +24,19 @@ test("product maturity is explicit", async () => {
   assert.match(landing, /Conceptual · Not installable yet/)
   assert.match(landing, /Codex and Claude today/)
 })
+
+test("the public environment layer keeps ecosystem roles distinct", async () => {
+  const [landing, layer] = await Promise.all([
+    read("src/pages/index.astro"),
+    read("src/components/EnvironmentLayer.astro"),
+  ])
+
+  assert.match(landing, /<EnvironmentLayer \/>/)
+  assert.match(layer, /id="environment-layer"/)
+  assert.match(layer, /Codex.+Available today/s)
+  assert.match(layer, /OpenClaw.+Ecosystem example/s)
+  assert.match(layer, /Separate model supply/)
+  assert.match(layer, /MCP/)
+  assert.match(layer, /Examples of organizable material—not announced integrations/)
+  assert.doesNotMatch(layer, /<b>Workspaces<\/b>/)
+})

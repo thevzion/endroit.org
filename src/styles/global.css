@@ -582,78 +582,6 @@ nav a:hover,
 	font-size: 0.82rem;
 }
 
-.product-map {
-	background: rgba(255, 250, 240, 0.45);
-}
-
-.concept-map {
-	margin-top: 3rem;
-	border-block: 1px solid var(--line-strong);
-}
-
-.concept-map > div {
-	display: grid;
-	grid-template-columns: 1fr 1fr 1.35fr;
-	gap: 1.5rem;
-	padding: 1rem 0;
-	border-bottom: 1px solid var(--line);
-}
-
-.concept-map > div:last-child {
-	border-bottom: 0;
-}
-
-.concept-map strong {
-	color: var(--copper-dark);
-}
-
-.concept-map code {
-	color: var(--muted);
-	font-size: 0.78rem;
-}
-
-.concept-map-head {
-	font-size: 0.68rem;
-	letter-spacing: 0.1em;
-	text-transform: uppercase;
-}
-
-.surface-line {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	flex-wrap: wrap;
-	gap: 0.75rem;
-	margin-top: 3rem;
-	padding: 1.5rem;
-	border: 1px solid var(--line);
-	background: var(--paper-strong);
-}
-
-.surface-line span {
-	color: var(--muted);
-	font-size: 0.72rem;
-}
-
-.surface-line b {
-	padding: 0.35rem 0.65rem;
-	background: var(--night);
-	color: white;
-}
-
-.surface-line i {
-	color: var(--copper);
-	font-style: normal;
-}
-
-.surface-note {
-	max-width: 720px;
-	margin: 1rem auto 0;
-	color: var(--muted);
-	font-size: 0.82rem;
-	text-align: center;
-}
-
 .section-dark {
 	background: var(--night);
 	color: #f9f6ef;
@@ -1096,25 +1024,6 @@ nav a:hover,
 	.shift-binding {
 		right: 23%;
 		width: 11%;
-	}
-
-	.concept-map > div {
-		grid-template-columns: 1fr;
-		gap: 0.2rem;
-	}
-
-	.concept-map-head {
-		display: none !important;
-	}
-
-	.surface-line {
-		align-items: stretch;
-		flex-direction: column;
-		text-align: center;
-	}
-
-	.surface-line i {
-		transform: rotate(90deg);
 	}
 
 	.truth-grid,

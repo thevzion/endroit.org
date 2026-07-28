@@ -1,5 +1,6 @@
 ---
 import CompactShift from '../components/CompactShift';
+import EnvironmentLayer from '../components/EnvironmentLayer.astro';
 import SiteFooter from '../components/SiteFooter.astro';
 import SiteHeader from '../components/SiteHeader.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
@@ -82,41 +83,7 @@ const createCommand = 'npx --yes @hairness/cli@latest create my-home';
 			</a>
 		</section>
 
-		<section class="section product-map">
-			<div class="shell">
-				<div class="section-heading">
-					<p class="eyebrow">Keep the tools. Own the environment.</p>
-					<h2>The model can remain a black box. The Home does not have to be.</h2>
-				</div>
-				<div class="concept-map" role="table" aria-label="Hairness concepts and concrete expressions">
-					<div class="concept-map-head" role="row">
-						<strong role="columnheader">Need</strong>
-						<strong role="columnheader">Hairness concept</strong>
-						<strong role="columnheader">Concrete expression</strong>
-					</div>
-					<div role="row"><span role="cell">Shared orientation</span><strong role="cell">Home + Front Door</strong><code role="cell">HOME.md · Floor Plan</code></div>
-					<div role="row"><span role="cell">Personal continuity</span><strong role="cell">Desk</strong><code role="cell">DESK.md · local Bindings</code></div>
-					<div role="row"><span role="cell">Reusable capability</span><strong role="cell">Asset</strong><code role="cell">Skill or Command projection</code></div>
-					<div role="row"><span role="cell">Chosen result</span><strong role="cell">Artifact</strong><code role="cell">Owner · state · lineage</code></div>
-					<div role="row"><span role="cell">Product destination</span><strong role="cell">Target</strong><code role="cell">Independent repository</code></div>
-					<div role="row"><span role="cell">Runtime compatibility</span><strong role="cell">Projection</strong><code role="cell">Codex or Claude form</code></div>
-				</div>
-				<div class="surface-line">
-					<span>Human</span>
-					<strong>Editor · Git · terminal</strong>
-					<i aria-hidden="true">→</i>
-					<b>Home</b>
-					<i aria-hidden="true">←</i>
-					<strong>Codex · Claude</strong>
-					<span>Agent Runtime</span>
-				</div>
-				<p class="surface-note">
-					Hairness does not require another desktop application and does not
-					replace the Agent Runtime. Humans and agents use different surfaces
-					over the same owned sources.
-				</p>
-			</div>
-		</section>
+		<EnvironmentLayer />
 
 		<section class="section section-dark product-truth">
 			<div class="shell">
