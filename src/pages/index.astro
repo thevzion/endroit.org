@@ -1,32 +1,37 @@
 ---
-import { Image } from 'astro:assets';
-import HomeFlow from '../components/HomeFlow.astro';
+import CompactShift from '../components/CompactShift';
 import SiteFooter from '../components/SiteFooter.astro';
 import SiteHeader from '../components/SiteHeader.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import homeFirstJourney from '../assets/hairness-home-first-journey.webp';
 
 const createCommand = 'npx --yes @hairness/cli@latest create my-home';
 ---
 
 <BaseLayout
-	title="Hairness | Own the place where your agents work"
-	description="Hairness is an open, Home-first framework for building source-owned agent work environments across providers and repositories."
+	title="Hairness | A shared, owned way of working for humans and agents"
+	description="Hairness is an open-source framework and CLI for source-owned, portable agent work environments across runtimes and repositories."
 	path="/"
 >
 	<SiteHeader />
 	<main>
 		<section class="hero shell">
 			<div class="hero-copy">
-				<p class="eyebrow">The ownership layer for agentic work.</p>
-				<h1>Own the place where your agents work.</h1>
+				<p class="eyebrow">A shared work system for humans and agents.</p>
+				<h1>A shared, owned way of working for humans and agents.</h1>
 				<p class="hero-lede">
-					Hairness is an open, Home-first framework for building source-owned
-					agent work environments across providers and repositories.
+					Hairness makes your agentic work environment explicit, owned and
+					portable across Agent Runtimes, collaborators and repositories.
+				</p>
+				<p class="product-definition">
+					An open-source framework and CLI that materializes a source-owned
+					Home, connects independent Targets and projects supported surfaces
+					into the Agent Runtimes you already use.
 				</p>
 				<div class="hero-actions">
 					<a class="button button-primary" href="#create-home">Create your Home</a>
-					<a class="button button-secondary" href="/home-first/">Explore Home-first</a>
+					<a class="button button-secondary" href="https://thevzion.com/home-first/">
+						Read the Home-first Proposal <span aria-hidden="true">↗</span>
+					</a>
 				</div>
 				<p class="proof-line">
 					<span>Codex and Claude today</span>
@@ -38,7 +43,7 @@ const createCommand = 'npx --yes @hairness/cli@latest create my-home';
 			<div class="hero-card" id="create-home">
 				<div class="terminal-bar" aria-hidden="true">
 					<span></span><span></span><span></span>
-					<p>create a Home</p>
+					<p>start with an owned source</p>
 				</div>
 				<div class="command-row">
 					<code>{createCommand}</code>
@@ -46,110 +51,139 @@ const createCommand = 'npx --yes @hairness/cli@latest create my-home';
 						Copy
 					</button>
 				</div>
-				<p>Own one environment across your existing agents and repositories.</p>
+				<p>Creates an independent Home repository. Your Targets stay independent.</p>
 			</div>
 		</section>
 
-		<section class="section shell section-flow" aria-labelledby="flow-title">
+		<section class="section shell shift-section">
 			<div class="section-heading">
-				<p class="eyebrow">Home-first by design</p>
-				<h2 id="flow-title">The agent enters a Home before it reaches a repository.</h2>
+				<p class="eyebrow">The accidental environment</p>
+				<h2>Your repository should own the product, not the whole agent environment.</h2>
 				<p>
-					The provider hosts the session. The Home owns orientation,
-					capabilities and continuity. Bindings keep every Target independent.
+					Open an Agent Runtime inside a repository and that Target becomes the
+					center of the setup. Methods, provider files, continuity and generated
+					work collect beside product source.
+				</p>
+				<p>
+					Hairness gives the portable environment its own source. Product-specific
+					instructions remain with the Target. Shared methods and continuity
+					remain in the Home.
 				</p>
 			</div>
-			<HomeFlow />
+			<CompactShift client:visible />
+			<p class="runtime-note">
+				<strong>Agent Runtime</strong> means the system that starts or hosts an
+				agent session and exposes its tools. Hairness 0.5 currently calls its
+				configured relation to that system a <strong>Provider</strong>. Model
+				providers remain a separate layer.
+			</p>
+			<a class="text-link" href="https://thevzion.com/home-first/">
+				Explore the full proposal on The VZion <span aria-hidden="true">↗</span>
+			</a>
 		</section>
 
-		<section class="section section-dark">
-			<div class="shell split-story">
-				<div>
-					<p class="eyebrow eyebrow-light">The accidental default</p>
-					<h2>Your repository is not your agent’s Home.</h2>
+		<section class="section product-map">
+			<div class="shell">
+				<div class="section-heading">
+					<p class="eyebrow">Keep the tools. Own the environment.</p>
+					<h2>The model can remain a black box. The Home does not have to be.</h2>
 				</div>
-				<div class="story-copy">
-					<p>
-						Open an agent in three repositories and you quietly create three
-						different environments. Context is rebuilt, methods are copied and
-						useful outcomes disappear into sessions.
-					</p>
-					<p>
-						Hairness moves that environment beside your repositories. A Target
-						is where the agent works. It should not own how the agent works.
-					</p>
-					<a class="text-link text-link-light" href="/home-first/">
-						See the Home-first shift <span aria-hidden="true">→</span>
-					</a>
+				<div class="concept-map" role="table" aria-label="Hairness concepts and concrete expressions">
+					<div class="concept-map-head" role="row">
+						<strong role="columnheader">Need</strong>
+						<strong role="columnheader">Hairness concept</strong>
+						<strong role="columnheader">Concrete expression</strong>
+					</div>
+					<div role="row"><span role="cell">Shared orientation</span><strong role="cell">Home + Front Door</strong><code role="cell">HOME.md · Floor Plan</code></div>
+					<div role="row"><span role="cell">Personal continuity</span><strong role="cell">Desk</strong><code role="cell">DESK.md · local Bindings</code></div>
+					<div role="row"><span role="cell">Reusable capability</span><strong role="cell">Asset</strong><code role="cell">Skill or Command projection</code></div>
+					<div role="row"><span role="cell">Chosen result</span><strong role="cell">Artifact</strong><code role="cell">Owner · state · lineage</code></div>
+					<div role="row"><span role="cell">Product destination</span><strong role="cell">Target</strong><code role="cell">Independent repository</code></div>
+					<div role="row"><span role="cell">Runtime compatibility</span><strong role="cell">Projection</strong><code role="cell">Codex or Claude form</code></div>
 				</div>
+				<div class="surface-line">
+					<span>Human</span>
+					<strong>Editor · Git · terminal</strong>
+					<i aria-hidden="true">→</i>
+					<b>Home</b>
+					<i aria-hidden="true">←</i>
+					<strong>Codex · Claude</strong>
+					<span>Agent Runtime</span>
+				</div>
+				<p class="surface-note">
+					Hairness does not require another desktop application and does not
+					replace the Agent Runtime. Humans and agents use different surfaces
+					over the same owned sources.
+				</p>
 			</div>
 		</section>
 
-		<section class="section shell proof-section" aria-labelledby="proof-title">
-			<div class="section-heading">
-				<p class="eyebrow">Already real</p>
-				<h2 id="proof-title">An environment you can inspect, version and keep.</h2>
+		<section class="section section-dark product-truth">
+			<div class="shell">
+				<div class="section-heading">
+					<p class="eyebrow eyebrow-light">Available today · 0.5 alpha</p>
+					<h2>A real Home, not a diagram.</h2>
+					<p>
+						Create it, inspect it, version it and enter it through Codex or
+						Claude. Hairness keeps owned sources separate from rebuildable
+						runtime projections.
+					</p>
+				</div>
+				<div class="truth-grid">
+					<div><strong>Home</strong><span>Shared sources and orientation</span></div>
+					<div><strong>Desk</strong><span>Collaborator-local continuity</span></div>
+					<div><strong>Assets</strong><span>Reusable products for work</span></div>
+					<div><strong>Artifacts</strong><span>Chosen results with lineage</span></div>
+					<div><strong>Front Door</strong><span>Floor Plan and Home Console</span></div>
+					<div><strong>Bindings</strong><span>Local relations to Targets</span></div>
+					<div><strong>Projections</strong><span>Codex and Claude surfaces</span></div>
+					<div><strong>Diagnostics</strong><span>Validation, build and doctor</span></div>
+				</div>
+				<a class="text-link text-link-light" href="https://github.com/thevzion/hairness">
+					Inspect Hairness on GitHub <span aria-hidden="true">↗</span>
+				</a>
 			</div>
-			<div class="proof-grid">
-				<article>
-					<span class="number">01</span>
-					<h3>Home + Desk</h3>
-					<p>Shared orientation and private continuity have distinct owners.</p>
-				</article>
-				<article>
-					<span class="number">02</span>
-					<h3>Assets + Artifacts</h3>
-					<p>Products for work stay separate from the products of work.</p>
-				</article>
-				<article>
-					<span class="number">03</span>
-					<h3>Bindings + Targets</h3>
-					<p>Operate repositories without filling them with agent infrastructure.</p>
-				</article>
-				<article>
-					<span class="number">04</span>
-					<h3>Replaceable providers</h3>
-					<p>Codex and Claude enter through projections rebuilt from owned sources.</p>
-				</article>
+		</section>
+
+		<section class="section shell direction-section">
+			<div class="direction-column">
+				<p class="eyebrow">Designed for</p>
+				<h2>One working environment across runtimes and repositories.</h2>
+				<ul class="direction-list">
+					<li><strong>Provider-neutral sources</strong><span>Change the Agent Runtime without rebuilding the work environment.</span></li>
+					<li><strong>Local working context</strong><span>Materialize owned context where the agent works before the work begins.</span></li>
+					<li><strong>Human curation</strong><span>Turn reviewed results into better reusable Assets deliberately.</span></li>
+				</ul>
 			</div>
-			<figure class="journey-figure">
-				<Image
-					src={homeFirstJourney}
-					alt="Nine illustrated stages show isolated agent work in repositories becoming a source-owned Home with a Front Door, Desks, Assets, Artifacts, independent Targets and accumulated agentic capital."
-					widths={[720, 1200, 1800]}
-					sizes="(max-width: 760px) 94vw, 1200px"
-					loading="lazy"
-				/>
-				<figcaption>
-					Ness is the recurring character in Hairness illustrations, the first
-					agent to get a Home. Hairness works with the agent you already use.
-				</figcaption>
-			</figure>
+			<aside class="direction-note">
+				<p>Direction, not an integration claim</p>
+				<span>
+					Codex and Claude are qualified today. Other runtimes, team Homes and
+					published Home catalogs describe where Hairness is designed to go.
+				</span>
+			</aside>
 		</section>
 
 		<section class="section concept-section">
 			<div class="shell">
 				<div class="section-heading section-heading-wide">
-					<p class="eyebrow">Think in Homes, not skill bundles</p>
-					<h2>What would your Home be built for?</h2>
+					<p class="eyebrow">Conceptual · Not installable yet</p>
+					<h2>Homes designed around real work.</h2>
 					<p>
-						A Home can organize a domain, a role or a team. These examples are
-						thought experiments, not products pretending to be finished.
+						A specialized Home could package a coherent collaboration system
+						for a domain—not another folder of disconnected Skills.
 					</p>
 				</div>
 				<div class="concept-grid">
 					<article>
-						<p class="concept-status">Concept · Not installable yet</p>
 						<h3>Game Development Home</h3>
-						<p>Engine conventions, design decisions, playtest Artifacts and independent game Targets.</p>
+						<p>Design methods, engine conventions, playtest Artifacts and independent game Targets.</p>
 					</article>
 					<article>
-						<p class="concept-status">Concept · Not installable yet</p>
 						<h3>Designer Home</h3>
 						<p>Research, critique practices, visual systems and durable decisions across client work.</p>
 					</article>
 					<article>
-						<p class="concept-status">Concept · Not installable yet</p>
 						<h3>Research Home</h3>
 						<p>Evidence standards, reading methods, claims and governed outputs across changing tools.</p>
 					</article>
@@ -164,17 +198,17 @@ const createCommand = 'npx --yes @hairness/cli@latest create my-home';
 			<div class="alpha-card">
 				<div>
 					<p class="eyebrow">Hairness 0.5 alpha</p>
-					<h2>Use the framework today and help shape the ecosystem.</h2>
+					<h2>Start with the agents and repositories you already use.</h2>
 				</div>
 				<div>
 					<p>
-						Create a dedicated Home repository, inspect every Asset runtime
-						before trusting it and keep product repositories independent.
+						The CLI creates a dedicated Home, validates its contracts and
+						projects supported Assets into Codex and Claude.
 					</p>
 					<div class="hero-actions">
 						<a class="button button-primary" href="#create-home">Create your Home</a>
 						<a class="text-link" href="https://github.com/thevzion/hairness">
-							View Hairness on GitHub <span aria-hidden="true">↗</span>
+							Inspect the source <span aria-hidden="true">↗</span>
 						</a>
 					</div>
 				</div>

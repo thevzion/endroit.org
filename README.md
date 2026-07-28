@@ -1,7 +1,10 @@
 # hairness.dev
 
-The public Home for [Hairness](https://github.com/thevzion/hairness) and the
-Home-first paradigm.
+The product site for [Hairness](https://github.com/thevzion/hairness).
+
+The wider [Home-first proposal](https://thevzion.com/home-first/) is published
+by The VZion. This Target owns product positioning, Hairness Today and the
+conceptual direction of specialized Homes.
 
 ## Development
 
@@ -15,19 +18,15 @@ npm run dev
 `npm run build` type-checks the Astro project and emits the static site to
 `dist/`.
 
-## Content ownership
+## Product truth
 
-- This repository owns the public landing page and Home-first learning pages.
+- Hairness 0.5 alpha qualifies Codex and Claude.
+- Other runtimes and specialized Homes are marked as product direction.
 - The Hairness repository owns installation, architecture, lifecycle,
   reference, security and release truth.
-- Conceptual Homes are always marked as concepts until an installable
-  implementation exists.
-
-The Hairness illustrations copied into `src/assets/` originate from
-`thevzion/hairness` and are distributed under the same MIT license.
 
 ## Deployment
 
-Pushes to `main` deploy through GitHub Pages. `hairness.dev` is the canonical
-domain; the Pages repository settings and DNS configuration complete the
-custom-domain setup.
+The static build is served by the `hairness-dev` Fly.io app behind Cloudflare.
+Pushes to `main` deploy through GitHub Actions using an app-scoped Fly deploy
+token. Run `flyctl deploy` for a manual deployment.
