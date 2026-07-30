@@ -1,4 +1,4 @@
-app = "hairness-dev"
+app = "endroit"
 primary_region = "cdg"
 
 [http_service]

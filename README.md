@@ -1,9 +1,9 @@
-# hairness.dev
+# endroit.org
 
-The product site for [Hairness](https://github.com/thevzion/hairness).
+The product site for [Endroit](https://github.com/thevzion/endroit).
 
 The wider [Home-first proposal](https://thevzion.com/home-first/) is published
-by The VZion. This Target owns product positioning, Hairness Today and the
+by The VZion. This Target owns product positioning, Endroit Today and the
 conceptual direction of specialized Homes.
 
 ## Development
@@ -20,13 +20,13 @@ npm run dev
 
 ## Product truth
 
-- Hairness 0.5 alpha qualifies Codex and Claude.
+- Endroit 0.7 alpha qualifies Codex and Claude.
 - Other runtimes and specialized Homes are marked as product direction.
-- The Hairness repository owns installation, architecture, lifecycle,
+- The Endroit repository owns installation, architecture, lifecycle,
   reference, security and release truth.
 
 ## Deployment
 
-The static build is served by the `hairness-dev` Fly.io app behind Cloudflare.
+The static build will be served by the `endroit` Fly.io app behind Cloudflare.
 Pushes to `main` deploy through GitHub Actions using an app-scoped Fly deploy
 token. Run `flyctl deploy` for a manual deployment.
