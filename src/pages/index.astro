@@ -6,12 +6,12 @@ import SiteHeader from '../components/SiteHeader.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 
 const capabilities = [
-	['Orient', 'Static Floor Plan and an optional live HUD'],
-	['Organize', 'Workspaces, Assets, Capabilities and Documents'],
-	['Keep', 'Inspectable Artifacts with owner, state and lineage'],
-	['Connect', 'Independent Targets and collaborator-local Bindings'],
-	['Project', 'Deterministic Codex and Claude surfaces'],
-	['Diagnose', 'Validation, build, Doctor and digest trust'],
+	['Places', 'Home, Desk, Workspaces and Workstreams with explicit owners'],
+	['Orientation', 'Front Door, static Floor Plan, optional live HUD and Maps'],
+	['Capabilities', 'Source-owned Assets projected into runtime-native surfaces'],
+	['Material', 'Documents, decisions and Artifacts with owner, state and lineage'],
+	['Relationships', 'Independent Targets, local Bindings and observed Handles'],
+	['Integrity', 'Validation, build, Doctor and digest trust'],
 ];
 
 const capital = [
@@ -25,7 +25,7 @@ const capital = [
 
 <BaseLayout
 	title="Endroit | Own the place where you work together"
-	description="Endroit is the open-source, local-first environment where you and your agents work from the same maps, decisions, methods and retained results."
+	description="Endroit is the open-source, local-first environment where you and your agents share places, orientation, capabilities, durable material and explicit relationships."
 	path="/"
 >
 	<SiteHeader />
@@ -91,11 +91,11 @@ const capital = [
 				<noscript>
 					<div class="mt-5 rounded-2xl border border-white/15 bg-white/[0.04] p-5 text-sm leading-relaxed text-paper/70">
 						<strong class="text-paper-strong">Home-first model summary.</strong>
-						An Endroit Home gives the environment an owner: the Front Door and
-						Floor Plan orient your agent; Workspaces keep Documents; human
-						curation promotes chosen results to Artifacts; local Bindings reach
-						independent Targets without absorbing their source, history or
-						delivery.
+						An Endroit Home gives the environment an owner: the Front Door
+						situates your agent; the Floor Plan, HUD and Maps progressively
+						orient it; Places own durable Material; Capabilities remain
+						source-owned; Relationships reach independent systems without
+						absorbing their source, history, authorization or delivery.
 					</div>
 				</noscript>
 			</div>
@@ -184,8 +184,10 @@ const capital = [
 						<p class="eyebrow">Endroit 0.7 today</p>
 						<h2 class="section-title">The workplace is concrete.</h2>
 						<p class="section-lede">
-							Endroit is an open-source framework and CLI. Its canonical
-							sources remain ordinary files under your control.
+							Endroit is an open-source framework and CLI. It makes Places,
+							Orientation, Capabilities, Material and Relationships explicit
+							while its canonical sources remain ordinary files under your
+							control.
 						</p>
 						<div class="capability-grid">
 							{

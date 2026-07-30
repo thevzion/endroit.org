@@ -46,6 +46,8 @@ test("the landing states current capabilities, alpha limits and honest claims", 
   assert.match(landing, /Change runtimes, keep the work/)
   assert.match(landing, /Keep repositories independent/)
   assert.match(landing, /Different interfaces\. Different runtimes\. Same place\. Same material\./)
+  assert.match(landing, /Places,[\s\S]*Orientation,[\s\S]*Capabilities,[\s\S]*Material and Relationships/)
+  assert.match(landing, /Front Door[\s\n]+situates your agent/)
   assert.match(landing, /Digest trust detects changed bytes; it is not a sandbox/)
   assert.match(landing, /not a measured claim about[\s\S]*reasoning quality, hallucinations, speed, cost or productivity/)
   assert.doesNotMatch(landing, /\bNess\b/)
@@ -84,8 +86,8 @@ test("the district keeps a complete static summary without JavaScript", async ()
 
   assert.match(landing, /<noscript>/)
   assert.match(landing, /Home-first model summary/)
-  assert.match(landing, /human[\s\n]+curation promotes chosen results to Artifacts/)
-  assert.match(landing, /local Bindings reach[\s\n]+independent Targets/)
+  assert.match(landing, /Places own durable Material/)
+  assert.match(landing, /Relationships reach independent systems/)
 })
 
 test("the landing qualifies when a Home is and is not useful", async () => {

@@ -154,16 +154,16 @@ function Building({
             />
           ))}
           <text x="18" y={-height + 38} className="district-building-label">
-            FLOOR PLAN
+            ORIENTATION
           </text>
           <text x="18" y={-height + 90} className="district-building-label">
-            WORKSPACES
+            PLACES
           </text>
           <text x="18" y={-height + 140} className="district-building-label">
             CAPABILITIES
           </text>
           <text x="18" y={-height + 190} className="district-building-label">
-            DOCS / ARTIFACTS
+            MATERIAL
           </text>
           <rect
             x={width / 2 - 26}
@@ -320,7 +320,7 @@ export default function EnvironmentDistrict() {
                   </p>
                   <strong className="mt-1 block text-lg text-paper-strong">Endroit Home</strong>
                   <div className="mt-4 grid grid-cols-2 gap-px overflow-hidden rounded-lg border border-white/10 bg-white/10 text-left font-mono text-[0.54rem] uppercase tracking-[0.06em] text-paper/55">
-                    {["Front Door", "Floor Plan", "Desk", "Workspaces", "Capabilities", "Docs / Artifacts"].map((label) => (
+                    {["Places", "Orientation", "Capabilities", "Material", "Relationships", "Front Door"].map((label) => (
                       <span key={label} className="bg-[#111717] px-2 py-2">{label}</span>
                     ))}
                   </div>
@@ -604,7 +604,7 @@ export default function EnvironmentDistrict() {
                 <div className="max-w-2xl">
                   <p className="district-panel-kicker">The environment now has an owner</p>
                   <h3 className="district-panel-title">Explore how the same place orients, keeps and routes work.</h3>
-                  <p className="district-panel-copy">Choose one guided action. Each one changes the same owned environment rather than opening a separate feature demo.</p>
+                  <p className="district-panel-copy">The Front Door situates the agent. Choose one guided action to see how the same owned environment then orients, keeps and routes work.</p>
                 </div>
               )}
 
