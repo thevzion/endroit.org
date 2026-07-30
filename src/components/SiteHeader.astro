@@ -1,20 +1,17 @@
 ---
-const docsUrl = 'https://github.com/thevzion/hairness#readme';
-const githubUrl = 'https://github.com/thevzion/hairness';
+const githubUrl = 'https://github.com/thevzion/endroit';
 ---
 
-<header class="site-header">
-	<div class="shell header-inner">
-		<a class="brand" href="/" aria-label="Hairness home">
+<header class="sticky top-0 z-50 border-b border-ink/10 bg-paper/90 backdrop-blur-xl">
+	<div class="page-shell flex min-h-16 items-center justify-between gap-4 lg:min-h-[4.75rem]">
+		<a class="brand" href="/" aria-label="Endroit home">
 			<span class="brand-mark" aria-hidden="true"><i></i></span>
-			<span>hairness</span>
+			<span>endroit</span>
 		</a>
-		<nav aria-label="Primary navigation">
-			<a href="https://thevzion.com/home-first/">Home-first <span aria-hidden="true">↗</span></a>
-			<a href="/homes/">Homes</a>
-			<a href={docsUrl}>Docs <span aria-hidden="true">↗</span></a>
-			<a href={githubUrl}>GitHub <span aria-hidden="true">↗</span></a>
+		<nav class="flex items-center gap-1.5 sm:gap-3" aria-label="Primary navigation">
+			<a class="nav-link hidden sm:inline-flex" href="/#workplace">How it works</a>
+			<a class="nav-link" href={githubUrl}>GitHub <span aria-hidden="true">↗</span></a>
+			<a class="nav-cta" href="/#install">Install</a>
 		</nav>
-		<a class="button button-small button-primary header-cta" href="/#create-home">Install</a>
 	</div>
 </header>

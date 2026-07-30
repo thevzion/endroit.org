@@ -10,6 +10,7 @@ interface Props {
 const { title, description, path } = Astro.props;
 const canonical = new URL(path, Astro.site);
 const socialCard = new URL('/social-card.png', Astro.site);
+const socialAlt = 'Endroit — You equipped the agent. Now own the place where you work together.';
 ---
 
 <!doctype html>
@@ -23,18 +24,20 @@ const socialCard = new URL('/social-card.png', Astro.site);
 		<link rel="canonical" href={canonical} />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta property="og:type" content="website" />
-		<meta property="og:site_name" content="Hairness" />
+		<meta property="og:site_name" content="Endroit" />
 		<meta property="og:title" content={title} />
 		<meta property="og:description" content={description} />
 		<meta property="og:url" content={canonical} />
 		<meta property="og:image" content={socialCard} />
+		<meta property="og:image:type" content="image/png" />
 		<meta property="og:image:width" content="1200" />
 		<meta property="og:image:height" content="630" />
-		<meta property="og:image:alt" content="Hairness — a shared, owned way of working for humans and agents." />
+		<meta property="og:image:alt" content={socialAlt} />
 		<meta name="twitter:card" content="summary_large_image" />
 		<meta name="twitter:title" content={title} />
 		<meta name="twitter:description" content={description} />
 		<meta name="twitter:image" content={socialCard} />
+		<meta name="twitter:image:alt" content={socialAlt} />
 		<title>{title}</title>
 	</head>
 	<body>

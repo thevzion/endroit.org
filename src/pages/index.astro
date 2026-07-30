@@ -1,201 +1,241 @@
 ---
-import CompactShift from '../components/CompactShift';
-import EnvironmentLayer from '../components/EnvironmentLayer.astro';
+import EnvironmentDistrict from '../components/EnvironmentDistrict';
+import InstallCommand from '../components/InstallCommand.astro';
 import SiteFooter from '../components/SiteFooter.astro';
 import SiteHeader from '../components/SiteHeader.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 
-const createCommand = 'npx --yes @hairness/cli@latest create my-home';
+const capabilities = [
+	['Orient', 'Static Floor Plan and an optional live HUD'],
+	['Organize', 'Workspaces, Assets, Capabilities and Documents'],
+	['Keep', 'Inspectable Artifacts with owner, state and lineage'],
+	['Connect', 'Independent Targets and collaborator-local Bindings'],
+	['Project', 'Deterministic Codex and Claude surfaces'],
+	['Diagnose', 'Validation, build, Doctor and digest trust'],
+];
+
+const capital = [
+	['Maps', 'A stable topology and retained routes through the work.'],
+	['Decisions', 'Accepted direction with an explicit owner and useful context.'],
+	['Methods', 'Source-owned Capabilities that survive a runtime change.'],
+	['Documents / Artifacts', 'Ordinary continuity and chosen results with lineage.'],
+	['Relationships', 'Bindings and Handles that keep authority visible.'],
+];
 ---
 
 <BaseLayout
-	title="Hairness | A shared, owned way of working for humans and agents"
-	description="Hairness is an open-source framework and CLI for source-owned, portable agent work environments across runtimes and repositories."
+	title="Endroit | Own the place where you work together"
+	description="Endroit is the open-source, local-first environment where you and your agents work from the same maps, decisions, methods and retained results."
 	path="/"
 >
 	<SiteHeader />
 	<main>
-		<section class="hero shell">
-			<div class="hero-copy">
-				<p class="eyebrow">A shared work system for humans and agents.</p>
-				<h1>A shared, owned way of working for humans and agents.</h1>
-				<p class="hero-lede">
-					Hairness makes your agentic work environment explicit, owned and
-					portable across Agent Runtimes, collaborators and repositories.
-				</p>
-				<p class="product-definition">
-					An open-source framework and CLI that materializes a source-owned
-					Home, connects independent Targets and projects supported surfaces
-					into the Agent Runtimes you already use.
-				</p>
-				<div class="hero-actions">
-					<a class="button button-primary" href="#create-home">Create your Home</a>
-					<a class="button button-secondary" href="https://thevzion.com/home-first/">
-						Read the Home-first Proposal <span aria-hidden="true">↗</span>
-					</a>
-				</div>
-				<p class="proof-line">
-					<span>Codex and Claude today</span>
-					<span aria-hidden="true">·</span>
-					<span>Hairness 0.5 alpha</span>
-				</p>
-			</div>
-
-			<div class="hero-card" id="create-home">
-				<div class="terminal-bar" aria-hidden="true">
-					<span></span><span></span><span></span>
-					<p>start with an owned source</p>
-				</div>
-				<div class="command-row">
-					<code>{createCommand}</code>
-					<button class="copy-button" type="button" data-copy={createCommand}>
-						Copy
-					</button>
-				</div>
-				<p>Creates an independent Home repository. Your Targets stay independent.</p>
-			</div>
-		</section>
-
-		<section class="section shell shift-section">
-			<div class="section-heading">
-				<p class="eyebrow">The accidental environment</p>
-				<h2>Your repository should own the product, not the whole agent environment.</h2>
-				<p>
-					Open an Agent Runtime inside a repository and that Target becomes the
-					center of the setup. Methods, provider files, continuity and generated
-					work collect beside product source.
-				</p>
-				<p>
-					Hairness gives the portable environment its own source. Product-specific
-					instructions remain with the Target. Shared methods and continuity
-					remain in the Home.
-				</p>
-			</div>
-			<CompactShift client:visible />
-			<p class="runtime-note">
-				<strong>Agent Runtime</strong> means the system that starts or hosts an
-				agent session and exposes its tools. Hairness 0.5 currently calls its
-				configured relation to that system a <strong>Provider</strong>. Model
-				providers remain a separate layer.
-			</p>
-			<a class="text-link" href="https://thevzion.com/home-first/">
-				Explore the full proposal on The VZion <span aria-hidden="true">↗</span>
-			</a>
-		</section>
-
-		<EnvironmentLayer />
-
-		<section class="section section-dark product-truth">
-			<div class="shell">
-				<div class="section-heading">
-					<p class="eyebrow eyebrow-light">Available today · 0.5 alpha</p>
-					<h2>A real Home, not a diagram.</h2>
-					<p>
-						Create it, inspect it, version it and enter it through Codex or
-						Claude. Hairness keeps owned sources separate from rebuildable
-						runtime projections.
-					</p>
-				</div>
-				<div class="truth-grid">
-					<div><strong>Home</strong><span>Shared sources and orientation</span></div>
-					<div><strong>Desk</strong><span>Collaborator-local continuity</span></div>
-					<div><strong>Assets</strong><span>Reusable products for work</span></div>
-					<div><strong>Artifacts</strong><span>Chosen results with lineage</span></div>
-					<div><strong>Front Door</strong><span>Floor Plan and Home Console</span></div>
-					<div><strong>Bindings</strong><span>Local relations to Targets</span></div>
-					<div><strong>Projections</strong><span>Codex and Claude surfaces</span></div>
-					<div><strong>Diagnostics</strong><span>Validation, build and doctor</span></div>
-				</div>
-				<a class="text-link text-link-light" href="https://github.com/thevzion/hairness">
-					Inspect Hairness on GitHub <span aria-hidden="true">↗</span>
-				</a>
-			</div>
-		</section>
-
-		<section class="section shell direction-section">
-			<div class="direction-column">
-				<p class="eyebrow">Designed for</p>
-				<h2>One working environment across runtimes and repositories.</h2>
-				<ul class="direction-list">
-					<li><strong>Provider-neutral sources</strong><span>Change the Agent Runtime without rebuilding the work environment.</span></li>
-					<li><strong>Local working context</strong><span>Materialize owned context where the agent works before the work begins.</span></li>
-					<li><strong>Human curation</strong><span>Turn reviewed results into better reusable Assets deliberately.</span></li>
-				</ul>
-			</div>
-			<aside class="direction-note">
-				<p>Direction, not an integration claim</p>
-				<span>
-					Codex and Claude are qualified today. Other runtimes, team Homes and
-					published Home catalogs describe where Hairness is designed to go.
-				</span>
-			</aside>
-		</section>
-
-		<section class="section concept-section">
-			<div class="shell">
-				<div class="section-heading section-heading-wide">
-					<p class="eyebrow">Conceptual · Not installable yet</p>
-					<h2>Homes designed around real work.</h2>
-					<p>
-						A specialized Home could package a coherent collaboration system
-						for a domain—not another folder of disconnected Skills.
-					</p>
-				</div>
-				<div class="concept-grid">
-					<article>
-						<h3>Game Development Home</h3>
-						<p>Design methods, engine conventions, playtest Artifacts and independent game Targets.</p>
-					</article>
-					<article>
-						<h3>Designer Home</h3>
-						<p>Research, critique practices, visual systems and durable decisions across client work.</p>
-					</article>
-					<article>
-						<h3>Research Home</h3>
-						<p>Evidence standards, reading methods, claims and governed outputs across changing tools.</p>
-					</article>
-				</div>
-				<div class="center-action">
-					<a class="button button-secondary" href="/homes/">Imagine your Home</a>
-				</div>
-			</div>
-		</section>
-
-		<section class="section shell alpha-section">
-			<div class="alpha-card">
-				<div>
-					<p class="eyebrow">Hairness 0.5 alpha</p>
-					<h2>Start with the agents and repositories you already use.</h2>
-				</div>
-				<div>
-					<p>
-						The CLI creates a dedicated Home, validates its contracts and
-						projects supported Assets into Codex and Claude.
-					</p>
-					<div class="hero-actions">
-						<a class="button button-primary" href="#create-home">Create your Home</a>
-						<a class="text-link" href="https://github.com/thevzion/hairness">
-							Inspect the source <span aria-hidden="true">↗</span>
+		<section class="hero-section">
+			<div class="page-shell">
+				<p class="eyebrow">Models · Tools · Skills · Memory</p>
+				<p class="mt-5 text-base font-semibold text-copper-dark">Get more from the agents you already use.</p>
+				<h1>You equipped the agent.<br /><span>Now own the place where you work together.</span></h1>
+				<div class="mt-8 grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(20rem,0.48fr)] lg:items-end lg:gap-16">
+					<div>
+						<p class="max-w-3xl text-xl leading-relaxed text-muted md:text-2xl">
+							Endroit is the open-source, local-first environment where you
+							and the agents you already use work from the same maps, decisions,
+							methods and retained results—across sessions and independent
+							repositories.
+						</p>
+						<p class="mt-5 max-w-2xl text-base font-semibold text-ink/80">
+							Different interfaces. Different runtimes. Same place. Same material.
+						</p>
+					</div>
+					<div class="flex flex-col gap-3 lg:items-start">
+						<a class="primary-cta" href="#workplace">
+							See how a Home changes the environment
+							<svg aria-hidden="true" viewBox="0 0 20 20"><path d="M4 10h11M11 6l4 4-4 4"></path></svg>
+						</a>
+						<a class="secondary-link" href="https://thevzion.com/home-first/">
+							Read the Home-first Proposal <span aria-hidden="true">↗</span>
 						</a>
 					</div>
+				</div>
+				<div class="mt-12 border-t border-ink/10 pt-5">
+					<ul class="grid list-none gap-3 p-0 text-sm font-semibold sm:grid-cols-3">
+						<li>Resume without starting over.</li>
+						<li>Change runtimes, keep the work.</li>
+						<li>Keep repositories independent.</li>
+					</ul>
+					<div class="mt-5 flex flex-wrap gap-x-6 gap-y-2 font-mono text-[0.68rem] font-semibold uppercase tracking-[0.12em] text-muted">
+						<span>Open source</span>
+						<span>Local-first</span>
+						<span class="text-copper-dark">Endroit 0.7 alpha</span>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section id="workplace" class="bg-night py-20 text-paper-strong md:py-28 lg:py-36">
+			<div class="district-shell">
+				<div class="mb-12 grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(18rem,0.45fr)] lg:items-end lg:gap-16">
+					<div>
+						<p class="eyebrow eyebrow-dark">Interactive model of an Endroit environment</p>
+						<h2 class="max-w-4xl text-balance text-4xl font-semibold tracking-[-0.055em] md:text-6xl lg:text-7xl">
+							A stocked storage closet is not an owned workplace.
+						</h2>
+					</div>
+					<p class="m-0 text-base leading-relaxed text-paper/60 md:text-lg">
+						The material may already be useful and orderly. What changes is
+						the system that owns it as one shared environment, orients the
+						work and keeps its destinations explicit.
+					</p>
+				</div>
+				<EnvironmentDistrict client:visible />
+				<noscript>
+					<div class="mt-5 rounded-2xl border border-white/15 bg-white/[0.04] p-5 text-sm leading-relaxed text-paper/70">
+						<strong class="text-paper-strong">Home-first model summary.</strong>
+						An Endroit Home gives the environment an owner: the Front Door and
+						Floor Plan orient your agent; Workspaces keep Documents; human
+						curation promotes chosen results to Artifacts; local Bindings reach
+						independent Targets without absorbing their source, history or
+						delivery.
+					</div>
+				</noscript>
+			</div>
+		</section>
+
+		<section id="owned" class="section-space">
+			<div class="page-shell">
+				<div class="max-w-3xl">
+					<p class="eyebrow">What becomes owned</p>
+					<h2 class="section-title">Useful context can become cumulative agentic capital.</h2>
+					<p class="section-lede">
+						Maps, decisions, methods, retained work and explicit relationships
+						stay locally addressable across sessions and Targets.
+					</p>
+				</div>
+				<div class="capital-grid">
+					{
+						capital.map(([title, copy], index) => (
+							<article>
+								<span>{String(index + 1).padStart(2, '0')}</span>
+								<h3>{title}</h3>
+								<p>{copy}</p>
+							</article>
+						))
+					}
+				</div>
+				<p class="claim-note">
+					This is an ownership and continuity claim—not a measured claim about
+					reasoning quality, hallucinations, speed, cost or productivity.
+				</p>
+			</div>
+		</section>
+
+		<section id="qualify" class="border-t border-ink/10 py-16 md:py-20">
+			<div class="page-shell">
+				<div class="grid gap-10 lg:grid-cols-[minmax(18rem,0.45fr)_minmax(0,1fr)] lg:gap-20">
+					<div class="max-w-xl">
+						<p class="eyebrow">A quick qualification</p>
+						<h2 class="mt-4 text-4xl font-semibold leading-[0.98] tracking-[-0.055em] md:text-5xl">
+							Do you need a Home?
+						</h2>
+						<p class="mt-5 max-w-lg text-base leading-relaxed text-muted">
+							Endroit is useful when continuity keeps escaping the repository
+							that happens to be open.
+						</p>
+						<a class="secondary-link mt-5" href="https://github.com/thevzion/endroit#do-you-need-a-home">
+							Read the full adoption path <span aria-hidden="true">↗</span>
+						</a>
+					</div>
+
+					<div class="grid gap-8 sm:grid-cols-2">
+						<div>
+							<h3 class="m-0 text-sm font-bold uppercase tracking-[0.08em]">Signals</h3>
+							<ul class="mt-4 grid list-none gap-3 p-0 text-sm leading-relaxed text-muted">
+								<li class="border-t border-ink/10 pt-3">You keep re-explaining the same maps and decisions.</li>
+								<li class="border-t border-ink/10 pt-3">Work starts inside a repository that does not own the work around it.</li>
+								<li class="border-t border-ink/10 pt-3">Switching runtimes—or copying instructions between them—makes the environment drift.</li>
+								<li class="border-t border-ink/10 pt-3">Plenty of context is reachable, but the right source or the destination for a result stays ambiguous.</li>
+							</ul>
+						</div>
+
+						<div>
+							<h3 class="m-0 text-sm font-bold uppercase tracking-[0.08em]">Probably not</h3>
+							<ul class="mt-4 grid list-none gap-3 p-0 text-sm leading-relaxed text-muted">
+								<li class="border-t border-ink/10 pt-3">A short session in one repository with no continuity worth retaining.</li>
+								<li class="border-t border-ink/10 pt-3">Another Home would create more ambiguity than the work itself.</li>
+							</ul>
+							<div class="mt-6 border-l-2 border-copper pl-4">
+								<p class="m-0 font-mono text-[0.62rem] font-bold uppercase tracking-[0.12em] text-copper-dark">
+									Smallest useful trial
+								</p>
+								<p class="mt-2 text-sm font-semibold leading-relaxed">
+									one Home → one existing Target → one current subject → one retained result → one resumed session
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section id="today" class="border-y border-ink/10 bg-paper-strong section-space">
+			<div class="page-shell">
+				<div class="grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(20rem,0.52fr)] lg:gap-20">
+					<div>
+						<p class="eyebrow">Endroit 0.7 today</p>
+						<h2 class="section-title">The workplace is concrete.</h2>
+						<p class="section-lede">
+							Endroit is an open-source framework and CLI. Its canonical
+							sources remain ordinary files under your control.
+						</p>
+						<div class="capability-grid">
+							{
+								capabilities.map(([title, copy]) => (
+									<div>
+										<strong>{title}</strong>
+										<span>{copy}</span>
+									</div>
+								))
+							}
+						</div>
+					</div>
+					<aside class="alpha-panel">
+						<p class="eyebrow">Alpha limits</p>
+						<h3>Inspect before you trust.</h3>
+						<ul>
+							<li>Codex and Claude are native and qualified today.</li>
+							<li>Other runtimes can try the portable Floor Plan and Home Console path.</li>
+							<li>The HUD is optional and never replaces live truth.</li>
+							<li>Digest trust detects changed bytes; it is not a sandbox.</li>
+							<li>Endroit is not a model, scheduler, methodology or remote memory service.</li>
+						</ul>
+						<a class="secondary-link mt-6" href="https://github.com/thevzion/endroit">
+							Inspect the source <span aria-hidden="true">↗</span>
+						</a>
+					</aside>
+				</div>
+			</div>
+		</section>
+
+		<section id="install" class="section-space">
+			<div class="page-shell">
+				<div class="grid gap-12 lg:grid-cols-[minmax(0,0.62fr)_minmax(0,1fr)] lg:items-center lg:gap-20">
+					<div>
+						<p class="eyebrow">Start with one Home</p>
+						<h2 class="section-title">Own the place where you work together.</h2>
+						<p class="section-lede">
+							Requires Node.js 22 or newer, Git, and the Codex or Claude CLI.
+							The guided setup creates an ordinary Git repository. Your
+							Targets stay independent.
+						</p>
+						<div class="mt-7 flex flex-wrap gap-x-6 gap-y-3 text-sm font-semibold">
+							<a class="secondary-link" href="https://github.com/thevzion/endroit#readme">Read the technical reference ↗</a>
+							<a class="secondary-link" href="https://thevzion.com/home-first/">Home-first Proposal ↗</a>
+						</div>
+					</div>
+					<InstallCommand />
 				</div>
 			</div>
 		</section>
 	</main>
 	<SiteFooter />
 </BaseLayout>
-
-<script>
-	const copyButton = document.querySelector<HTMLButtonElement>('[data-copy]');
-
-	copyButton?.addEventListener('click', async () => {
-		const command = copyButton.dataset.copy;
-		if (!command || !navigator.clipboard) return;
-
-		await navigator.clipboard.writeText(command);
-		copyButton.textContent = 'Copied';
-		window.setTimeout(() => {
-			copyButton.textContent = 'Copy';
-		}, 1600);
-	});
-</script>
