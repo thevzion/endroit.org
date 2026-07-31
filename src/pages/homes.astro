@@ -2,113 +2,86 @@
 import SiteFooter from '../components/SiteFooter.astro';
 import SiteHeader from '../components/SiteHeader.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
+
+const objects = [
+	['Home', 'The durable workplace and shared trust boundary.'],
+	['Desk', 'Personal continuity, staging and local access.'],
+	['Room', 'One durable domain and the Material that belongs there.'],
+	['Meeting', 'A bounded event whose hot context is ephemeral by default.'],
+	['Equipment', 'A reusable method, its instructions, limits and optional runtime.'],
+	['Site', 'A sovereign repository, service or publication system.'],
+	['Route', 'A Desk-owned declaration of local Git access to a Site.'],
+];
 ---
 
 <BaseLayout
-	title="Conceptual Homes | Endroit"
-	description="Possible specialized Endroit Homes, clearly separated from what Endroit 0.7 alpha ships today."
+	title="Homes in practice | Endroit"
+	description="How an Endroit Home composes Rooms, Equipment, Sites and Routes into a durable human-agent workplace."
 	path="/homes/"
 >
 	<SiteHeader />
 	<main>
 		<header class="learn-hero shell">
-			<p class="eyebrow">Conceptual · Not installable yet</p>
-			<h1>What could a specialized Home be built for?</h1>
+			<p class="eyebrow">Home-first in practice</p>
+			<h1>A Home is small enough to start and broad enough to grow.</h1>
 			<p>
-				These are product directions, not catalog entries. Endroit 0.7 provides
-				the framework; it does not ship these specialized Homes.
+				It is not a giant instruction file or a persistent agent. It is an owned workplace
+				whose Rooms, methods and external relationships remain understandable when the occupant changes.
 			</p>
 		</header>
 
 		<article class="learn-content shell">
 			<section>
-				<p class="section-index">01 · Composition</p>
-				<h2>A coherent Home organizes more than invocation.</h2>
-				<div class="anatomy-grid">
-					<article><span>01</span><h3>Inhabitants</h3><p>Who collaborates here?</p></article>
-					<article><span>02</span><h3>Conventions</h3><p>How is judgment exercised?</p></article>
-					<article><span>03</span><h3>Continuity</h3><p>What deserves to survive sessions?</p></article>
-					<article><span>04</span><h3>Assets</h3><p>What equips the work?</p></article>
-					<article><span>05</span><h3>Artifacts</h3><p>What results are worth governing?</p></article>
-					<article><span>06</span><h3>Targets</h3><p>Where does work land without being absorbed?</p></article>
-					<article><span>07</span><h3>Agent Runtimes</h3><p>What remains when the runtime changes?</p></article>
-				</div>
+				<p class="section-index">01 · The bootstrap</p>
+				<h2>Four human-authored orientation sources are enough to begin.</h2>
+				<pre class="source-tree"><code>my-home/
+├── endroit.json
+├── HOME.md
+├── rooms/home/ROOM.md
+└── .desk/DESK.md</code></pre>
+				<p>
+					Provider front doors are generated from these owned sources. Five inspectable foundation
+					Equipment provide onboarding, orientation, Artifacts, Rooms and Sites. Additional Rooms,
+					Sites and optional Equipment appear only when real work needs them.
+				</p>
 			</section>
 
 			<section>
-				<p class="section-index">02 · More than the low level</p>
-				<h2>Skills are useful. They are not the organizing idea.</h2>
+				<p class="section-index">02 · The workplace</p>
+				<h2>Each noun owns one durable responsibility.</h2>
 				<div class="definition-stack">
-					<div><strong>Skill</strong><span>A model-facing entrypoint to a capability.</span></div>
-					<div><strong>Asset</strong><span>A reusable product for work: instructions, tools, knowledge, workflows or runtime.</span></div>
-					<div><strong>Home</strong><span>A coherent environment that owns and composes Assets for people, agents and Targets.</span></div>
-					<div><strong>Endroit</strong><span>The framework that makes the environment portable, inspectable and source-owned.</span></div>
+					{objects.map(([name, copy]) => <div><strong>{name}</strong><span>{copy}</span></div>)}
 				</div>
 			</section>
 
 			<section>
-				<p class="section-index">03 · Product truth</p>
-				<h2>Ideas, directions and available products are different promises.</h2>
+				<p class="section-index">03 · Composition</p>
+				<h2>Methods equip a place. They do not own it.</h2>
 				<div class="maturity-grid">
-					<article>
-						<p class="concept-status">Imagined usage</p>
-						<h3>Make the paradigm visible</h3>
-						<p>A thought experiment reveals what becomes possible without claiming an implementation.</p>
-					</article>
-					<article>
-						<p class="concept-status">Conceptual Home</p>
-						<h3>Describe a coherent composition</h3>
-						<p>The inhabitants, Assets, Artifacts and Targets fit together, but the Home is not installable.</p>
-					</article>
-					<article class="maturity-live">
-						<p class="concept-status">Installable Home</p>
-						<h3>Deliver the composition</h3>
-						<p>Sources, contracts and runtime exist and can be inspected before use.</p>
-					</article>
+					<article><p class="concept-status">Room</p><h3>Start from the durable domain</h3><p>Give one coherent subject a mission, Material and continuity before choosing a runtime or methodology.</p></article>
+					<article><p class="concept-status">Equipment</p><h3>Install a way of working</h3><p>Research, planning or publishing can be added, adapted and removed without absorbing the Room.</p></article>
+					<article><p class="concept-status">Meeting</p><h3>Compose for the work at hand</h3><p>Humans, agents, Roles and Equipment meet temporarily. Nothing becomes durable by accident.</p></article>
+					<article class="maturity-live"><p class="concept-status">Site + Route</p><h3>Deliver without absorbing truth</h3><p>A repository keeps its authority while a Desk declares local Git access. A remote-only Site has no Route in 0.8.</p></article>
 				</div>
 			</section>
 
 			<section>
-				<p class="section-index">04 · Three thought experiments</p>
-				<h2>Start with the work, then design its Home.</h2>
+				<p class="section-index">04 · Different Homes</p>
+				<h2>The responsibilities stay explicit. The contents stay yours.</h2>
 				<div class="home-experiments">
-					<article>
-						<header><p>Concept · Not installable yet</p><h3>Game Development Home</h3></header>
-						<ul>
-							<li>Engine and studio conventions as shared Assets</li>
-							<li>Playtest reports and design decisions as Artifacts</li>
-							<li>Games, tools and documentation as independent Targets</li>
-						</ul>
-					</article>
-					<article>
-						<header><p>Concept · Not installable yet</p><h3>Designer Home</h3></header>
-						<ul>
-							<li>Research and critique methods that survive clients</li>
-							<li>Design-system knowledge without trapping it in one app</li>
-							<li>Deliverables that keep evidence and lineage</li>
-						</ul>
-					</article>
-					<article>
-						<header><p>Concept · Not installable yet</p><h3>Research Home</h3></header>
-						<ul>
-							<li>Evidence standards and reading practices as Assets</li>
-							<li>Claims, syntheses and decisions as governed Artifacts</li>
-							<li>Projects and publications as separate Targets</li>
-						</ul>
-					</article>
+					<article><header><p>Example composition</p><h3>Product Studio</h3></header><ul><li>Rooms for product, design and engineering domains</li><li>Shared review and delivery Equipment</li><li>Repositories and documentation as sovereign Sites</li></ul></article>
+					<article><header><p>Example composition</p><h3>Research Home</h3></header><ul><li>Rooms organized by durable research domain</li><li>Evidence and synthesis Equipment</li><li>Publications and knowledge bases declared as Sites; non-Git Routes remain future work</li></ul></article>
+					<article><header><p>Example composition</p><h3>Personal Studio</h3></header><ul><li>One Desk carrying personal continuity</li><li>Rooms for writing, learning and making</li><li>Git repositories and publishing systems kept independent</li></ul></article>
 				</div>
 			</section>
 
 			<section class="home-question">
-				<p class="eyebrow">Conceptual direction</p>
-				<h2>If your agents had a Home, what would yours be built for?</h2>
-				<p>
-					What would you preserve across sessions? What would you equip every
-					agent with? And what would you finally remove from your repositories?
-				</p>
+				<p class="eyebrow">Start with the place</p>
+				<h2>What should still make sense when the agent changes?</h2>
+				<p>That is the first question a Home answers.</p>
 				<div class="hero-actions">
-					<a class="button button-primary" href="/#install">Install Endroit</a>
-					<a class="button button-secondary" href="https://github.com/thevzion/endroit">Inspect the framework ↗</a>
+					<a class="button button-primary" href="/#install">Create a Home</a>
+					<a class="button button-secondary" href="https://github.com/thevzion/endroit">Inspect Endroit ↗</a>
 				</div>
 			</section>
 		</article>

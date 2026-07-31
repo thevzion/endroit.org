@@ -5,51 +5,50 @@ import SiteFooter from '../components/SiteFooter.astro';
 import SiteHeader from '../components/SiteHeader.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 
-const capabilities = [
-	['Places', 'Home, Desk, Workspaces and Workstreams with explicit owners'],
-	['Orientation', 'Front Door, static Floor Plan, optional live HUD and Maps'],
-	['Capabilities', 'Source-owned Assets projected into runtime-native surfaces'],
-	['Material', 'Documents, decisions and Artifacts with owner, state and lineage'],
-	['Relationships', 'Independent Targets, local Bindings and observed Handles'],
-	['Integrity', 'Validation, build, Doctor and digest trust'],
+const journey = [
+	['Enter a Home', 'Provider front doors explain where the agent arrived.'],
+	['Name the Room', 'Endroit recovers its purpose, Material and relationships.'],
+	['Start a Meeting', 'Humans, agents, Roles and Equipment compose for the work at hand.'],
+	['Choose what remains', 'Keep the result ephemeral, retain it, accept it or deliver it.'],
+	['Return later', 'Another supported agent resumes from the owned place, not a private chat memory.'],
 ];
 
-const capital = [
-	['Maps', 'A stable topology and retained routes through the work.'],
-	['Decisions', 'Accepted direction with an explicit owner and useful context.'],
-	['Methods', 'Source-owned Capabilities that survive a runtime change.'],
-	['Documents / Artifacts', 'Ordinary continuity and chosen results with lineage.'],
-	['Relationships', 'Bindings and Handles that keep authority visible.'],
+const responsibilities = [
+	['Home', 'Shared workplace and house rules'],
+	['Desk', 'Personal continuity and local access'],
+	['Room', 'One durable domain and its Material'],
+	['Equipment', 'A reusable way of working'],
+	['Site', 'A sovereign external owner of truth'],
+	['Route', 'Desk-local Git access to a Site'],
 ];
+
+const siteModes = ['Embedded', 'Managed clone', 'Managed worktree', 'Existing checkout', 'Submodule', 'Remote-only'];
 ---
 
 <BaseLayout
-	title="Endroit | Own the place where you work together"
-	description="Endroit is the open-source, local-first environment where you and your agents share places, orientation, capabilities, durable material and explicit relationships."
+	title="Endroit — A durable workplace for humans and AI agents"
+	description="Endroit is a local-first, headless framework that gives humans and AI agents a durable workplace across meetings, tools and repositories."
 	path="/"
 >
 	<SiteHeader />
 	<main>
 		<section class="hero-section">
 			<div class="page-shell">
-				<p class="eyebrow">Models · Tools · Skills · Memory</p>
-				<p class="mt-5 text-base font-semibold text-copper-dark">Get more from the agents you already use.</p>
-				<h1>You equipped the agent.<br /><span>Now own the place where you work together.</span></h1>
+				<p class="eyebrow">Instructions · Skills · A place for the work</p>
+				<h1 class="mt-7">Give your agents<br /><span>a familiar place to work.</span></h1>
 				<div class="mt-8 grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(20rem,0.48fr)] lg:items-end lg:gap-16">
 					<div>
 						<p class="max-w-3xl text-xl leading-relaxed text-muted md:text-2xl">
-							Endroit is the open-source, local-first environment where you
-							and the agents you already use work from the same maps, decisions,
-							methods and retained results—across sessions and independent
-							repositories.
+							Endroit is a local-first, headless framework for durable human-agent workplaces.
+							It adds ownership, orientation, continuity and destination around the agents and repositories you already use.
 						</p>
 						<p class="mt-5 max-w-2xl text-base font-semibold text-ink/80">
-							Different interfaces. Different runtimes. Same place. Same material.
+							Same Material. Human-readable sources. Provider-native interfaces.
 						</p>
 					</div>
 					<div class="flex flex-col gap-3 lg:items-start">
-						<a class="primary-cta" href="#workplace">
-							See how a Home changes the environment
+						<a class="primary-cta" href="#install">
+							Create a Home
 							<svg aria-hidden="true" viewBox="0 0 20 20"><path d="M4 10h11M11 6l4 4-4 4"></path></svg>
 						</a>
 						<a class="secondary-link" href="https://thevzion.com/home-first/">
@@ -57,185 +56,198 @@ const capital = [
 						</a>
 					</div>
 				</div>
-				<div class="mt-12 border-t border-ink/10 pt-5">
-					<ul class="grid list-none gap-3 p-0 text-sm font-semibold sm:grid-cols-3">
-						<li>Resume without starting over.</li>
-						<li>Change runtimes, keep the work.</li>
-						<li>Keep repositories independent.</li>
-					</ul>
-					<div class="mt-5 flex flex-wrap gap-x-6 gap-y-2 font-mono text-[0.68rem] font-semibold uppercase tracking-[0.12em] text-muted">
-						<span>Open source</span>
-						<span>Local-first</span>
-						<span class="text-copper-dark">Endroit 0.7 alpha</span>
-					</div>
+				<div class="mt-12 flex flex-wrap gap-x-6 gap-y-2 border-t border-ink/10 pt-5 font-mono text-[0.68rem] font-semibold uppercase tracking-[0.12em] text-muted">
+					<span>Local-first</span>
+					<span>Headless</span>
+					<span>Git-friendly</span>
+					<span class="text-copper-dark">0.8 alpha · actively dogfooded</span>
 				</div>
 			</div>
 		</section>
 
-		<section id="workplace" class="bg-night py-20 text-paper-strong md:py-28 lg:py-36">
+		<section id="setup" class="border-y border-ink/10 bg-paper-strong section-space">
+			<div class="page-shell">
+				<div class="max-w-3xl">
+					<p class="eyebrow">The setup you already recognize</p>
+					<h2 class="section-title">Your agent setup quietly became a workplace.</h2>
+					<p class="section-lede">
+						It started with an instruction file. Then came preferences, maps, memory, plans,
+						decisions, methods, specialized agents and a folder for outputs. Each addition made sense.
+						The whole no longer had clear owners.
+					</p>
+				</div>
+				<div class="mt-12 grid gap-5 lg:grid-cols-2">
+					<article class="responsibility-panel responsibility-before">
+						<p class="eyebrow">A few surfaces, many responsibilities</p>
+						<pre><code>AGENTS.md
+├── constitution
+├── preferences
+├── orientation
+├── product rules
+├── decisions
+└── current state
+
+Skills/
+├── procedures
+├── knowledge
+├── methods
+├── agents
+└── outputs</code></pre>
+					</article>
+					<article class="responsibility-panel responsibility-after">
+						<p class="eyebrow">One owner per responsibility</p>
+						<div class="responsibility-list">
+							{responsibilities.map(([name, copy]) => <div><strong>{name}</strong><span>{copy}</span></div>)}
+						</div>
+					</article>
+				</div>
+				<p class="mt-8 text-2xl font-semibold tracking-[-0.035em]">The pieces were already there. They just needed a place.</p>
+			</div>
+		</section>
+
+		<section id="home-first" class="bg-night py-20 text-paper-strong md:py-28 lg:py-36">
 			<div class="district-shell">
 				<div class="mb-12 grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(18rem,0.45fr)] lg:items-end lg:gap-16">
 					<div>
-						<p class="eyebrow eyebrow-dark">Interactive model of an Endroit environment</p>
+						<p class="eyebrow eyebrow-dark">Prompt-centric · Agent-centric · Home-first</p>
 						<h2 class="max-w-4xl text-balance text-4xl font-semibold tracking-[-0.055em] md:text-6xl lg:text-7xl">
-							A stocked storage closet is not an owned workplace.
+							Make the workplace first-class.
 						</h2>
 					</div>
 					<p class="m-0 text-base leading-relaxed text-paper/60 md:text-lg">
-						The material may already be useful and orderly. What changes is
-						the system that owns it as one shared environment, orients the
-						work and keeps its destinations explicit.
+						These are composable centers of attention, not three formal paradigms or a
+						historical sequence. Home-first gives their environment an owner.
 					</p>
 				</div>
 				<EnvironmentDistrict client:visible />
 				<noscript>
 					<div class="mt-5 rounded-2xl border border-white/15 bg-white/[0.04] p-5 text-sm leading-relaxed text-paper/70">
-						<strong class="text-paper-strong">Home-first model summary.</strong>
-						An Endroit Home gives the environment an owner: the Front Door
-						situates your agent; the Floor Plan, HUD and Maps progressively
-						orient it; Places own durable Material; Capabilities remain
-						source-owned; Relationships reach independent systems without
-						absorbing their source, history, authorization or delivery.
+						<strong class="text-paper-strong">Agent-centric design equips the occupant. Home-first equips the place.</strong>
+						 Home, Desk, Room, Equipment, Site and Route give durable responsibilities explicit owners before provider projections are built.
 					</div>
 				</noscript>
 			</div>
 		</section>
 
-		<section id="owned" class="section-space">
+		<section id="experience" class="section-space">
 			<div class="page-shell">
 				<div class="max-w-3xl">
-					<p class="eyebrow">What becomes owned</p>
-					<h2 class="section-title">Useful context can become cumulative agentic capital.</h2>
-					<p class="section-lede">
-						Maps, decisions, methods, retained work and explicit relationships
-						stay locally addressable across sessions and Targets.
-					</p>
+					<p class="eyebrow">The experience</p>
+					<h2 class="section-title">Name the Room. Recover the place.</h2>
+					<p class="section-lede">The Meeting can change. The owned environment carries what should remain.</p>
 				</div>
 				<div class="capital-grid">
-					{
-						capital.map(([title, copy], index) => (
-							<article>
-								<span>{String(index + 1).padStart(2, '0')}</span>
-								<h3>{title}</h3>
-								<p>{copy}</p>
-							</article>
-						))
-					}
+					{journey.map(([title, copy], index) => (
+						<article><span>{String(index + 1).padStart(2, '0')}</span><h3>{title}</h3><p>{copy}</p></article>
+					))}
 				</div>
-				<p class="claim-note">
-					This is an ownership and continuity claim—not a measured claim about
-					reasoning quality, hallucinations, speed, cost or productivity.
-				</p>
+				<p class="claim-note">Endroit doesn’t make the agent smarter. It makes the situation clearer.</p>
 			</div>
 		</section>
 
-		<section id="qualify" class="border-t border-ink/10 py-16 md:py-20">
-			<div class="page-shell">
-				<div class="grid gap-10 lg:grid-cols-[minmax(18rem,0.45fr)_minmax(0,1fr)] lg:gap-20">
-					<div class="max-w-xl">
-						<p class="eyebrow">A quick qualification</p>
-						<h2 class="mt-4 text-4xl font-semibold leading-[0.98] tracking-[-0.055em] md:text-5xl">
-							Do you need a Home?
-						</h2>
-						<p class="mt-5 max-w-lg text-base leading-relaxed text-muted">
-							Endroit is useful when continuity keeps escaping the repository
-							that happens to be open.
-						</p>
-						<a class="secondary-link mt-5" href="https://github.com/thevzion/endroit#do-you-need-a-home">
-							Read the full adoption path <span aria-hidden="true">↗</span>
-						</a>
-					</div>
-
-					<div class="grid gap-8 sm:grid-cols-2">
-						<div>
-							<h3 class="m-0 text-sm font-bold uppercase tracking-[0.08em]">Signals</h3>
-							<ul class="mt-4 grid list-none gap-3 p-0 text-sm leading-relaxed text-muted">
-								<li class="border-t border-ink/10 pt-3">You keep re-explaining the same maps and decisions.</li>
-								<li class="border-t border-ink/10 pt-3">Work starts inside a repository that does not own the work around it.</li>
-								<li class="border-t border-ink/10 pt-3">Switching runtimes—or copying instructions between them—makes the environment drift.</li>
-								<li class="border-t border-ink/10 pt-3">Plenty of context is reachable, but the right source or the destination for a result stays ambiguous.</li>
-							</ul>
-						</div>
-
-						<div>
-							<h3 class="m-0 text-sm font-bold uppercase tracking-[0.08em]">Probably not</h3>
-							<ul class="mt-4 grid list-none gap-3 p-0 text-sm leading-relaxed text-muted">
-								<li class="border-t border-ink/10 pt-3">A short session in one repository with no continuity worth retaining.</li>
-								<li class="border-t border-ink/10 pt-3">Another Home would create more ambiguity than the work itself.</li>
-							</ul>
-							<div class="mt-6 border-l-2 border-copper pl-4">
-								<p class="m-0 font-mono text-[0.62rem] font-bold uppercase tracking-[0.12em] text-copper-dark">
-									Smallest useful trial
-								</p>
-								<p class="mt-2 text-sm font-semibold leading-relaxed">
-									one Home → one existing Target → one current subject → one retained result → one resumed session
-								</p>
-							</div>
-						</div>
-					</div>
+		<section id="material" class="border-y border-ink/10 bg-paper-strong section-space">
+			<div class="page-shell grid gap-12 lg:grid-cols-2 lg:gap-20">
+				<div>
+					<p class="eyebrow">Shared matter</p>
+					<h2 class="section-title">Touch the same Material as your agents.</h2>
+					<p class="section-lede">
+						Endroit’s sources are ordinary local files. Humans read and edit them directly.
+						Agents receive deterministic projections for their provider. The interface can change without moving ownership into it.
+					</p>
+				</div>
+				<div class="plain-contract">
+					<p>Owned sources</p>
+					<span>Human-readable documents</span>
+					<span>Provider front doors</span>
+					<span>Optional live orientation</span>
+					<span>Explicit Git Routes</span>
+					<strong>No persistent agent, daemon or SaaS is required.</strong>
 				</div>
 			</div>
 		</section>
 
-		<section id="today" class="border-y border-ink/10 bg-paper-strong section-space">
+		<section id="sites" class="section-space">
 			<div class="page-shell">
-				<div class="grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(20rem,0.52fr)] lg:gap-20">
+				<div class="grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(20rem,0.5fr)] lg:gap-20">
 					<div>
-						<p class="eyebrow">Endroit 0.7 today</p>
-						<h2 class="section-title">The workplace is concrete.</h2>
+						<p class="eyebrow">Sites and Routes</p>
+						<h2 class="section-title">Repositories keep their sovereignty.</h2>
 						<p class="section-lede">
-							Endroit is an open-source framework and CLI. It makes Places,
-							Orientation, Capabilities, Material and Relationships explicit
-							while its canonical sources remain ordinary files under your
-							control.
+							A Site owns external truth. In Endroit 0.8, a Route records Desk-local Git access.
+							A remote-only Site has no Route; non-Git access remains future work.
+							Physical containment never erases a repository’s Git history, permissions or delivery lifecycle.
 						</p>
-						<div class="capability-grid">
-							{
-								capabilities.map(([title, copy]) => (
-									<div>
-										<strong>{title}</strong>
-										<span>{copy}</span>
-									</div>
-								))
-							}
-						</div>
+						<p class="mt-7 text-lg font-semibold">A Site is not a symlink. A symlink can only be a disposable local view.</p>
 					</div>
-					<aside class="alpha-panel">
-						<p class="eyebrow">Alpha limits</p>
-						<h3>Inspect before you trust.</h3>
-						<ul>
-							<li>Codex and Claude are native and qualified today.</li>
-							<li>Other runtimes can try the portable Floor Plan and Home Console path.</li>
-							<li>The HUD is optional and never replaces live truth.</li>
-							<li>Digest trust detects changed bytes; it is not a sandbox.</li>
-							<li>Endroit is not a model, scheduler, methodology or remote memory service.</li>
-						</ul>
-						<a class="secondary-link mt-6" href="https://github.com/thevzion/endroit">
-							Inspect the source <span aria-hidden="true">↗</span>
-						</a>
-					</aside>
+					<div class="mode-list">
+						{siteModes.map((mode, index) => <div><span>{String(index + 1).padStart(2, '0')}</span><strong>{mode}</strong></div>)}
+					</div>
 				</div>
 			</div>
 		</section>
 
-		<section id="install" class="section-space">
+		<section id="install" class="border-y border-ink/10 bg-paper-strong section-space">
 			<div class="page-shell">
 				<div class="grid gap-12 lg:grid-cols-[minmax(0,0.62fr)_minmax(0,1fr)] lg:items-center lg:gap-20">
 					<div>
-						<p class="eyebrow">Start with one Home</p>
-						<h2 class="section-title">Own the place where you work together.</h2>
+						<p class="eyebrow">A small framework</p>
+						<h2 class="section-title">Start with four human-authored orientation sources.</h2>
 						<p class="section-lede">
-							Requires Node.js 22 or newer, Git, and the Codex or Claude CLI.
-							The guided setup creates an ordinary Git repository. Your
-							Targets stay independent.
+							A new Home starts with settings, house rules, one Room and one Desk. Provider front doors are generated,
+							and five inspectable foundation Equipment provide onboarding, orientation, Artifacts, Rooms and Sites.
+							Additional Rooms, Sites and optional Equipment appear only when the work needs them.
 						</p>
-						<div class="mt-7 flex flex-wrap gap-x-6 gap-y-3 text-sm font-semibold">
-							<a class="secondary-link" href="https://github.com/thevzion/endroit#readme">Read the technical reference ↗</a>
-							<a class="secondary-link" href="https://thevzion.com/home-first/">Home-first Proposal ↗</a>
-						</div>
+						<p class="mt-6 text-sm font-semibold">Requires Git and Node.js 22 or newer. Codex and Claude are the first qualified providers.</p>
+						<p class="mt-5 font-mono text-sm"><code>npx @endroit/cli init</code> adds a Home to an existing repository.</p>
 					</div>
 					<InstallCommand />
 				</div>
+			</div>
+		</section>
+
+		<section id="framework" class="section-space">
+			<div class="page-shell grid gap-12 lg:grid-cols-2 lg:gap-20">
+				<article>
+					<p class="eyebrow">Core and Equipment</p>
+					<h2 class="mt-5 text-4xl font-semibold leading-[0.98] tracking-[-0.055em] md:text-5xl">The framework owns the workplace. Equipment owns the method.</h2>
+					<p class="section-lede">
+						Core resolves ownership, validates structure, builds projections and manages safe Routes.
+						Optional Equipment adds research, planning, publishing, maintenance or your own way of working.
+					</p>
+				</article>
+				<article>
+					<p class="eyebrow">Optional companion</p>
+					<h2 class="mt-5 text-4xl font-semibold leading-[0.98] tracking-[-0.055em] md:text-5xl">The workplace needs nouns. Humans need verbs.</h2>
+					<p class="section-lede">
+						HACP can make an invoked move explicit: call another occupant, adopt a Role, use Equipment,
+						retain Material or deliver through a Route. It is an independent draft protocol, not an Endroit prerequisite.
+					</p>
+					<p class="mt-5 text-sm text-muted">Illustrative Home-native vocabulary; these commands are not shipped by HACP or Endroit today.</p>
+					<a class="secondary-link" href="https://github.com/control-decks/human-agent-control-protocol">Read about HACP ↗</a>
+				</article>
+			</div>
+		</section>
+
+		<section id="boundaries" class="bg-night py-20 text-paper-strong md:py-28">
+			<div class="page-shell grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(20rem,0.52fr)] lg:gap-20">
+				<div>
+					<p class="eyebrow eyebrow-dark">Usable today. Still evolving.</p>
+					<h2 class="mt-5 max-w-3xl text-5xl font-semibold leading-[0.95] tracking-[-0.06em] md:text-7xl">Give agentic work a place to compound.</h2>
+					<div class="mt-8 flex flex-wrap gap-4">
+						<a class="primary-cta" href="#install">Create a Home</a>
+						<a class="secondary-link text-paper-strong" href="https://github.com/thevzion/endroit">View on GitHub ↗</a>
+					</div>
+				</div>
+				<aside class="alpha-panel alpha-panel-dark">
+					<p class="eyebrow eyebrow-dark">Alpha boundaries</p>
+					<ul>
+						<li>Codex and Claude are the first qualified projections.</li>
+						<li>The 0.8 workplace grammar is a breaking alpha change.</li>
+						<li>Submodules are recognized; their lifecycle is not managed.</li>
+						<li>Automated placement and semantic hygiene are not shipped.</li>
+						<li>No claim of better intelligence, fewer hallucinations, lower costs or higher productivity.</li>
+					</ul>
+				</aside>
 			</div>
 		</section>
 	</main>

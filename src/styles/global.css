@@ -473,77 +473,40 @@ code {
 	color: var(--color-signal);
 }
 
-.paradigm-switch,
-.district-action,
-.target-choice {
+.perspective-choice {
 	min-height: 44px;
-	border: 1px solid rgb(255 255 255 / 14%);
-	background: rgb(255 255 255 / 5%);
-	color: var(--color-paper-strong);
-	font-weight: 760;
-	transition: border-color 160ms ease, background-color 160ms ease, color 160ms ease, transform 160ms ease;
-}
-
-.paradigm-switch {
-	display: inline-flex;
+	display: grid;
+	grid-template-columns: auto 1fr;
 	align-items: center;
-	justify-content: center;
-	gap: 0.65rem;
-	border-radius: 999px;
-	padding: 0.65rem 1rem;
-	font-size: 0.76rem;
-}
-
-.paradigm-switch:hover,
-.district-action:hover,
-.target-choice:hover {
-	border-color: var(--color-signal);
-	color: var(--color-signal);
-}
-
-.paradigm-switch-icon {
-	display: grid;
-	width: 1.45rem;
-	height: 1.45rem;
-	place-items: center;
-	border-radius: 999px;
-	background: var(--color-copper);
-	color: white;
-}
-
-.scenario-button {
-	display: grid;
-	min-height: 72px;
-	grid-template-rows: auto auto;
-	align-content: center;
-	gap: 0.15rem;
+	gap: 0.8rem;
 	border: 0;
-	border-right: 1px solid rgb(255 255 255 / 10%);
+	border-bottom: 1px solid rgb(255 255 255 / 10%);
 	background: transparent;
 	color: rgb(244 239 229 / 46%);
-	padding: 0.85rem 0.65rem;
+	padding: 1.1rem 1.4rem;
 	text-align: left;
-}
+	transition: background-color 160ms ease, color 160ms ease;
+	}
 
-.scenario-button:last-child {
-	border-right: 0;
-}
+.perspective-choice:last-child {
+	border-bottom: 0;
+	}
 
-.scenario-button span {
+.perspective-choice span {
 	font-family: var(--font-mono);
 	font-size: 0.57rem;
 	letter-spacing: 0.12em;
-}
+	}
 
-.scenario-button strong {
-	font-size: 0.78rem;
-}
+.perspective-choice strong {
+	font-size: 0.86rem;
+	}
 
-.scenario-button:hover,
-.scenario-button[data-active="true"] {
+.perspective-choice:hover,
+.perspective-choice[data-active="true"] {
 	background: rgb(118 220 224 / 7%);
 	color: var(--color-signal);
-}
+	}
 
 .district-panel-kicker {
 	margin: 0 0 0.7rem;
@@ -572,99 +535,215 @@ code {
 	line-height: 1.68;
 }
 
-.district-action {
+.overloaded-surfaces {
+	display: grid;
+	gap: 0.8rem;
+	margin-top: 2.5rem;
+	}
+
+.overloaded-surfaces article {
+	padding: 1.1rem 1.25rem;
+	border: 1px solid rgb(255 255 255 / 14%);
+	background: rgb(255 255 255 / 4%);
+	}
+
+.overloaded-surfaces strong {
+	display: block;
+	color: var(--color-paper-strong);
+	font-family: var(--font-mono);
+	font-size: 0.78rem;
+	}
+
+.overloaded-surfaces p {
+	margin: 0.5rem 0 0;
+	color: rgb(244 239 229 / 50%);
+	font-size: 0.8rem;
+	line-height: 1.6;
+	}
+
+.agent-orbit {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: center;
+	gap: 0.7rem;
+	margin-top: 1.5rem;
+	}
+
+.agent-orbit > * {
+	padding: 0.55rem 0.8rem;
+	border: 1px solid rgb(255 255 255 / 12%);
 	border-radius: 999px;
-	background: var(--color-copper-dark);
-	padding: 0.72rem 1rem;
-	font-size: 0.75rem;
-}
+	color: rgb(244 239 229 / 48%);
+	font-family: var(--font-mono);
+	font-size: 0.6rem;
+	text-transform: uppercase;
+	}
 
-.district-action:hover {
-	border-color: var(--color-copper-light);
-	background: #662d1d;
-	color: white;
-	transform: translateY(-1px);
-}
-
-.district-action:disabled {
-	cursor: not-allowed;
-	opacity: 0.35;
-	transform: none;
-}
-
-.district-action-secondary {
-	background: transparent;
-}
-
-.target-choice {
-	border-radius: 0.85rem;
-	padding: 0.75rem;
-	font-size: 0.75rem;
-}
-
-.target-choice[data-active="true"] {
+.agent-orbit strong {
 	border-color: var(--color-signal);
 	background: rgb(118 220 224 / 9%);
 	color: var(--color-signal);
-}
+	font-size: 0.7rem;
+	}
 
-.district-building-label,
-.district-door-label,
-.district-code,
-.district-name,
-.district-token-label,
-.district-object-label,
-.district-object-meta {
-	pointer-events: none;
+.workplace-plan {
+	display: grid;
+	gap: 0.7rem;
+	margin-top: 2.5rem;
+	}
+
+.workplace-plan article {
+	position: relative;
+	padding: 1.1rem;
+	border: 1px solid rgb(255 255 255 / 14%);
+	background: rgb(255 255 255 / 4%);
+	}
+
+.workplace-plan article::after {
+	position: absolute;
+	right: -0.45rem;
+	bottom: -0.45rem;
+	width: 0.65rem;
+	height: 0.65rem;
+	border-radius: 999px;
+	background: var(--color-copper-light);
+	content: "";
+	}
+
+.workplace-plan article > span {
+	position: absolute;
+	top: 0.65rem;
+	right: 0.75rem;
+	color: rgb(244 239 229 / 28%);
 	font-family: var(--font-mono);
-}
+	font-size: 0.55rem;
+	}
 
-.district-building-label {
-	fill: rgb(244 239 229 / 52%);
-	font-size: 10px;
-	font-weight: 700;
-	letter-spacing: 0.08em;
-}
+.workplace-plan strong {
+	display: block;
+	color: var(--color-paper-strong);
+	font-size: 1rem;
+	}
 
-.district-door-label {
-	fill: #080c0d;
-	font-size: 8px;
-	font-weight: 900;
-}
+.workplace-plan p {
+	margin: 0.35rem 0 0;
+	color: rgb(244 239 229 / 48%);
+	font-size: 0.75rem;
+	}
 
-.district-code {
-	fill: rgb(244 239 229 / 40%);
-	font-size: 10px;
-	font-weight: 700;
-	letter-spacing: 0.09em;
-}
+.workplace-plan .workplace-home {
+	border-color: var(--color-copper-light);
+	background: rgb(216 121 78 / 9%);
+	}
 
-.district-name {
-	fill: #fffaf0;
-	font-family: var(--font-sans);
-	font-size: 20px;
-	font-weight: 700;
-	letter-spacing: -0.03em;
-}
+.responsibility-panel {
+	padding: 1.5rem;
+	border: 1px solid rgb(23 25 22 / 14%);
+	border-radius: 1.25rem;
+	background: var(--color-paper);
+	}
 
-.district-token-label {
-	fill: #080c0d;
-	font-size: 8px;
-	font-weight: 900;
-}
+.responsibility-panel pre,
+.source-tree {
+	overflow-x: auto;
+	margin: 1.5rem 0 0;
+	font-family: var(--font-mono);
+	font-size: 0.78rem;
+	line-height: 1.75;
+	white-space: pre;
+	}
 
-.district-object-label {
-	fill: #171916;
-	font-size: 9px;
+.responsibility-after {
+	border-color: rgb(183 91 54 / 55%);
+	}
+
+.responsibility-list,
+.definition-stack {
+	display: grid;
+	gap: 0.75rem;
+	margin-top: 1.5rem;
+	}
+
+.responsibility-list > div,
+.definition-stack > div {
+	display: grid;
+	gap: 0.25rem;
+	padding-top: 0.75rem;
+	border-top: 1px solid rgb(23 25 22 / 12%);
+	}
+
+.responsibility-list strong,
+.definition-stack strong {
+	font-size: 0.9rem;
+	}
+
+.responsibility-list span,
+.definition-stack span {
+	color: var(--color-muted);
+	font-size: 0.82rem;
+	}
+
+.plain-contract {
+	display: grid;
+	align-content: start;
+	gap: 0;
+	padding: 1.5rem;
+	border: 1px solid rgb(23 25 22 / 14%);
+	border-radius: 1.25rem;
+	background: var(--color-paper);
+	}
+
+.plain-contract p {
+	margin: 0;
+	color: var(--color-copper-dark);
+	font-family: var(--font-mono);
+	font-size: 0.68rem;
 	font-weight: 800;
-	letter-spacing: 0.06em;
+	letter-spacing: 0.12em;
 	text-transform: uppercase;
-}
+	}
 
-.district-object-meta {
-	fill: rgb(23 25 22 / 58%);
-	font-size: 7px;
-}
+.plain-contract span,
+.plain-contract strong {
+	padding-block: 1rem;
+	border-bottom: 1px solid rgb(23 25 22 / 12%);
+	}
+
+.plain-contract strong {
+	border: 0;
+	color: var(--color-copper-dark);
+	}
+
+.mode-list {
+	display: grid;
+	align-content: start;
+	border-top: 1px solid rgb(23 25 22 / 14%);
+	}
+
+.mode-list div {
+	display: grid;
+	grid-template-columns: 2rem 1fr;
+	gap: 0.75rem;
+	padding-block: 1rem;
+	border-bottom: 1px solid rgb(23 25 22 / 14%);
+	}
+
+.mode-list span {
+	color: var(--color-copper-dark);
+	font-family: var(--font-mono);
+	font-size: 0.62rem;
+	}
+
+.alpha-panel-dark {
+	border-color: rgb(255 255 255 / 14%);
+	background: rgb(255 255 255 / 4%);
+	box-shadow: none;
+	}
+
+.alpha-panel-dark li {
+	color: rgb(244 239 229 / 62%);
+	}
 
 .learn-hero,
 .learn-content,
@@ -837,19 +916,18 @@ code {
 		grid-template-columns: repeat(2, minmax(0, 1fr));
 	}
 
-	.scenario-button {
-		min-height: 92px;
-		padding-inline: 1.5rem;
-		border-right: 0;
-		border-bottom: 1px solid rgb(255 255 255 / 10%);
-	}
-
-	.scenario-button:last-child {
+	.perspective-choice {
+		border-right: 1px solid rgb(255 255 255 / 10%);
 		border-bottom: 0;
+		padding-inline: 1.75rem;
 	}
 
-	.scenario-button strong {
-		font-size: 0.86rem;
+	.perspective-choice:last-child {
+		border-right: 0;
+	}
+
+	.workplace-plan {
+		grid-template-columns: repeat(3, minmax(0, 1fr));
 	}
 }
 
