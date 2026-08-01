@@ -10,7 +10,8 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro check && astro build",
-    "test": "node --test tests/*.test.mjs",
+    "test": "npm run build && node --test tests/*.test.mjs",
+    "sync:sources": "node scripts/sync-owned-sources.mjs",
     "preview": "astro preview",
     "astro": "astro"
   },

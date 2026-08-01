@@ -1,0 +1,54 @@
+---
+import SiteFooter from '../../components/SiteFooter.astro';
+import SiteHeader from '../../components/SiteHeader.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const legacy = ['home', 'desk', 'asset', 'runtime', 'artifact'];
+const current = ['home', 'desk', 'member', 'equipment', 'site', 'route', 'runtime', 'artifact'];
+---
+
+<BaseLayout
+	title="Schema contracts | Endroit"
+	description="Stable public addresses for Endroit's historical and current JSON Schema contracts."
+	path="/schema/"
+>
+	<SiteHeader />
+	<main>
+		<header class="learn-hero shell">
+			<p class="eyebrow">Public contracts</p>
+			<h1>Versioned addresses. Offline validation.</h1>
+			<p>
+				Git owns each contract, the npm package carries it for offline validation and this domain gives it a stable public address.
+				Published schema bytes never change in place.
+			</p>
+		</header>
+
+		<article class="learn-content shell">
+			<section>
+				<p class="section-index">01 · Endroit 0.8</p>
+				<h2>Current v7 contracts</h2>
+				<p>Endroit 0.8 uses only these versioned identifiers. There is no mutable <code>latest</code> alias.</p>
+				<ul>
+					{current.map((name) => <li><a href={`/schema/v7/${name}.json`}><code>{`/schema/v7/${name}.json`}</code></a></li>)}
+				</ul>
+			</section>
+
+			<section>
+				<p class="section-index">02 · Historical</p>
+				<h2>Endroit 0.7 contracts</h2>
+				<p>These unversioned URLs preserve the exact bytes published with <code>@endroit/cli@0.7.0-alpha.0</code>.</p>
+				<ul>
+					{legacy.map((name) => <li><a href={`/schema/${name}.json`}><code>{`/schema/${name}.json`}</code></a></li>)}
+				</ul>
+			</section>
+
+			<section>
+				<p class="section-index">03 · Provenance</p>
+				<h2>Inspect the hashes</h2>
+				<p>The generated manifest records the source and SHA-256 of every served contract.</p>
+				<p><a class="button button-secondary" href="/schema/manifest.json">Open the schema manifest</a></p>
+			</section>
+		</article>
+	</main>
+	<SiteFooter />
+</BaseLayout>

@@ -27,12 +27,16 @@ npm run dev
 
 ## Product truth
 
-- Endroit 0.8 alpha qualifies Codex and Claude.
+- Endroit 0.8 alpha is projection-qualified at L1 for Codex and Claude.
 - The 0.8 baseline adds Members, explicit workplace verbs and read-only Home
   Hygiene without claiming Presence or autonomous maintenance.
 - Other runtimes and specialized Homes are marked as product direction.
 - The Endroit repository owns installation, architecture, lifecycle,
   reference, security and release truth.
+
+The Home Publications own the exact landing wording. This Site owns its layout,
+rendering and delivery. Run `npm run sync:sources` from the connected Home to
+refresh the landing, installation contract and public schema projections.
 
 ## Deployment
 
