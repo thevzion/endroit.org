@@ -5,8 +5,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
 const objects = [
 	['Home', 'The durable workplace and shared trust boundary.'],
-	['Desk', 'Personal continuity, staging and local access.'],
+	['Member', 'One human collaborator and their durable responsibilities.'],
+	['Desk', 'A Member’s local continuity, staging and access; its ID names the place, not the person.'],
 	['Room', 'One durable domain and the Material that belongs there.'],
+	['Occupant', 'A temporary participant; an agent is not a Member.'],
 	['Meeting', 'A bounded event whose hot context is ephemeral by default.'],
 	['Equipment', 'A reusable method, its instructions, limits and optional runtime.'],
 	['Site', 'A sovereign repository, service or publication system.'],
@@ -33,15 +35,20 @@ const objects = [
 		<article class="learn-content shell">
 			<section>
 				<p class="section-index">01 · The bootstrap</p>
-				<h2>Four human-authored orientation sources are enough to begin.</h2>
+				<h2>A Member, a Desk and one Room are enough to begin.</h2>
 				<pre class="source-tree"><code>my-home/
 ├── endroit.json
 ├── HOME.md
+├── members/me/MEMBER.md
 ├── rooms/home/ROOM.md
-└── .desk/DESK.md</code></pre>
+└── .desk/
+    ├── desk.json
+    └── DESK.md</code></pre>
 				<p>
-					Provider front doors are generated from these owned sources. Five inspectable foundation
-					Equipment provide onboarding, orientation, Artifacts, Rooms and Sites. Additional Rooms,
+					<code>endroit create</code> keeps the initial Desk in the Home Git by default. <code>endroit init</code>
+					uses a separate nested Desk repository by default. <code>--desk tracked|separate|later</code> makes
+					that boundary explicit. Provider front doors are generated from the owned sources. Bootstrap
+					Equipment provide onboarding, orientation, Artifacts, Rooms, Sites and Home Hygiene. Additional Rooms,
 					Sites and optional Equipment appear only when real work needs them.
 				</p>
 			</section>
@@ -66,7 +73,18 @@ const objects = [
 			</section>
 
 			<section>
-				<p class="section-index">04 · Different Homes</p>
+				<p class="section-index">04 · Maintenance</p>
+				<h2>Keep the whole Home healthy without hidden automation.</h2>
+				<p>
+					<code>maintain-the-home</code> composes the existing Home, Member, Desk, Room, Site, Equipment,
+					Route, projection and Material checks. It separates confirmed inconsistencies, ownership ambiguities,
+					legacy residue and optional improvements. Inspection is read-only. A repair needs approval for one
+					finding, uses an existing operation and then re-runs the checks.
+				</p>
+			</section>
+
+			<section>
+				<p class="section-index">05 · Different Homes</p>
 				<h2>The responsibilities stay explicit. The contents stay yours.</h2>
 				<div class="home-experiments">
 					<article><header><p>Example composition</p><h3>Product Studio</h3></header><ul><li>Rooms for product, design and engineering domains</li><li>Shared review and delivery Equipment</li><li>Repositories and documentation as sovereign Sites</li></ul></article>

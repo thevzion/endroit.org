@@ -1,0 +1,82 @@
+---
+import SiteFooter from '../components/SiteFooter.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const lanes = [
+	{
+		status: 'Available',
+		title: 'A local-first workplace foundation',
+		items: [
+			'Owned Home and Room sources with deterministic provider projections',
+			'Inspectable Material and explicit retain, accept, deliver and archive transitions',
+			'Independent Git Sites reached through Desk-local Routes',
+		],
+	},
+	{
+		status: 'In progress',
+		title: 'The 0.8 Home-first baseline',
+		items: [
+			'Members and Desks with an explicit Git boundary',
+			'Enter, call, work-as, use, work-on and deliver as human provider-native verbs',
+			'Read-only Home Hygiene with approved, finding-specific repair',
+		],
+	},
+	{
+		status: 'Exploring',
+		title: 'Provider portability and adaptive workplaces',
+		items: [
+			'Provider portability evidence from L0 readable sources to L4 equivalent workflows',
+			'Adaptive placement and context behavior only where dogfood demonstrates a stable need',
+		],
+	},
+	{
+		status: 'Later',
+		title: 'Presence',
+		items: [
+			'Visible occupants, live titles and runtime-aware workplace state',
+			'No daemon, hidden memory or mandatory hosted service implied',
+		],
+	},
+];
+---
+
+<BaseLayout
+	title="Roadmap | Endroit"
+	description="The public direction for Endroit: what is available, in progress, being explored and deliberately later."
+	path="/roadmap/"
+>
+	<SiteHeader />
+	<main>
+		<header class="learn-hero shell">
+			<p class="eyebrow">Public roadmap</p>
+			<h1>Keep the place useful before making it alive.</h1>
+			<p>
+				This is a directional roadmap without dates. “Exploring” is evidence-seeking,
+				not a delivery commitment. Public release notes remain the source of truth for what shipped.
+			</p>
+		</header>
+
+		<article class="learn-content shell">
+			{lanes.map((lane, index) => (
+				<section>
+					<p class="section-index">{String(index + 1).padStart(2, '0')} · {lane.status}</p>
+					<h2>{lane.title}</h2>
+					<ul>
+						{lane.items.map((item) => <li>{item}</li>)}
+					</ul>
+				</section>
+			))}
+			<section class="home-question">
+				<p class="eyebrow">Current focus</p>
+				<h2>Ship the static vertical slice. Learn from real Homes.</h2>
+				<p>Presence follows only after the owned workplace is dependable without it.</p>
+				<div class="hero-actions">
+					<a class="button button-primary" href="/#install">Create a Home</a>
+					<a class="button button-secondary" href="https://github.com/thevzion/endroit">Follow the releases ↗</a>
+				</div>
+			</section>
+		</article>
+	</main>
+	<SiteFooter />
+</BaseLayout>

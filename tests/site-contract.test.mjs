@@ -8,10 +8,10 @@ const read = (path, encoding = "utf8") =>
 test("the landing follows the workplace narrative in order", async () => {
   const landing = await read("src/pages/index.astro")
   const chapters = [
-    "Instructions · Skills · A place for the work",
+    "The place layer for agentic work.",
     "Your agent setup quietly became a workplace.",
     "Prompt-centric · Agent-centric · Home-first",
-    "Name the Room. Recover the place.",
+    "Enter the place. Complete the work.",
     "Touch the same Material as your agents.",
     "Repositories keep their sovereignty.",
     'id="install"',
@@ -46,7 +46,8 @@ test("the landing states the 0.8 product truth and limits", async () => {
   assert.match(landing, /Managed clone/)
   assert.match(landing, /Managed worktree/)
   assert.match(landing, /Submodules are recognized; their lifecycle is not managed/)
-  assert.match(landing, /Automated placement and semantic hygiene are not shipped/)
+  assert.match(landing, /Home Hygiene advises and inspects/)
+  assert.match(landing, /Presence, live titles and adaptive workplace behavior remain later work/)
   assert.match(landing, /No claim of better intelligence, fewer hallucinations, lower costs or higher productivity/)
   assert.doesNotMatch(landing, /Target-first/)
 })
@@ -57,7 +58,7 @@ test("the public vocabulary distinguishes workplace owners", async () => {
     read("src/pages/homes.astro"),
   ])
 
-  for (const noun of ["Home", "Desk", "Room", "Equipment", "Site", "Route"]) {
+  for (const noun of ["Home", "Member", "Desk", "Room", "Equipment", "Site", "Route"]) {
     assert.match(landing, new RegExp(`\\b${noun}\\b`))
   }
   assert.match(homes, /Meeting/)
@@ -98,10 +99,25 @@ test("social metadata points to the current 1200 by 630 PNG", async () => {
     read("public/social-card.png", null),
   ])
 
-  assert.match(layout, /Give your agents a familiar place to work/)
+  assert.match(layout, /Give agentic work a place to compound/)
   assert.match(layout, /og:image:type" content="image\/png"/)
   assert.match(layout, /twitter:image:alt/)
   assert.equal(card.toString("ascii", 1, 4), "PNG")
   assert.equal(card.readUInt32BE(16), 1200)
   assert.equal(card.readUInt32BE(20), 630)
+})
+
+test("the roadmap separates shipped, active, exploratory and later work", async () => {
+  const [roadmap, sitemap] = await Promise.all([
+    read("src/pages/roadmap.astro"),
+    read("public/sitemap.xml"),
+  ])
+
+  for (const status of ["Available", "In progress", "Exploring", "Later"]) {
+    assert.match(roadmap, new RegExp(status))
+  }
+  assert.match(roadmap, /Provider portability/)
+  assert.match(roadmap, /Presence/)
+  assert.match(roadmap, /not a delivery commitment/)
+  assert.match(sitemap, /endroit\.org\/roadmap\//)
 })

@@ -6,16 +6,17 @@ import SiteHeader from '../components/SiteHeader.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 
 const journey = [
-	['Enter a Home', 'Provider front doors explain where the agent arrived.'],
-	['Name the Room', 'Endroit recovers its purpose, Material and relationships.'],
-	['Start a Meeting', 'Humans, agents, Roles and Equipment compose for the work at hand.'],
-	['Choose what remains', 'Keep the result ephemeral, retain it, accept it or deliver it.'],
-	['Return later', 'Another supported agent resumes from the owned place, not a private chat memory.'],
+	['Create or initialize', 'Start with a human Member and a Desk whose identity and Git boundary are explicit.'],
+	['Enter the place', 'Enter the Home or a Room and reload its owned sources without hidden active-Room state.'],
+	['Compose the Meeting', 'Call an Occupant, work through a Role or use Equipment through distinct provider-native verbs.'],
+	['Choose what remains', 'Keep the result ephemeral, retain it, accept it, deliver it or archive it.'],
+	['Maintain the Home', 'Inspect every layer read-only; approve one concrete repair before anything changes.'],
 ];
 
 const responsibilities = [
 	['Home', 'Shared workplace and house rules'],
-	['Desk', 'Personal continuity and local access'],
+	['Member', 'One human collaborator and durable responsibilities'],
+	['Desk', 'That Member’s local continuity and access'],
 	['Room', 'One durable domain and its Material'],
 	['Equipment', 'A reusable way of working'],
 	['Site', 'A sovereign external owner of truth'],
@@ -26,20 +27,20 @@ const siteModes = ['Embedded', 'Managed clone', 'Managed worktree', 'Existing ch
 ---
 
 <BaseLayout
-	title="Endroit — A durable workplace for humans and AI agents"
-	description="Endroit is a local-first, headless framework that gives humans and AI agents a durable workplace across meetings, tools and repositories."
+	title="Endroit — The place layer for agentic work"
+	description="A lightweight, local-first framework for durable human-agent workplaces across sessions, tools, and repositories."
 	path="/"
 >
 	<SiteHeader />
 	<main>
 		<section class="hero-section">
 			<div class="page-shell">
-				<p class="eyebrow">Instructions · Skills · A place for the work</p>
-				<h1 class="mt-7">Give your agents<br /><span>a familiar place to work.</span></h1>
+				<p class="eyebrow">The place layer for agentic work.</p>
+				<h1 class="mt-7">Give agentic work<br /><span>a place to compound.</span></h1>
 				<div class="mt-8 grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(20rem,0.48fr)] lg:items-end lg:gap-16">
 					<div>
 						<p class="max-w-3xl text-xl leading-relaxed text-muted md:text-2xl">
-							Endroit is a local-first, headless framework for durable human-agent workplaces.
+							A lightweight, local-first framework for durable human-agent workplaces across sessions, tools, and repositories.
 							It adds ownership, orientation, continuity and destination around the agents and repositories you already use.
 						</p>
 						<p class="mt-5 max-w-2xl text-base font-semibold text-ink/80">
@@ -133,9 +134,12 @@ Skills/
 			<div class="page-shell">
 				<div class="max-w-3xl">
 					<p class="eyebrow">The experience</p>
-					<h2 class="section-title">Name the Room. Recover the place.</h2>
+					<h2 class="section-title">Enter the place. Complete the work.</h2>
 					<p class="section-lede">The Meeting can change. The owned environment carries what should remain.</p>
 				</div>
+				<pre class="source-tree mt-8"><code>create/init → enter → call/work-as/use
+            → retain → accept → work-on/deliver
+            → maintain-the-home</code></pre>
 				<div class="capital-grid">
 					{journey.map(([title, copy], index) => (
 						<article><span>{String(index + 1).padStart(2, '0')}</span><h3>{title}</h3><p>{copy}</p></article>
@@ -191,14 +195,15 @@ Skills/
 				<div class="grid gap-12 lg:grid-cols-[minmax(0,0.62fr)_minmax(0,1fr)] lg:items-center lg:gap-20">
 					<div>
 						<p class="eyebrow">A small framework</p>
-						<h2 class="section-title">Start with four human-authored orientation sources.</h2>
+						<h2 class="section-title">Start with a Member, a Desk and one Room.</h2>
 						<p class="section-lede">
-							A new Home starts with settings, house rules, one Room and one Desk. Provider front doors are generated,
-							and five inspectable foundation Equipment provide onboarding, orientation, Artifacts, Rooms and Sites.
+							A new Home starts with settings, house rules, one human Member, one Room and one Desk. The Member is not an agent;
+							the Desk identifies a local place, not the person. Provider front doors are generated, and inspectable bootstrap
+							Equipment provide onboarding, orientation, Artifacts, Rooms, Sites and Home Hygiene.
 							Additional Rooms, Sites and optional Equipment appear only when the work needs them.
 						</p>
-						<p class="mt-6 text-sm font-semibold">Requires Git and Node.js 22 or newer. Codex and Claude are the first qualified providers.</p>
-						<p class="mt-5 font-mono text-sm"><code>npx @endroit/cli init</code> adds a Home to an existing repository.</p>
+						<p class="mt-6 text-sm font-semibold">Requires Git and Node.js 22 or newer. Codex and Claude are the first qualified providers; unsupported provider actions return blocked.</p>
+						<p class="mt-5 font-mono text-sm"><code>npx @endroit/cli init</code> adds a Home to an existing repository with a separate local Desk by default. <code>--desk tracked|separate|later</code> overrides that boundary.</p>
 					</div>
 					<InstallCommand />
 				</div>
@@ -212,17 +217,18 @@ Skills/
 					<h2 class="mt-5 text-4xl font-semibold leading-[0.98] tracking-[-0.055em] md:text-5xl">The framework owns the workplace. Equipment owns the method.</h2>
 					<p class="section-lede">
 						Core resolves ownership, validates structure, builds projections and manages safe Routes.
-						Optional Equipment adds research, planning, publishing, maintenance or your own way of working.
+						First-party Home Hygiene composes those existing checks into one read-only inspection. Optional Equipment
+						adds research, planning, publishing or your own way of working.
 					</p>
 				</article>
 				<article>
 					<p class="eyebrow">Optional companion</p>
 					<h2 class="mt-5 text-4xl font-semibold leading-[0.98] tracking-[-0.055em] md:text-5xl">The workplace needs nouns. Humans need verbs.</h2>
 					<p class="section-lede">
-						HACP can make an invoked move explicit: call another occupant, adopt a Role, use Equipment,
-						retain Material or deliver through a Route. It is an independent draft protocol, not an Endroit prerequisite.
+						Endroit 0.8 projects human verbs such as <code>call-the-researcher</code>, <code>work-as-an-engineer</code>,
+						<code>use-research</code>, <code>retain-this</code> and <code>deliver-this</code>. HACP can compose explicit
+						controls around those moves, but remains an independent draft protocol rather than an Endroit prerequisite.
 					</p>
-					<p class="mt-5 text-sm text-muted">Illustrative Home-native vocabulary; these commands are not shipped by HACP or Endroit today.</p>
 					<a class="secondary-link" href="https://github.com/control-decks/human-agent-control-protocol">Read about HACP ↗</a>
 				</article>
 			</div>
@@ -244,7 +250,8 @@ Skills/
 						<li>Codex and Claude are the first qualified projections.</li>
 						<li>The 0.8 workplace grammar is a breaking alpha change.</li>
 						<li>Submodules are recognized; their lifecycle is not managed.</li>
-						<li>Automated placement and semantic hygiene are not shipped.</li>
+						<li>Home Hygiene advises and inspects; it never repairs, archives, delivers or pushes implicitly.</li>
+						<li>Presence, live titles and adaptive workplace behavior remain later work.</li>
 						<li>No claim of better intelligence, fewer hallucinations, lower costs or higher productivity.</li>
 					</ul>
 				</aside>
