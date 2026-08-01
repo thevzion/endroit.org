@@ -205,6 +205,7 @@ test('Nginx serves schema contracts with the required headers', async () => {
 	assert.match(nginx, /default_type application\/schema\+json/);
 	assert.match(nginx, /Access-Control-Allow-Origin "\*" always/);
 	assert.doesNotMatch(nginx, /schema\/latest|return 30[1278] \/schema/);
+	assert.match(nginx, /location \/ \{[\s\S]*Cache-Control "no-transform" always;/);
 });
 
 test('the static build emits every public entrypoint', async () => {
