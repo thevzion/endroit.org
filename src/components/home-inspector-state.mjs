@@ -20,7 +20,8 @@ export const scenarios = Object.freeze({
 })
 
 const providers = new Set(["codex", "claude"])
-const panels = new Set(["recover", "sources", "lifecycle"])
+export const panelIds = Object.freeze(["recover", "sources", "lifecycle"])
+const panels = new Set(panelIds)
 
 export const initialInspectorState = Object.freeze({
   provider: "codex",
@@ -61,4 +62,14 @@ export function inspectorStatus(state) {
   const snapshot = inspectorSnapshot(state)
   const provider = state.provider === "claude" ? "Claude" : "Codex"
   return `${provider} receives an L1 projection of the same owned Home. Room ${snapshot.room} and its destinations do not move with the occupant.`
+}
+
+export function panelForKey(current, key) {
+  const index = panelIds.indexOf(current)
+  if (index < 0) return null
+  if (key === "Home") return panelIds[0]
+  if (key === "End") return panelIds.at(-1)
+  if (key === "ArrowRight") return panelIds[(index + 1) % panelIds.length]
+  if (key === "ArrowLeft") return panelIds[(index - 1 + panelIds.length) % panelIds.length]
+  return null
 }

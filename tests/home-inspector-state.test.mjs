@@ -4,6 +4,7 @@ import {
   initialInspectorState,
   inspectorSnapshot,
   inspectorStatus,
+  panelForKey,
   transitionInspector,
 } from "../src/components/home-inspector-state.mjs"
 
@@ -40,4 +41,13 @@ test("unknown interactions preserve the current inspector", () => {
   const state = { ...initialInspectorState, panel: "sources" }
   assert.equal(transitionInspector(state, { type: "SELECT_PANEL", panel: "graph" }), state)
   assert.equal(transitionInspector(state, { type: "RUN_PROVIDER" }), state)
+})
+
+test("tab keyboard navigation wraps and supports Home and End", () => {
+  assert.equal(panelForKey("recover", "ArrowRight"), "sources")
+  assert.equal(panelForKey("recover", "ArrowLeft"), "lifecycle")
+  assert.equal(panelForKey("lifecycle", "ArrowRight"), "recover")
+  assert.equal(panelForKey("sources", "Home"), "recover")
+  assert.equal(panelForKey("sources", "End"), "lifecycle")
+  assert.equal(panelForKey("sources", "Enter"), null)
 })

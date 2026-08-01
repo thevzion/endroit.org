@@ -1,8 +1,9 @@
-import { useReducer } from "react"
+import { useReducer, type KeyboardEvent } from "react"
 import {
   initialInspectorState,
   inspectorSnapshot,
   inspectorStatus,
+  panelForKey,
   scenarios,
   transitionInspector,
 } from "./home-inspector-state.mjs"
@@ -51,6 +52,16 @@ export default function HomeInspector() {
   )
   const snapshot = inspectorSnapshot(state)
 
+  const selectPanelFromKeyboard = (
+    event: KeyboardEvent<HTMLButtonElement>,
+  ) => {
+    const panel = panelForKey(state.panel, event.key) as Panel | null
+    if (!panel) return
+    event.preventDefault()
+    dispatch({ type: "SELECT_PANEL", panel })
+    requestAnimationFrame(() => document.getElementById(`inspector-tab-${panel}`)?.focus())
+  }
+
   return (
     <section className="home-inspector" aria-labelledby="inspector-title">
       <div className="inspector-chrome">
@@ -90,8 +101,9 @@ export default function HomeInspector() {
             id={`inspector-tab-${id}`}
             aria-controls={`inspector-panel-${id}`}
             aria-selected={state.panel === id}
-            tabIndex={0}
+            tabIndex={state.panel === id ? 0 : -1}
             onClick={() => dispatch({ type: "SELECT_PANEL", panel: id })}
+            onKeyDown={selectPanelFromKeyboard}
           >
             <span>{String(panels.findIndex((panel) => panel.id === id) + 1).padStart(2, "0")}</span>
             {label}
@@ -99,13 +111,14 @@ export default function HomeInspector() {
         ))}
       </div>
 
+      <div className="inspector-panels">
       <div
         className="inspector-panel"
-        id={`inspector-panel-${state.panel}`}
+        id="inspector-panel-recover"
         role="tabpanel"
-        aria-labelledby={`inspector-tab-${state.panel}`}
+        aria-labelledby="inspector-tab-recover"
+        hidden={state.panel !== "recover"}
       >
-        {state.panel === "recover" && (
           <div className="recovery-panel">
             <aside className="subject-picker">
               <p>What are we working on?</p>
@@ -132,14 +145,20 @@ export default function HomeInspector() {
                 <li><span>01</span><div><strong>Home entered</strong><small>{snapshot.home}</small></div></li>
                 <li><span>02</span><div><strong>Room resolved</strong><small>rooms/{snapshot.room}/</small></div></li>
                 <li><span>03</span><div><strong>Material recovered</strong><small>{snapshot.material.join(" · ")}</small></div></li>
-                <li><span>04</span><div><strong>Routes available</strong><small>{snapshot.sites.join(" · ")}</small></div></li>
+                <li><span>04</span><div><strong>Sites available</strong><small>{snapshot.sites.join(" · ")}</small></div></li>
               </ol>
               <div className="recovery-ready"><span aria-hidden="true">✓</span><strong>Ready to work</strong><small>No transcript required.</small></div>
             </div>
           </div>
-        )}
+      </div>
 
-        {state.panel === "sources" && (
+      <div
+        className="inspector-panel"
+        id="inspector-panel-sources"
+        role="tabpanel"
+        aria-labelledby="inspector-tab-sources"
+        hidden={state.panel !== "sources"}
+      >
           <div className="sources-panel">
             <div className="source-tree-panel" aria-label="Authoritative Home files">
               <p className="panel-label">Authoritative sources</p>
@@ -158,9 +177,15 @@ export default function HomeInspector() {
               <p>The interface changes. Ownership does not.</p>
             </aside>
           </div>
-        )}
+      </div>
 
-        {state.panel === "lifecycle" && (
+      <div
+        className="inspector-panel"
+        id="inspector-panel-lifecycle"
+        role="tabpanel"
+        aria-labelledby="inspector-tab-lifecycle"
+        hidden={state.panel !== "lifecycle"}
+      >
           <div className="lifecycle-panel">
             <p className="panel-label">Human-controlled lifecycle</p>
             <div className="lifecycle-track">
@@ -177,7 +202,7 @@ export default function HomeInspector() {
               <span>destination explicit</span><i aria-hidden="true">→</i><span>Room default</span><i aria-hidden="true">→</i><span>unique compatible Site</span><i aria-hidden="true">→</i><strong>pending if ambiguous</strong>
             </div>
           </div>
-        )}
+      </div>
       </div>
 
       <div className="inspector-status" role="status" aria-live="polite">

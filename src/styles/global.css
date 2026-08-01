@@ -1010,6 +1010,32 @@ code {
 	margin-top: clamp(3.5rem, 7vw, 6rem);
 }
 
+.inspector-fallback {
+	display: grid;
+	gap: 1px;
+	margin-top: 1rem;
+	overflow: hidden;
+	border: 1px solid rgb(23 25 22 / 14%);
+	border-radius: 1rem;
+	background: rgb(23 25 22 / 14%);
+}
+
+.inspector-fallback section {
+	background: var(--color-paper-strong);
+	padding: 1.25rem;
+}
+
+.inspector-fallback h3 {
+	margin: 0;
+	font-size: 1rem;
+}
+
+.inspector-fallback p {
+	margin: 0.5rem 0 0;
+	color: var(--color-muted);
+	font-size: 0.82rem;
+}
+
 .home-inspector {
 	overflow: hidden;
 	border: 1px solid rgb(255 255 255 / 13%);
@@ -1429,6 +1455,7 @@ code {
 .responsibility-shift .shift-note { margin: 1.3rem 0 0; max-width: 720px; color: var(--color-muted); font-size: 0.77rem; line-height: 1.65; }
 
 @media (min-width: 720px) {
+	.inspector-fallback { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 	.inspector-heading { grid-template-columns: 1fr auto; align-items: end; }
 	.recovery-panel { grid-template-columns: minmax(12rem, 0.36fr) minmax(0, 1fr); }
 	.sources-panel { grid-template-columns: minmax(0, 1fr) minmax(13rem, 0.34fr); }

@@ -57,10 +57,18 @@ test('the landing demonstrates recovery without simulating a hosted provider', a
 		'Name the subject. Recover the workplace.',
 		'Local snapshot · no hosted session invoked',
 		'Material recovered',
-		'Routes available',
+		'Sites available',
 		'Ready to work',
 		'Human-controlled lifecycle',
 	]) assert.match(inspector, new RegExp(phrase.replaceAll('.', '\\.')));
+	for (const id of ['recover', 'sources', 'lifecycle']) {
+		assert.match(inspector, new RegExp(`id="inspector-panel-${id}"`));
+		assert.match(inspector, new RegExp(`aria-labelledby="inspector-tab-${id}"`));
+	}
+	assert.match(inspector, /tabIndex=\{state\.panel === id \? 0 : -1\}/);
+	assert.match(state, /ArrowRight/);
+	assert.match(state, /ArrowLeft/);
+	assert.match(page, /<noscript>[\s\S]*Recover the workplace[\s\S]*Inspect authoritative sources[\s\S]*Decide and deliver[\s\S]*<\/noscript>/);
 
 	assert.match(state, /L1 projection of the same owned Home/);
 	assert.doesNotMatch(`${inspector}\n${state}`, /provider-native|hosted invocation (?:is|was) (?:run|executed)/i);
@@ -150,6 +158,10 @@ test('the static build emits every public entrypoint', async () => {
 		'dist/schema/home.json',
 	]) assert.ok(existsSync(resolve(siteRoot, path)), path);
 	assert.deepEqual(await read('dist/install.md', null), await read('public/install.md', null));
+	const landing = await read('dist/index.html');
+	for (const phrase of ['Sites available', 'Authoritative sources', 'Human-controlled lifecycle']) {
+		assert.match(landing, new RegExp(phrase));
+	}
 });
 
 test('historical Home-first routes delegate to Open Workplace', async () => {
