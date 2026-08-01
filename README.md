@@ -4,12 +4,14 @@ The product site for [Endroit](https://github.com/thevzion/endroit).
 
 **The place layer for agentic work.** Give agentic work a place to compound.
 
-Endroit is a lightweight, local-first framework for durable human-agent
+Endroit is a local-first, headless, file-based implementation of the
+[Open Workplace](https://open-workplace.org/) model for durable human-agent
 workplaces across sessions, tools, and repositories.
 
-The companion [Home-first proposal](https://thevzion.com/home-first/) is owned
-by The VZion and prepared alongside this release. This Site owns product
-positioning, Endroit Today and the conceptual direction of specialized Homes.
+The [Workplace-first Proposal](https://open-workplace.org/proposal/) is an open
+proposal, not a standard or a prerequisite for using Endroit. This Site owns
+Endroit product positioning, current capabilities and the conceptual direction
+of specialized Homes.
 
 ## Development
 

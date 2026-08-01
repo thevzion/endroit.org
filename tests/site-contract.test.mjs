@@ -10,7 +10,7 @@ test("the landing follows the workplace narrative in order", async () => {
   const chapters = [
     "The place layer for agentic work.",
     "Your agent setup quietly became a workplace.",
-    "Prompt-centric · Agent-centric · Home-first",
+    "Prompt-centric · Agent-centric · Workplace-first",
     "Enter the place. Complete the work.",
     "Touch the same Material as your agents.",
     "Repositories keep their sovereignty.",
@@ -26,16 +26,16 @@ test("the landing follows the workplace narrative in order", async () => {
   }
 })
 
-test("the product site delegates the Proposal to The VZion", async () => {
+test("the product site delegates the Proposal to Open Workplace", async () => {
   const [landing, sitemap, nginx] = await Promise.all([
     read("src/pages/index.astro"),
     read("public/sitemap.xml"),
     read("nginx.conf"),
   ])
 
-  assert.match(landing, /https:\/\/thevzion\.com\/home-first\//)
+  assert.match(landing, /https:\/\/open-workplace\.org\/proposal\//)
   assert.doesNotMatch(sitemap, /endroit\.org\/home-first/)
-  assert.match(nginx, /return 301 https:\/\/thevzion\.com\/home-first\//)
+  assert.match(nginx, /return 301 https:\/\/open-workplace\.org\/proposal\//)
 })
 
 test("the landing states the 0.8 product truth and limits", async () => {

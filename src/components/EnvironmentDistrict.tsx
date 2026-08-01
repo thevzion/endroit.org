@@ -5,7 +5,7 @@ import {
   transitionDistrict,
 } from "./environment-district-state.mjs"
 
-type Perspective = "agent-centric" | "home-first"
+type Perspective = "agent-centric" | "workplace-first"
 
 type DistrictState = { perspective: Perspective }
 type DistrictEvent = { type: "SELECT_PERSPECTIVE"; perspective: Perspective }
@@ -34,13 +34,13 @@ export default function EnvironmentDistrict() {
     reduceDistrict,
     initialDistrictState as DistrictState,
   )
-  const homeFirst = state.perspective === "home-first"
+  const workplaceFirst = state.perspective === "workplace-first"
   const status = districtStatus(state)
 
   return (
     <div className="overflow-hidden rounded-[1.75rem] border border-white/12 bg-[#080c0d] shadow-[0_40px_140px_rgba(0,0,0,.42)] md:rounded-[2.5rem]">
       <div className="grid border-b border-white/10 sm:grid-cols-2" role="group" aria-label="Choose a design center">
-        {(["agent-centric", "home-first"] as Perspective[]).map((perspective) => (
+        {(["agent-centric", "workplace-first"] as Perspective[]).map((perspective) => (
           <button
             key={perspective}
             type="button"
@@ -56,14 +56,14 @@ export default function EnvironmentDistrict() {
       </div>
 
       <div className="grid min-h-[34rem] place-items-center bg-[radial-gradient(circle_at_50%_35%,rgba(216,121,78,.12),transparent_35%),radial-gradient(circle_at_85%_18%,rgba(118,220,224,.06),transparent_24%)] p-5 sm:p-8 lg:p-12">
-        {homeFirst ? (
+        {workplaceFirst ? (
           <div className="w-full max-w-5xl">
             <div className="mx-auto max-w-xl text-center">
-              <p className="district-panel-kicker">Home-first · durable workplace</p>
+              <p className="district-panel-kicker">Workplace-first · durable workplace</p>
               <h3 className="district-panel-title">The place carries the continuity.</h3>
               <p className="district-panel-copy">Each responsibility has an owner before Codex, Claude or another interface receives its projection.</p>
             </div>
-            <div className="workplace-plan" aria-label="Home-first workplace model">
+            <div className="workplace-plan" aria-label="Workplace-first model">
               {workplace.map(([name, role], index) => (
                 <article key={name} className={index === 0 ? "workplace-home" : ""}>
                   <span>{String(index + 1).padStart(2, "0")}</span>

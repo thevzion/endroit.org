@@ -2,7 +2,7 @@ export const initialDistrictState = Object.freeze({
   perspective: "agent-centric",
 })
 
-const perspectives = new Set(["agent-centric", "home-first"])
+const perspectives = new Set(["agent-centric", "workplace-first"])
 
 export function transitionDistrict(state, event) {
   if (event.type !== "SELECT_PERSPECTIVE" || !perspectives.has(event.perspective)) {
@@ -13,7 +13,7 @@ export function transitionDistrict(state, event) {
 }
 
 export function districtStatus(state) {
-  if (state.perspective === "home-first") {
+  if (state.perspective === "workplace-first") {
     return "The Home owns the durable workplace. Rooms own domains, Equipment owns methods, Sites own external truth and Routes declare access."
   }
 
