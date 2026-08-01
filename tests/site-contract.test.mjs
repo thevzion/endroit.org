@@ -116,7 +116,9 @@ test("the roadmap separates shipped, active, exploratory and later work", async 
   for (const status of ["Available", "In progress", "Exploring", "Later"]) {
     assert.match(roadmap, new RegExp(status))
   }
-  assert.match(roadmap, /Provider portability/)
+  assert.match(roadmap, /status: 'Available'[\s\S]*title: 'The 0\.8 Workplace-first baseline'/)
+  assert.match(roadmap, /status: 'In progress'[\s\S]*title: 'Alpha\.1 evidence and provider portability'/)
+  assert.match(roadmap, /no runtime is promoted without dated proof/)
   assert.match(roadmap, /Presence/)
   assert.match(roadmap, /not a delivery commitment/)
   assert.match(sitemap, /endroit\.org\/roadmap\//)
