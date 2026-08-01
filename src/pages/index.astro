@@ -1,5 +1,6 @@
 ---
 import { Content } from '../content/endroit-landing.md';
+import HomeInspector from '../components/HomeInspector';
 import SiteFooter from '../components/SiteFooter.astro';
 import SiteHeader from '../components/SiteHeader.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
@@ -11,10 +12,50 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 	path="/"
 >
 	<SiteHeader />
-	<main class="publication-landing">
+	<main class="publication-landing endroit-landing">
 		<div class="page-shell publication-copy">
 			<Content />
+			<div id="home-inspector-placement">
+				<HomeInspector client:load />
+			</div>
+			<section id="responsibility-shift" class="responsibility-shift" aria-labelledby="responsibility-shift-title">
+				<div class="shift-heading">
+					<p>Same pieces · explicit owners</p>
+					<h2 id="responsibility-shift-title">Stop asking two technical surfaces to own the whole workplace.</h2>
+				</div>
+				<div class="shift-grid">
+					<div class="overloaded-stack">
+						<p>Implicit workplace</p>
+						<article><code>AGENTS.md</code><span>constitution · preferences · orientation · rules · decisions · state</span></article>
+						<article><code>Skills/</code><span>procedures · knowledge · methods · agents · outputs</span></article>
+					</div>
+					<div class="shift-arrow" aria-hidden="true"><span>→</span><small>place first</small></div>
+					<div class="owned-stack">
+						<p>Owned workplace</p>
+						<div><strong>Home</strong><span>composition</span></div>
+						<div><strong>Desk</strong><span>personal continuity</span></div>
+						<div><strong>Room</strong><span>durable domain</span></div>
+						<div><strong>Equipment</strong><span>reusable method</span></div>
+						<div><strong>Site</strong><span>sovereign truth</span></div>
+						<div><strong>Route</strong><span>declared access</span></div>
+					</div>
+				</div>
+				<p class="shift-note">Technical formats still matter. They become projections of responsibilities that already have an owner.</p>
+			</section>
 		</div>
 	</main>
 	<SiteFooter />
 </BaseLayout>
+
+<script is:inline>
+	const copy = document.querySelector('.publication-copy');
+	if (copy) {
+		const headings = [...copy.querySelectorAll(':scope > h2')];
+		const inspector = document.querySelector('#home-inspector-placement');
+		const shift = document.querySelector('#responsibility-shift');
+		const pieces = headings.find((heading) => heading.textContent?.trim() === 'You already have the pieces');
+		const owned = headings.find((heading) => heading.textContent?.trim() === 'Owned files, projected interfaces');
+		if (inspector && pieces) copy.insertBefore(inspector, pieces);
+		if (shift && owned) copy.insertBefore(shift, owned);
+	}
+</script>

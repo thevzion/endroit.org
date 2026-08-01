@@ -43,6 +43,29 @@ test('the landing states the exact alpha positioning and three adoption paths', 
 	assert.doesNotMatch(landing, /provider-native|qualified providers|@latest|Target-first/i);
 });
 
+test('the landing demonstrates recovery without simulating a hosted provider', async () => {
+	const [page, inspector, state] = await Promise.all([
+		read('src/pages/index.astro'),
+		read('src/components/HomeInspector.tsx'),
+		read('src/components/home-inspector-state.mjs'),
+	]);
+
+	assert.match(page, /<HomeInspector client:load \/>/);
+	assert.match(page, /You already have the pieces/);
+	assert.match(page, /Owned files, projected interfaces/);
+	for (const phrase of [
+		'Name the subject. Recover the workplace.',
+		'Local snapshot · no hosted session invoked',
+		'Material recovered',
+		'Routes available',
+		'Ready to work',
+		'Human-controlled lifecycle',
+	]) assert.match(inspector, new RegExp(phrase.replaceAll('.', '\\.')));
+
+	assert.match(state, /L1 projection of the same owned Home/);
+	assert.doesNotMatch(`${inspector}\n${state}`, /provider-native|hosted invocation (?:is|was) (?:run|executed)/i);
+});
+
 test('the human install page and machine-readable endpoint share one exact source', async () => {
 	const [source, machine, manifest, page] = await Promise.all([
 		read('src/content/install.md'),
