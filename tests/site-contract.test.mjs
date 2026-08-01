@@ -195,6 +195,7 @@ test('Nginx serves schema contracts with the required headers', async () => {
 	const nginx = await read('nginx.conf');
 	assert.match(nginx, /location = \/install\.md[\s\S]*default_type text\/markdown/);
 	assert.match(nginx, /location ~ \^\/schema\/\.\*\\\.json\$/);
+	assert.match(nginx, /types \{[\s\S]*application\/schema\+json json;[\s\S]*\}/);
 	assert.match(nginx, /default_type application\/schema\+json/);
 	assert.match(nginx, /Access-Control-Allow-Origin "\*" always/);
 	assert.doesNotMatch(nginx, /schema\/latest|return 30[1278] \/schema/);
