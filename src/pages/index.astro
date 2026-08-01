@@ -7,47 +7,101 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
 <BaseLayout
-	title="Endroit — Give agentic work a place to compound"
-	description="A local-first, headless, file-based implementation of the Open Workplace model."
+	title="Endroit — The place layer for agentic work"
+	description="A lightweight, local-first framework for building and operating file-based Open Workplaces."
 	path="/"
 >
 	<SiteHeader />
 	<main class="publication-landing endroit-landing">
 		<div class="page-shell publication-copy">
 			<Content />
+
 			<div id="home-inspector-placement">
 				<HomeInspector client:load />
 				<noscript>
 					<div class="inspector-fallback" aria-label="Home Inspector static overview">
 						<section>
 							<h3>Recover the workplace</h3>
-							<p>Name the subject. Endroit enters the Home, resolves its Room, recovers retained Material and shows the available Sites. No transcript is required.</p>
+							<p>Enter the existing Home, resolve <code>.desk/rooms/endroit/ROOM.md</code> and recover retained Material. No transcript is required.</p>
 						</section>
 						<section>
 							<h3>Inspect authoritative sources</h3>
-							<p>Home, Member, Desk, Room, Equipment, Site and Route remain owned files. Codex and Claude receive L1 projections of that same Home.</p>
+							<p>Home, Member, Desk, Room, Equipment, Site and Route remain owned files. Codex and Claude receive L1 projections.</p>
 						</section>
 						<section>
 							<h3>Decide and deliver</h3>
-							<p>Retain keeps a candidate. Accept makes it current. Deliver authorizes a Site effect. Archive removes Material from active work without deleting it.</p>
+							<p>Retain keeps a candidate. Accept makes it current. Deliver authorizes a Site effect. Archive removes Material from active work.</p>
 						</section>
 					</div>
 				</noscript>
 			</div>
+
+			<div id="floor-plan-placement">
+				<section class="floor-plan-card" aria-labelledby="floor-plan-title">
+					<div class="visual-heading">
+						<p>Default standalone <code>create</code></p>
+						<h2 id="floor-plan-title">Small source. Complete address.</h2>
+					</div>
+					<div class="floor-plan-grid">
+						<pre aria-label="Default Endroit Home floor plan"><code>my-home/
+├── endroit.json
+├── HOME.md
+├── members/owner/MEMBER.md
+├── rooms/home/
+│   ├── ROOM.md
+│   └── inbox.md
+├── equipment/
+├── .desk/
+│   ├── desk.json
+│   └── DESK.md
+├── endroit.mjs
+├── AGENTS.md        generated
+├── CLAUDE.md        generated
+├── .agents/         generated
+├── .claude/         generated
+└── .endroit/        rebuildable</code></pre>
+						<div class="floor-plan-legend">
+							<article><span>Owned</span><strong>Home sources</strong><p>Human-readable files carry identity, rules and durable placement.</p></article>
+							<article><span>Projected</span><strong>Provider interfaces</strong><p>Codex and Claude receive generated Front Doors, Skills and Commands.</p></article>
+							<article><span>When needed</span><strong>Sites and checkouts</strong><p><code>sites/</code>, <code>.desk/routes/</code> and <code>checkouts/</code> appear only when operations need them.</p></article>
+						</div>
+					</div>
+				</section>
+			</div>
+
+			<div id="execution-map-placement">
+				<section class="execution-map" aria-labelledby="execution-map-title">
+					<div class="visual-heading">
+						<p>Execution and ownership</p>
+						<h2 id="execution-map-title">The provider runs the session. The Workplace holds the work.</h2>
+					</div>
+					<div class="execution-flow">
+						<article class="execution-node provider-node"><span>Provider / Harness</span><strong>Model · tools · sandbox</strong><small>Execution and hot state</small></article>
+						<div class="flow-arrow"><span aria-hidden="true">→</span><small>temporary Occupant</small></div>
+						<article class="execution-node meeting-node"><span>Endroit Home</span><strong>Human ↔ Meeting</strong><small>Owned context and destinations</small></article>
+						<div class="flow-arrow"><span aria-hidden="true">→</span><small>candidate</small></div>
+						<article class="execution-node transition-node"><span>Human transition</span><strong>retain · accept · archive</strong><small>or approve delivery</small></article>
+						<div class="flow-arrow"><span aria-hidden="true">→</span><small>approved Route</small></div>
+						<article class="execution-node site-node"><span>Sovereign Site</span><strong>Observed external truth</strong><small>Repository history and permissions remain its own</small></article>
+					</div>
+					<p class="visual-note">Responsibilities, not a required stack. Provider projections may change; Workplace ownership does not.</p>
+				</section>
+			</div>
+
 			<section id="responsibility-shift" class="responsibility-shift" aria-labelledby="responsibility-shift-title">
 				<div class="shift-heading">
 					<p>Same pieces · explicit owners</p>
-					<h2 id="responsibility-shift-title">Stop asking two technical surfaces to own the whole workplace.</h2>
+					<h2 id="responsibility-shift-title">Stop asking two technical surfaces to own the whole Workplace.</h2>
 				</div>
 				<div class="shift-grid">
 					<div class="overloaded-stack">
-						<p>Implicit workplace</p>
+						<p>Implicit Workplace</p>
 						<article><code>AGENTS.md</code><span>constitution · preferences · orientation · rules · decisions · state</span></article>
 						<article><code>Skills/</code><span>procedures · knowledge · methods · agents · outputs</span></article>
 					</div>
 					<div class="shift-arrow" aria-hidden="true"><span>→</span><small>place first</small></div>
 					<div class="owned-stack">
-						<p>Owned workplace</p>
+						<p>Owned Workplace</p>
 						<div><strong>Home</strong><span>composition</span></div>
 						<div><strong>Desk</strong><span>personal continuity</span></div>
 						<div><strong>Room</strong><span>durable domain</span></div>
@@ -67,11 +121,27 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 	const copy = document.querySelector('.publication-copy');
 	if (copy) {
 		const headings = [...copy.querySelectorAll(':scope > h2')];
+		const findHeading = (text) => headings.find((heading) => heading.textContent?.trim() === text);
+		const placeVisual = (visualId, headingText, hideSourceDiagram = false) => {
+			const visual = document.querySelector(visualId);
+			const heading = findHeading(headingText);
+			if (!visual || !heading) return;
+			copy.insertBefore(visual, heading.nextElementSibling);
+			if (hideSourceDiagram) {
+				const sourceDiagram = visual.nextElementSibling;
+				if (sourceDiagram?.tagName === 'PRE') sourceDiagram.hidden = true;
+			}
+		};
+
 		const inspector = document.querySelector('#home-inspector-placement');
+		const recovery = findHeading('Recover the work, not the transcript');
+		if (inspector && recovery) copy.insertBefore(inspector, recovery);
+
+		placeVisual('#floor-plan-placement', 'What create gives you', true);
+		placeVisual('#execution-map-placement', 'Providers execute. The Home remembers.', true);
+
 		const shift = document.querySelector('#responsibility-shift');
-		const pieces = headings.find((heading) => heading.textContent?.trim() === 'You already have the pieces');
-		const owned = headings.find((heading) => heading.textContent?.trim() === 'Owned files, projected interfaces');
-		if (inspector && pieces) copy.insertBefore(inspector, pieces);
-		if (shift && owned) copy.insertBefore(shift, owned);
+		const pieces = findHeading('You already have the pieces');
+		if (shift && pieces) copy.insertBefore(shift, pieces);
 	}
 </script>

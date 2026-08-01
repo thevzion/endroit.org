@@ -4,9 +4,10 @@ The product site for [Endroit](https://github.com/thevzion/endroit).
 
 **The place layer for agentic work.** Give agentic work a place to compound.
 
-Endroit is a local-first, headless, file-based implementation of the
-[Open Workplace](https://open-workplace.org/) model for durable human-agent
-workplaces across sessions, tools, and repositories.
+Endroit is a lightweight, local-first framework for building and operating
+file-based [Open Workplaces](https://open-workplace.org/proposal/). It is also
+a local-first, headless, file-based implementation of the Open Workplace
+model.
 
 The [Workplace-first Proposal](https://open-workplace.org/proposal/) is an open
 proposal, not a standard or a prerequisite for using Endroit. This Site owns

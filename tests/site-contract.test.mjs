@@ -31,7 +31,9 @@ test('the landing is an exact owned Markdown projection', async () => {
 test('the landing states the exact alpha positioning and three adoption paths', async () => {
 	const landing = await read('src/content/endroit-landing.md');
 
-	assert.match(landing, /Projection-qualified for Codex and\s+Claude\./);
+	assert.match(landing, /Codex and Claude L1 Projection-qualified/);
+	assert.match(landing, /lightweight, local-first framework for building and operating/);
+	assert.match(landing, /local-first, headless, file-based implementation/);
 	for (const phrase of [
 		'Install with your agent',
 		'Use the terminal',
@@ -52,15 +54,22 @@ test('the landing demonstrates recovery without simulating a hosted provider', a
 
 	assert.match(page, /<HomeInspector client:load \/>/);
 	assert.match(page, /You already have the pieces/);
-	assert.match(page, /Owned files, projected interfaces/);
+	assert.match(page, /Providers execute\. The Home remembers\./);
+	assert.match(page, /What create gives you/);
 	for (const phrase of [
 		'Name the subject. Recover the workplace.',
-		'Local snapshot · no hosted session invoked',
+		'Sanitized dogfood snapshot · no hosted session invoked',
+		'.desk/rooms/endroit/ROOM.md',
 		'Material recovered',
 		'Sites available',
 		'Ready to work',
 		'Human-controlled lifecycle',
 	]) assert.match(inspector, new RegExp(phrase.replaceAll('.', '\\.')));
+	for (const path of [
+		'.desk/rooms/endroit/planning/initiative/endroit-home-first-hard-reset/HANDOFF.md',
+		'.desk/rooms/endroit/exploring/scratch/endroit-current-shape/planning/validation.md',
+	]) assert.match(state, new RegExp(path.replaceAll('.', '\\.')));
+	assert.doesNotMatch(`${inspector}\n${state}`, /release-candidate\.md|launch-frictions\.md|accepted-findings\.md/);
 	for (const id of ['recover', 'sources', 'lifecycle']) {
 		assert.match(inspector, new RegExp(`id="inspector-panel-${id}"`));
 		assert.match(inspector, new RegExp(`aria-labelledby="inspector-tab-${id}"`));
@@ -72,6 +81,24 @@ test('the landing demonstrates recovery without simulating a hosted provider', a
 
 	assert.match(state, /L1 projection of the same owned Home/);
 	assert.doesNotMatch(`${inspector}\n${state}`, /provider-native|hosted invocation (?:is|was) (?:run|executed)/i);
+});
+
+test('the product visuals separate execution, ownership and the exact bootstrap floor plan', async () => {
+	const page = await read('src/pages/index.astro');
+	for (const phrase of [
+		'Provider / Harness',
+		'temporary Occupant',
+		'Human transition',
+		'approved Route',
+		'Sovereign Site',
+		'Responsibilities, not a required stack.',
+		'rooms/home/',
+		'inbox.md',
+		'.agents/',
+		'.claude/',
+	]) assert.match(page, new RegExp(phrase.replaceAll('.', '\\.')));
+	assert.match(page, /title="Endroit — The place layer for agentic work"/);
+	assert.match(page, /description="A lightweight, local-first framework for building and operating file-based Open Workplaces\."/);
 });
 
 test('the human install page and machine-readable endpoint share one exact source', async () => {
@@ -188,7 +215,7 @@ test('social metadata points to the current 1200 by 630 PNG', async () => {
 		read('public/social-card.png', null),
 	]);
 
-	assert.match(layout, /Give agentic work a place to compound/);
+	assert.match(layout, /The place layer for agentic work/);
 	assert.match(layout, /og:image:type" content="image\/png"/);
 	assert.match(layout, /twitter:image:alt/);
 	assert.equal(card.toString('ascii', 1, 4), 'PNG');

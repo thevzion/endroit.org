@@ -16,7 +16,9 @@ test("provider projections never change the owned workplace", () => {
   })
   const claude = inspectorSnapshot(claudeState)
 
+  assert.equal(codex.home, "agentic-tools-home")
   assert.equal(codex.home, claude.home)
+  assert.equal(codex.room, ".desk/rooms/endroit/ROOM.md")
   assert.equal(codex.room, claude.room)
   assert.deepEqual(codex.material, claude.material)
   assert.deepEqual(codex.sites, claude.sites)
@@ -25,16 +27,15 @@ test("provider projections never change the owned workplace", () => {
   assert.match(inspectorStatus(claudeState), /L1 projection of the same owned Home/)
 })
 
-test("subject selection recovers its Room, Material and destinations", () => {
-  const state = transitionInspector(initialInspectorState, {
-    type: "SELECT_SCENARIO",
-    scenario: "open-workplace",
-  })
-  const snapshot = inspectorSnapshot(state)
+test("the sanitized dogfood snapshot references only existing public-safe material", () => {
+  const snapshot = inspectorSnapshot(initialInspectorState)
 
-  assert.equal(snapshot.room, "open-workplace")
-  assert.deepEqual(snapshot.material, ["workplace-first.md", "proposal.md"])
-  assert.deepEqual(snapshot.sites, ["open-workplace", "thevzion.com"])
+  assert.deepEqual(snapshot.material, [
+    ".desk/rooms/endroit/planning/initiative/endroit-home-first-hard-reset/HANDOFF.md",
+    ".desk/rooms/endroit/exploring/scratch/endroit-current-shape/planning/validation.md",
+  ])
+  assert.deepEqual(snapshot.sites, ["endroit", "endroit.org", "thevzion.com"])
+  assert.ok(snapshot.material.every((path) => !/release-candidate|launch-frictions|accepted-findings/.test(path)))
 })
 
 test("unknown interactions preserve the current inspector", () => {

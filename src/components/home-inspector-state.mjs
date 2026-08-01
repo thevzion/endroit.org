@@ -1,22 +1,12 @@
-export const scenarios = Object.freeze({
-  "endroit-launch": Object.freeze({
-    label: "Endroit 0.8 launch",
-    room: "endroit",
-    material: ["release-candidate.md", "launch-frictions.md"],
-    sites: ["endroit", "endroit.org", "thevzion.com"],
-  }),
-  "open-workplace": Object.freeze({
-    label: "Open Workplace proposal",
-    room: "open-workplace",
-    material: ["workplace-first.md", "proposal.md"],
-    sites: ["open-workplace", "thevzion.com"],
-  }),
-  "research-workflow": Object.freeze({
-    label: "Research workflow",
-    room: "human-agent-collaboration",
-    material: ["study.md", "accepted-findings.md"],
-    sites: ["self", "control-decks"],
-  }),
+const dogfoodSnapshot = Object.freeze({
+  home: "agentic-tools-home",
+  homeLabel: "The VZion Studio Home",
+  room: ".desk/rooms/endroit/ROOM.md",
+  material: Object.freeze([
+    ".desk/rooms/endroit/planning/initiative/endroit-home-first-hard-reset/HANDOFF.md",
+    ".desk/rooms/endroit/exploring/scratch/endroit-current-shape/planning/validation.md",
+  ]),
+  sites: Object.freeze(["endroit", "endroit.org", "thevzion.com"]),
 })
 
 const providers = new Set(["codex", "claude"])
@@ -26,7 +16,6 @@ const panels = new Set(panelIds)
 export const initialInspectorState = Object.freeze({
   provider: "codex",
   panel: "recover",
-  scenario: "endroit-launch",
 })
 
 export function transitionInspector(state, event) {
@@ -38,30 +27,23 @@ export function transitionInspector(state, event) {
     return { ...state, panel: event.panel }
   }
 
-  if (event.type === "SELECT_SCENARIO" && scenarios[event.scenario]) {
-    return { ...state, scenario: event.scenario }
-  }
-
   return state
 }
 
 export function inspectorSnapshot(state) {
-  const scenario = scenarios[state.scenario] ?? scenarios["endroit-launch"]
   const projection = state.provider === "claude"
     ? ["CLAUDE.md", ".claude/commands/"]
     : ["AGENTS.md", ".agents/skills/"]
 
   return {
-    home: "the-vzion-studio",
-    ...scenario,
+    ...dogfoodSnapshot,
     projection,
   }
 }
 
 export function inspectorStatus(state) {
-  const snapshot = inspectorSnapshot(state)
   const provider = state.provider === "claude" ? "Claude" : "Codex"
-  return `${provider} receives an L1 projection of the same owned Home. Room ${snapshot.room} and its destinations do not move with the occupant.`
+  return `${provider} receives an L1 projection of the same owned Home. The Endroit Room, retained Material and Site destinations remain workplace-owned.`
 }
 
 export function panelForKey(current, key) {
