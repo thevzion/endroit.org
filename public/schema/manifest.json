@@ -1,5 +1,5 @@
 {
-  "release": "0.8.0-alpha.0",
+  "release": "0.8.0-alpha.1",
   "contracts": [
     {
       "path": "/schema/home.json",
@@ -28,42 +28,42 @@
     },
     {
       "path": "/schema/v7/home.json",
-      "source": "thevzion/endroit@0.8.0-alpha.0:schemas/v7/home.schema.json",
+      "source": "thevzion/endroit@0.8.0-alpha.1:schemas/v7/home.schema.json",
       "sha256": "7ae8d40ea516938902695549191388fe2510badf65ded5341227cced2f0a5a55"
     },
     {
       "path": "/schema/v7/desk.json",
-      "source": "thevzion/endroit@0.8.0-alpha.0:schemas/v7/desk.schema.json",
+      "source": "thevzion/endroit@0.8.0-alpha.1:schemas/v7/desk.schema.json",
       "sha256": "66ce6ab3dc01cb63afad47d14041511ef849336034657a6decb0fb0601bb5af8"
     },
     {
       "path": "/schema/v7/member.json",
-      "source": "thevzion/endroit@0.8.0-alpha.0:schemas/v7/member.schema.json",
+      "source": "thevzion/endroit@0.8.0-alpha.1:schemas/v7/member.schema.json",
       "sha256": "b12d957ee00a823eae1766e0941d0a3c7da100701e6545d8afb8b7d4769503e1"
     },
     {
       "path": "/schema/v7/equipment.json",
-      "source": "thevzion/endroit@0.8.0-alpha.0:schemas/v7/equipment.schema.json",
+      "source": "thevzion/endroit@0.8.0-alpha.1:schemas/v7/equipment.schema.json",
       "sha256": "c2e8378f20ceb1e83b0c2b7d92ca94964f12d142e7a0dd607fc54a8c5c39936a"
     },
     {
       "path": "/schema/v7/site.json",
-      "source": "thevzion/endroit@0.8.0-alpha.0:schemas/v7/site.schema.json",
+      "source": "thevzion/endroit@0.8.0-alpha.1:schemas/v7/site.schema.json",
       "sha256": "1b6392fec0b66407739f7537567e74af0c3ba439d85c071b8682897175e336ac"
     },
     {
       "path": "/schema/v7/route.json",
-      "source": "thevzion/endroit@0.8.0-alpha.0:schemas/v7/route.schema.json",
+      "source": "thevzion/endroit@0.8.0-alpha.1:schemas/v7/route.schema.json",
       "sha256": "7afec4ac50bc0fe06726e89e0e79f114ad9a9bffdfbbb87ca31e6b041b3535b7"
     },
     {
       "path": "/schema/v7/runtime.json",
-      "source": "thevzion/endroit@0.8.0-alpha.0:schemas/v7/runtime.schema.json",
+      "source": "thevzion/endroit@0.8.0-alpha.1:schemas/v7/runtime.schema.json",
       "sha256": "7f95cf78217d0a94219cb0d9dd6f0b952fb854ac95c8e91ec1dd8367830e8799"
     },
     {
       "path": "/schema/v7/artifact.json",
-      "source": "thevzion/endroit@0.8.0-alpha.0:schemas/v7/artifact.schema.json",
+      "source": "thevzion/endroit@0.8.0-alpha.1:schemas/v7/artifact.schema.json",
       "sha256": "560e0d62ac8646cf61488ec88298a0af4e7b87cef42e2cfe24a2c9e3b2c29535"
     }
   ]

@@ -7,8 +7,8 @@ import { fileURLToPath } from 'node:url';
 import test from 'node:test';
 
 const siteRoot = fileURLToPath(new URL('..', import.meta.url));
-const homeRoot = resolve(siteRoot, '../../../..');
-const endroitRoot = resolve(siteRoot, '../../endroit/home-first-reset');
+const homeRoot = resolve(process.env.ENDROIT_HOME_ROOT ?? resolve(siteRoot, '../../../..'));
+const endroitRoot = resolve(process.env.ENDROIT_SOURCE_ROOT ?? resolve(siteRoot, '../../endroit/home-first-reset'));
 const read = (path, encoding = 'utf8') => readFile(resolve(siteRoot, path), encoding);
 const hash = (content) => createHash('sha256').update(content).digest('hex');
 
@@ -39,7 +39,7 @@ test('the landing states the exact alpha positioning and three adoption paths', 
 		'Use the terminal',
 		'Continue onboarding',
 		'The agent guides. The CLI applies. You approve.',
-		'@endroit/cli@0.8.0-alpha.0',
+		'@endroit/cli@0.8.0-alpha.1',
 	]) assert.match(landing, new RegExp(phrase.replaceAll('.', '\\.')));
 
 	assert.doesNotMatch(landing, /provider-native|qualified providers|@latest|Target-first/i);
@@ -137,8 +137,9 @@ test('the human install page and machine-readable endpoint share one exact sourc
 
 	assert.equal(source, machine);
 	assert.equal(hash(source), manifest.projections.install.sha256);
+	assert.equal(manifest.projections.install.source, 'thevzion/endroit@0.8.0-alpha.1:INSTALL.md');
 	assert.match(page, /import \{ Content \} from '\.\.\/content\/install\.md'/);
-	assert.match(source, /@endroit\/cli@0\.8\.0-alpha\.0/);
+	assert.match(source, /@endroit\/cli@0\.8\.0-alpha\.1/);
 	assert.match(source, /ask|approval|approve/i);
 	assert.doesNotMatch(source, /curl\s.*\|\s*(?:ba)?sh|@latest/);
 
@@ -148,7 +149,7 @@ test('the human install page and machine-readable endpoint share one exact sourc
 
 test('public schema bytes match their manifest and Endroit sources', async () => {
 	const manifest = await read('public/schema/manifest.json').then(JSON.parse);
-	assert.equal(manifest.release, '0.8.0-alpha.0');
+	assert.equal(manifest.release, '0.8.0-alpha.1');
 	assert.equal(manifest.contracts.length, 13);
 	assert.equal(new Set(manifest.contracts.map(({ path }) => path)).size, 13);
 	assert.ok(manifest.contracts.every(({ path }) => !path.includes('latest')));
@@ -156,6 +157,11 @@ test('public schema bytes match their manifest and Endroit sources', async () =>
 	for (const contract of manifest.contracts) {
 		const publicContent = await read(`public${contract.path}`, null);
 		assert.equal(hash(publicContent), contract.sha256, contract.path);
+		if (contract.path.startsWith('/schema/v7/')) {
+			assert.match(contract.source, /^thevzion\/endroit@0\.8\.0-alpha\.1:/, contract.path);
+		} else {
+			assert.match(contract.source, /^@endroit\/cli@0\.7\.0-alpha\.0:/, contract.path);
+		}
 		if (existsSync(resolve(siteRoot, `dist${contract.path}`))) {
 			assert.deepEqual(await read(`dist${contract.path}`, null), publicContent, `dist${contract.path}`);
 		}

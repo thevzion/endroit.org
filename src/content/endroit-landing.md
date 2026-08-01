@@ -228,13 +228,13 @@ existing instructions, Skills, memory or project files.
 Create a standalone Home:
 
 ```bash
-npx --yes --package @endroit/cli@0.8.0-alpha.0 endroit create my-home
+npx --yes --package @endroit/cli@0.8.0-alpha.1 endroit create my-home
 ```
 
 Add a Home to an existing repository:
 
 ```bash
-npx --yes --package @endroit/cli@0.8.0-alpha.0 endroit init .
+npx --yes --package @endroit/cli@0.8.0-alpha.1 endroit init .
 ```
 
 By default, `create` adds a tracked Desk and `init` creates a separate local

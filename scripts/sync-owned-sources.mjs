@@ -53,7 +53,7 @@ if (selection === 'all' || selection === 'install') {
 	for (const destination of destinations) hashes.push(await copyExact(source, destination));
 	if (new Set(hashes).size !== 1) throw new Error('INSTALL.md projections differ.');
 	projectionManifest.projections.install = {
-		source: 'thevzion/endroit@0.8.0-alpha.0:INSTALL.md',
+		source: 'thevzion/endroit@0.8.0-alpha.1:INSTALL.md',
 		sha256: hashes[0],
 	};
 }
@@ -73,7 +73,7 @@ if (selection === 'all' || selection === 'schemas') {
 		...['home', 'desk', 'member', 'equipment', 'site', 'route', 'runtime', 'artifact'].map((name) => ({
 			publicPath: `/schema/v7/${name}.json`,
 			sourcePath: `schemas/v7/${name}.schema.json`,
-			provenance: `thevzion/endroit@0.8.0-alpha.0:schemas/v7/${name}.schema.json`,
+			provenance: `thevzion/endroit@0.8.0-alpha.1:schemas/v7/${name}.schema.json`,
 		})),
 	];
 	const contracts = [];
@@ -90,7 +90,7 @@ if (selection === 'all' || selection === 'schemas') {
 
 	await writeFile(
 		resolve(siteRoot, 'public/schema/manifest.json'),
-		`${JSON.stringify({ release: '0.8.0-alpha.0', contracts }, null, 2)}\n`,
+		`${JSON.stringify({ release: '0.8.0-alpha.1', contracts }, null, 2)}\n`,
 	);
 }
 
