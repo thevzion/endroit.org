@@ -33,7 +33,7 @@ test('the landing states the exact alpha positioning and three adoption paths', 
 
 	assert.match(landing, /Codex and Claude L1 Projection-qualified/);
 	assert.match(landing, /lightweight, local-first framework for building and operating/);
-	assert.match(landing, /local-first, headless, file-based implementation/);
+	assert.match(landing, /local-first, headless implementation/);
 	for (const phrase of [
 		'Install with your agent',
 		'Use the terminal',
@@ -45,7 +45,7 @@ test('the landing states the exact alpha positioning and three adoption paths', 
 	assert.doesNotMatch(landing, /provider-native|qualified providers|@latest|Target-first/i);
 });
 
-test('the landing demonstrates recovery without simulating a hosted provider', async () => {
+test('the landing demonstrates governed compounding without simulating provider memory', async () => {
 	const [page, inspector, state] = await Promise.all([
 		read('src/pages/index.astro'),
 		read('src/components/HomeInspector.tsx'),
@@ -53,34 +53,60 @@ test('the landing demonstrates recovery without simulating a hosted provider', a
 	]);
 
 	assert.match(page, /<HomeInspector client:load \/>/);
-	assert.match(page, /You already have the pieces/);
-	assert.match(page, /Providers execute\. The Home remembers\./);
-	assert.match(page, /What create gives you/);
+	assert.match(page, /replaceSourceSection\('#home-inspector-placement', 'One Home\. Several sessions\. More to build on\.'\)/);
+	assert.match(page, /replaceSourceSection\('#adoption-map-placement', 'Start with conversation\. Add precision when it matters\.'\)/);
 	for (const phrase of [
-		'Name the subject. Recover the workplace.',
 		'Sanitized dogfood snapshot · no hosted session invoked',
-		'.desk/rooms/endroit/ROOM.md',
-		'Material recovered',
-		'Sites available',
-		'Ready to work',
-		'Human-controlled lifecycle',
+		'One Home. Several sessions. More to build on.',
 	]) assert.match(inspector, new RegExp(phrase.replaceAll('.', '\\.')));
+	for (const phrase of [
+		'.desk/rooms/endroit/ROOM.md',
+		'No private Claude memory is transferred.',
+		'Hygiene inspects read-only.',
+		'approved, revalidated Route',
+	]) assert.match(state, new RegExp(phrase.replaceAll('.', '\\.')));
 	for (const path of [
 		'.desk/rooms/endroit/planning/initiative/endroit-home-first-hard-reset/HANDOFF.md',
-		'.desk/rooms/endroit/exploring/scratch/endroit-current-shape/planning/validation.md',
+		'.desk/routes/endroit.org/home-first-reset.json',
 	]) assert.match(state, new RegExp(path.replaceAll('.', '\\.')));
 	assert.doesNotMatch(`${inspector}\n${state}`, /release-candidate\.md|launch-frictions\.md|accepted-findings\.md/);
-	for (const id of ['recover', 'sources', 'lifecycle']) {
-		assert.match(inspector, new RegExp(`id="inspector-panel-${id}"`));
-		assert.match(inspector, new RegExp(`aria-labelledby="inspector-tab-${id}"`));
-	}
+	assert.match(state, /\["retain", "reuse", "maintain"\]/);
+	assert.match(inspector, /id=\{`inspector-panel-\$\{panel\}`\}/);
+	assert.match(inspector, /aria-labelledby=\{`inspector-tab-\$\{panel\}`\}/);
 	assert.match(inspector, /tabIndex=\{state\.panel === id \? 0 : -1\}/);
 	assert.match(state, /ArrowRight/);
 	assert.match(state, /ArrowLeft/);
-	assert.match(page, /<noscript>[\s\S]*Recover the workplace[\s\S]*Inspect authoritative sources[\s\S]*Decide and deliver[\s\S]*<\/noscript>/);
+	assert.match(page, /<noscript>[\s\S]*Retain[\s\S]*Reuse[\s\S]*Maintain &amp; deliver[\s\S]*<\/noscript>/);
 
-	assert.match(state, /L1 projection of the same owned Home/);
+	assert.match(state, /The Home keeps only the human-selected continuity/);
 	assert.doesNotMatch(`${inspector}\n${state}`, /provider-native|hosted invocation (?:is|was) (?:run|executed)/i);
+});
+
+test('the landing presents progressive adoption and five gesture families', async () => {
+	const [landing, page] = await Promise.all([
+		read('src/content/endroit-landing.md'),
+		read('src/pages/index.astro'),
+	]);
+
+	for (const phrase of [
+		'A more intuitive way to work with agents.',
+		'New session. Same workplace.',
+		'Your way of working stays. Each agent adapts at the door.',
+		'Places make intent legible. Gestures make it explicit.',
+		'Talk naturally',
+		'Inspect the shared workplace',
+		'Use explicit gestures when authority matters',
+		'Use the CLI for deterministic operations',
+		'Endroit makes placement inferable, explainable and correctable.',
+		'Each useful session can leave the Home better prepared for the next.',
+	]) assert.match(landing, new RegExp(phrase.replaceAll('.', '\\.')));
+
+	for (const family of ['Enter', 'Equip', 'Keep', 'Reach', 'Maintain']) {
+		assert.match(page, new RegExp(`<span>${family}<\\/span>`));
+	}
+	assert.match(landing, /Commands are optional\.[\s\S]*without[\s\n]+surrendering control of the session\./);
+	assert.match(page, /acknowledgement alone never causes a durable transition/);
+	assert.doesNotMatch(`${landing}\n${page}`, /automatic(?:ally)? (?:learn|sort|organize)|intent layer|intent engine/i);
 });
 
 test('the product visuals separate execution, ownership and the exact bootstrap floor plan', async () => {
@@ -98,7 +124,7 @@ test('the product visuals separate execution, ownership and the exact bootstrap 
 		'.claude/',
 	]) assert.match(page, new RegExp(phrase.replaceAll('.', '\\.')));
 	assert.match(page, /title="Endroit — The place layer for agentic work"/);
-	assert.match(page, /description="A lightweight, local-first framework for building and operating file-based Open Workplaces\."/);
+	assert.match(page, /description="A more intuitive way to work with agents: one inspectable Home across sessions, providers and repositories\."/);
 });
 
 test('the human install page and machine-readable endpoint share one exact source', async () => {
@@ -186,7 +212,11 @@ test('the static build emits every public entrypoint', async () => {
 	]) assert.ok(existsSync(resolve(siteRoot, path)), path);
 	assert.deepEqual(await read('dist/install.md', null), await read('public/install.md', null));
 	const landing = await read('dist/index.html');
-	for (const phrase of ['Sites available', 'Authoritative sources', 'Human-controlled lifecycle']) {
+	for (const phrase of [
+		'One Home. Several sessions. More to build on.',
+		'No private Claude memory is transferred.',
+		'Start with conversation. Add precision when it matters.',
+	]) {
 		assert.match(landing, new RegExp(phrase));
 	}
 });

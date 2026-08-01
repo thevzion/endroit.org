@@ -8,7 +8,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
 <BaseLayout
 	title="Endroit — The place layer for agentic work"
-	description="A lightweight, local-first framework for building and operating file-based Open Workplaces."
+	description="A more intuitive way to work with agents: one inspectable Home across sessions, providers and repositories."
 	path="/"
 >
 	<SiteHeader />
@@ -21,19 +21,42 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 				<noscript>
 					<div class="inspector-fallback" aria-label="Home Inspector static overview">
 						<section>
-							<h3>Recover the workplace</h3>
-							<p>Enter the existing Home, resolve <code>.desk/rooms/endroit/ROOM.md</code> and recover retained Material. No transcript is required.</p>
+							<h3>Retain</h3>
+							<p>Claude produces a candidate. The human retains it as inspectable, non-authoritative Room Material.</p>
 						</section>
 						<section>
-							<h3>Inspect authoritative sources</h3>
-							<p>Home, Member, Desk, Room, Equipment, Site and Route remain owned files. Codex and Claude receive L1 projections.</p>
+							<h3>Reuse</h3>
+							<p>Codex enters in a later Meeting and builds on the same owned Room and Material without receiving Claude's private memory.</p>
 						</section>
 						<section>
-							<h3>Decide and deliver</h3>
-							<p>Retain keeps a candidate. Accept makes it current. Deliver authorizes a Site effect. Archive removes Material from active work.</p>
+							<h3>Maintain &amp; deliver</h3>
+							<p>Hygiene inspects read-only. A human-approved, revalidated Route carries the result to its sovereign Site.</p>
 						</section>
 					</div>
 				</noscript>
+			</div>
+
+			<div id="adoption-map-placement">
+				<section class="adoption-map" aria-labelledby="adoption-map-title">
+					<div class="visual-heading">
+						<p>Progressive control</p>
+						<h2 id="adoption-map-title">Start with conversation. Add precision when it matters.</h2>
+					</div>
+					<ol class="adoption-ladder">
+						<li><span>01</span><strong>Talk</strong><p>Work in normal conversation.</p></li>
+						<li><span>02</span><strong>Inspect</strong><p>Read the shared Home and its owners.</p></li>
+						<li><span>03</span><strong>Gestures</strong><p>Name authority, persistence and destination.</p></li>
+						<li><span>04</span><strong>CLI</strong><p>Apply deterministic structural operations.</p></li>
+					</ol>
+					<div class="gesture-families" aria-label="Endroit gesture families">
+						<article><span>Enter</span><strong>Recover the place</strong><code>enter-the-home</code></article>
+						<article><span>Equip</span><strong>Add a way of working</strong><code>use-research</code></article>
+						<article><span>Keep</span><strong>Control durability</strong><code>retain-this</code></article>
+						<article><span>Reach</span><strong>Name the destination</strong><code>work-on-&lt;site&gt;</code></article>
+						<article><span>Maintain</span><strong>Inspect the whole Home</strong><code>maintain-the-home</code></article>
+					</div>
+					<p class="adoption-note">Commands are optional. A natural sentence with the same explicit meaning works too; an acknowledgement alone never causes a durable transition.</p>
+				</section>
 			</div>
 
 			<div id="floor-plan-placement">
@@ -66,6 +89,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 							<article><span>When needed</span><strong>Sites and checkouts</strong><p><code>sites/</code>, <code>.desk/routes/</code> and <code>checkouts/</code> appear only when operations need them.</p></article>
 						</div>
 					</div>
+					<p class="visual-note">Meetings stay ephemeral by default. No Material or persisted Meeting appears until a human explicitly retains work.</p>
 				</section>
 			</div>
 
@@ -122,23 +146,23 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 	if (copy) {
 		const headings = [...copy.querySelectorAll(':scope > h2')];
 		const findHeading = (text) => headings.find((heading) => heading.textContent?.trim() === text);
-		const placeVisual = (visualId, headingText, hideSourceDiagram = false) => {
+		const replaceSourceSection = (visualId, headingText) => {
 			const visual = document.querySelector(visualId);
 			const heading = findHeading(headingText);
 			if (!visual || !heading) return;
-			copy.insertBefore(visual, heading.nextElementSibling);
-			if (hideSourceDiagram) {
-				const sourceDiagram = visual.nextElementSibling;
-				if (sourceDiagram?.tagName === 'PRE') sourceDiagram.hidden = true;
+			copy.insertBefore(visual, heading);
+			let source = heading;
+			while (source && (source === heading || source.tagName !== 'H2')) {
+				const next = source.nextElementSibling;
+				source.hidden = true;
+				source = next;
 			}
 		};
 
-		const inspector = document.querySelector('#home-inspector-placement');
-		const recovery = findHeading('Recover the work, not the transcript');
-		if (inspector && recovery) copy.insertBefore(inspector, recovery);
-
-		placeVisual('#floor-plan-placement', 'What create gives you', true);
-		placeVisual('#execution-map-placement', 'Providers execute. The Home remembers.', true);
+		replaceSourceSection('#home-inspector-placement', 'One Home. Several sessions. More to build on.');
+		replaceSourceSection('#adoption-map-placement', 'Start with conversation. Add precision when it matters.');
+		replaceSourceSection('#floor-plan-placement', 'The Home stays inspectable');
+		replaceSourceSection('#execution-map-placement', 'Providers execute. The Home remembers.');
 
 		const shift = document.querySelector('#responsibility-shift');
 		const pieces = findHeading('You already have the pieces');

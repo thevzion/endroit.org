@@ -1,57 +1,72 @@
-const dogfoodSnapshot = Object.freeze({
+export const stageIds = Object.freeze(["retain", "reuse", "maintain"])
+const stages = new Set(stageIds)
+
+const sharedWorkplace = Object.freeze({
   home: "agentic-tools-home",
   homeLabel: "The VZion Studio Home",
   room: ".desk/rooms/endroit/ROOM.md",
-  material: Object.freeze([
-    ".desk/rooms/endroit/planning/initiative/endroit-home-first-hard-reset/HANDOFF.md",
-    ".desk/rooms/endroit/exploring/scratch/endroit-current-shape/planning/validation.md",
-  ]),
-  sites: Object.freeze(["endroit", "endroit.org", "thevzion.com"]),
+  retainedMaterial: ".desk/rooms/endroit/planning/initiative/endroit-home-first-hard-reset/HANDOFF.md",
+  route: ".desk/routes/endroit.org/home-first-reset.json",
+  site: "endroit.org",
 })
 
-const providers = new Set(["codex", "claude"])
-export const panelIds = Object.freeze(["recover", "sources", "lifecycle"])
-const panels = new Set(panelIds)
-
-export const initialInspectorState = Object.freeze({
-  provider: "codex",
-  panel: "recover",
+const stageSnapshots = Object.freeze({
+  retain: Object.freeze({
+    label: "Retain",
+    actor: "Claude · first Meeting",
+    flow: Object.freeze(["Claude enters", "Room context", "candidate", "human retains", "Room Material"]),
+    title: "Keep the useful result, not the whole session.",
+    description: "The candidate becomes durable and inspectable without becoming current truth.",
+    evidence: Object.freeze([sharedWorkplace.room, sharedWorkplace.retainedMaterial]),
+    outcome: "Retained · non-authoritative",
+  }),
+  reuse: Object.freeze({
+    label: "Reuse",
+    actor: "Codex · later Meeting",
+    flow: Object.freeze(["Codex enters", "same Room + Material", "use Research", "decision candidate"]),
+    title: "A new agent builds on the owned Workplace.",
+    description: "Codex receives fresh orientation and reads retained Material. No private Claude memory is transferred.",
+    evidence: Object.freeze([sharedWorkplace.room, sharedWorkplace.retainedMaterial]),
+    outcome: "Reused · new candidate",
+  }),
+  maintain: Object.freeze({
+    label: "Maintain & deliver",
+    actor: "Human · Hygiene · Route",
+    flow: Object.freeze(["human transition", "Hygiene advisory", "approved Route", "observed Site result"]),
+    title: "Clarify the destination before changing the Site.",
+    description: "Hygiene inspects read-only. Delivery proceeds only through an approved, revalidated Route and an observed result.",
+    evidence: Object.freeze([sharedWorkplace.route, `site:${sharedWorkplace.site}`]),
+    outcome: "Delivered · observed",
+  }),
 })
+
+export const initialInspectorState = Object.freeze({ panel: "retain" })
 
 export function transitionInspector(state, event) {
-  if (event.type === "SELECT_PROVIDER" && providers.has(event.provider)) {
-    return { ...state, provider: event.provider }
-  }
-
-  if (event.type === "SELECT_PANEL" && panels.has(event.panel)) {
+  if (event.type === "SELECT_PANEL" && stages.has(event.panel)) {
     return { ...state, panel: event.panel }
   }
-
   return state
 }
 
 export function inspectorSnapshot(state) {
-  const projection = state.provider === "claude"
-    ? ["CLAUDE.md", ".claude/commands/"]
-    : ["AGENTS.md", ".agents/skills/"]
-
   return {
-    ...dogfoodSnapshot,
-    projection,
+    ...sharedWorkplace,
+    ...(stageSnapshots[state.panel] ?? stageSnapshots.retain),
   }
 }
 
 export function inspectorStatus(state) {
-  const provider = state.provider === "claude" ? "Claude" : "Codex"
-  return `${provider} receives an L1 projection of the same owned Home. The Endroit Room, retained Material and Site destinations remain workplace-owned.`
+  const snapshot = inspectorSnapshot(state)
+  return `${snapshot.label}: ${snapshot.outcome}. The Home keeps only the human-selected continuity needed for the next Meeting.`
 }
 
 export function panelForKey(current, key) {
-  const index = panelIds.indexOf(current)
+  const index = stageIds.indexOf(current)
   if (index < 0) return null
-  if (key === "Home") return panelIds[0]
-  if (key === "End") return panelIds.at(-1)
-  if (key === "ArrowRight") return panelIds[(index + 1) % panelIds.length]
-  if (key === "ArrowLeft") return panelIds[(index - 1 + panelIds.length) % panelIds.length]
+  if (key === "Home") return stageIds[0]
+  if (key === "End") return stageIds.at(-1)
+  if (key === "ArrowRight") return stageIds[(index + 1) % stageIds.length]
+  if (key === "ArrowLeft") return stageIds[(index - 1 + stageIds.length) % stageIds.length]
   return null
 }

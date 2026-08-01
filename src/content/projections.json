@@ -2,7 +2,7 @@
   "projections": {
     "landing": {
       "source": "artifact:desk/endroit/publishing/publication/endroit-landing#content",
-      "sha256": "d05f1607b81680d33593af931326f8b9c85352ba623f845d711adb648988b409"
+      "sha256": "7999603ad4aba7845e2f3ac23bd32dd4e6d83dfde1b0234c8ef5c42127933d66"
     },
     "install": {
       "source": "thevzion/endroit@0.8.0-alpha.0:INSTALL.md",

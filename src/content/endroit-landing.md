@@ -1,65 +1,119 @@
 # Endroit
 
-> The place layer for agentic work.
+> A more intuitive way to work with agents.
 
 ## New session. Same workplace.
 
-Name the subject. Endroit brings Codex or Claude into the same owned Home—with
-its Room, retained Material and Sites still inspectable.
+Your way of working stays. Each agent adapts at the door.
 
-Endroit is a lightweight, local-first framework for building and operating
-file-based [Open Workplaces](https://open-workplace.org/proposal/).
+**Places make intent legible. Gestures make it explicit.**
+
+Name the subject. Endroit brings Codex or Claude into the same owned Home, with
+its Room, retained Material and Sites still inspectable.
 
 **Alpha · Codex and Claude L1 Projection-qualified**
 
 [Create a Home](#create-a-home) ·
 [Inspect the source](https://github.com/thevzion/endroit)
 
-## Recover the work, not the transcript
+## One Home. Several sessions. More to build on.
 
-**Sanitized dogfood snapshot — The VZion Studio Home**
+Providers arrive and leave. The Home remains the shared, inspectable place.
+There is no simulated memory between agents: each one receives orientation,
+projections and available capabilities composed from the same owned sources.
+
+### Retain
+
+Claude enters the Endroit Room, reads the current Material and produces a
+candidate for the `0.8` launch. The human chooses `retain-this`. The candidate
+becomes durable and inspectable without becoming current truth.
 
 ```text
-Continue the Endroit 0.8 launch
-→ enter the existing Home
-→ recover the Endroit Room and retained Material
-→ inspect Endroit, endroit.org and The VZion Sites
-→ continue through Codex or Claude
-→ deliver through an approved Route
+Claude enters → Room context → candidate → human retains → Room Material
 ```
 
-### Recover
+### Reuse
 
-The Home exposes its Floor Plan. `.desk/rooms/endroit/ROOM.md` identifies the
-durable subject; retained Material carries the useful continuity; Site and
-Route declarations show where external truth lives. No transcript is required.
+Codex enters in a later Meeting. It does not read Claude's private memory. It
+finds the same Room and retained Material in the Home, activates the Research
+method and prepares a decision for review.
 
-### Inspect
+```text
+Codex enters → same Room + Material → use Research → decision candidate
+```
 
-`HOME.md`, `MEMBER.md`, `DESK.md`, `ROOM.md`, Equipment and `SITE.md` remain
-human-readable sources. Endroit resolves them deterministically into generated
-`AGENTS.md`, `CLAUDE.md`, Skills and Commands for Codex and Claude.
+### Maintain & deliver
 
-### Decide & deliver
+The human accepts the decision or archives the candidate. Home Hygiene reports
+an ambiguous destination without changing anything. Once the destination is
+clear, an approved Route carries the result to its Site and Endroit observes
+the resulting state.
 
-Each execution produces a candidate. The human can retain it for later,
-accept it as current workplace truth, deliver it through a revalidated Route,
-or archive it without deleting history. No output becomes durable
-automatically.
+```text
+human transition → Hygiene advisory → approved Route → observed Site result
+```
 
-## The framework behind the Home
+Each useful session can leave the Home better prepared for the next. Endroit
+compounds retained Material, accepted decisions, stabilized Equipment,
+verified Routes and observed Site results. It does not keep every transcript or
+output.
 
-Endroit is also a local-first, headless, file-based implementation of the Open
-Workplace model. `framework` describes the product form; `implementation`
-describes its relationship to the model.
+## Start with conversation. Add precision when it matters.
+
+```text
+Talk naturally
+      ↓
+Inspect the shared workplace
+      ↓
+Use explicit gestures when authority matters
+      ↓
+Use the CLI for deterministic operations
+```
+
+Commands are optional. They help you steer, retain, accept and deliver without
+surrendering control of the session. A natural sentence with the same explicit
+meaning works too. An acknowledgement such as “looks good” never causes a
+durable transition by itself.
+
+### Enter
+
+`enter-the-home` and `enter-the-<room>-room` recover or recenter the place.
+
+### Equip
+
+`call-the-researcher` adds a temporary Occupant. `work-as-an-engineer` adopts a
+temporary Role. `use-research` activates a method. These are distinct choices.
+
+### Keep
+
+`retain-this` preserves a non-authoritative candidate. `accept-this` records
+current truth for its owner. `archive-this` removes Material from the active
+set without deleting it.
+
+### Reach
+
+`work-on-<site>` revalidates access through a Route.
+`deliver-this-to-<site>` names the destination and external effect explicitly.
+
+### Maintain
+
+`maintain-the-home` inspects the whole Home read-only. A repair requires one
+exact finding and matching human approval.
+
+## The place layer for agentic work
+
+Endroit is a lightweight, local-first framework for building and operating
+file-based [Open Workplaces](https://open-workplace.org/proposal/). It is also
+a local-first, headless implementation of that model.
 
 Core loads, validates, resolves and projects owned sources. First-party
 Equipment adds bounded ways of working without becoming the owner of their
 results. Natural conversation remains the default interface.
 
-Endroit does not make the agent smarter. It makes the situation clearer.
+Endroit makes placement inferable, explainable and correctable. It does not
+make the model smarter or infer the human's intent.
 
-## What `create` gives you
+## The Home stays inspectable
 
 ```text
 my-home/
@@ -90,24 +144,6 @@ checkouts/
 Meetings remain ephemeral by default. No required `material/` directory or
 persisted Meeting appears until the human explicitly retains work.
 
-## Core and Equipment
-
-Core provides deterministic loading, validation, resolution and provider
-projection. A new Home installs seven foundation Equipment packages for the
-first complete experience:
-
-- `endroit/onboarding` — consent-first setup and explanation;
-- `endroit/hud` — live orientation over the static Floor Plan;
-- `endroit/workplace` — entry and workplace gestures;
-- `endroit/artifacts` — retained, accepted and published Material;
-- `endroit/rooms` — Room inspection and diagnostics;
-- `endroit/sites` — Site and Route operations with destructive guards;
-- `endroit/hygiene` — read-only Home maintenance and approved repairs.
-
-Additional Equipment can add research, planning or publishing methods. A Skill
-or Command is an activation surface; the Equipment remains the reusable method,
-and the Room, Desk or Site owns the resulting work.
-
 ## Providers execute. The Home remembers.
 
 ```text
@@ -130,6 +166,23 @@ source of the work.
 Endroit does not recruit, schedule or maintain resident agents. Codex and
 Claude are L1 Projection-qualified surfaces, not universally interchangeable
 runtimes.
+
+## Core and Equipment
+
+Core provides deterministic loading, validation, resolution and provider
+projection. A new Home installs seven foundation Equipment packages:
+
+- `endroit/onboarding`: consent-first setup and explanation;
+- `endroit/hud`: live orientation over the static Floor Plan;
+- `endroit/workplace`: entry and workplace gestures;
+- `endroit/artifacts`: retained, accepted and published Material;
+- `endroit/rooms`: Room inspection and diagnostics;
+- `endroit/sites`: Site and Route operations with destructive guards;
+- `endroit/hygiene`: read-only Home maintenance and approved repairs.
+
+Additional Equipment can add research, planning or publishing methods. A Skill
+or Command is an activation surface; Equipment owns the reusable method, while
+the Room, Desk or Site owns the resulting work.
 
 ## Repositories keep their sovereignty
 
@@ -197,6 +250,9 @@ when you need more control.
 
 - Codex and Claude are L1 Projection-qualified. Hosted invocation and live
   Presence are not qualified by this release.
+- “Each agent adapts at the door” means Endroit composes provider projections,
+  orientation and capabilities from the Home. It does not imply automatic
+  learning or model personalization.
 - The 0.8 workplace grammar is a breaking alpha change from 0.7.
 - Public grammar and schemas may change through explicit releases and migration
   notes.
