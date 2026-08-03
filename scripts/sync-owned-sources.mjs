@@ -5,7 +5,7 @@ import { fileURLToPath } from 'node:url';
 
 const siteRoot = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const homeRoot = resolve(process.env.ENDROIT_HOME_ROOT ?? resolve(siteRoot, '../../../..'));
-const endroitRoot = resolve(process.env.ENDROIT_SOURCE_ROOT ?? resolve(siteRoot, '../../endroit/home-first-reset'));
+const endroitRoot = resolve(process.env.ENDROIT_SOURCE_ROOT ?? resolve(siteRoot, '../agentic-tools-home/checkouts/endroit/integrated-main'));
 const selection = process.argv[2] ?? 'all';
 const allowed = new Set(['all', 'landing', 'install', 'schemas']);
 
@@ -75,6 +75,11 @@ if (selection === 'all' || selection === 'schemas') {
 			sourcePath: `schemas/v7/${name}.schema.json`,
 			provenance: `thevzion/endroit@0.8.0-alpha.1:schemas/v7/${name}.schema.json`,
 		})),
+		{
+			publicPath: '/schema/v8/route.json',
+			sourcePath: 'schemas/v8/route.schema.json',
+			provenance: 'thevzion/endroit@0.9.0-alpha.0:schemas/v8/route.schema.json',
+		},
 	];
 	const contracts = [];
 
@@ -90,7 +95,7 @@ if (selection === 'all' || selection === 'schemas') {
 
 	await writeFile(
 		resolve(siteRoot, 'public/schema/manifest.json'),
-		`${JSON.stringify({ release: '0.8.0-alpha.1', contracts }, null, 2)}\n`,
+		`${JSON.stringify({ release: '0.9.0-alpha.0', contracts }, null, 2)}\n`,
 	);
 }
 

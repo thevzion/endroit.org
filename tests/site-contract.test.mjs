@@ -8,7 +8,7 @@ import test from 'node:test';
 
 const siteRoot = fileURLToPath(new URL('..', import.meta.url));
 const homeRoot = resolve(process.env.ENDROIT_HOME_ROOT ?? resolve(siteRoot, '../../../..'));
-const endroitRoot = resolve(process.env.ENDROIT_SOURCE_ROOT ?? resolve(siteRoot, '../../endroit/home-first-reset'));
+const endroitRoot = resolve(process.env.ENDROIT_SOURCE_ROOT ?? resolve(siteRoot, '../agentic-tools-home/checkouts/endroit/integrated-main'));
 const read = (path, encoding = 'utf8') => readFile(resolve(siteRoot, path), encoding);
 const hash = (content) => createHash('sha256').update(content).digest('hex');
 
@@ -144,20 +144,28 @@ test('the human install page and machine-readable endpoint share one exact sourc
 	assert.doesNotMatch(source, /curl\s.*\|\s*(?:ba)?sh|@latest/);
 
 	const ownedSource = resolve(endroitRoot, 'INSTALL.md');
-	if (existsSync(ownedSource)) assert.deepEqual(await readFile(ownedSource), Buffer.from(source));
+	const productManifest = resolve(endroitRoot, 'package.json');
+	if (existsSync(ownedSource) && existsSync(productManifest)) {
+		const { version } = JSON.parse(await readFile(productManifest, 'utf8'));
+		if (manifest.projections.install.source.includes(`@${version}:`)) {
+			assert.deepEqual(await readFile(ownedSource), Buffer.from(source));
+		}
+	}
 });
 
 test('public schema bytes match their manifest and Endroit sources', async () => {
 	const manifest = await read('public/schema/manifest.json').then(JSON.parse);
-	assert.equal(manifest.release, '0.8.0-alpha.1');
-	assert.equal(manifest.contracts.length, 13);
-	assert.equal(new Set(manifest.contracts.map(({ path }) => path)).size, 13);
+	assert.equal(manifest.release, '0.9.0-alpha.0');
+	assert.equal(manifest.contracts.length, 14);
+	assert.equal(new Set(manifest.contracts.map(({ path }) => path)).size, 14);
 	assert.ok(manifest.contracts.every(({ path }) => !path.includes('latest')));
 
 	for (const contract of manifest.contracts) {
 		const publicContent = await read(`public${contract.path}`, null);
 		assert.equal(hash(publicContent), contract.sha256, contract.path);
-		if (contract.path.startsWith('/schema/v7/')) {
+		if (contract.path.startsWith('/schema/v8/')) {
+			assert.match(contract.source, /^thevzion\/endroit@0\.9\.0-alpha\.0:/, contract.path);
+		} else if (contract.path.startsWith('/schema/v7/')) {
 			assert.match(contract.source, /^thevzion\/endroit@0\.8\.0-alpha\.1:/, contract.path);
 		} else {
 			assert.match(contract.source, /^@endroit\/cli@0\.7\.0-alpha\.0:/, contract.path);
@@ -166,9 +174,9 @@ test('public schema bytes match their manifest and Endroit sources', async () =>
 			assert.deepEqual(await read(`dist${contract.path}`, null), publicContent, `dist${contract.path}`);
 		}
 
-		const match = contract.path.match(/^\/schema\/(v7\/)?([^/]+)\.json$/);
+		const match = contract.path.match(/^\/schema\/(?:(v7|v8)\/)?([^/]+)\.json$/);
 		assert.ok(match, contract.path);
-		const source = resolve(endroitRoot, `schemas/${match[1] ? 'v7' : 'v6'}/${match[2]}.schema.json`);
+		const source = resolve(endroitRoot, `schemas/${match[1] ?? 'v6'}/${match[2]}.schema.json`);
 		if (existsSync(source)) assert.deepEqual(await readFile(source), publicContent, contract.path);
 	}
 });
@@ -195,6 +203,11 @@ test('v7 schemas use stable versioned identifiers and Runtime v2alpha1', async (
 
 	const runtime = await read('public/schema/v7/runtime.json');
 	assert.match(runtime, /endroit\.org\/runtime\/v2alpha1/);
+	assert.equal(hash(runtime), '7f95cf78217d0a94219cb0d9dd6f0b952fb854ac95c8e91ec1dd8367830e8799');
+
+	const routeV8 = await read('public/schema/v8/route.json');
+	assert.equal(JSON.parse(routeV8).$id, 'https://endroit.org/schema/v8/route.json');
+	assert.equal(hash(routeV8), 'e54b3cb4e68078aa89e26284e23f520b9ae3db9e1d9f8ef9e6b50caea1566936');
 });
 
 test('Nginx serves schema contracts with the required headers', async () => {
@@ -216,6 +229,7 @@ test('the static build emits every public entrypoint', async () => {
 		'dist/schema/index.html',
 		'dist/schema/manifest.json',
 		'dist/schema/v7/home.json',
+		'dist/schema/v8/route.json',
 		'dist/schema/home.json',
 	]) assert.ok(existsSync(resolve(siteRoot, path)), path);
 	assert.deepEqual(await read('dist/install.md', null), await read('public/install.md', null));

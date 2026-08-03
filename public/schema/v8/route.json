@@ -1,0 +1,87 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://endroit.org/schema/v8/route.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["$schema", "id", "site", "status", "checkout"],
+  "properties": {
+    "$schema": { "const": "https://endroit.org/schema/v8/route.json" },
+    "id": { "$ref": "#/$defs/id" },
+    "site": { "$ref": "#/$defs/id" },
+    "status": { "enum": ["active", "parked", "superseded"] },
+    "supersededBy": { "$ref": "#/$defs/id" },
+    "revision": { "$ref": "#/$defs/revision" },
+    "checkout": {
+      "oneOf": [
+        { "$ref": "#/$defs/contextCheckout" },
+        { "$ref": "#/$defs/pathCheckout" }
+      ]
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": { "status": { "const": "superseded" } },
+        "required": ["status"]
+      },
+      "then": { "required": ["supersededBy"] },
+      "else": { "not": { "required": ["supersededBy"] } }
+    },
+    {
+      "if": {
+        "properties": { "checkout": { "type": "object", "properties": { "mode": { "const": "managed-worktree" } }, "required": ["mode"] } },
+        "required": ["checkout"]
+      },
+      "then": { "required": ["revision"] }
+    },
+    {
+      "if": {
+        "properties": { "checkout": { "type": "object", "properties": { "mode": { "const": "submodule" } }, "required": ["mode"] } },
+        "required": ["checkout"]
+      },
+      "then": { "not": { "required": ["revision"] } }
+    }
+  ],
+  "$defs": {
+    "id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9._-]{0,127}$" },
+    "revision": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["kind", "name"],
+          "properties": {
+            "kind": { "const": "branch" },
+            "name": { "type": "string", "minLength": 1 }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["kind", "sha"],
+          "properties": {
+            "kind": { "const": "commit" },
+            "sha": { "type": "string", "pattern": "^[a-fA-F0-9]{40,64}$" }
+          }
+        }
+      ]
+    },
+    "contextCheckout": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["mode"],
+      "properties": {
+        "mode": { "enum": ["embedded", "managed-clone", "managed-worktree"] }
+      }
+    },
+    "pathCheckout": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["mode", "path"],
+      "properties": {
+        "mode": { "enum": ["existing", "submodule"] },
+        "path": { "type": "string", "minLength": 1 }
+      }
+    }
+  }
+}

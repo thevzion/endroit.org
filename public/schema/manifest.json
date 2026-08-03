@@ -1,5 +1,5 @@
 {
-  "release": "0.8.0-alpha.1",
+  "release": "0.9.0-alpha.0",
   "contracts": [
     {
       "path": "/schema/home.json",
@@ -65,6 +65,11 @@
       "path": "/schema/v7/artifact.json",
       "source": "thevzion/endroit@0.8.0-alpha.1:schemas/v7/artifact.schema.json",
       "sha256": "560e0d62ac8646cf61488ec88298a0af4e7b87cef42e2cfe24a2c9e3b2c29535"
+    },
+    {
+      "path": "/schema/v8/route.json",
+      "source": "thevzion/endroit@0.9.0-alpha.0:schemas/v8/route.schema.json",
+      "sha256": "e54b3cb4e68078aa89e26284e23f520b9ae3db9e1d9f8ef9e6b50caea1566936"
     }
   ]
 }
