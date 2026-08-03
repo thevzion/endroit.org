@@ -1,0 +1,2 @@
+# Preserve the byte-exact Home-owned Markdown projection, including its EOF.
+src/content/endroit-landing.md whitespace=-blank-at-eof

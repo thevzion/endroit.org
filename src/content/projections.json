@@ -1,12 +1,18 @@
 {
   "projections": {
     "landing": {
-      "source": "artifact:desk/endroit/publishing/publication/endroit-landing#content",
-      "sha256": "c7db3ae96f88cbfd1d9daf7581f3d6f4a97ec878fa1b07040661a069cdfc1e69"
+      "source": "artifact:desk/endroit/publishing/work/endroit-public-entrypoint/publication/endroit-landing#content",
+      "sha256": "b2053951ebdd27ea3589a5b85b44ee6fedb6cb303470894b1ab84cc7b3a474c7",
+      "usage": "owned public copy projection; the interactive production surface is a traced transposition of Interface Lab Endroit 024"
     },
     "install": {
-      "source": "thevzion/endroit@0.8.0-alpha.1:INSTALL.md",
+      "source": "site:endroit.org/src/content/install.md",
+      "releaseSource": "thevzion/endroit@0.8.0-alpha.1:INSTALL.md",
       "sha256": "e6bb1bd87d40d49e059d2344c576e8bfa186ac6def1026a7c1e8b6db3afd1e2b"
+    },
+    "llms": {
+      "source": "site:endroit.org/scripts/sync-owned-sources.mjs#llms",
+      "sha256": "418ab743529f16fad7438547dce5368c2f963c4b915d11292394a7e88941e4ff"
     }
   }
 }

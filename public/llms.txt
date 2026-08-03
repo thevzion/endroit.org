@@ -1,0 +1,19 @@
+# Endroit
+
+> The Workplace-first application framework. Agents produce. Your workplace compounds.
+
+## Public surfaces
+
+- [Product instrument](https://endroit.org/): typed context, explicit lifecycle and agentic capital
+- [Homes in practice](https://endroit.org/homes/): the semantic objects and their responsibilities
+- [Install for humans](https://endroit.org/install/): agent-led, CLI-backed, human-approved installation
+- [Install contract](https://endroit.org/install.md): the same installation procedure as Markdown
+- [Roadmap](https://endroit.org/roadmap/): available, in-progress, exploratory and later work
+- [Schema contracts](https://endroit.org/schema/): immutable public JSON Schema addresses
+- [Schema manifest](https://endroit.org/schema/manifest.json): source and SHA-256 for served contracts
+
+## Source
+
+- [Endroit on GitHub](https://github.com/thevzion/endroit)
+
+The public navigation intentionally excludes unpublished Workplace, adoption and Work Resolution documents.
