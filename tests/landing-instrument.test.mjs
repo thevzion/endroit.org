@@ -91,6 +91,8 @@ test('the bench is progressively enhanced and complete without JavaScript', () =
 	assert.match(styles, /:focus-visible/);
 	assert.match(styles, /min-width: 320px/);
 	assert.match(styles, /\[data-gated\]:not\(\[data-revealed\]\)/);
+	assert.doesNotMatch(styles, /\.capital-reveal\[data-gated\]:not\(\[data-revealed\]\)\s*\{[^}]*opacity/s);
+	assert.match(styles, /\.channel-excluded\s*\{\s*opacity:\s*1;/);
 });
 
 test('the production surface records the frozen reference and exact permitted deltas', async () => {
