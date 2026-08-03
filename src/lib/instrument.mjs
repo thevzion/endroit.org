@@ -77,8 +77,8 @@ export const modules = [
 		id: 'stack',
 		role: 'boundary',
 		claim: 'Open Workplace supplies the grammar. Endroit gives it a place.',
-		mechanism: 'Workplace-first is the paradigm; Open Workplace owns the shared model and experimental protocol; Endroit is the framework; your Workplace is the result.',
-		proof: 'The independent proposal and model are public; the framework is installable.',
+		mechanism: 'Workplace-first is the paradigm; Open Workplace owns the shared model and experimental Protocol; Endroit is the framework; your Workplace is the result. The current Protocol is open-workplace/0.2-draft; Endroit 0.8.0-alpha.2 still targets superseded open-workplace/0.1.',
+		proof: 'The independent proposal and current draft are public; Endroit’s older target is named without implying compatibility.',
 		maturity: 'current',
 		source: 'Resolved terminology · Open Workplace remains independent',
 		action: 'Read the proposal.',
@@ -218,7 +218,7 @@ export const availability = [
 		state: 'candidate',
 		label: 'Local release candidate · 0.8.0-alpha.2',
 		detail:
-			'Adds the versioned Workplace Profile targeting open-workplace/0.1, Work Resolution and a consent-first adoption journey. Local qualification only; publication cannot be inferred.',
+			'Adds the versioned Workplace Profile targeting superseded open-workplace/0.1, Work Resolution and a consent-first adoption journey. The current experimental Protocol is open-workplace/0.2-draft; compatibility is not implied. Local qualification only; publication cannot be inferred.',
 	},
 	{
 		state: 'research',

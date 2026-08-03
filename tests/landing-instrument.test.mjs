@@ -14,10 +14,11 @@ import {
 } from '../src/lib/instrument.mjs';
 
 const site = new URL('..', import.meta.url);
-const [page, styles, reference] = await Promise.all([
+const [page, styles, reference, product] = await Promise.all([
 	readFile(new URL('src/pages/index.astro', site), 'utf8'),
 	readFile(new URL('src/styles/global.css', site), 'utf8'),
 	readFile(new URL('src/content/landing-reference.json', site), 'utf8').then(JSON.parse),
+	readFile(new URL('PRODUCT.md', site), 'utf8'),
 ]);
 const corpus = page + JSON.stringify({ availability, capitalDefinition, intents, latchPhases, modules, signalTypes, spine });
 const hash = (content) => createHash('sha256').update(content).digest('hex');
@@ -77,6 +78,13 @@ test('claim boundaries and verified public destinations hold', () => {
 	for (const href of hrefs) assert.ok(externalLinks.includes(href), href);
 });
 
+test('the current Open Workplace protocol boundary stays explicit', () => {
+	assert.match(corpus, /current experimental Protocol is <code>open-workplace\/0\.2-draft<\/code>/);
+	assert.match(corpus, /superseded <code>open-workplace\/0\.1<\/code>/);
+	assert.match(corpus, /compatibility with the current draft is not implied/);
+	assert.match(product, /current Open Workplace experimental Protocol is\s+`open-workplace\/0\.2-draft`/);
+});
+
 test('the bench is progressively enhanced and complete without JavaScript', () => {
 	assert.doesNotMatch(page, /noindex|nofollow|client:/);
 	assert.match(page, /<html lang="en">/);
@@ -99,7 +107,7 @@ test('the production surface records the frozen reference and exact permitted de
 	assert.equal(reference.referenceArtifact.freezeCommit, 'b0c4bf23f7d9ee882619a2d3c39049760feb2104');
 	assert.equal(reference.referenceArtifact.manifestBaseCommit, 'f4d7e154407ad26d8a88461aa9f5d38c7a24599e');
 	assert.equal(reference.referenceArtifact.sourceHashes['Page.astro'], '5b04f296ceb7d3299273a54c24cb40842df7f100696c880ba242414202de7e2b');
-	assert.equal(reference.productionDeltas.length, 6);
+	assert.equal(reference.productionDeltas.length, 7);
 	for (const path of reference.unchangedReferenceModules) {
 		const content = await readFile(new URL(path, site));
 		const expectedKey = path.endsWith('instrument.mjs') ? 'instrument.mjs' : 'CalTag.astro';

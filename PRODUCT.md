@@ -54,6 +54,10 @@ unrelated Rooms and unauthorized Sites visibly excluded.
   alpha.2 local candidate only, Codex and Claude L1-qualified, no measured
   intelligence or accuracy claims, delivery = observed effect, no private
   paths.
+- Protocol boundary: the current Open Workplace experimental Protocol is
+  `open-workplace/0.2-draft`. Endroit `0.8.0-alpha.2` remains a local candidate
+  targeting the superseded `open-workplace/0.1`; compatibility with the
+  current draft is not implied.
 - Verified public links only: endroit.org/install/, endroit.org/roadmap/,
   open-workplace.org/, open-workplace.org/proposal/,
   github.com/thevzion/endroit, github.com/open-workplace/open-workplace.
