@@ -1,171 +1,509 @@
 ---
-import { Content } from '../content/endroit-landing.md';
-import HomeInspector from '../components/HomeInspector';
-import SiteFooter from '../components/SiteFooter.astro';
-import SiteHeader from '../components/SiteHeader.astro';
-import BaseLayout from '../layouts/BaseLayout.astro';
+import CalTag from '../components/CalTag.astro';
+import {
+	availability,
+	capitalDefinition,
+	externalLinks,
+	intents,
+	latchPhases,
+	modules,
+	relations,
+	signalTypes,
+	spine,
+} from '../lib/instrument.mjs';
+import '../styles/global.css';
+
+const module = Object.fromEntries(modules.map((item) => [item.id, item]));
+void externalLinks;
 ---
 
-<BaseLayout
-	title="Endroit — The place layer for agentic work"
-	description="A more intuitive way to work with agents: one inspectable Home across sessions, providers and repositories."
-	path="/"
->
-	<SiteHeader />
-	<main class="publication-landing endroit-landing">
-		<div class="page-shell publication-copy">
-			<Content />
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<meta
+			name="description"
+			content="Endroit gives human-agent work typed context, durable continuity, and an owned place to compound across sessions and repositories."
+		/>
+		<link rel="canonical" href="https://endroit.org/" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="theme-color" content="#d9dbd4" />
+		<meta property="og:type" content="website" />
+		<meta property="og:site_name" content="Endroit" />
+		<meta property="og:title" content="Endroit · Agents produce. Your workplace compounds." />
+		<meta property="og:description" content="Context that knows its place. The next agent starts ahead, not over." />
+		<meta property="og:url" content="https://endroit.org/" />
+		<meta property="og:image" content="https://endroit.org/social-card.png" />
+		<meta property="og:image:type" content="image/png" />
+		<meta property="og:image:width" content="1200" />
+		<meta property="og:image:height" content="630" />
+		<meta property="og:image:alt" content="Endroit — Agents produce. Your workplace compounds." />
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content="Endroit · Agents produce. Your workplace compounds." />
+		<meta name="twitter:description" content="Context that knows its place. The next agent starts ahead, not over." />
+		<meta name="twitter:image" content="https://endroit.org/social-card.png" />
+		<meta name="twitter:image:alt" content="Endroit — Agents produce. Your workplace compounds." />
+		<script is:inline type="application/ld+json" set:html={JSON.stringify({
+			'@context': 'https://schema.org',
+			'@type': 'WebSite',
+			name: 'Endroit',
+			url: 'https://endroit.org/',
+			description: 'The Workplace-first application framework.',
+			publisher: { '@type': 'Organization', name: 'The VZion', url: 'https://thevzion.com/' },
+		})} />
+		<title>Endroit · Agents produce. Your workplace compounds.</title>
+	</head>
+	<body>
+		<!--
+		THESIS: Agents produce, the workplace compounds; this production landing is a bench instrument that proves typed context and the capital latch, refusing dark dev-tool theater and feature grids.
+		OWN-WORLD: Bench logic-analyzer: warm steel bezel, silkscreen labels, dark graticule screens as bounded inserts, phosphor-green traces, amber trigger accents, red exclusion markers, mono readouts.
+		STORY: An engineer sees the restart trace, arms an intent and watches context resolve with visible exclusions, runs the latch sequence, meets the name agentic capital only after experiencing it, then installs.
+		FIRST VIEWPORT: Silkscreen title block left (category signal, spine, promise); right, one screen with two traces: agent bursts decaying, workplace staircase holding. Primary action: Run the proof.
+		FORM: Oscilloscope and logic-analyzer bench instrument · pinned Endroit 024 world · seed 35010d6f.
+		FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, and DESIGN.md
+		-->
+		<a class="skip-link" href="#main">Skip to the bench</a>
 
-			<div id="home-inspector-placement">
-				<HomeInspector client:load />
-				<noscript>
-					<div class="inspector-fallback" aria-label="Home Inspector static overview">
-						<section>
-							<h3>Retain</h3>
-							<p>Claude produces a candidate. The human retains it as inspectable, non-authoritative Room Material.</p>
-						</section>
-						<section>
-							<h3>Reuse</h3>
-							<p>Codex enters in a later Meeting and builds on the same owned Room and Material without receiving Claude's private memory.</p>
-						</section>
-						<section>
-							<h3>Maintain &amp; deliver</h3>
-							<p>Hygiene inspects read-only. A human-approved, revalidated Route carries the result to its sovereign Site.</p>
-						</section>
-					</div>
-				</noscript>
+		<header class="bench-bar">
+			<a class="brand" href="/" aria-label="Endroit home">endroit</a>
+			<nav aria-label="Modules">
+				<a href="#problem">The problem</a>
+				<a href="#resolver">The resolver</a>
+				<a href="#capital">The proof</a>
+				<a href="#availability">Availability</a>
+			</nav>
+			<div class="bar-tools">
+				<button type="button" class="cal-toggle" data-cal-toggle aria-pressed="false" hidden>CAL</button>
+				<a class="bar-install" href="/install/">Install</a>
 			</div>
+		</header>
 
-			<div id="adoption-map-placement">
-				<section class="adoption-map" aria-labelledby="adoption-map-title">
-					<div class="visual-heading">
-						<p>Progressive control</p>
-						<h2 id="adoption-map-title">Start with conversation. Add precision when it matters.</h2>
+		<main id="main">
+			<!-- MODULE 1 · HERO -->
+			<section class="module module-hero" aria-labelledby="hero-title">
+				<div class="hero-plate">
+					<p class="silkscreen-category">{spine.category}</p>
+					<h1 id="hero-title">{spine.punch}</h1>
+					<p class="hero-promise">{spine.promise}</p>
+					<p class="hero-lede">
+						Endroit is the local-first framework for Workplace-first software craft. It turns the context, decisions,
+						methods and bounded reach of human-agent work into durable, owned capacity, so each new agent resolves
+						what remained instead of asking you to rebuild it.
+					</p>
+					<div class="hero-actions">
+						<a class="action action-primary" href="#capital">Run the proof</a>
+						<a class="action" href="/install/">Install Endroit</a>
+						<a class="action" href="https://github.com/thevzion/endroit">View the source</a>
 					</div>
-					<ol class="adoption-ladder">
-						<li><span>01</span><strong>Talk</strong><p>Work in normal conversation.</p></li>
-						<li><span>02</span><strong>Inspect</strong><p>Read the shared Home and its owners.</p></li>
-						<li><span>03</span><strong>Gestures</strong><p>Name authority, persistence and destination.</p></li>
-						<li><span>04</span><strong>CLI</strong><p>Apply deterministic structural operations.</p></li>
-					</ol>
-					<div class="gesture-families" aria-label="Endroit gesture families">
-						<article><span>Enter</span><strong>Recover the place</strong><code>enter-the-home</code></article>
-						<article><span>Equip</span><strong>Add a way of working</strong><code>use-research</code></article>
-						<article><span>Keep</span><strong>Control durability</strong><code>retain-this</code></article>
-						<article><span>Reach</span><strong>Name the destination</strong><code>work-on-&lt;site&gt;</code></article>
-						<article><span>Maintain</span><strong>Inspect the whole Home</strong><code>maintain-the-home</code></article>
-					</div>
-					<p class="adoption-note">Commands are optional. A natural sentence with the same explicit meaning works too; an acknowledgement alone never causes a durable transition.</p>
-				</section>
-			</div>
+					<p class="hero-meta">
+						Published <code>0.8.0-alpha.1</code> · Local candidate <code>0.8.0-alpha.2</code> · local-first ·
+						file-based · no daemon
+					</p>
+				</div>
 
-			<div id="floor-plan-placement">
-				<section class="floor-plan-card" aria-labelledby="floor-plan-title">
-					<div class="visual-heading">
-						<p>Default standalone <code>create</code></p>
-						<h2 id="floor-plan-title">Small source. Complete address.</h2>
-					</div>
-					<div class="floor-plan-grid">
-						<pre aria-label="Default Endroit Home floor plan"><code>my-home/
-├── endroit.json
-├── HOME.md
-├── members/owner/MEMBER.md
-├── rooms/home/
-│   ├── ROOM.md
-│   └── inbox.md
-├── equipment/
-├── .desk/
-│   ├── desk.json
-│   └── DESK.md
-├── endroit.mjs
-├── AGENTS.md        generated
-├── CLAUDE.md        generated
-├── .agents/         generated
-├── .claude/         generated
-└── .endroit/        rebuildable</code></pre>
-						<div class="floor-plan-legend">
-							<article><span>Owned</span><strong>Home sources</strong><p>Human-readable files carry identity, rules and durable placement.</p></article>
-							<article><span>Projected</span><strong>Provider interfaces</strong><p>Codex and Claude receive generated Front Doors, Skills and Commands.</p></article>
-							<article><span>When needed</span><strong>Sites and checkouts</strong><p><code>sites/</code>, <code>.desk/routes/</code> and <code>checkouts/</code> appear only when operations need them.</p></article>
+				<figure class="screen hero-screen" aria-labelledby="hero-screen-caption">
+					<div class="screen-face" aria-hidden="true">
+						<div class="trace-row">
+							<p class="trace-label">AGENT SESSIONS</p>
+							<div class="trace trace-agent">
+								<span class="seg low w1"></span><span class="seg high w2"></span><span class="seg low w1"></span>
+								<span class="seg high w2"></span><span class="seg low w1"></span><span class="seg high w2"></span>
+								<span class="seg low w1"></span>
+							</div>
+						</div>
+						<div class="trace-row">
+							<p class="trace-label">YOUR WORKPLACE</p>
+							<div class="trace trace-workplace">
+								<span class="seg step-0 w3"></span><span class="seg step-1 w3"></span><span class="seg step-2 w3"></span>
+								<span class="seg step-3 w3"></span>
+							</div>
 						</div>
 					</div>
-					<p class="visual-note">Meetings stay ephemeral by default. No Material or persisted Meeting appears until a human explicitly retains work.</p>
-				</section>
-			</div>
-
-			<div id="execution-map-placement">
-				<section class="execution-map" aria-labelledby="execution-map-title">
-					<div class="visual-heading">
-						<p>Execution and ownership</p>
-						<h2 id="execution-map-title">The provider runs the session. The Workplace holds the work.</h2>
-					</div>
-					<div class="execution-flow">
-						<article class="execution-node provider-node"><span>Provider / Harness</span><strong>Model · tools · sandbox</strong><small>Execution and hot state</small></article>
-						<div class="flow-arrow"><span aria-hidden="true">→</span><small>temporary Occupant</small></div>
-						<article class="execution-node meeting-node"><span>Endroit Home</span><strong>Human ↔ Meeting</strong><small>Owned context and destinations</small></article>
-						<div class="flow-arrow"><span aria-hidden="true">→</span><small>candidate</small></div>
-						<article class="execution-node transition-node"><span>Human transition</span><strong>retain · accept · archive</strong><small>or approve delivery</small></article>
-						<div class="flow-arrow"><span aria-hidden="true">→</span><small>approved Route</small></div>
-						<article class="execution-node site-node"><span>Sovereign Site</span><strong>Observed external truth</strong><small>Repository history and permissions remain its own</small></article>
-					</div>
-					<p class="visual-note">Responsibilities, not a required stack. Provider projections may change; Workplace ownership does not.</p>
-				</section>
-			</div>
-
-			<section id="responsibility-shift" class="responsibility-shift" aria-labelledby="responsibility-shift-title">
-				<div class="shift-heading">
-					<p>Same pieces · explicit owners</p>
-					<h2 id="responsibility-shift-title">Stop asking two technical surfaces to own the whole Workplace.</h2>
-				</div>
-				<div class="shift-grid">
-					<div class="overloaded-stack">
-						<p>Implicit Workplace</p>
-						<article><code>AGENTS.md</code><span>constitution · preferences · orientation · rules · decisions · state</span></article>
-						<article><code>Skills/</code><span>procedures · knowledge · methods · agents · outputs</span></article>
-					</div>
-					<div class="shift-arrow" aria-hidden="true"><span>→</span><small>place first</small></div>
-					<div class="owned-stack">
-						<p>Owned Workplace</p>
-						<div><strong>Home</strong><span>composition</span></div>
-						<div><strong>Desk</strong><span>personal continuity</span></div>
-						<div><strong>Room</strong><span>durable domain</span></div>
-						<div><strong>Equipment</strong><span>reusable method</span></div>
-						<div><strong>Site</strong><span>sovereign truth</span></div>
-						<div><strong>Route</strong><span>declared access</span></div>
-					</div>
-				</div>
-				<p class="shift-note">Technical formats still matter. They become projections of responsibilities that already have an owner.</p>
+					<figcaption id="hero-screen-caption">
+						Two signals, one difference: sessions return to zero; the Workplace holds what you decided to keep.
+					</figcaption>
+				</figure>
+				<CalTag module={module.hero} />
 			</section>
-		</div>
-	</main>
-	<SiteFooter />
-</BaseLayout>
 
-<script is:inline>
-	const copy = document.querySelector('.publication-copy');
-	if (copy) {
-		const headings = [...copy.querySelectorAll(':scope > h2')];
-		const findHeading = (text) => headings.find((heading) => heading.textContent?.trim() === text);
-		const replaceSourceSection = (visualId, headingText) => {
-			const visual = document.querySelector(visualId);
-			const heading = findHeading(headingText);
-			if (!visual || !heading) return;
-			copy.insertBefore(visual, heading);
-			let source = heading;
-			while (source && (source === heading || source.tagName !== 'H2')) {
-				const next = source.nextElementSibling;
-				source.hidden = true;
-				source = next;
+			<!-- MODULE 2 · PROBLEM -->
+			<section class="module" id="problem" aria-labelledby="problem-title">
+				<p class="module-plate">MODULE · THE PROBLEM</p>
+				<h2 id="problem-title">A longer context window is not continuity.</h2>
+				<div class="module-body">
+					<div class="module-copy">
+						<p>
+							Each session starts warm-up again: what we work on, which decisions are current, where results belong,
+							what the agent may change. A bigger window holds more tokens for one session. It gives none of it a
+							place, an owner, or a life beyond the session.
+						</p>
+						<p class="module-punch">Context windows hold tokens. Workplaces hold meaning.</p>
+					</div>
+					<figure class="screen" aria-labelledby="restart-caption">
+						<div class="screen-face" aria-hidden="true">
+							<div class="trace-row">
+								<p class="trace-label">SESSION 1</p>
+								<div class="trace"><span class="seg ramp w4"></span><span class="seg drop w1"></span><span class="seg low w4"></span></div>
+							</div>
+							<div class="trace-row">
+								<p class="trace-label">SESSION 2</p>
+								<div class="trace"><span class="seg low w2"></span><span class="seg ramp w4"></span><span class="seg drop w1"></span><span class="seg low w2"></span></div>
+							</div>
+							<div class="trace-row">
+								<p class="trace-label">SESSION 3</p>
+								<div class="trace"><span class="seg low w4"></span><span class="seg ramp w4"></span><span class="seg drop w1"></span></div>
+							</div>
+						</div>
+						<figcaption id="restart-caption">The restart trace: three sessions, three warm-ups, nothing carried.</figcaption>
+					</figure>
+				</div>
+				<CalTag module={module.problem} />
+			</section>
+
+			<!-- MODULE 3 · RESOLVER -->
+			<section class="module" id="resolver" aria-labelledby="resolver-title">
+				<p class="module-plate">MODULE · THE RESOLVER</p>
+				<h2 id="resolver-title">Context that knows its place.</h2>
+				<p class="module-lede">
+					Your agent does not need all your context. It needs the right context, with its meaning intact. Endroit
+					keeps working context semantically typed, so composition preserves boundaries instead of flattening them:
+				</p>
+
+				<dl class="type-table">
+					{signalTypes.map((entry) => (
+						<div>
+							<dt>{entry.not}</dt>
+							<dd><span class="preserves">{entry.preserves}</span> {entry.detail}</dd>
+						</div>
+					))}
+				</dl>
+
+				<div class="resolver" data-resolver>
+					<div class="resolver-rail" data-resolver-rail hidden>
+						<p class="rail-label" id="resolver-rail-label">Trigger · your intent</p>
+						<div class="rail-list" role="tablist" aria-labelledby="resolver-rail-label"></div>
+					</div>
+
+					<div class="resolver-panels">
+						{intents.map((intent) => (
+							<article class="capture" data-capture id={`capture-${intent.id}`} aria-labelledby={`capture-${intent.id}-title`}>
+								<header class="capture-head">
+									<h3 id={`capture-${intent.id}-title`}>“{intent.label}”</h3>
+									<p class="capture-readout">IN {intent.armed.length} · OUT {intent.excluded.length} · smallest relevant composition</p>
+								</header>
+								<ul class="channel-list">
+									{intent.armed.map((line) => (
+										<li class={`channel channel-armed channel-${line.kind}`}>
+											<span class="channel-name">{line.channel}</span>
+											<span class="channel-trace" aria-hidden="true"></span>
+											<span class="channel-note">{line.note}</span>
+										</li>
+									))}
+									{intent.excluded.map((line) => (
+										<li class="channel channel-excluded">
+											<span class="channel-name">{line.channel}</span>
+											<span class="channel-trace" aria-hidden="true"></span>
+											<span class="channel-note">excluded · {line.reason}</span>
+										</li>
+									))}
+								</ul>
+							</article>
+						))}
+					</div>
+				</div>
+
+				<p class="module-punch">Don’t dump context. Resolve it.</p>
+				<p class="module-note">
+					Resolution reduces environmental ambiguity by design. It is not a measured claim about model intelligence
+					or accuracy, and it does not remove the need for human correction.
+				</p>
+				<CalTag module={module.resolver} />
+			</section>
+
+			<!-- MODULE 4 · CAPITAL -->
+			<section class="module" id="capital" aria-labelledby="capital-title">
+				<p class="module-plate">MODULE · THE PROOF</p>
+				<h2 id="capital-title">End the Meeting. Watch what remains.</h2>
+				<p class="module-lede">
+					One capture, four phases. The names are illustrative; the transitions are the product. Nothing durable
+					happens without your verb.
+				</p>
+
+				<div class="latch" data-latch data-phase="0">
+					<figure class="screen latch-screen">
+						<div class="screen-face">
+							<div class="trace-row" data-channel="occ1">
+								<p class="trace-label">OCCUPANT 1 · claude</p>
+								<div class="trace">
+									<span class="seg high w3" data-ph="0"></span><span class="seg high w3" data-ph="1"></span>
+									<span class="seg drop w1" data-ph="2"></span><span class="seg low w2" data-ph="2"></span>
+									<span class="seg low w3" data-ph="3"></span>
+								</div>
+							</div>
+							<div class="trace-row" data-channel="material">
+								<p class="trace-label">ROOM · payments / Material</p>
+								<div class="trace">
+									<span class="seg low w3" data-ph="0"></span><span class="seg latch w3" data-ph="1"></span>
+									<span class="seg latch w3" data-ph="2"></span><span class="seg latch w3" data-ph="3"></span>
+								</div>
+							</div>
+							<div class="trace-row" data-channel="occ2">
+								<p class="trace-label">OCCUPANT 2 · codex</p>
+								<div class="trace">
+									<span class="seg low w3" data-ph="0"></span><span class="seg low w3" data-ph="1"></span>
+									<span class="seg low w3" data-ph="2"></span><span class="seg high w3" data-ph="3"></span>
+								</div>
+							</div>
+						</div>
+						<figcaption class="latch-status" data-latch-status aria-live="polite">
+							{latchPhases[0].title} — {latchPhases[0].note}
+						</figcaption>
+					</figure>
+
+					<ol class="latch-phases">
+						{latchPhases.map((phase, index) => (
+							<li class="latch-phase" data-latch-phase={index}>
+								<p class="phase-control">
+									{index === 0 ? (
+										<span class="phase-start">{phase.control}</span>
+									) : (
+										<button type="button" class="phase-button" data-latch-control={index} disabled={index !== 1}>
+											{phase.control}
+										</button>
+									)}
+								</p>
+								<div class="phase-text">
+									<h3>{phase.title}</h3>
+									<p>{phase.note}</p>
+								</div>
+							</li>
+						))}
+					</ol>
+					<p class="latch-reset"><button type="button" class="reset-button" data-latch-reset hidden>Reset the capture</button></p>
+				</div>
+
+				<aside class="capital-reveal" data-capital-reveal aria-labelledby="capital-reveal-title">
+					<h3 id="capital-reveal-title">{capitalDefinition.reveal}</h3>
+					<p>{capitalDefinition.meaning}</p>
+					<p class="reveal-isnot-head">It is not:</p>
+					<ul class="reveal-isnot">
+						{capitalDefinition.isNot.map((item) => (
+							<li>{item}</li>
+						))}
+					</ul>
+					<p class="module-punch">{capitalDefinition.honest}</p>
+				</aside>
+				<CalTag module={module.capital} />
+			</section>
+
+			<!-- MODULE 5 · RELATIONS -->
+			<section class="module" aria-labelledby="relations-title">
+				<p class="module-plate">MODULE · THE LEGEND</p>
+				<h2 id="relations-title">Capital needs more than storage.</h2>
+				<dl class="legend">
+					{relations.map((relation) => (
+						<div>
+							<dt>{relation.name}</dt>
+							<dd>{relation.behavior}</dd>
+						</div>
+					))}
+				</dl>
+				<p class="module-note">
+					Retention, acceptance, delivery and archive stay explicit. Nothing is captured silently, and no background
+					agent learns your organization.
+				</p>
+				<CalTag module={module.relations} />
+			</section>
+
+			<!-- MODULE 6 · CRAFT -->
+			<section class="module module-craft" aria-labelledby="craft-title">
+				<p class="module-plate">MODULE · THE CRAFT</p>
+				<h2 id="craft-title">Software craftsmanship, one level up.</h2>
+				<p class="craft-copy">
+					You already care about source, boundaries, ownership and lifecycle in code. Endroit brings the same craft
+					to the system around the code: the context an agent enters, the places results land, the authority every
+					change crosses. The exoskeleton isn’t the agent. It’s the workplace around it.
+				</p>
+				<p class="module-punch">Craft the system that crafts the software.</p>
+				<CalTag module={module.craft} />
+			</section>
+
+			<!-- MODULE 7 · STACK -->
+			<section class="module" aria-labelledby="stack-title">
+				<p class="module-plate">MODULE · THE GRAMMAR</p>
+				<h2 id="stack-title">Open Workplace supplies the grammar. Endroit gives it a place.</h2>
+				<div class="module-body">
+					<ol class="stack-rows">
+						<li><strong>Workplace-first</strong><span>the paradigm</span></li>
+						<li><strong>Open Workplace</strong><span>the shared model · experimental protocol · independent</span></li>
+						<li class="stack-here"><strong>Endroit</strong><span>the application framework</span></li>
+						<li><strong>Your Workplace</strong><span>the durable result</span></li>
+					</ol>
+					<div class="module-copy">
+						<p>
+							<a href="https://open-workplace.org/">Open Workplace</a> is an open proposal, not an established
+							standard. The local <code>0.8.0-alpha.2</code> candidate declares the versioned <code>endroit/0.8</code>
+							Profile targeting <code>open-workplace/0.1</code>. Endroit is not an agent, a scheduler, a universal
+							memory or a permission system: providers keep execution, Sites keep their source and history, you keep
+							direction and judgment.
+						</p>
+						<p class="stack-links">
+							<a href="https://open-workplace.org/proposal/">Read the proposal</a>
+							<a href="https://github.com/open-workplace/open-workplace">View the Open Workplace source</a>
+						</p>
+					</div>
+				</div>
+				<CalTag module={module.stack} />
+			</section>
+
+			<!-- MODULE 8 · AVAILABILITY -->
+			<section class="module" id="availability" aria-labelledby="availability-title">
+				<p class="module-plate">MODULE · CONDITION</p>
+				<h2 id="availability-title">Available now. Candidate next. Research beyond.</h2>
+				<ul class="condition-row">
+					{availability.map((item) => (
+						<li class={`condition condition-${item.state}`}>
+							<p class="condition-state">{item.state}</p>
+							<h3>{item.label}</h3>
+							<p>{item.detail}</p>
+						</li>
+					))}
+				</ul>
+				<div class="closing">
+					<p class="closing-line">{spine.action}</p>
+					<div class="hero-actions">
+						<a class="action action-primary" href="/install/">Install Endroit</a>
+						<a class="action" href="https://github.com/thevzion/endroit">View the source</a>
+						<a class="action" href="/roadmap/">Read the roadmap</a>
+					</div>
+				</div>
+				<CalTag module={module.availability} />
+			</section>
+		</main>
+
+		<footer class="bench-foot">
+			<p>
+				Category on file: <strong>{spine.accepted}</strong> (accepted). The headline spine on this page is candidate
+				copy under evaluation on this surface. Every module carries a calibration tag: open any of them, press
+				<kbd>Alt</kbd>+<kbd>I</kbd>, or use the CAL switch. This page renders from one semantic module; public
+				per-fragment source links remain research.
+			</p>
+			<p>
+				Endroit implements <a href="https://open-workplace.org/">Open Workplace</a> ·
+				<a href="https://github.com/thevzion/endroit">source</a> · <a href="/roadmap/">roadmap</a> · MIT licensed
+			</p>
+		</footer>
+
+		<script>
+			// The resolver: three captures exist in document order; JavaScript adds
+			// the intent trigger rail over them.
+			const resolver = document.querySelector('[data-resolver]');
+			const captures = [...document.querySelectorAll('[data-capture]')];
+			const resolverRail = document.querySelector('[data-resolver-rail]');
+			const resolverList = document.querySelector('[data-resolver-rail] .rail-list');
+
+			if (resolver instanceof HTMLElement && resolverRail && resolverList && captures.length > 0) {
+				const tabs: HTMLButtonElement[] = [];
+				const show = (index: number, focusTab = false) => {
+					captures.forEach((capture, i) => {
+						capture.toggleAttribute('hidden', i !== index);
+						capture.setAttribute('role', 'tabpanel');
+						capture.setAttribute('tabindex', '0');
+						capture.setAttribute('aria-labelledby', `resolver-tab-${i}`);
+					});
+					tabs.forEach((tab, i) => {
+						tab.setAttribute('aria-selected', String(i === index));
+						tab.setAttribute('tabindex', i === index ? '0' : '-1');
+					});
+					if (focusTab) tabs[index]?.focus();
+				};
+
+				captures.forEach((capture, index) => {
+					const tab = document.createElement('button');
+					tab.type = 'button';
+					tab.setAttribute('role', 'tab');
+					tab.id = `resolver-tab-${index}`;
+					tab.setAttribute('aria-controls', capture.id);
+					tab.textContent = capture.querySelector('h3')?.textContent?.replace(/[“”]/g, '') ?? '';
+					tab.addEventListener('click', () => show(index, true));
+					tab.addEventListener('keydown', (event) => {
+						if (!(event instanceof KeyboardEvent) || !['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'Home', 'End'].includes(event.key)) return;
+						event.preventDefault();
+						const target =
+							event.key === 'Home' ? 0
+							: event.key === 'End' ? captures.length - 1
+							: ['ArrowRight', 'ArrowDown'].includes(event.key) ? Math.min(captures.length - 1, index + 1)
+							: Math.max(0, index - 1);
+						show(target, true);
+					});
+					resolverList.append(tab);
+					tabs.push(tab);
+				});
+
+				resolver.setAttribute('data-enhanced', 'true');
+				resolverList.setAttribute('aria-orientation', 'vertical');
+				resolverRail.toggleAttribute('hidden', false);
+				show(0);
 			}
-		};
 
-		replaceSourceSection('#home-inspector-placement', 'One Home. Several sessions. More to build on.');
-		replaceSourceSection('#adoption-map-placement', 'Start with conversation. Add precision when it matters.');
-		replaceSourceSection('#floor-plan-placement', 'The Home stays inspectable');
-		replaceSourceSection('#execution-map-placement', 'Providers execute. The Home remembers.');
+			// The latch sequence: phases advance only through the explicit verbs.
+			const latch = document.querySelector('[data-latch]');
+			const latchStatus = document.querySelector('[data-latch-status]');
+			const latchControls = [...document.querySelectorAll('[data-latch-control]')];
+			const latchReset = document.querySelector('[data-latch-reset]');
+			const reveal = document.querySelector('[data-capital-reveal]');
+			const phaseTitles = [...document.querySelectorAll('[data-latch-phase] h3')].map((h) => h.textContent ?? '');
+			const phaseNotes = [...document.querySelectorAll('[data-latch-phase] .phase-text p')].map((p) => p.textContent ?? '');
 
-		const shift = document.querySelector('#responsibility-shift');
-		const pieces = findHeading('You already have the pieces');
-		if (shift && pieces) copy.insertBefore(shift, pieces);
-	}
-</script>
+			if (
+				latch instanceof HTMLElement &&
+				latchStatus &&
+				reveal instanceof HTMLElement &&
+				latchReset instanceof HTMLButtonElement &&
+				latchControls.length === 3
+			) {
+				const setPhase = (phase: number) => {
+					latch.dataset.phase = String(phase);
+					latchStatus.textContent = `${phaseTitles[phase] ?? ''} — ${phaseNotes[phase] ?? ''}`;
+					latchControls.forEach((control) => {
+						if (!(control instanceof HTMLButtonElement)) return;
+						const index = Number(control.dataset.latchControl);
+						control.disabled = index !== phase + 1;
+					});
+					reveal.toggleAttribute('data-revealed', phase === 3);
+					latchReset.toggleAttribute('hidden', phase === 0);
+				};
+
+				latch.dataset.enhanced = 'true';
+				reveal.setAttribute('data-gated', 'true');
+				for (const control of latchControls) {
+					control.addEventListener('click', () => {
+						if (!(control instanceof HTMLButtonElement)) return;
+						setPhase(Number(control.dataset.latchControl));
+					});
+				}
+				latchReset.addEventListener('click', () => setPhase(0));
+				setPhase(0);
+			}
+
+			// Calibration tags: one switch, plus the i key for inspectors.
+			const calToggle = document.querySelector('[data-cal-toggle]');
+			const calTags = [...document.querySelectorAll('[data-cal-tag]')];
+			if (calToggle instanceof HTMLButtonElement) {
+				const setCal = (on: boolean) => {
+					document.body.classList.toggle('calibrating', on);
+					calToggle.setAttribute('aria-pressed', String(on));
+					for (const tag of calTags) tag.toggleAttribute('open', on);
+				};
+				calToggle.toggleAttribute('hidden', false);
+				calToggle.addEventListener('click', () => setCal(!document.body.classList.contains('calibrating')));
+				document.addEventListener('keydown', (event) => {
+					if (!(event instanceof KeyboardEvent) || !event.altKey || event.code !== 'KeyI' || event.metaKey || event.ctrlKey) return;
+					event.preventDefault();
+					setCal(!document.body.classList.contains('calibrating'));
+				});
+			}
+		</script>
+	</body>
+</html>

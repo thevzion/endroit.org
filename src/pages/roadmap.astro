@@ -1,84 +1,47 @@
 ---
-import SiteFooter from '../components/SiteFooter.astro';
-import SiteHeader from '../components/SiteHeader.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 
 const lanes = [
-	{
-		status: 'Available',
-		title: 'The 0.8 Workplace-first baseline',
-		items: [
-			'Owned Home and Room sources with deterministic provider projections',
-			'Inspectable Material and explicit retain, accept, deliver and archive transitions',
-			'Independent Git Sites reached through Desk-local Routes',
-			'Members and Desks with an explicit Git boundary',
-			'Enter, call, work-as, use, work-on and deliver as explicit workplace verbs',
-			'Read-only Home Hygiene with approved, finding-specific repair',
-		],
-	},
-	{
-		status: 'In progress',
-		title: 'Alpha.1 evidence and provider portability',
-		items: [
-			'Cold reads and the first external Home turn alpha.0 findings into the alpha.1 backlog',
-			'Provider compatibility is recorded by evidence level; no runtime is promoted without dated proof',
-			'Codex and Claude remain projection-qualified at L1 while other runtimes are observed',
-		],
-	},
-	{
-		status: 'Exploring',
-		title: 'Adaptive workplaces',
-		items: [
-			'Adaptive placement and context behavior only where dogfood demonstrates a stable need',
-		],
-	},
-	{
-		status: 'Later',
-		title: 'Presence',
-		items: [
-			'Visible occupants, live titles and runtime-aware workplace state',
-			'No daemon, hidden memory or mandatory hosted service implied',
-		],
-	},
+	{ signal: 'LIVE', status: 'Available', title: 'The 0.8 Workplace-first baseline', items: ['Owned Home and Room sources with deterministic provider projections', 'Inspectable Material and explicit retain, accept, deliver and archive transitions', 'Independent Git Sites reached through Desk-local Routes', 'Members and Desks with an explicit Git boundary', 'Enter, call, work-as, use, work-on and deliver as explicit workplace verbs', 'Read-only Home Hygiene with approved, finding-specific repair'] },
+	{ signal: 'ARMED', status: 'In progress', title: 'Alpha.1 evidence and provider portability', items: ['Cold reads and the first external Home turn alpha.0 findings into the alpha.1 backlog', 'Provider compatibility is recorded by evidence level; no runtime is promoted without dated proof', 'Codex and Claude remain projection-qualified at L1 while other runtimes are observed'] },
+	{ signal: 'PROBE', status: 'Exploring', title: 'Adaptive workplaces', items: ['Adaptive placement and context behavior only where dogfood demonstrates a stable need'] },
+	{ signal: 'PARK', status: 'Later', title: 'Presence', items: ['Visible occupants, live titles and runtime-aware workplace state', 'No daemon, hidden memory or mandatory hosted service implied'] },
 ];
 ---
 
-<BaseLayout
-	title="Roadmap | Endroit"
-	description="The public direction for Endroit: what is available, in progress, being explored and deliberately later."
-	path="/roadmap/"
->
-	<SiteHeader />
-	<main>
-		<header class="learn-hero shell">
-			<p class="eyebrow">Public roadmap</p>
-			<h1>Keep the place useful before making it alive.</h1>
-			<p>
-				This is a directional roadmap without dates. “Exploring” is evidence-seeking,
-				not a delivery commitment. Public release notes remain the source of truth for what shipped.
-			</p>
-		</header>
+<BaseLayout title="Roadmap | Endroit" description="What Endroit makes available, is validating, is exploring and deliberately leaves for later." path="/roadmap/" current="roadmap">
+	<main id="main" class="page-instrument">
+		<section class="module page-hero" aria-labelledby="roadmap-title">
+			<div>
+				<p class="module-plate">SIGNAL BOARD · ROADMAP / 01</p>
+				<h1 id="roadmap-title">Keep the place useful before making it alive.</h1>
+				<p class="page-lede">A directional roadmap without dates. “Exploring” means evidence-seeking, not a delivery commitment. Release notes remain the source of truth for what shipped.</p>
+			</div>
+			<figure class="screen page-screen roadmap-screen">
+				<div class="screen-face roadmap-traces" aria-hidden="true">{lanes.map((lane) => <p><span>{lane.signal}</span><i class={`roadmap-trace trace-${lane.signal.toLowerCase()}`}></i></p>)}</div>
+				<figcaption>Four signal states. Only one means available now.</figcaption>
+			</figure>
+		</section>
 
-		<article class="learn-content shell">
-			{lanes.map((lane, index) => (
-				<section>
-					<p class="section-index">{String(index + 1).padStart(2, '0')} · {lane.status}</p>
-					<h2>{lane.title}</h2>
-					<ul>
-						{lane.items.map((item) => <li>{item}</li>)}
-					</ul>
-				</section>
-			))}
-			<section class="home-question">
-				<p class="eyebrow">Current focus</p>
-				<h2>Ship the static vertical slice. Learn from real Homes.</h2>
-				<p>Presence follows only after the owned workplace is dependable without it.</p>
-				<div class="hero-actions">
-					<a class="button button-primary" href="/#create-a-home">Create a Home</a>
-					<a class="button button-secondary" href="https://github.com/thevzion/endroit">Follow the releases ↗</a>
-				</div>
-			</section>
-		</article>
+		<section class="module" aria-labelledby="lanes-title">
+			<p class="module-plate">MODULE · DELIVERY STATES</p>
+			<h2 id="lanes-title">Read the status before the promise.</h2>
+			<div class="roadmap-lanes">
+				{lanes.map((lane, index) => (
+					<article>
+						<header><span class={`status-lamp lamp-${lane.signal.toLowerCase()}`}></span><p>{String(index + 1).padStart(2, '0')} · {lane.signal}</p><strong>{lane.status}</strong></header>
+						<h3>{lane.title}</h3>
+						<ul>{lane.items.map((item) => <li>{item}</li>)}</ul>
+					</article>
+				))}
+			</div>
+		</section>
+
+		<section class="module page-terminal" aria-labelledby="roadmap-focus">
+			<p class="module-plate">CURRENT TRIGGER</p>
+			<h2 id="roadmap-focus">Ship the static vertical slice. Learn from real Homes.</h2>
+			<p class="module-lede">Presence follows only after the owned workplace is dependable without it.</p>
+			<a class="action action-primary" href="https://github.com/thevzion/endroit/releases">Follow releases</a>
+		</section>
 	</main>
-	<SiteFooter />
 </BaseLayout>

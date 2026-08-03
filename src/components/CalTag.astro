@@ -1,0 +1,21 @@
+---
+// Calibration tag: the module's proof-carrying record. Native disclosure,
+// fully usable without JavaScript; the CAL switch only opens them together.
+const { module } = Astro.props;
+---
+
+<details class="cal-tag" data-cal-tag id={`cal-${module.id}`}>
+	<summary>
+		<span class="cal-dot" aria-hidden="true"></span>
+		<span>CAL · {module.id}</span>
+		<span class={`cal-maturity cal-${module.maturity}`}>{module.maturity}</span>
+	</summary>
+	<dl>
+		<div><dt>Role</dt><dd>{module.role}</dd></div>
+		<div><dt>Claim</dt><dd>{module.claim}</dd></div>
+		<div><dt>Mechanism</dt><dd>{module.mechanism}</dd></div>
+		<div><dt>Proof</dt><dd>{module.proof}</dd></div>
+		<div><dt>Source</dt><dd>{module.source}</dd></div>
+		<div><dt>Next action</dt><dd>{module.action}</dd></div>
+	</dl>
+</details>

@@ -1,20 +1,15 @@
 ---
-import SiteFooter from '../components/SiteFooter.astro';
-import SiteHeader from '../components/SiteHeader.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
-<BaseLayout
-	title="Not found | Endroit"
-	description="This room does not exist in the Endroit Home."
-	path="/404.html"
->
-	<SiteHeader />
-	<main class="not-found shell">
-		<p class="eyebrow">404 · Wrong door</p>
-		<h1>This room doesn’t exist.</h1>
-		<p>The Home is intact. No Route reaches this address.</p>
-		<a class="button button-primary" href="/">Return to the Front Door</a>
+<BaseLayout title="Not found | Endroit" description="This address does not resolve inside the Endroit public instrument." path="/404.html">
+	<main id="main" class="page-instrument">
+		<section class="module not-found-module" aria-labelledby="not-found-title">
+			<p class="module-plate">FAULT · 404 / UNRESOLVED ADDRESS</p>
+			<div class="fault-code" aria-hidden="true"><span>4</span><i></i><span>0</span><i></i><span>4</span></div>
+			<h1 id="not-found-title">No Route reaches this address.</h1>
+			<p class="page-lede">The Home is intact. Return to the instrument and resolve a known surface.</p>
+			<a class="action action-primary" href="/">Return to the Front Door</a>
+		</section>
 	</main>
-	<SiteFooter />
 </BaseLayout>

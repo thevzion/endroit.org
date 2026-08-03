@@ -1,16 +1,27 @@
 ---
+import BenchFooter from '../components/BenchFooter.astro';
+import BenchHeader from '../components/BenchHeader.astro';
 import '../styles/global.css';
 
 interface Props {
 	title: string;
 	description: string;
 	path: string;
+	current?: 'home' | 'homes' | 'install' | 'roadmap' | 'schema';
 }
 
-const { title, description, path } = Astro.props;
+const { title, description, path, current } = Astro.props;
 const canonical = new URL(path, Astro.site);
 const socialCard = new URL('/social-card.png', Astro.site);
-const socialAlt = 'Endroit — The place layer for agentic work.';
+const socialAlt = 'Endroit — Agents produce. Your workplace compounds.';
+const website = {
+	'@context': 'https://schema.org',
+	'@type': 'WebSite',
+	name: 'Endroit',
+	url: 'https://endroit.org/',
+	description: 'The Workplace-first application framework.',
+	publisher: { '@type': 'Organization', name: 'The VZion', url: 'https://thevzion.com/' },
+};
 ---
 
 <!doctype html>
@@ -20,7 +31,7 @@ const socialAlt = 'Endroit — The place layer for agentic work.';
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
 		<meta name="description" content={description} />
-		<meta name="theme-color" content="#f4efe5" />
+		<meta name="theme-color" content="#d9dbd4" />
 		<link rel="canonical" href={canonical} />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta property="og:type" content="website" />
@@ -38,12 +49,21 @@ const socialAlt = 'Endroit — The place layer for agentic work.';
 		<meta name="twitter:description" content={description} />
 		<meta name="twitter:image" content={socialCard} />
 		<meta name="twitter:image:alt" content={socialAlt} />
+		<script is:inline type="application/ld+json" set:html={JSON.stringify(website)} />
 		<title>{title}</title>
 	</head>
 	<body>
-		<a class="skip-link" href="#content">Skip to content</a>
-		<div id="content">
-			<slot />
-		</div>
+		<!--
+		THESIS: Endroit's public surfaces behave as one inspectable bench instrument: each page exposes one bounded responsibility without turning the product into a feature grid.
+		OWN-WORLD: Bench logic-analyzer: warm steel bezel, silkscreen labels, dark graticule screens as bounded inserts, phosphor-green traces, amber trigger accents, red exclusion markers, mono readouts.
+		STORY: The visitor enters through the instrument, inspects one responsibility, follows stable public contracts, and returns to the proof or installation without losing orientation.
+		FIRST VIEWPORT: One compact title plate, one dark readout, and the primary next action remain visible without JavaScript at 320px and above.
+		FORM: Oscilloscope and logic-analyzer bench instrument · pinned Endroit 024 world · seed 35010d6f.
+		FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, and DESIGN.md
+		-->
+		<a class="skip-link" href="#main">Skip to content</a>
+		<BenchHeader current={current} />
+		<slot />
+		<BenchFooter />
 	</body>
 </html>

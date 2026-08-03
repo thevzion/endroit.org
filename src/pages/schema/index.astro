@@ -1,54 +1,39 @@
 ---
-import SiteFooter from '../../components/SiteFooter.astro';
-import SiteHeader from '../../components/SiteHeader.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
 const legacy = ['home', 'desk', 'asset', 'runtime', 'artifact'];
-const current = ['home', 'desk', 'member', 'equipment', 'site', 'route', 'runtime', 'artifact'];
+const v7 = ['home', 'desk', 'member', 'equipment', 'site', 'route', 'runtime', 'artifact'];
+const v8 = ['route'];
 ---
 
-<BaseLayout
-	title="Schema contracts | Endroit"
-	description="Stable public addresses for Endroit's historical and current JSON Schema contracts."
-	path="/schema/"
->
-	<SiteHeader />
-	<main>
-		<header class="learn-hero shell">
-			<p class="eyebrow">Public contracts</p>
-			<h1>Versioned addresses. Offline validation.</h1>
-			<p>
-				Git owns each contract, the npm package carries it for offline validation and this domain gives it a stable public address.
-				Published schema bytes never change in place.
-			</p>
-		</header>
+<BaseLayout title="Schema contracts | Endroit" description="Stable public addresses for Endroit's immutable JSON Schema contracts." path="/schema/" current="schema">
+	<main id="main" class="page-instrument">
+		<section class="module page-hero page-hero-compact" aria-labelledby="schema-title">
+			<div>
+				<p class="module-plate">CONTRACT RACK · SCHEMA / 01</p>
+				<h1 id="schema-title">Versioned addresses. Immutable bytes.</h1>
+				<p class="page-lede">Git owns each contract. The npm package carries it for offline validation. This domain gives the same bytes a stable public address.</p>
+			</div>
+			<figure class="screen page-screen schema-screen">
+				<div class="screen-face checksum-readout"><span>PATH</span><strong>/schema/vN/name.json</strong><span>MUTATION</span><strong>REFUSED</strong><span>PROOF</span><strong>SHA-256</strong></div>
+				<figcaption>No mutable <code>latest</code> alias. Published schema bytes never change in place.</figcaption>
+			</figure>
+		</section>
 
-		<article class="learn-content shell">
-			<section>
-				<p class="section-index">01 · Endroit 0.8</p>
-				<h2>Current v7 contracts</h2>
-				<p>Endroit 0.8 uses only these versioned identifiers. There is no mutable <code>latest</code> alias.</p>
-				<ul>
-					{current.map((name) => <li><a href={`/schema/v7/${name}.json`}><code>{`/schema/v7/${name}.json`}</code></a></li>)}
-				</ul>
-			</section>
+		<section class="module" aria-labelledby="schema-rack">
+			<p class="module-plate">MODULE · PUBLIC CONTRACTS</p>
+			<h2 id="schema-rack">Select an address. Inspect the contract.</h2>
+			<div class="schema-racks">
+				<article><p class="card-signal signal-live">V7 · ENDROIT 0.8</p><h3>Current baseline</h3><ul>{v7.map((name) => <li><a href={`/schema/v7/${name}.json`}><code>{name}.json</code></a></li>)}</ul></article>
+				<article><p class="card-signal">V8 · ROUTE CONTRACT</p><h3>Published next contract</h3><ul>{v8.map((name) => <li><a href={`/schema/v8/${name}.json`}><code>{name}.json</code></a></li>)}</ul></article>
+				<article><p class="card-signal">V6 · HISTORICAL</p><h3>Preserved 0.7 bytes</h3><ul>{legacy.map((name) => <li><a href={`/schema/${name}.json`}><code>{name}.json</code></a></li>)}</ul></article>
+			</div>
+		</section>
 
-			<section>
-				<p class="section-index">02 · Historical</p>
-				<h2>Endroit 0.7 contracts</h2>
-				<p>These unversioned URLs preserve the exact bytes published with <code>@endroit/cli@0.7.0-alpha.0</code>.</p>
-				<ul>
-					{legacy.map((name) => <li><a href={`/schema/${name}.json`}><code>{`/schema/${name}.json`}</code></a></li>)}
-				</ul>
-			</section>
-
-			<section>
-				<p class="section-index">03 · Provenance</p>
-				<h2>Inspect the hashes</h2>
-				<p>The generated manifest records the source and SHA-256 of every served contract.</p>
-				<p><a class="button button-secondary" href="/schema/manifest.json">Open the schema manifest</a></p>
-			</section>
-		</article>
+		<section class="module page-terminal" aria-labelledby="manifest-title">
+			<p class="module-plate">PROVENANCE · SHA-256</p>
+			<h2 id="manifest-title">Every served contract carries its source and digest.</h2>
+			<a class="action action-primary" href="/schema/manifest.json">Open the manifest</a>
+		</section>
 	</main>
-	<SiteFooter />
 </BaseLayout>

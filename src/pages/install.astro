@@ -1,20 +1,32 @@
 ---
-import { Content } from '../content/install.md';
-import SiteFooter from '../components/SiteFooter.astro';
-import SiteHeader from '../components/SiteHeader.astro';
+import * as installContract from '../content/install.md';
 import BaseLayout from '../layouts/BaseLayout.astro';
+
+const contractHtml = await installContract.compiledContent();
+const renderedContract = contractHtml.replace(/^<h1 id="install-endroit">Install Endroit<\/h1>\s*/, '');
+if (renderedContract === contractHtml) throw new Error('The owned install title could not be separated from the rendered contract.');
 ---
 
 <BaseLayout
 	title="Install Endroit"
 	description="Agent-led, CLI-backed and human-approved installation for Endroit 0.8."
 	path="/install/"
+	current="install"
 >
-	<SiteHeader />
-	<main class="publication-landing">
-		<div class="page-shell publication-copy install-contract">
-			<Content />
-		</div>
+	<main id="main" class="page-instrument">
+		<section class="module page-hero page-hero-compact" aria-labelledby="install-title">
+			<div>
+				<p class="module-plate">PROCEDURE · INSTALL / 01</p>
+				<h1 id="install-title">Bring the framework to the workplace you already have.</h1>
+				<p class="page-lede">The human chooses the root and approves the plan. The agent inspects, proposes and installs. The resulting Home stays plain-file, local-first and inspectable.</p>
+			</div>
+			<figure class="screen page-screen install-screen">
+				<div class="screen-face install-readout"><span>HUMAN</span><b>approves</b><span>AGENT</span><b>installs</b><span>HOME</span><b>persists</b></div>
+				<figcaption>No daemon. No hosted account. Existing repositories stay sovereign.</figcaption>
+			</figure>
+		</section>
+		<article class="module publication-copy install-contract bench-prose">
+			<Fragment set:html={renderedContract} />
+		</article>
 	</main>
-	<SiteFooter />
 </BaseLayout>

@@ -1,0 +1,97 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-04T00:58:50+02:00",
+  "title": "Design System: Endroit",
+  "extensions": {
+    "colorMeta": {
+      "phosphor": { "role": "primary", "displayName": "Phosphor Signal", "canonical": "#6fe6a1", "tonalRamp": ["#092519", "#123b28", "#1e5639", "#2f754d", "#439661", "#59bd7e", "#6fe6a1", "#d9f9e5"] },
+      "amber-trigger": { "role": "secondary", "displayName": "Amber Trigger", "canonical": "#e2a43e", "tonalRamp": ["#291b05", "#48310b", "#694913", "#8e641d", "#b78129", "#d99a38", "#e2a43e", "#f8e6c5"] },
+      "alarm": { "role": "tertiary", "displayName": "Alarm Red", "canonical": "#b23920", "tonalRamp": ["#260905", "#45110a", "#681b10", "#8b2818", "#b23920", "#d85b41", "#eb8f7d", "#f8ddd7"] },
+      "warm-steel": { "role": "neutral", "displayName": "Warm Steel", "canonical": "#d9dbd4", "tonalRamp": ["#222420", "#3c3f39", "#5c5f58", "#7e8179", "#a0a39b", "#c1c4bc", "#d9dbd4", "#f4f5f0"] },
+      "silkscreen": { "role": "neutral", "displayName": "Silkscreen Ink", "canonical": "#22272a", "tonalRamp": ["#101214", "#22272a", "#3a4043", "#555c5f", "#737b7e", "#9ba1a3", "#c7cbcc", "#f2f3f3"] },
+      "screen": { "role": "neutral", "displayName": "Graticule Screen", "canonical": "#0e1512", "tonalRamp": ["#08100c", "#0e1512", "#1c2922", "#35453d", "#53665c", "#7d8d84", "#b1bbb5", "#eef1ef"] }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Bench Declaration", "purpose": "One dominant first-viewport claim." },
+      "body": { "displayName": "Plain Consequence", "purpose": "Mechanism and consequence in direct language." },
+      "label": { "displayName": "Instrument Readout", "purpose": "Signals, states, paths, maturity and provenance." }
+    },
+    "shadows": [
+      { "name": "screen-inset", "value": "inset 0 6px 24px rgba(0, 0, 0, 0.55)", "purpose": "Bounded depth inside graticule screens only." },
+      { "name": "phosphor-signal", "value": "0 0 8px rgba(111, 230, 161, 0.35)", "purpose": "Energy halo on active traces only." }
+    ],
+    "motion": [
+      { "name": "state-fast", "value": "160ms ease-out", "purpose": "Button and resolver state changes." },
+      { "name": "trace-sweep", "value": "7s linear infinite", "purpose": "Single hero-screen calibration sweep; disabled for reduced motion." }
+    ],
+    "breakpoints": [
+      { "name": "stack", "value": "960px" },
+      { "name": "compact", "value": "640px" },
+      { "name": "floor", "value": "320px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Action",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The explicit next human action.",
+      "html": "<button class=\"ds-action-primary\">RUN THE PROOF</button>",
+      "css": ".ds-action-primary { min-height: 3rem; padding: .7rem 1.3rem; border: 1.5px solid var(--silk, #22272a); border-radius: 0; background: var(--silk, #22272a); color: var(--phos, #6fe6a1); font: 800 .8rem/1.4 Helvetica, Arial, sans-serif; letter-spacing: .07em; text-transform: uppercase; } .ds-action-primary:hover { background: #000; } .ds-action-primary:focus-visible { outline: 3px solid var(--focus, #14507a); outline-offset: 3px; }"
+    },
+    {
+      "name": "Secondary Action",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "A bounded alternative without competing for primary emphasis.",
+      "html": "<button class=\"ds-action-secondary\">VIEW THE SOURCE</button>",
+      "css": ".ds-action-secondary { min-height: 3rem; padding: .7rem 1.3rem; border: 1.5px solid var(--silk, #22272a); border-radius: 0; background: transparent; color: var(--silk, #22272a); font: 800 .8rem/1.4 Helvetica, Arial, sans-serif; letter-spacing: .07em; text-transform: uppercase; } .ds-action-secondary:hover { background: var(--silk, #22272a); color: var(--bezel, #d9dbd4); } .ds-action-secondary:focus-visible { outline: 3px solid var(--focus, #14507a); outline-offset: 3px; }"
+    },
+    {
+      "name": "Bench Navigation",
+      "kind": "nav",
+      "description": "Persistent orientation across one public instrument.",
+      "html": "<nav class=\"ds-nav\"><a href=\"#\">INSTRUMENT</a><a class=\"ds-current\" href=\"#\">HOMES</a><a href=\"#\">ROADMAP</a></nav>",
+      "css": ".ds-nav { display: flex; gap: 1.5rem; padding: .8rem 1.25rem; border-bottom: 2px solid #22272a; background: #d9dbd4; } .ds-nav a { color: #4c534f; font: 700 .76rem/1.4 Helvetica, Arial, sans-serif; letter-spacing: .08em; text-decoration: none; } .ds-nav a:hover, .ds-nav a:focus-visible { color: #22272a; } .ds-nav .ds-current { color: #22272a; text-decoration: underline; text-decoration-color: #7c5410; text-decoration-thickness: 2px; text-underline-offset: .2em; }"
+    },
+    {
+      "name": "Graticule Screen",
+      "kind": "custom",
+      "refersTo": "screen",
+      "description": "A bounded proof surface for traces, states and addresses.",
+      "html": "<figure class=\"ds-screen\"><div><span>SIGNAL</span><b>RESOLVED</b></div><figcaption>Plain-language interpretation of the readout.</figcaption></figure>",
+      "css": ".ds-screen { margin: 0; } .ds-screen div { display: grid; gap: .75rem; padding: 1.4rem 1.5rem; border: 2px solid #263028; border-radius: 6px; background: repeating-linear-gradient(to right, rgba(111,230,161,.05) 0 1px, transparent 1px 10%), #0e1512; box-shadow: inset 0 6px 24px rgba(0,0,0,.55); color: #6fe6a1; font: 700 .78rem/1.5 ui-monospace, monospace; } .ds-screen figcaption { margin-top: .9rem; color: #4c534f; font: 400 .86rem/1.6 Helvetica, Arial, sans-serif; }"
+    },
+    {
+      "name": "Calibration Record",
+      "kind": "custom",
+      "description": "Native disclosure for claim provenance and maturity.",
+      "html": "<details class=\"ds-cal\"><summary><span></span>CAL / PROOF <b>CURRENT</b></summary><p>Mechanism, proof, source and action remain inspectable.</p></details>",
+      "css": ".ds-cal { border: 1.5px dashed #a7aba0; background: #f4f5f0; color: #22272a; font-family: ui-monospace, monospace; } .ds-cal summary { display: flex; align-items: center; gap: .7rem; padding: .55rem .9rem; cursor: pointer; font-size: .72rem; letter-spacing: .1em; } .ds-cal summary span { width: .6rem; height: .6rem; border: 1.5px solid #7c5410; border-radius: 50%; } .ds-cal[open] summary span { background: #e2a43e; } .ds-cal summary b { margin-left: auto; padding: .14rem .5rem; background: #1f6f43; color: #fff; font-size: .6rem; } .ds-cal p { margin: 0; padding: .9rem 1rem; border-top: 1px dashed #a7aba0; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Bench Logic-Analyzer",
+    "overview": "Endroit presents itself as a precise instrument built by people who care how software is made. Warm steel is the work surface; silkscreen typography labels each bounded responsibility; dark graticule screens make system behavior observable rather than merely asserted.",
+    "keyCharacteristics": [
+      "One warm work surface with bounded dark readouts.",
+      "Meaning expressed through traces, latches, states, addresses and exclusions.",
+      "Dense technical labels paired with plain-language consequences.",
+      "Static-first behavior with full no-JavaScript reading."
+    ],
+    "rules": [
+      { "name": "Signal Has Meaning", "body": "Never use phosphor, amber or alarm red as arbitrary decoration.", "section": "colors" },
+      { "name": "Readout Is Not the Message", "body": "Monospace labels identify a signal or contract; they do not replace explanatory prose.", "section": "typography" },
+      { "name": "Bounded Insert", "body": "Dark material appears only as a screen, readout or control—not as the page background.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do make inclusion and exclusion equally inspectable.",
+      "Do preserve keyboard completion, visible focus, AA contrast, reduced motion and full no-JavaScript reading."
+    ],
+    "donts": [
+      "Don't turn the Site into an IDE, fake terminal, decorative dashboard or all-dark developer template.",
+      "Don't add ornamental glows or accent colors without a semantic state.",
+      "Don't hide product claims behind interaction."
+    ]
+  }
+}

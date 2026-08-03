@@ -1,0 +1,30 @@
+{
+  "referenceArtifact": {
+    "site": "interface-lab",
+    "freezeCommit": "b0c4bf23f7d9ee882619a2d3c39049760feb2104",
+    "manifestBaseCommit": "f4d7e154407ad26d8a88461aa9f5d38c7a24599e",
+    "path": "src/experiments/endroit.org/iterations/024-context-that-knows-its-place",
+    "manifest": "evidence/selected-landings-freeze/manifest.json",
+    "sourceHashes": {
+      "PRODUCT.md": "485e4a045ac82cb04d65dc0b1070cd8ec2ab80cbbc00576017960479762542a3",
+      "Page.astro": "5b04f296ceb7d3299273a54c24cb40842df7f100696c880ba242414202de7e2b",
+      "instrument.mjs": "18bdd4b0d3081815cf7e54b8974a1c902ec524e7c375072c879603d48b9a8089",
+      "bench.css": "dfb2e25b44c7bdbc3fc2d210cb8e21663313129f6cf657ccc239e5c965de530f",
+      "DESIGN.md": "77c5093c56fac2a94a34e4a5834d4449f54075f3c91042c4238345b570ed3236",
+      "CalTag.astro": "12baa63457f75c073c4e101ecfb3e1c7127b46b6a34b7e8379d64e50cc7c46c2",
+      "candidate.test.mjs": "b720010b668447d2e54b99a2eed209efcc2b088cd663ed94cccc19eafd39cc26"
+    }
+  },
+  "productionDeltas": [
+    "Remove the Interface Lab frame and noindex directive.",
+    "Resolve component, data, stylesheet, navigation and asset paths for the production Site.",
+    "Add production canonical, social and WebSite JSON-LD metadata.",
+    "Replace experiment-only footer language with production source, roadmap and license links.",
+    "Extend the frozen bench stylesheet only for secondary public routes and shared production chrome.",
+    "Record the production direction contract and exact reference provenance."
+  ],
+  "unchangedReferenceModules": [
+    "src/lib/instrument.mjs",
+    "src/components/CalTag.astro"
+  ]
+}

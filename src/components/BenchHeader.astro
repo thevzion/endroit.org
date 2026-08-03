@@ -1,0 +1,23 @@
+---
+interface Props {
+	current?: 'home' | 'homes' | 'install' | 'roadmap' | 'schema';
+}
+
+const { current } = Astro.props;
+const links = [
+	{ id: 'home', href: '/', label: 'Instrument' },
+	{ id: 'homes', href: '/homes/', label: 'Homes' },
+	{ id: 'roadmap', href: '/roadmap/', label: 'Roadmap' },
+	{ id: 'schema', href: '/schema/', label: 'Schemas' },
+] as const;
+---
+
+<header class="bench-bar page-bench-bar">
+	<a class="brand" href="/" aria-label="Endroit home">endroit</a>
+	<nav aria-label="Primary">
+		{links.map((link) => (
+			<a href={link.href} aria-current={current === link.id ? 'page' : undefined}>{link.label}</a>
+		))}
+	</nav>
+	<a class="bar-install" href="/install/" aria-current={current === 'install' ? 'page' : undefined}>Install</a>
+</header>
