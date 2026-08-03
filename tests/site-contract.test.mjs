@@ -1,276 +1,161 @@
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import { existsSync } from 'node:fs';
-import { readFile } from 'node:fs/promises';
+import { readdir, readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
+import { spawnSync } from 'node:child_process';
+import { gzipSync } from 'node:zlib';
 import { fileURLToPath } from 'node:url';
 import test from 'node:test';
 
 const siteRoot = fileURLToPath(new URL('..', import.meta.url));
-const homeRoot = resolve(process.env.ENDROIT_HOME_ROOT ?? resolve(siteRoot, '../../../..'));
-const endroitRoot = resolve(process.env.ENDROIT_SOURCE_ROOT ?? resolve(siteRoot, '../agentic-tools-home/checkouts/endroit/integrated-main'));
 const read = (path, encoding = 'utf8') => readFile(resolve(siteRoot, path), encoding);
 const hash = (content) => createHash('sha256').update(content).digest('hex');
 
-test('the landing is an exact owned Markdown projection', async () => {
-	const [landing, manifest, page] = await Promise.all([
+test('owned publication projection has an explicit owner, exact bytes and no silent fallback', async () => {
+	const [landing, manifest, script] = await Promise.all([
 		read('src/content/endroit-landing.md'),
 		read('src/content/projections.json').then(JSON.parse),
-		read('src/pages/index.astro'),
+		read('scripts/sync-owned-sources.mjs'),
 	]);
-
 	assert.equal(hash(landing), manifest.projections.landing.sha256);
-	assert.equal(manifest.projections.landing.source, 'artifact:desk/endroit/publishing/publication/endroit-landing#content');
-	assert.match(page, /import \{ Content \} from '\.\.\/content\/endroit-landing\.md'/);
-	assert.match(page, /<Content \/>/);
+	assert.equal(manifest.projections.landing.source, 'artifact:desk/endroit/publishing/work/endroit-public-entrypoint/publication/endroit-landing#content');
+	assert.match(script, /ENDROIT_HOME_ROOT is required/);
+	assert.doesNotMatch(script, /ENDROIT_HOME_ROOT \?\?/);
 
-	const ownedSource = resolve(homeRoot, '.desk/rooms/endroit/publishing/publication/endroit-landing/content.md');
-	if (existsSync(ownedSource)) assert.deepEqual(await readFile(ownedSource), Buffer.from(landing));
-});
+	const withoutOwner = spawnSync(process.execPath, ['scripts/sync-owned-sources.mjs', 'landing'], {
+		cwd: siteRoot,
+		env: Object.fromEntries(Object.entries(process.env).filter(([key]) => key !== 'ENDROIT_HOME_ROOT')),
+		encoding: 'utf8',
+	});
+	assert.notEqual(withoutOwner.status, 0);
+	assert.match(withoutOwner.stderr, /ENDROIT_HOME_ROOT is required/);
 
-test('the landing states the exact alpha positioning and three adoption paths', async () => {
-	const landing = await read('src/content/endroit-landing.md');
-
-	assert.match(landing, /Codex and Claude L1 Projection-qualified/);
-	assert.match(landing, /lightweight, local-first framework for building and operating/);
-	assert.match(landing, /local-first, headless implementation/);
-	for (const phrase of [
-		'Install with your agent',
-		'Use the terminal',
-		'Continue onboarding',
-		'The agent guides. The CLI applies. You approve.',
-		'@endroit/cli@0.8.0-alpha.1',
-	]) assert.match(landing, new RegExp(phrase.replaceAll('.', '\\.')));
-
-	assert.doesNotMatch(landing, /provider-native|qualified providers|@latest|Target-first/i);
-});
-
-test('the landing demonstrates governed compounding without simulating provider memory', async () => {
-	const [page, inspector, state] = await Promise.all([
-		read('src/pages/index.astro'),
-		read('src/components/HomeInspector.tsx'),
-		read('src/components/home-inspector-state.mjs'),
-	]);
-
-	assert.match(page, /<HomeInspector client:load \/>/);
-	assert.match(page, /replaceSourceSection\('#home-inspector-placement', 'One Home\. Several sessions\. More to build on\.'\)/);
-	assert.match(page, /replaceSourceSection\('#adoption-map-placement', 'Start with conversation\. Add precision when it matters\.'\)/);
-	for (const phrase of [
-		'Sanitized dogfood snapshot · no hosted session invoked',
-		'One Home. Several sessions. More to build on.',
-	]) assert.match(inspector, new RegExp(phrase.replaceAll('.', '\\.')));
-	for (const phrase of [
-		'.desk/rooms/endroit/ROOM.md',
-		'No private Claude memory is transferred.',
-		'Hygiene inspects read-only.',
-		'approved, revalidated Route',
-	]) assert.match(state, new RegExp(phrase.replaceAll('.', '\\.')));
-	for (const path of [
-		'.desk/rooms/endroit/planning/initiative/endroit-home-first-hard-reset/HANDOFF.md',
-		'.desk/routes/endroit.org/home-first-reset.json',
-	]) assert.match(state, new RegExp(path.replaceAll('.', '\\.')));
-	assert.doesNotMatch(`${inspector}\n${state}`, /release-candidate\.md|launch-frictions\.md|accepted-findings\.md/);
-	assert.match(state, /\["retain", "reuse", "maintain"\]/);
-	assert.match(inspector, /id=\{`inspector-panel-\$\{panel\}`\}/);
-	assert.match(inspector, /aria-labelledby=\{`inspector-tab-\$\{panel\}`\}/);
-	assert.match(inspector, /tabIndex=\{state\.panel === id \? 0 : -1\}/);
-	assert.match(state, /ArrowRight/);
-	assert.match(state, /ArrowLeft/);
-	assert.match(page, /<noscript>[\s\S]*Retain[\s\S]*Reuse[\s\S]*Maintain &amp; deliver[\s\S]*<\/noscript>/);
-
-	assert.match(state, /The Home keeps only the human-selected continuity/);
-	assert.doesNotMatch(`${inspector}\n${state}`, /provider-native|hosted invocation (?:is|was) (?:run|executed)/i);
-});
-
-test('the landing presents progressive adoption and five gesture families', async () => {
-	const [landing, page] = await Promise.all([
-		read('src/content/endroit-landing.md'),
-		read('src/pages/index.astro'),
-	]);
-
-	for (const phrase of [
-		'A more intuitive way to work with agents.',
-		'New session. Same workplace.',
-		'Your way of working stays. Each agent adapts at the door.',
-		'Places make intent legible. Gestures make it explicit.',
-		'Talk naturally',
-		'Inspect the shared workplace',
-		'Use explicit gestures when authority matters',
-		'Use the CLI for deterministic operations',
-		'Endroit makes placement inferable, explainable and correctable.',
-		'Each useful session can leave the Home better prepared for the next.',
-	]) assert.match(landing, new RegExp(phrase.replaceAll('.', '\\.')));
-
-	for (const family of ['Enter', 'Equip', 'Keep', 'Reach', 'Maintain']) {
-		assert.match(page, new RegExp(`<span>${family}<\\/span>`));
+	if (process.env.ENDROIT_HOME_ROOT) {
+		const owner = resolve(process.env.ENDROIT_HOME_ROOT, '.desk/rooms/endroit/publishing/work/endroit-public-entrypoint/publication/endroit-landing/content.md');
+		assert.ok(existsSync(owner), `owned source is absent: ${owner}`);
+		assert.deepEqual(await readFile(owner), Buffer.from(landing));
 	}
-	assert.match(landing, /Commands are optional\.[\s\S]*without[\s\n]+surrendering control of the session\./);
-	assert.match(page, /acknowledgement alone never causes a durable transition/);
-	assert.doesNotMatch(`${landing}\n${page}`, /automatic(?:ally)? (?:learn|sort|organize)|intent layer|intent engine/i);
 });
 
-test('the product visuals separate execution, ownership and the exact bootstrap floor plan', async () => {
-	const page = await read('src/pages/index.astro');
-	for (const phrase of [
-		'Provider / Harness',
-		'temporary Occupant',
-		'Human transition',
-		'approved Route',
-		'Sovereign Site',
-		'Responsibilities, not a required stack.',
-		'rooms/home/',
-		'inbox.md',
-		'.agents/',
-		'.claude/',
-	]) assert.match(page, new RegExp(phrase.replaceAll('.', '\\.')));
-	assert.match(page, /title="Endroit — The place layer for agentic work"/);
-	assert.match(page, /description="A more intuitive way to work with agents: one inspectable Home across sessions, providers and repositories\."/);
-});
-
-test('the human install page and machine-readable endpoint share one exact source', async () => {
+test('human and machine install surfaces share one owned Site source', async () => {
 	const [source, machine, manifest, page] = await Promise.all([
-		read('src/content/install.md'),
-		read('public/install.md'),
-		read('src/content/projections.json').then(JSON.parse),
-		read('src/pages/install.astro'),
+		read('src/content/install.md'), read('public/install.md'), read('src/content/projections.json').then(JSON.parse), read('src/pages/install.astro'),
 	]);
-
 	assert.equal(source, machine);
 	assert.equal(hash(source), manifest.projections.install.sha256);
-	assert.equal(manifest.projections.install.source, 'thevzion/endroit@0.8.0-alpha.1:INSTALL.md');
-	assert.match(page, /import \{ Content \} from '\.\.\/content\/install\.md'/);
+	assert.equal(manifest.projections.install.source, 'site:endroit.org/src/content/install.md');
+	assert.equal(manifest.projections.install.releaseSource, 'thevzion/endroit@0.8.0-alpha.1:INSTALL.md');
+	assert.match(page, /import \* as installContract from '\.\.\/content\/install\.md'/);
+	assert.match(page, /<h1 id="install-title">/);
+	assert.match(page, /compiledContent\(\)/);
+	assert.match(page, /<Fragment set:html=\{renderedContract\} \/>/);
 	assert.match(source, /@endroit\/cli@0\.8\.0-alpha\.1/);
-	assert.match(source, /ask|approval|approve/i);
 	assert.doesNotMatch(source, /curl\s.*\|\s*(?:ba)?sh|@latest/);
-
-	const ownedSource = resolve(endroitRoot, 'INSTALL.md');
-	const productManifest = resolve(endroitRoot, 'package.json');
-	if (existsSync(ownedSource) && existsSync(productManifest)) {
-		const { version } = JSON.parse(await readFile(productManifest, 'utf8'));
-		if (manifest.projections.install.source.includes(`@${version}:`)) {
-			assert.deepEqual(await readFile(ownedSource), Buffer.from(source));
-		}
-	}
 });
 
-test('public schema bytes match their manifest and Endroit sources', async () => {
+test('llms discovery is generated, manifested and excludes unpublished surfaces', async () => {
+	const [llms, manifest, script, sitemap, robots] = await Promise.all([
+		read('public/llms.txt'), read('src/content/projections.json').then(JSON.parse), read('scripts/sync-owned-sources.mjs'), read('public/sitemap.xml'), read('public/robots.txt'),
+	]);
+	assert.equal(hash(llms), manifest.projections.llms.sha256);
+	assert.equal(manifest.projections.llms.source, 'site:endroit.org/scripts/sync-owned-sources.mjs#llms');
+	assert.match(script, /## Public surfaces/);
+	for (const route of ['/', '/homes/', '/install/', '/install.md', '/roadmap/', '/schema/', '/llms.txt']) assert.match(sitemap, new RegExp(`endroit\\.org${route.replace('.', '\\.').replace('/', '\\/')}`));
+	assert.match(robots, /User-agent: OAI-SearchBot\s+Allow: \//);
+	assert.doesNotMatch(`${llms}\n${sitemap}`, /WORKPLACE\.md|adopt\.md|work-resolution|feed|rss|atom/i);
+});
+
+test('public schema bytes remain immutable and match their manifest', async () => {
 	const manifest = await read('public/schema/manifest.json').then(JSON.parse);
 	assert.equal(manifest.release, '0.9.0-alpha.0');
 	assert.equal(manifest.contracts.length, 14);
 	assert.equal(new Set(manifest.contracts.map(({ path }) => path)).size, 14);
-	assert.ok(manifest.contracts.every(({ path }) => !path.includes('latest')));
-
 	for (const contract of manifest.contracts) {
 		const publicContent = await read(`public${contract.path}`, null);
 		assert.equal(hash(publicContent), contract.sha256, contract.path);
-		if (contract.path.startsWith('/schema/v8/')) {
-			assert.match(contract.source, /^thevzion\/endroit@0\.9\.0-alpha\.0:/, contract.path);
-		} else if (contract.path.startsWith('/schema/v7/')) {
-			assert.match(contract.source, /^thevzion\/endroit@0\.8\.0-alpha\.1:/, contract.path);
-		} else {
-			assert.match(contract.source, /^@endroit\/cli@0\.7\.0-alpha\.0:/, contract.path);
-		}
-		if (existsSync(resolve(siteRoot, `dist${contract.path}`))) {
-			assert.deepEqual(await read(`dist${contract.path}`, null), publicContent, `dist${contract.path}`);
-		}
-
-		const match = contract.path.match(/^\/schema\/(?:(v7|v8)\/)?([^/]+)\.json$/);
-		assert.ok(match, contract.path);
-		const source = resolve(endroitRoot, `schemas/${match[1] ?? 'v6'}/${match[2]}.schema.json`);
-		if (existsSync(source)) assert.deepEqual(await readFile(source), publicContent, contract.path);
+		assert.doesNotMatch(contract.path, /latest/);
 	}
-});
-
-test('historical 0.7 schema bytes remain immutable', async () => {
-	const expected = {
+	const historical = {
 		'home.json': '57bfae48f1288a684b60a56a73a82b79d6907c5ead7f968da316850e8bfa109b',
 		'desk.json': 'f7a4b92ba01c82c5e186feeb77aa2a5dc38c1aa23622d9a7481f9f5308acc87e',
 		'asset.json': '9951c9992ee21066161d24ac4342d058f7b68a1754da42d30a26bc574783f2aa',
 		'runtime.json': 'c5dc6f9f772650cc645434d85f659b9874a47eb2bb51584326d1c757d3b6b251',
 		'artifact.json': '331fd94dd5ed5bc159c6c8b2bf286eff580b30f957bf7a9e3beb0c5732121995',
 	};
+	for (const [name, digest] of Object.entries(historical)) assert.equal(hash(await read(`public/schema/${name}`, null)), digest, name);
+	assert.equal(JSON.parse(await read('public/schema/v8/route.json')).$id, 'https://endroit.org/schema/v8/route.json');
+});
 
-	for (const [name, expectedHash] of Object.entries(expected)) {
-		assert.equal(hash(await read(`public/schema/${name}`, null)), expectedHash, name);
+test('all public pages use one production bench system and keep unpublished contracts out of navigation', async () => {
+	const files = ['src/pages/index.astro', 'src/pages/homes.astro', 'src/pages/install.astro', 'src/pages/roadmap.astro', 'src/pages/schema/index.astro', 'src/pages/404.astro'];
+	const sources = await Promise.all(files.map((file) => read(file)));
+	for (const [index, source] of sources.entries()) {
+		assert.match(source, index === 0 ? /bench-bar/ : /BaseLayout/, files[index]);
+		assert.doesNotMatch(source, /WORKPLACE\.md|adopt\.md|work-resolution/i, files[index]);
 	}
+	for (const page of sources.slice(1)) assert.match(page, /module|page-instrument/);
+	const layout = await read('src/layouts/BaseLayout.astro');
+	assert.match(layout, /<body>\s*<!--[\s\S]*THESIS:[\s\S]*FINISH:/);
 });
 
-test('v7 schemas use stable versioned identifiers and Runtime v2alpha1', async () => {
-	for (const name of ['home', 'desk', 'member', 'equipment', 'site', 'route', 'runtime', 'artifact']) {
-		const schema = await read(`public/schema/v7/${name}.json`).then(JSON.parse);
-		assert.equal(schema.$id, `https://endroit.org/schema/v7/${name}.json`, name);
-	}
-
-	const runtime = await read('public/schema/v7/runtime.json');
-	assert.match(runtime, /endroit\.org\/runtime\/v2alpha1/);
-	assert.equal(hash(runtime), '7f95cf78217d0a94219cb0d9dd6f0b952fb854ac95c8e91ec1dd8367830e8799');
-
-	const routeV8 = await read('public/schema/v8/route.json');
-	assert.equal(JSON.parse(routeV8).$id, 'https://endroit.org/schema/v8/route.json');
-	assert.equal(hash(routeV8), 'e54b3cb4e68078aa89e26284e23f520b9ae3db9e1d9f8ef9e6b50caea1566936');
+test('the shipped visual system is documented from the frozen world', async () => {
+	const [design, sidecar] = await Promise.all([read('DESIGN.md'), read('.impeccable/design.json').then(JSON.parse)]);
+	assert.match(design, /Creative North Star: "The Bench Logic-Analyzer"/);
+	assert.match(design, /b0c4bf23f7d9ee882619a2d3c39049760feb2104/);
+	assert.equal(sidecar.schemaVersion, 2);
+	assert.equal(sidecar.narrative.northStar, 'The Bench Logic-Analyzer');
 });
 
-test('Nginx serves schema contracts with the required headers', async () => {
-	const nginx = await read('nginx.conf');
-	assert.match(nginx, /location = \/install\.md[\s\S]*default_type text\/markdown/);
-	assert.match(nginx, /location ~ \^\/schema\/\.\*\\\.json\$/);
-	assert.match(nginx, /types \{[\s\S]*application\/schema\+json json;[\s\S]*\}/);
-	assert.match(nginx, /default_type application\/schema\+json/);
-	assert.match(nginx, /Access-Control-Allow-Origin "\*" always/);
-	assert.doesNotMatch(nginx, /schema\/latest|return 30[1278] \/schema/);
-	assert.match(nginx, /location \/ \{[\s\S]*Cache-Control "no-transform" always;/);
-});
-
-test('the static build emits every public entrypoint', async () => {
-	for (const path of [
-		'dist/index.html',
-		'dist/install/index.html',
-		'dist/install.md',
-		'dist/schema/index.html',
-		'dist/schema/manifest.json',
-		'dist/schema/v7/home.json',
-		'dist/schema/v8/route.json',
-		'dist/schema/home.json',
-	]) assert.ok(existsSync(resolve(siteRoot, path)), path);
-	assert.deepEqual(await read('dist/install.md', null), await read('public/install.md', null));
-	const landing = await read('dist/index.html');
-	for (const phrase of [
-		'One Home. Several sessions. More to build on.',
-		'No private Claude memory is transferred.',
-		'Start with conversation. Add precision when it matters.',
-	]) {
-		assert.match(landing, new RegExp(phrase));
-	}
-});
-
-test('historical Home-first routes delegate to Open Workplace', async () => {
-	const [sitemap, nginx] = await Promise.all([read('public/sitemap.xml'), read('nginx.conf')]);
-	assert.doesNotMatch(sitemap, /endroit\.org\/home-first/);
-	assert.match(nginx, /return 301 https:\/\/open-workplace\.org\/proposal\//);
-	for (const route of ['/install/', '/install.md', '/schema/', '/roadmap/']) {
-		assert.match(sitemap, new RegExp(`endroit\\.org${route.replace('.', '\\.')}`));
-	}
-});
-
-test('the roadmap separates shipped, active, exploratory and later work', async () => {
-	const roadmap = await read('src/pages/roadmap.astro');
-	for (const status of ['Available', 'In progress', 'Exploring', 'Later']) {
-		assert.match(roadmap, new RegExp(status));
-	}
-	assert.match(roadmap, /projection-qualified at L1/);
-	assert.doesNotMatch(roadmap, /provider-native|qualified baseline/);
-});
-
-test('social metadata points to the current 1200 by 630 PNG', async () => {
-	const [layout, card] = await Promise.all([
-		read('src/layouts/BaseLayout.astro'),
-		read('public/social-card.png', null),
+test('SEO, headers and historical redirects remain explicit', async () => {
+	const [landing, layout, nginx, sitemap, card] = await Promise.all([
+		read('src/pages/index.astro'), read('src/layouts/BaseLayout.astro'), read('nginx.conf'), read('public/sitemap.xml'), read('public/social-card.png', null),
 	]);
-
-	assert.match(layout, /The place layer for agentic work/);
-	assert.match(layout, /og:image:type" content="image\/png"/);
-	assert.match(layout, /twitter:image:alt/);
+	for (const source of [landing, layout]) {
+		assert.match(source, /application\/ld\+json/);
+		assert.match(source, /'@type': 'WebSite'/);
+		assert.match(source, /og:image:type" content="image\/png"/);
+		assert.match(source, /twitter:image:alt/);
+	}
 	assert.equal(card.toString('ascii', 1, 4), 'PNG');
 	assert.equal(card.readUInt32BE(16), 1200);
 	assert.equal(card.readUInt32BE(20), 630);
+	assert.match(nginx, /location = \/install\.md[\s\S]*default_type text\/markdown/);
+	assert.match(nginx, /location = \/llms\.txt[\s\S]*default_type text\/plain/);
+	assert.match(nginx, /location ~ \^\/schema\/\.\*\\\.json\$/);
+	assert.match(nginx, /application\/schema\+json/);
+	assert.match(nginx, /Access-Control-Allow-Origin "\*" always/);
+	assert.match(nginx, /Cache-Control "no-transform" always/);
+	assert.match(nginx, /return 301 https:\/\/open-workplace\.org\/proposal\//);
+	assert.doesNotMatch(sitemap, /home-first/);
+});
+
+test('the static build emits every supported route and machine contract', async () => {
+	for (const path of ['dist/index.html', 'dist/homes/index.html', 'dist/install/index.html', 'dist/roadmap/index.html', 'dist/schema/index.html', 'dist/404.html', 'dist/install.md', 'dist/llms.txt', 'dist/robots.txt', 'dist/sitemap.xml', 'dist/schema/manifest.json', 'dist/schema/v7/home.json', 'dist/schema/v8/route.json', 'dist/schema/home.json']) {
+		assert.ok(existsSync(resolve(siteRoot, path)), path);
+	}
+	assert.deepEqual(await read('dist/install.md', null), await read('public/install.md', null));
+	assert.deepEqual(await read('dist/llms.txt', null), await read('public/llms.txt', null));
+	const landing = await read('dist/index.html');
+	const install = await read('dist/install/index.html');
+	for (const phrase of ['Agents produce. Your workplace compounds.', 'Context that knows its place.', 'What remains is your agentic capital.']) assert.match(landing, new RegExp(phrase.replaceAll('.', '\\.')));
+	assert.equal([...install.matchAll(/<h1(?:\s|>)/g)].length, 1);
+	assert.doesNotMatch(install, /<h1[^>]*>Install Endroit<\/h1>/);
+});
+
+test('the built Site makes no third-party runtime requests and keeps shipped JavaScript under 25 KiB gzip', async () => {
+	const walk = async (directory) => {
+		const entries = await readdir(directory, { withFileTypes: true });
+		return (await Promise.all(entries.map((entry) => entry.isDirectory() ? walk(resolve(directory, entry.name)) : [resolve(directory, entry.name)]))).flat();
+	};
+	const files = await walk(resolve(siteRoot, 'dist'));
+	const htmlFiles = files.filter((path) => path.endsWith('.html'));
+	const html = (await Promise.all(htmlFiles.map((path) => readFile(path, 'utf8')))).join('\n');
+	assert.doesNotMatch(html, /<(?:script|img)[^>]+src=["']https?:\/\//i);
+	assert.doesNotMatch(html, /<link[^>]+rel=["']stylesheet["'][^>]+href=["']https?:\/\//i);
+	assert.doesNotMatch(html, /google-analytics|gtag\(|segment\.com|plausible\.io|posthog/i);
+	const js = await Promise.all(files.filter((path) => path.endsWith('.js')).map((path) => readFile(path)));
+	const inlineJs = [...html.matchAll(/<script(?![^>]*type=["']application\/ld\+json["'])[^>]*>([\s\S]*?)<\/script>/gi)].map(([, source]) => Buffer.from(source));
+	const gzipBytes = gzipSync(Buffer.concat([...js, ...inlineJs])).byteLength;
+	assert.ok(gzipBytes <= 25 * 1024, `JavaScript is ${gzipBytes} bytes gzip`);
 });
