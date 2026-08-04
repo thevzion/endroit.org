@@ -29,7 +29,7 @@
     "Replace experiment-only footer language with production source, roadmap and license links.",
     "Extend the frozen bench stylesheet only for secondary public routes and shared production chrome.",
     "Record the production direction contract and exact reference provenance.",
-    "Qualify the open-workplace/0.1 target against the current incompatible open-workplace/0.2-draft Protocol.",
+    "Align the public claims with the current open-workplace/0.2-draft Protocol.",
     "Move owned landing composition and copy into the Site-owned Surface Artifact without redesigning the native Astro renderer.",
     "Render the accepted, honestly bootstrapping Endroit Discord destination."
   ],
@@ -45,13 +45,13 @@
     "sources": [
       {
         "site": "endroit",
-        "commit": "c4f76c3e45ccae9c07a46a6a9bd6a401631d02ee",
+        "commit": "32dda906242e2dc0e8746a3b35eeff9152ef2d2b",
         "path": "PROFILE.md",
         "projection": "public/profile.md"
       },
       {
         "site": "open-workplace",
-        "commit": "ee7b693b69f175f5570f6b81fea7b838a08abee0",
+        "commit": "2f484206b8c3a7cd0f55ada455222e122daf8924",
         "path": "PROTOCOL.md",
         "sha256": "0388741005eb318e920cd8ee5407e1f81e16c0d8d547212affa3ceb76ea31a70"
       }
@@ -59,11 +59,11 @@
     "manifests": [
       {
         "path": "public/schema/manifest.json",
-        "sha256": "6a91ef4eaa423ccc980a3d1e816640a8174cb0f6e6c5376414baaf9c01aea0f4"
+        "sha256": "2124c1ce3bcc3b7b85ac34b4f71f40e4240a239a50c7a729eb6ba52b9eef0147"
       },
       {
         "path": "src/content/projections.json",
-        "sha256": "3d4fa9406ed743bf1e1b8304c4a5b43dd32cb879c7a7f7e4000873278d8f38b7"
+        "sha256": "e420f41c89104dc6fd59ecdbb3a133fb904730769ad2813621dda83d6447a8bc"
       },
       {
         "path": "src/content/release-destinations.json",

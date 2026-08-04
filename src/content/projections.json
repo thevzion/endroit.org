@@ -1,8 +1,8 @@
 {
   "projections": {
     "install": {
-      "source": "site:endroit@c4f76c3e45ccae9c07a46a6a9bd6a401631d02ee:INSTALL.md",
-      "sourceCommit": "c4f76c3e45ccae9c07a46a6a9bd6a401631d02ee",
+      "source": "site:endroit@32dda906242e2dc0e8746a3b35eeff9152ef2d2b:INSTALL.md",
+      "sourceCommit": "32dda906242e2dc0e8746a3b35eeff9152ef2d2b",
       "sourceSha256": "b9bc091e34f109b817b96263e236715e5e272182fb5286c56fdb788805339bb5",
       "sha256": "586827939a157b294ce14f7ca5df3409b2ab9a4e3520ce5a63fa8a8301cb6a7a",
       "transform": "normalize raw ADOPT.md link to /adopt.md"
@@ -12,34 +12,34 @@
       "sha256": "afef398da1d9fb2a49bc83e2feba577513a2cb223557d80b1a43cc8296874fe2"
     },
     "adopt": {
-      "source": "site:endroit@c4f76c3e45ccae9c07a46a6a9bd6a401631d02ee:ADOPT.md",
-      "sourceCommit": "c4f76c3e45ccae9c07a46a6a9bd6a401631d02ee",
+      "source": "site:endroit@32dda906242e2dc0e8746a3b35eeff9152ef2d2b:ADOPT.md",
+      "sourceCommit": "32dda906242e2dc0e8746a3b35eeff9152ef2d2b",
       "sourceSha256": "63fc58aa4cb08e9f13e005e4c01290202d574ccf8036b7ad8acf12d7aaaba997",
       "sha256": "63fc58aa4cb08e9f13e005e4c01290202d574ccf8036b7ad8acf12d7aaaba997"
     },
     "profile": {
-      "source": "site:endroit@c4f76c3e45ccae9c07a46a6a9bd6a401631d02ee:PROFILE.md",
-      "sourceCommit": "c4f76c3e45ccae9c07a46a6a9bd6a401631d02ee",
+      "source": "site:endroit@32dda906242e2dc0e8746a3b35eeff9152ef2d2b:PROFILE.md",
+      "sourceCommit": "32dda906242e2dc0e8746a3b35eeff9152ef2d2b",
       "sourceSha256": "53d8a2ea90bef5fd8d0f487f643bf91d4bbf8c8890f27fdbaa0784658268e520",
       "sha256": "53d8a2ea90bef5fd8d0f487f643bf91d4bbf8c8890f27fdbaa0784658268e520"
     },
     "reference": {
-      "source": "site:endroit@c4f76c3e45ccae9c07a46a6a9bd6a401631d02ee:docs/reference.md",
-      "sourceCommit": "c4f76c3e45ccae9c07a46a6a9bd6a401631d02ee",
-      "sourceSha256": "57b436cf0d2a7b5903ad5ca74993fecae7c05ecdb98deb10b96aaa95f3171bde",
-      "sha256": "57b436cf0d2a7b5903ad5ca74993fecae7c05ecdb98deb10b96aaa95f3171bde"
+      "source": "site:endroit@32dda906242e2dc0e8746a3b35eeff9152ef2d2b:docs/reference.md",
+      "sourceCommit": "32dda906242e2dc0e8746a3b35eeff9152ef2d2b",
+      "sourceSha256": "a24431ea52f43955180d405a59e72e7d98802ced51d4aa5811c8921255c935cd",
+      "sha256": "a24431ea52f43955180d405a59e72e7d98802ced51d4aa5811c8921255c935cd"
     },
     "migration010": {
-      "source": "site:endroit@c4f76c3e45ccae9c07a46a6a9bd6a401631d02ee:docs/migration-0.10.md",
-      "sourceCommit": "c4f76c3e45ccae9c07a46a6a9bd6a401631d02ee",
+      "source": "site:endroit@32dda906242e2dc0e8746a3b35eeff9152ef2d2b:docs/migration-0.10.md",
+      "sourceCommit": "32dda906242e2dc0e8746a3b35eeff9152ef2d2b",
       "sourceSha256": "3905a414ef3a85e91ed37f18a4d14b4d5061bed172068bc9b39735d1fad5b636",
       "sha256": "3905a414ef3a85e91ed37f18a4d14b4d5061bed172068bc9b39735d1fad5b636"
     },
     "migrationRouteV9": {
-      "source": "site:endroit@c4f76c3e45ccae9c07a46a6a9bd6a401631d02ee:docs/migration-route-v9.md",
-      "sourceCommit": "c4f76c3e45ccae9c07a46a6a9bd6a401631d02ee",
-      "sourceSha256": "4acdc97be355a80eaae87a1b47dd31df36ea4dd52008652ad92c55fb8f309bb4",
-      "sha256": "4acdc97be355a80eaae87a1b47dd31df36ea4dd52008652ad92c55fb8f309bb4"
+      "source": "site:endroit@32dda906242e2dc0e8746a3b35eeff9152ef2d2b:docs/migration-route-v9.md",
+      "sourceCommit": "32dda906242e2dc0e8746a3b35eeff9152ef2d2b",
+      "sourceSha256": "3b35828fe5939d6f246dc91491736d9cfbc53def5175629956cdbc17c30d1c6d",
+      "sha256": "3b35828fe5939d6f246dc91491736d9cfbc53def5175629956cdbc17c30d1c6d"
     }
   }
 }
