@@ -1,0 +1,71 @@
+name: Deliver
+
+on:
+  workflow_dispatch:
+    inputs:
+      release_id:
+        description: Workplace Release identifier
+        required: true
+        type: string
+      expected_sha:
+        description: Exact Site commit locked by the Release
+        required: true
+        type: string
+      lock_digest:
+        description: SHA-256 digest of release.lock.json
+        required: true
+        type: string
+      mode:
+        description: Qualify only or deploy to production
+        required: true
+        default: check
+        type: choice
+        options:
+          - check
+          - production
+
+permissions:
+  contents: read
+
+concurrency:
+  group: deliver-${{ inputs.release_id }}
+  cancel-in-progress: false
+
+jobs:
+  qualify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.expected_sha }}
+      - name: Verify Release binding
+        env:
+          EXPECTED_SHA: ${{ inputs.expected_sha }}
+          LOCK_DIGEST: ${{ inputs.lock_digest }}
+        run: |
+          test "$(git rev-parse HEAD)" = "$EXPECTED_SHA"
+          printf '%s' "$LOCK_DIGEST" | grep -Eq '^[0-9a-f]{64}$'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm test
+
+  deploy:
+    if: inputs.mode == 'production'
+    needs: qualify
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.expected_sha }}
+      - name: Reverify exact commit
+        env:
+          EXPECTED_SHA: ${{ inputs.expected_sha }}
+        run: test "$(git rev-parse HEAD)" = "$EXPECTED_SHA"
+      - uses: superfly/flyctl-actions/setup-flyctl@ed8efb33836e8b2096c7fd3ba1c8afe303ebbff1
+      - run: flyctl deploy --remote-only
+        env:
+          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}

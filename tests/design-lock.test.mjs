@@ -44,7 +44,7 @@ test('every promoted design source and public asset matches the receipt', async 
 });
 
 test('the landing facts are pinned to the release sources and local manifests', async () => {
-	assert.equal(receipt.contentReceipt.release, 'ecosystem-2026-08');
+	assert.equal(receipt.contentReceipt.release, 'ecosystem-2026-08-02');
 	assert.equal(receipt.contentReceipt.availability, 'candidate');
 	assert.deepEqual(receipt.contentReceipt.facts, {
 		package: '0.10.0-alpha.0',

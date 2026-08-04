@@ -93,6 +93,16 @@ export const modules = [
 		source: 'Product claim boundaries',
 		action: 'Start with a Workplace. Bring an agent.',
 	},
+	{
+		id: 'community',
+		role: 'action',
+		claim: 'Join the new Discord.',
+		mechanism: 'A new, explicitly bootstrapping channel for release feedback and Workplace experiments.',
+		proof: 'The Site-owned Surface declares the destination and honest maturity.',
+		maturity: 'bootstrapping',
+		source: 'Accepted release destination',
+		action: 'Join the new Discord.',
+	},
 ];
 
 // The type system. Each distinction preserves a boundary during resolution.
@@ -236,4 +246,5 @@ export const externalLinks = [
 	'https://open-workplace.org/proposal/',
 	'https://open-workplace.org/protocol/',
 	'https://github.com/open-workplace/open-workplace',
+	'https://discord.gg/HW4Hs9sEp',
 ];

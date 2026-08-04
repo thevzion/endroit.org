@@ -1,12 +1,12 @@
 {
-  "release": "ecosystem-2026-08",
+  "release": "ecosystem-2026-08-02",
   "destinations": [
     {
       "id": "endroit-discord",
       "url": "https://discord.gg/HW4Hs9sEp",
       "cta": "Join the new Discord",
-      "status": "pending-human-acceptance",
-      "render": false,
+      "status": "accepted",
+      "render": true,
       "claim": "bootstrapping"
     }
   ]

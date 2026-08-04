@@ -11,9 +11,11 @@ import {
 	signalTypes,
 	spine,
 } from '../lib/instrument.mjs';
+import { publicSurface } from '../lib/surface.mjs';
 import '../styles/global.css';
 
 const module = Object.fromEntries(modules.map((item) => [item.id, item]));
+const { hero, problem, resolver, capital, relations: relationsCopy, craft, stack, availability: availabilityCopy, community } = publicSurface;
 void externalLinks;
 ---
 
@@ -84,17 +86,11 @@ void externalLinks;
 			<section class="module module-hero" aria-labelledby="hero-title">
 				<div class="hero-plate">
 					<p class="silkscreen-category">{spine.category}</p>
-					<h1 id="hero-title">{spine.punch}</h1>
-					<p class="hero-promise">{spine.promise}</p>
-					<p class="hero-lede">
-						Endroit is the local-first framework for Workplace-first software craft. It turns the context, decisions,
-						methods and bounded reach of human-agent work into durable, owned capacity, so each new agent resolves
-						what remained instead of asking you to rebuild it.
-					</p>
+					<h1 id="hero-title">{hero.title}</h1>
+					<p class="hero-promise">{hero.punch}</p>
+					<p class="hero-lede">{hero.intro}</p>
 					<div class="hero-actions">
-						<a class="action action-primary" href="#capital">Run the proof</a>
-						<a class="action" href="/install/">Install Endroit</a>
-						<a class="action" href="https://github.com/thevzion/endroit">View the source</a>
+						{hero.actions.map((action, index) => <a class:list={['action', { 'action-primary': index === 0 }]} href={action.href}>{action.label}</a>)}
 					</div>
 					<p class="hero-meta">
 						Published package <code>0.8.0-alpha.1</code> · Qualified local candidate <code>0.10.0-alpha.0</code> ·
@@ -130,15 +126,11 @@ void externalLinks;
 			<!-- MODULE 2 · PROBLEM -->
 			<section class="module" id="problem" aria-labelledby="problem-title">
 				<p class="module-plate">MODULE · THE PROBLEM</p>
-				<h2 id="problem-title">A longer context window is not continuity.</h2>
+				<h2 id="problem-title">{problem.title}</h2>
 				<div class="module-body">
 					<div class="module-copy">
-						<p>
-							Each session starts warm-up again: what we work on, which decisions are current, where results belong,
-							what the agent may change. A bigger window holds more tokens for one session. It gives none of it a
-							place, an owner, or a life beyond the session.
-						</p>
-						<p class="module-punch">Context windows hold tokens. Workplaces hold meaning.</p>
+						<p>{problem.intro}</p>
+						<p class="module-punch">{problem.punch}</p>
 					</div>
 					<figure class="screen" aria-labelledby="restart-caption">
 						<div class="screen-face" aria-hidden="true">
@@ -164,11 +156,8 @@ void externalLinks;
 			<!-- MODULE 3 · RESOLVER -->
 			<section class="module" id="resolver" aria-labelledby="resolver-title">
 				<p class="module-plate">MODULE · THE RESOLVER</p>
-				<h2 id="resolver-title">Context that knows its place.</h2>
-				<p class="module-lede">
-					Your agent does not need all your context. It needs the right context, with its meaning intact. Endroit
-					keeps working context semantically typed, so composition preserves boundaries instead of flattening them:
-				</p>
+				<h2 id="resolver-title">{resolver.title}</h2>
+				<p class="module-lede">{resolver.intro}</p>
 
 				<dl class="type-table">
 					{signalTypes.map((entry) => (
@@ -213,7 +202,7 @@ void externalLinks;
 					</div>
 				</div>
 
-				<p class="module-punch">Don’t dump context. Resolve it.</p>
+				<p class="module-punch">{resolver.punch}</p>
 				<p class="module-note">
 					Resolution reduces environmental ambiguity by design. It is not a measured claim about model intelligence
 					or accuracy, and it does not remove the need for human correction.
@@ -224,11 +213,8 @@ void externalLinks;
 			<!-- MODULE 4 · CAPITAL -->
 			<section class="module" id="capital" aria-labelledby="capital-title">
 				<p class="module-plate">MODULE · THE PROOF</p>
-				<h2 id="capital-title">End the Meeting. Watch what remains.</h2>
-				<p class="module-lede">
-					One capture, four phases. The names are illustrative; the transitions are the product. Nothing durable
-					happens without your verb.
-				</p>
+				<h2 id="capital-title">{capital.title}</h2>
+				<p class="module-lede">{capital.intro}</p>
 
 				<div class="latch" data-latch data-phase="0">
 					<figure class="screen latch-screen">
@@ -300,7 +286,7 @@ void externalLinks;
 			<!-- MODULE 5 · RELATIONS -->
 			<section class="module" aria-labelledby="relations-title">
 				<p class="module-plate">MODULE · THE LEGEND</p>
-				<h2 id="relations-title">Capital needs more than storage.</h2>
+				<h2 id="relations-title">{relationsCopy.title}</h2>
 				<dl class="legend">
 					{relations.map((relation) => (
 						<div>
@@ -309,30 +295,23 @@ void externalLinks;
 						</div>
 					))}
 				</dl>
-				<p class="module-note">
-					Retention, acceptance, delivery and archive stay explicit. Nothing is captured silently, and no background
-					agent learns your organization.
-				</p>
+				<p class="module-note">{relationsCopy.intro}</p>
 				<CalTag module={module.relations} />
 			</section>
 
 			<!-- MODULE 6 · CRAFT -->
 			<section class="module module-craft" aria-labelledby="craft-title">
 				<p class="module-plate">MODULE · THE CRAFT</p>
-				<h2 id="craft-title">Software craftsmanship, one level up.</h2>
-				<p class="craft-copy">
-					You already care about source, boundaries, ownership and lifecycle in code. Endroit brings the same craft
-					to the system around the code: the context an agent enters, the places results land, the authority every
-					change crosses. The exoskeleton isn’t the agent. It’s the workplace around it.
-				</p>
-				<p class="module-punch">Craft the system that crafts the software.</p>
+				<h2 id="craft-title">{craft.title}</h2>
+				<p class="craft-copy">{craft.intro}</p>
+				<p class="module-punch">{craft.punch}</p>
 				<CalTag module={module.craft} />
 			</section>
 
 			<!-- MODULE 7 · STACK -->
 			<section class="module" aria-labelledby="stack-title">
 				<p class="module-plate">MODULE · THE GRAMMAR</p>
-				<h2 id="stack-title">Open Workplace supplies the grammar. Endroit gives it a place.</h2>
+				<h2 id="stack-title">{stack.title}</h2>
 				<div class="module-body">
 					<ol class="stack-rows">
 						<li><strong>Workplace-first</strong><span>the paradigm</span></li>
@@ -341,15 +320,7 @@ void externalLinks;
 						<li><strong>Your Workplace</strong><span>the durable result</span></li>
 					</ol>
 					<div class="module-copy">
-						<p>
-							<a href="https://open-workplace.org/">Open Workplace</a> is an open proposal, not an established
-							standard. Its current experimental Protocol is <code>open-workplace/0.2-draft</code>. The qualified local
-							Endroit <code>0.10.0-alpha.0</code> candidate declares the versioned <code>endroit/0.10</code> Profile
-							targeting that draft. Publication, deployment and broader conformance cannot be inferred.
-							Endroit is not an agent, a scheduler, a universal
-							memory or a permission system: providers keep execution, Sites keep their source and history, you keep
-							direction and judgment.
-						</p>
+						<p>{stack.intro}</p>
 						<p class="stack-links">
 							<a href="https://open-workplace.org/proposal/">Read the proposal</a>
 							<a href="https://open-workplace.org/protocol/">Read the protocol</a>
@@ -364,7 +335,7 @@ void externalLinks;
 			<!-- MODULE 8 · AVAILABILITY -->
 			<section class="module" id="availability" aria-labelledby="availability-title">
 				<p class="module-plate">MODULE · CONDITION</p>
-				<h2 id="availability-title">Available now. Candidate next. Research beyond.</h2>
+				<h2 id="availability-title">{availabilityCopy.title}</h2>
 				<ul class="condition-row">
 					{availability.map((item) => (
 						<li class={`condition condition-${item.state}`}>
@@ -384,14 +355,25 @@ void externalLinks;
 				</div>
 				<CalTag module={module.availability} />
 			</section>
+
+			<!-- MODULE 9 · COMMUNITY -->
+			<section class="module" id="community" aria-labelledby="community-title">
+				<p class="module-plate">MODULE · COMMUNITY</p>
+				<h2 id="community-title">{community.title}</h2>
+				<p class="module-lede">{community.intro}</p>
+				<div class="hero-actions">
+					{community.actions.map((action) => <a class="action action-primary" href={action.href}>{action.label}</a>)}
+				</div>
+				<CalTag module={module.community} />
+			</section>
 		</main>
 
 		<footer class="bench-foot">
 			<p>
 				Category on file: <strong>{spine.accepted}</strong> (accepted). The headline spine on this page is candidate
 				copy under evaluation on this surface. Every module carries a calibration tag: open any of them, press
-				<kbd>Alt</kbd>+<kbd>I</kbd>, or use the CAL switch. This page renders from one semantic module; public
-				per-fragment source links remain research.
+				<kbd>Alt</kbd>+<kbd>I</kbd>, or use the CAL switch. The Site-owned <code>SURFACE.md</code> carries the
+				public composition and copy; Astro keeps the renderer and visual system.
 			</p>
 			<p>
 				Endroit implements <a href="https://open-workplace.org/">Open Workplace</a> ·

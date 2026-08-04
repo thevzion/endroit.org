@@ -29,10 +29,12 @@
     "Replace experiment-only footer language with production source, roadmap and license links.",
     "Extend the frozen bench stylesheet only for secondary public routes and shared production chrome.",
     "Record the production direction contract and exact reference provenance.",
-    "Qualify the open-workplace/0.1 target against the current incompatible open-workplace/0.2-draft Protocol."
+    "Qualify the open-workplace/0.1 target against the current incompatible open-workplace/0.2-draft Protocol.",
+    "Move owned landing composition and copy into the Site-owned Surface Artifact without redesigning the native Astro renderer.",
+    "Render the accepted, honestly bootstrapping Endroit Discord destination."
   ],
   "contentReceipt": {
-    "release": "ecosystem-2026-08",
+    "release": "ecosystem-2026-08-02",
     "availability": "candidate",
     "facts": {
       "package": "0.10.0-alpha.0",
@@ -65,7 +67,7 @@
       },
       {
         "path": "src/content/release-destinations.json",
-        "sha256": "f2e183b84aedabe0f926182f0edc9d142aad60be86631dbfd70faef14a96571d"
+        "sha256": "1990de0f5c072c35cde7739d758e22b4cfbe4db8ce8d0054835ded918175287f"
       }
     ]
   },
@@ -91,11 +93,19 @@
       },
       {
         "path": "src/pages/index.astro",
-        "sha256": "3c11dab44d74735629f03f3d45a31e80b6a72db9bbcfa9d096dc77cecc6aa365"
+        "sha256": "e47bb0ed050d338f0bd590c2f9dd7f5637697730c450d9f11f3f570b7e894eba"
       },
       {
         "path": "src/lib/instrument.mjs",
-        "sha256": "bc0aaa50ec226807d1becc6a63cbbfbc56f8fd730c6cde7f0d2a28092e2f62d1"
+        "sha256": "bdab59f8d258c239f8e3b25301aa5f6a7657c453e3c8b18ed28fe17238a6fb5a"
+      },
+      {
+        "path": "surfaces/home/SURFACE.md",
+        "sha256": "75a8d8236750ffdee22cc387845c66376dcdeecdccff5562726a62f71d86e5cb"
+      },
+      {
+        "path": "src/lib/surface.mjs",
+        "sha256": "aae2887ae0e12af7fc0b5042c0bd736fdfda807a19fd72cd7487bf1d32590816"
       },
       {
         "path": "src/styles/global.css",
@@ -118,7 +128,7 @@
     ],
     "render": {
       "path": "dist/index.html",
-      "sha256": "7a17a901772f36f821ff5d3c6ceda32c8a0463ef43930a6582cbe5520f7fd219",
+      "sha256": "cb1ab2a63526e91752761ffef8d10f7d15375417d34d5841d9413cf362b01ce5",
       "assets": [
         {
           "href": "/_astro/global.Bk6ZAFbN.css",

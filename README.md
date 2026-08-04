@@ -37,12 +37,17 @@ npm run dev
   reference, security and release truth.
 
 The Endroit Site owns the landing, product contracts and documentation
-transposition. Interface Lab supplies a frozen design reference, never product
-truth. Run `npm run sync:sources` with an explicit `ENDROIT_SOURCE_ROOT` to
-refresh product projections without guessing their owner.
+transposition. `surfaces/home/SURFACE.md` owns the landing composition and
+copy; Astro owns its renderer and visual system. Interface Lab is retained as
+historical design provenance and is never read by the build or release
+qualification. Run `npm run sync:sources` with an explicit
+`ENDROIT_SOURCE_ROOT` to refresh product projections without guessing their
+owner.
 
 ## Deployment
 
-The static build will be served by the `endroit` Fly.io app behind Cloudflare.
-Pushes to `main` deploy through GitHub Actions using an app-scoped Fly deploy
-token. Run `flyctl deploy` for a manual deployment.
+The static build is served by the `endroit` Fly.io app behind Cloudflare.
+`.github/workflows/ci.yml` qualifies pull requests, release candidates and
+`main` without deploying. Delivery is an explicit `workflow_dispatch` in
+`.github/workflows/deliver.yml`, bound to an expected commit and a Release lock
+digest. Its production environment owns the Fly credential and approval.

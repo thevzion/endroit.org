@@ -96,12 +96,12 @@ test('public schema bytes remain immutable and match their manifest', async () =
 	assert.equal(JSON.parse(await read('public/schema/work/v1alpha2.json')).$id, 'https://endroit.org/schema/work/v1alpha2.json');
 });
 
-test('all public pages use one production bench system and keep pending destinations out of navigation', async () => {
+test('all public pages use one production bench system and keep the accepted community CTA scoped to the landing', async () => {
 	const files = ['src/pages/index.astro', 'src/pages/homes.astro', 'src/pages/install.astro', 'src/pages/roadmap.astro', 'src/pages/schema/index.astro', 'src/pages/404.astro'];
 	const sources = await Promise.all(files.map((file) => read(file)));
 	for (const [index, source] of sources.entries()) {
 		assert.match(source, index === 0 ? /bench-bar/ : /BaseLayout/, files[index]);
-		assert.doesNotMatch(source, /discord\.gg/i, files[index]);
+		if (index > 0) assert.doesNotMatch(source, /discord\.gg/i, files[index]);
 	}
 	for (const page of sources.slice(1)) assert.match(page, /module|page-instrument/);
 	const layout = await read('src/layouts/BaseLayout.astro');
@@ -152,19 +152,21 @@ test('the static build emits every supported route and machine contract', async 
 	assert.doesNotMatch(install, /<h1[^>]*>Install Endroit<\/h1>/);
 });
 
-test('the retained Discord destination stays pending and non-rendered', async () => {
+test('the accepted Discord destination renders with an honest bootstrapping claim', async () => {
 	const destination = await read('src/content/release-destinations.json').then(JSON.parse);
-	assert.equal(destination.release, 'ecosystem-2026-08');
+	assert.equal(destination.release, 'ecosystem-2026-08-02');
 	assert.deepEqual(destination.destinations, [{
 		id: 'endroit-discord',
 		url: 'https://discord.gg/HW4Hs9sEp',
 		cta: 'Join the new Discord',
-		status: 'pending-human-acceptance',
-		render: false,
+		status: 'accepted',
+		render: true,
 		claim: 'bootstrapping',
 	}]);
 	const built = await read('dist/index.html');
-	assert.doesNotMatch(built, /discord\.gg|Join the new Discord/);
+	assert.match(built, /https:\/\/discord\.gg\/HW4Hs9sEp/);
+	assert.match(built, /Join the new Discord/);
+	assert.match(built, /new and bootstrapping/);
 });
 
 test('the built Site makes no third-party runtime requests and keeps shipped JavaScript under 25 KiB gzip', async () => {

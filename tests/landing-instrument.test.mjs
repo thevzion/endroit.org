@@ -12,6 +12,7 @@ import {
 	signalTypes,
 	spine,
 } from '../src/lib/instrument.mjs';
+import { publicSurface } from '../src/lib/surface.mjs';
 
 const site = new URL('..', import.meta.url);
 const [page, styles, reference, product] = await Promise.all([
@@ -45,7 +46,7 @@ test('every module carries mechanism, proof, maturity, source and action', () =>
 	for (const module of modules) {
 		assert.deepEqual(Object.keys(module), ['id', 'role', 'claim', 'mechanism', 'proof', 'maturity', 'source', 'action']);
 		for (const key of ['claim', 'mechanism', 'proof', 'source', 'action']) assert.ok(module[key].length > 0, `${module.id}.${key}`);
-		assert.ok(['current', 'experimental', 'research'].includes(module.maturity));
+		assert.ok(['current', 'experimental', 'research', 'bootstrapping'].includes(module.maturity));
 	}
 });
 
@@ -79,10 +80,10 @@ test('claim boundaries and verified public destinations hold', () => {
 });
 
 test('the current Open Workplace protocol and Endroit candidate boundary stay explicit', () => {
-	assert.match(corpus, /current experimental Protocol is <code>open-workplace\/0\.2-draft<\/code>/);
-	assert.match(corpus, /Endroit <code>0\.10\.0-alpha\.0<\/code> candidate/);
-	assert.match(corpus, /<code>endroit\/0\.10<\/code> Profile/);
-	assert.match(corpus, /Publication, deployment and broader conformance cannot be inferred/);
+	assert.match(publicSurface.fragments.find(({ id }) => id === 'stack').body, /current\s+experimental Protocol is `open-workplace\/0\.2-draft`/);
+	assert.match(publicSurface.fragments.find(({ id }) => id === 'stack').body, /Endroit `0\.10\.0-alpha\.0` candidate/);
+	assert.match(publicSurface.fragments.find(({ id }) => id === 'stack').body, /`endroit\/0\.10`\s+Profile/);
+	assert.match(publicSurface.fragments.find(({ id }) => id === 'stack').body, /Publication, deployment and broader conformance\s+cannot be inferred/);
 	assert.match(product, /current Open Workplace experimental Protocol is\s+`open-workplace\/0\.2-draft`/);
 });
 
@@ -108,7 +109,8 @@ test('the production surface records the frozen reference and exact permitted de
 	assert.equal(reference.referenceArtifact.freezeCommit, 'b0c4bf23f7d9ee882619a2d3c39049760feb2104');
 	assert.equal(reference.referenceArtifact.manifestBaseCommit, 'f4d7e154407ad26d8a88461aa9f5d38c7a24599e');
 	assert.equal(reference.referenceArtifact.sourceHashes['Page.astro'], '5b04f296ceb7d3299273a54c24cb40842df7f100696c880ba242414202de7e2b');
-	assert.equal(reference.productionDeltas.length, 7);
+	assert.match(reference.productionDeltas.join('\n'), /Site-owned Surface Artifact/);
+	assert.match(reference.productionDeltas.join('\n'), /Endroit Discord destination/);
 	for (const path of reference.unchangedReferenceModules) {
 		const content = await readFile(new URL(path, site));
 		const expectedKey = path.endsWith('instrument.mjs') ? 'instrument.mjs' : 'CalTag.astro';
