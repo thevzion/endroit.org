@@ -1,7 +1,14 @@
 {
+  "schemaVersion": 2,
   "referenceArtifact": {
     "site": "interface-lab",
     "freezeCommit": "b0c4bf23f7d9ee882619a2d3c39049760feb2104",
+    "lockCommit": "fd30ccb7826c040410f95c91ac4bd32cfe338910",
+    "manifestSchemaVersion": 2,
+    "manifestSha256": "7ce0089c2e6b462fc14fd7f9c47bc31b69d2058cd33880cd967f24c334a391c1",
+    "candidate": "endroit-024",
+    "route": "/experiments/endroit.org/024-context-that-knows-its-place/",
+    "entrypoint": "src/experiments/endroit.org/iterations/024-context-that-knows-its-place/Page.astro",
     "manifestBaseCommit": "f4d7e154407ad26d8a88461aa9f5d38c7a24599e",
     "path": "src/experiments/endroit.org/iterations/024-context-that-knows-its-place",
     "manifest": "evidence/selected-landings-freeze/manifest.json",
@@ -26,5 +33,61 @@
   ],
   "unchangedReferenceModules": [
     "src/components/CalTag.astro"
-  ]
+  ],
+  "promotionReceipt": {
+    "site": "endroit.org",
+    "route": "/",
+    "entrypoint": "src/pages/index.astro",
+    "sourceFiles": [
+      {
+        "path": "PRODUCT.md",
+        "sha256": "03332b4764bfdfa16358a1d81ce97d5dff1e66fd4d79c54ee2a2a92d258a42f0"
+      },
+      {
+        "path": "DESIGN.md",
+        "sha256": "6f1d2b37e67f22fd77dc690f3c32a92d437fdcfcbfdb934bb7b682e5c221cea7"
+      },
+      {
+        "path": ".impeccable/design.json",
+        "sha256": "16d75922512e88a699ceaaabd64b67cef1a82ddb6c9cc7c5481a2c7da4022dcb"
+      },
+      {
+        "path": "src/pages/index.astro",
+        "sha256": "5ea289196498bd54146b3277d8340ce63732dfce35ecf4ff0355f54079cc22c5"
+      },
+      {
+        "path": "src/lib/instrument.mjs",
+        "sha256": "b7e4cbb0b71ed25b70faf850c942a18219079dd3da803146566ed9f47b18ba8a"
+      },
+      {
+        "path": "src/styles/global.css",
+        "sha256": "d5cdf7a1451bf20c066ad1b1163f46fae91fd28ba12dc317ae0dd8eef7be2c78"
+      },
+      {
+        "path": "src/components/CalTag.astro",
+        "sha256": "12baa63457f75c073c4e101ecfb3e1c7127b46b6a34b7e8379d64e50cc7c46c2"
+      }
+    ],
+    "publicAssets": [
+      {
+        "path": "public/favicon.svg",
+        "sha256": "dfc2c082fc0a54aac116afa7cf738895be19f907a7dd2a8677686cae476dc395"
+      },
+      {
+        "path": "public/social-card.png",
+        "sha256": "d810852b308a869300a18bb8bf4ec64061b7e0ef31c52f7ab782327994f012e6"
+      }
+    ],
+    "render": {
+      "path": "dist/index.html",
+      "sha256": "2aa044075b9721c23a2f18c801ccc255d7ae9afe6c2cec88572c92496fdb98db",
+      "assets": [
+        {
+          "href": "/_astro/global.Bk6ZAFbN.css",
+          "path": "dist/_astro/global.Bk6ZAFbN.css",
+          "sha256": "ad0932164cc0bad625959f8c6426be4dcf96352fb1fbc13ef71bf71a65df9513"
+        }
+      ]
+    }
+  }
 }
