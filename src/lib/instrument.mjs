@@ -77,8 +77,8 @@ export const modules = [
 		id: 'stack',
 		role: 'boundary',
 		claim: 'Open Workplace supplies the grammar. Endroit gives it a place.',
-		mechanism: 'Workplace-first is the paradigm; Open Workplace owns the shared model and experimental Protocol; Endroit is the framework; your Workplace is the result. The current Protocol is open-workplace/0.2-draft; Endroit 0.8.0-alpha.2 still targets superseded open-workplace/0.1.',
-		proof: 'The independent proposal and current draft are public; Endroit’s older target is named without implying compatibility.',
+		mechanism: 'Workplace-first is the paradigm; Open Workplace owns the shared model and experimental Protocol; Endroit is the framework; your Workplace is the result. The Endroit 0.10 candidate declares the endroit/0.10 Profile targeting open-workplace/0.2-draft.',
+		proof: 'The independent proposal and current draft are public; the candidate Profile and its implementation limits are source-owned and inspectable.',
 		maturity: 'current',
 		source: 'Resolved terminology · Open Workplace remains independent',
 		action: 'Read the proposal.',
@@ -216,9 +216,9 @@ export const availability = [
 	},
 	{
 		state: 'candidate',
-		label: 'Local release candidate · 0.8.0-alpha.2',
+		label: 'Qualified local candidate · 0.10.0-alpha.0',
 		detail:
-			'Adds the versioned Workplace Profile targeting superseded open-workplace/0.1, Work Resolution and a consent-first adoption journey. The current experimental Protocol is open-workplace/0.2-draft; compatibility is not implied. Local qualification only; publication cannot be inferred.',
+			'Declares the endroit/0.10 Profile targeting open-workplace/0.2-draft, native v9 Workplace Documents, deterministic resolution, pathless Routes with derived Checkouts, and WORK.md v1alpha2. Qualified locally; npm publication, schema delivery and deployment cannot be inferred.',
 	},
 	{
 		state: 'research',
@@ -234,5 +234,6 @@ export const externalLinks = [
 	'https://github.com/thevzion/endroit',
 	'https://open-workplace.org/',
 	'https://open-workplace.org/proposal/',
+	'https://open-workplace.org/protocol/',
 	'https://github.com/open-workplace/open-workplace',
 ];

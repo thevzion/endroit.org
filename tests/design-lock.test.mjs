@@ -43,6 +43,24 @@ test('every promoted design source and public asset matches the receipt', async 
 	}
 });
 
+test('the landing facts are pinned to the release sources and local manifests', async () => {
+	assert.equal(receipt.contentReceipt.release, 'ecosystem-2026-08');
+	assert.equal(receipt.contentReceipt.availability, 'candidate');
+	assert.deepEqual(receipt.contentReceipt.facts, {
+		package: '0.10.0-alpha.0',
+		profile: 'endroit/0.10',
+		protocol: 'open-workplace/0.2-draft',
+		publishedPackage: '0.8.0-alpha.1',
+	});
+	assert.deepEqual(receipt.contentReceipt.sources.map(({ site, commit }) => ({ site, commit })), [
+		{ site: 'endroit', commit: 'c4f76c3e45ccae9c07a46a6a9bd6a401631d02ee' },
+		{ site: 'open-workplace', commit: 'ee7b693b69f175f5570f6b81fea7b838a08abee0' },
+	]);
+	for (const artifact of receipt.contentReceipt.manifests) {
+		assert.equal(sha256(await read(artifact.path)), artifact.sha256, artifact.path);
+	}
+});
+
 test('the root route cannot silently select a legacy landing entrypoint', async () => {
 	const entries = await readdir(resolve(siteRoot, 'src/pages'), { withFileTypes: true });
 	const rootEntrypoints = entries

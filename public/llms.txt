@@ -5,9 +5,13 @@
 ## Public surfaces
 
 - [Product instrument](https://endroit.org/): typed context, explicit lifecycle and agentic capital
-- [Homes in practice](https://endroit.org/homes/): the semantic objects and their responsibilities
+- [Workplaces in practice](https://endroit.org/homes/): the Endroit Profile vocabulary and its responsibilities
 - [Install for humans](https://endroit.org/install/): agent-led, CLI-backed, human-approved installation
 - [Install contract](https://endroit.org/install.md): the same installation procedure as Markdown
+- [Adoption contract](https://endroit.org/adopt.md): bounded recognition before mutation
+- [Endroit Profile](https://endroit.org/profile.md): the candidate implementation mapping for open-workplace/0.2-draft
+- [0.10 reference](https://endroit.org/docs/reference.md): source formats, commands and exact limits
+- [Upgrade from 0.9](https://endroit.org/docs/migration-0.10.md): compatibility boundary and safe sequence
 - [Roadmap](https://endroit.org/roadmap/): available, in-progress, exploratory and later work
 - [Schema contracts](https://endroit.org/schema/): immutable public JSON Schema addresses
 - [Schema manifest](https://endroit.org/schema/manifest.json): source and SHA-256 for served contracts
@@ -16,4 +20,4 @@
 
 - [Endroit on GitHub](https://github.com/thevzion/endroit)
 
-The public navigation intentionally excludes unpublished Workplace, adoption and Work Resolution documents.
+The Site describes the qualified 0.10 candidate without implying npm publication, schema delivery or deployment.

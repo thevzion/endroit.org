@@ -1,18 +1,45 @@
 {
   "projections": {
-    "landing": {
-      "source": "artifact:desk/endroit/publishing/work/endroit-public-entrypoint/publication/endroit-landing#content",
-      "sha256": "b2053951ebdd27ea3589a5b85b44ee6fedb6cb303470894b1ab84cc7b3a474c7",
-      "usage": "owned public copy projection; the interactive production surface is a traced transposition of Interface Lab Endroit 024"
-    },
     "install": {
-      "source": "site:endroit.org/src/content/install.md",
-      "releaseSource": "thevzion/endroit@0.8.0-alpha.1:INSTALL.md",
-      "sha256": "e6bb1bd87d40d49e059d2344c576e8bfa186ac6def1026a7c1e8b6db3afd1e2b"
+      "source": "site:endroit@c4f76c3e45ccae9c07a46a6a9bd6a401631d02ee:INSTALL.md",
+      "sourceCommit": "c4f76c3e45ccae9c07a46a6a9bd6a401631d02ee",
+      "sourceSha256": "b9bc091e34f109b817b96263e236715e5e272182fb5286c56fdb788805339bb5",
+      "sha256": "586827939a157b294ce14f7ca5df3409b2ab9a4e3520ce5a63fa8a8301cb6a7a",
+      "transform": "normalize raw ADOPT.md link to /adopt.md"
     },
     "llms": {
       "source": "site:endroit.org/scripts/sync-owned-sources.mjs#llms",
-      "sha256": "418ab743529f16fad7438547dce5368c2f963c4b915d11292394a7e88941e4ff"
+      "sha256": "afef398da1d9fb2a49bc83e2feba577513a2cb223557d80b1a43cc8296874fe2"
+    },
+    "adopt": {
+      "source": "site:endroit@c4f76c3e45ccae9c07a46a6a9bd6a401631d02ee:ADOPT.md",
+      "sourceCommit": "c4f76c3e45ccae9c07a46a6a9bd6a401631d02ee",
+      "sourceSha256": "63fc58aa4cb08e9f13e005e4c01290202d574ccf8036b7ad8acf12d7aaaba997",
+      "sha256": "63fc58aa4cb08e9f13e005e4c01290202d574ccf8036b7ad8acf12d7aaaba997"
+    },
+    "profile": {
+      "source": "site:endroit@c4f76c3e45ccae9c07a46a6a9bd6a401631d02ee:PROFILE.md",
+      "sourceCommit": "c4f76c3e45ccae9c07a46a6a9bd6a401631d02ee",
+      "sourceSha256": "53d8a2ea90bef5fd8d0f487f643bf91d4bbf8c8890f27fdbaa0784658268e520",
+      "sha256": "53d8a2ea90bef5fd8d0f487f643bf91d4bbf8c8890f27fdbaa0784658268e520"
+    },
+    "reference": {
+      "source": "site:endroit@c4f76c3e45ccae9c07a46a6a9bd6a401631d02ee:docs/reference.md",
+      "sourceCommit": "c4f76c3e45ccae9c07a46a6a9bd6a401631d02ee",
+      "sourceSha256": "57b436cf0d2a7b5903ad5ca74993fecae7c05ecdb98deb10b96aaa95f3171bde",
+      "sha256": "57b436cf0d2a7b5903ad5ca74993fecae7c05ecdb98deb10b96aaa95f3171bde"
+    },
+    "migration010": {
+      "source": "site:endroit@c4f76c3e45ccae9c07a46a6a9bd6a401631d02ee:docs/migration-0.10.md",
+      "sourceCommit": "c4f76c3e45ccae9c07a46a6a9bd6a401631d02ee",
+      "sourceSha256": "3905a414ef3a85e91ed37f18a4d14b4d5061bed172068bc9b39735d1fad5b636",
+      "sha256": "3905a414ef3a85e91ed37f18a4d14b4d5061bed172068bc9b39735d1fad5b636"
+    },
+    "migrationRouteV9": {
+      "source": "site:endroit@c4f76c3e45ccae9c07a46a6a9bd6a401631d02ee:docs/migration-route-v9.md",
+      "sourceCommit": "c4f76c3e45ccae9c07a46a6a9bd6a401631d02ee",
+      "sourceSha256": "4acdc97be355a80eaae87a1b47dd31df36ea4dd52008652ad92c55fb8f309bb4",
+      "sha256": "4acdc97be355a80eaae87a1b47dd31df36ea4dd52008652ad92c55fb8f309bb4"
     }
   }
 }

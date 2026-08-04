@@ -4,10 +4,9 @@ The product site for [Endroit](https://github.com/thevzion/endroit).
 
 **The place layer for agentic work.** Give agentic work a place to compound.
 
-Endroit is a lightweight, local-first framework for building and operating
-file-based [Open Workplaces](https://open-workplace.org/proposal/). It is also
-a local-first, headless, file-based implementation of the Open Workplace
-model.
+Endroit is a local-first compiler for human-owned Workplace context and an
+implementation of the experimental
+[Open Workplace 0.2 draft](https://open-workplace.org/protocol/).
 
 The [Workplace-first Proposal](https://open-workplace.org/proposal/) is an open
 proposal, not a standard or a prerequisite for using Endroit. This Site owns
@@ -28,16 +27,19 @@ npm run dev
 
 ## Product truth
 
-- Endroit 0.8 alpha is projection-qualified at L1 for Codex and Claude.
-- The 0.8 baseline adds Members, explicit workplace verbs and read-only Home
-  Hygiene without claiming Presence or autonomous maintenance.
-- Other runtimes and specialized Homes are marked as product direction.
+- `0.8.0-alpha.1` remains the observed public package.
+- `0.10.0-alpha.0` is a qualified local candidate, not yet published or
+  deployed. It declares Profile `endroit/0.10` targeting
+  `open-workplace/0.2-draft`.
+- v9 and Work schemas are projected from one exact Endroit source commit; the
+  manifest records that commit and every digest.
 - The Endroit repository owns installation, architecture, lifecycle,
   reference, security and release truth.
 
-The Home Publications own the exact landing wording. This Site owns its layout,
-rendering and delivery. Run `npm run sync:sources` from the connected Home to
-refresh the landing, installation contract and public schema projections.
+The Endroit Site owns the landing, product contracts and documentation
+transposition. Interface Lab supplies a frozen design reference, never product
+truth. Run `npm run sync:sources` with an explicit `ENDROIT_SOURCE_ROOT` to
+refresh product projections without guessing their owner.
 
 ## Deployment
 

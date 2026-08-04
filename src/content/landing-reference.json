@@ -31,6 +31,44 @@
     "Record the production direction contract and exact reference provenance.",
     "Qualify the open-workplace/0.1 target against the current incompatible open-workplace/0.2-draft Protocol."
   ],
+  "contentReceipt": {
+    "release": "ecosystem-2026-08",
+    "availability": "candidate",
+    "facts": {
+      "package": "0.10.0-alpha.0",
+      "profile": "endroit/0.10",
+      "protocol": "open-workplace/0.2-draft",
+      "publishedPackage": "0.8.0-alpha.1"
+    },
+    "sources": [
+      {
+        "site": "endroit",
+        "commit": "c4f76c3e45ccae9c07a46a6a9bd6a401631d02ee",
+        "path": "PROFILE.md",
+        "projection": "public/profile.md"
+      },
+      {
+        "site": "open-workplace",
+        "commit": "ee7b693b69f175f5570f6b81fea7b838a08abee0",
+        "path": "PROTOCOL.md",
+        "sha256": "0388741005eb318e920cd8ee5407e1f81e16c0d8d547212affa3ceb76ea31a70"
+      }
+    ],
+    "manifests": [
+      {
+        "path": "public/schema/manifest.json",
+        "sha256": "639192c11d7e504af3c4f8dcccc0b72d3ee7ca8e6f11d32c9e1e0bdd9e227b85"
+      },
+      {
+        "path": "src/content/projections.json",
+        "sha256": "3d4fa9406ed743bf1e1b8304c4a5b43dd32cb879c7a7f7e4000873278d8f38b7"
+      },
+      {
+        "path": "src/content/release-destinations.json",
+        "sha256": "f2e183b84aedabe0f926182f0edc9d142aad60be86631dbfd70faef14a96571d"
+      }
+    ]
+  },
   "unchangedReferenceModules": [
     "src/components/CalTag.astro"
   ],
@@ -41,7 +79,7 @@
     "sourceFiles": [
       {
         "path": "PRODUCT.md",
-        "sha256": "03332b4764bfdfa16358a1d81ce97d5dff1e66fd4d79c54ee2a2a92d258a42f0"
+        "sha256": "6337a61f9ac7df586b6474af6a90ea308f859d7116569eec62d343bc090e79fc"
       },
       {
         "path": "DESIGN.md",
@@ -53,11 +91,11 @@
       },
       {
         "path": "src/pages/index.astro",
-        "sha256": "5ea289196498bd54146b3277d8340ce63732dfce35ecf4ff0355f54079cc22c5"
+        "sha256": "3c11dab44d74735629f03f3d45a31e80b6a72db9bbcfa9d096dc77cecc6aa365"
       },
       {
         "path": "src/lib/instrument.mjs",
-        "sha256": "b7e4cbb0b71ed25b70faf850c942a18219079dd3da803146566ed9f47b18ba8a"
+        "sha256": "bc0aaa50ec226807d1becc6a63cbbfbc56f8fd730c6cde7f0d2a28092e2f62d1"
       },
       {
         "path": "src/styles/global.css",
@@ -80,7 +118,7 @@
     ],
     "render": {
       "path": "dist/index.html",
-      "sha256": "2aa044075b9721c23a2f18c801ccc255d7ae9afe6c2cec88572c92496fdb98db",
+      "sha256": "7a17a901772f36f821ff5d3c6ceda32c8a0463ef43930a6582cbe5520f7fd219",
       "assets": [
         {
           "href": "/_astro/global.Bk6ZAFbN.css",

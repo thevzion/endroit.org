@@ -3,13 +3,16 @@ import * as installContract from '../content/install.md';
 import BaseLayout from '../layouts/BaseLayout.astro';
 
 const contractHtml = await installContract.compiledContent();
-const renderedContract = contractHtml.replace(/^<h1 id="install-endroit">Install Endroit<\/h1>\s*/, '');
+const renderedContract = contractHtml
+	.replace(/^<h1 id="install-endroit-010">Install Endroit 0\.10<\/h1>\s*/, '')
+	.replaceAll('href="docs/', 'href="/docs/')
+	.replace('href="ADOPT.md"', 'href="/adopt.md"');
 if (renderedContract === contractHtml) throw new Error('The owned install title could not be separated from the rendered contract.');
 ---
 
 <BaseLayout
 	title="Install Endroit"
-	description="Agent-led, CLI-backed and human-approved installation for Endroit 0.8."
+	description="Agent-led, CLI-backed and human-approved installation for the Endroit 0.10 release candidate."
 	path="/install/"
 	current="install"
 >
@@ -18,7 +21,7 @@ if (renderedContract === contractHtml) throw new Error('The owned install title 
 			<div>
 				<p class="module-plate">PROCEDURE · INSTALL / 01</p>
 				<h1 id="install-title">Bring the framework to the workplace you already have.</h1>
-				<p class="page-lede">The human chooses the root and approves the plan. The agent inspects, proposes and installs. The resulting Home stays plain-file, local-first and inspectable.</p>
+				<p class="page-lede">The human chooses the boundary and approves the plan. The agent inspects, proposes and installs. The resulting Workplace stays plain-file, local-first and inspectable.</p>
 			</div>
 			<figure class="screen page-screen install-screen">
 				<div class="screen-face install-readout"><span>HUMAN</span><b>approves</b><span>AGENT</span><b>installs</b><span>HOME</span><b>persists</b></div>

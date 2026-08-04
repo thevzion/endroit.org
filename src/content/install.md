@@ -1,68 +1,92 @@
-# Install Endroit
+# Install Endroit 0.10
 
-Endroit is installed **agent-led, CLI-backed and human-approved**.
+Endroit 0.10 is a local alpha candidate. The package version is
+`0.10.0-alpha.0`, the Profile is `endroit/0.10`, and the protocol target is
+`open-workplace/0.2-draft`. Its v9 contracts and runtime support are not the
+same thing; use the [support matrix](docs/reference.md#source-format-support)
+before converting an existing source.
 
-If you are an agent reading this file, guide the human through the following
-contract. The CLI applies the changes; you do not reorganize their files
-yourself.
+The agent guides. The CLI applies. The human approves.
 
-## 1. Inspect without changing anything
+## Requirements
 
-Confirm that Git and Node.js 22 or newer are available. Inspect the requested
-destination and determine which operation fits:
+- Node.js 22 or 24;
+- Git for repository-backed Workplaces, Desks and Sites;
+- an explicitly selected destination;
+- human approval before creating or initializing that destination.
 
-- use `create` for a new standalone Home in a new directory;
-- use `init` when the current Git repository should also contain the Home;
-- use neither when the human has not identified the intended destination.
+Do not install over an existing Endroit declaration. Follow [ADOPT.md](ADOPT.md)
+first when the boundary has not been selected.
 
-Do not move or rewrite existing `AGENTS.md`, `CLAUDE.md`, Skills, memory,
-source files or checkouts during bootstrap.
+## Create a standalone Workplace
 
-## 2. Present the exact plan
-
-Before any mutation, tell the human:
-
-- whether you propose `create` or `init` and why;
-- the exact destination;
-- the Desk strategy: `tracked`, `separate` or `later`;
-- that Endroit will add owned source files, first-party Equipment and generated
-  provider projections;
-- that existing product files will stay in place.
-
-Show the exact command and ask for approval. A refusal or missing approval
-ends the installation without effects.
-
-## 3. Apply only the approved command
-
-Use the pinned alpha package:
-
-```bash
-npx --yes --package @endroit/cli@0.8.0-alpha.1 endroit create <directory> --desk tracked
+```sh
+npx --yes --package @endroit/cli@0.10.0-alpha.0 \
+  endroit create <directory> --desk tracked
 ```
 
-or, from the existing repository:
+Desk strategies:
 
-```bash
-npx --yes --package @endroit/cli@0.8.0-alpha.1 endroit init . --desk separate
+- `tracked`: Desk sources share the Workplace repository;
+- `separate`: `.desk/` is a nested private repository;
+- `later`: create no Desk continuity or local Routes yet.
+
+Optional Equipment can be selected with
+`--with research,planning,publishing,scratch`. Codex and Claude are enabled
+by default; use `--providers` to narrow them.
+
+## Initialize a selected repository
+
+```sh
+npx --yes --package @endroit/cli@0.10.0-alpha.0 \
+  endroit init <repository> --desk separate
 ```
 
-Change arguments only when the human approved the corresponding destination,
-providers, Member or Desk strategy. Do not substitute another installer,
-script, package version or direct file mutation.
+This creates an embedded Site relationship for the selected repository. It
+does not import other repositories or transfer their ownership.
 
-## 4. Verify and continue onboarding
+## Verify
 
-From the resulting Home, run:
+Use the tracked console generated inside the Workplace:
 
-```bash
+```sh
+cd <directory>
+node ./endroit.mjs validate
+node ./endroit.mjs build --check
 node ./endroit.mjs doctor
 ```
 
-Report the observed result. If Doctor is not ready, stop and explain the
-limits; do not repair or migrate unrelated files implicitly.
+The canonical selector is `--workplace <path>` or
+`ENDROIT_WORKPLACE_PATH`. The 0.10 compatibility window still reads
+`--home` and `ENDROIT_HOME_PATH`; both aliases are scheduled for removal in
+0.11.
 
-When the Home is ready, use its generated Front Door and onboarding Equipment.
-The human can continue in normal conversation, inspect the Home, and adopt
-explicit workplace gestures only when useful.
+## Provider projections
 
-> **The agent guides. The CLI applies. The human approves.**
+`build` writes `AGENTS.md`, `CLAUDE.md`, provider Skills, the tracked
+console and `.endroit/build.json`. It does not install provider hooks, edit
+host configuration or mutate `.git/info/exclude`.
+
+Open Codex or Claude in the Workplace using the launch command printed by
+`create` or `init`. Provider-specific host integration, when needed, is a
+separate explicit operation and is not implied by installation.
+
+## Existing 0.9 data
+
+Endroit 0.10 reads frozen v7 declarations and Route v8 through its compatibility
+adapter. It does not accept the earlier unversioned v6 contracts or offer a
+whole-Workplace migration command. Keep the existing source intact until its
+owner-specific migration is documented and verified.
+
+Route conversion is the only general source migration included in this
+candidate:
+
+```sh
+node ./endroit.mjs route migrate --check --json
+node ./endroit.mjs route migrate --json
+node ./endroit.mjs route migrate --rollback <run-id> --json
+```
+
+Read [Upgrade from 0.9 to 0.10](docs/migration-0.10.md) first, then the focused
+[Route v8 to v9 migration](docs/migration-route-v9.md). Never move or clean a
+checkout as part of source migration.
