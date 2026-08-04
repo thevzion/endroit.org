@@ -11,6 +11,7 @@ import test from 'node:test';
 const siteRoot = fileURLToPath(new URL('..', import.meta.url));
 const read = (path, encoding = 'utf8') => readFile(resolve(siteRoot, path), encoding);
 const hash = (content) => createHash('sha256').update(content).digest('hex');
+const endroitSourceCommit = '11275a0b4af648140b5f1f9f499897b62f897dfe';
 
 test('source synchronization refuses to guess the Endroit release checkout', async () => {
 	const script = await read('scripts/sync-owned-sources.mjs');
@@ -71,7 +72,7 @@ test('public schema bytes remain immutable and match their manifest', async () =
 	const manifest = await read('public/schema/manifest.json').then(JSON.parse);
 	assert.equal(manifest.release, '0.10.0-alpha.0');
 	assert.equal(manifest.availability, 'candidate');
-	assert.match(manifest.sourceCommit, /^[0-9a-f]{40}$/);
+	assert.equal(manifest.sourceCommit, endroitSourceCommit);
 	assert.equal(manifest.contracts.length, 26);
 	assert.equal(new Set(manifest.contracts.map(({ path }) => path)).size, 26);
 	for (const contract of manifest.contracts) {
@@ -91,6 +92,7 @@ test('public schema bytes remain immutable and match their manifest', async () =
 		'artifact.json': '331fd94dd5ed5bc159c6c8b2bf286eff580b30f957bf7a9e3beb0c5732121995',
 	};
 	for (const [name, digest] of Object.entries(historical)) assert.equal(hash(await read(`public/schema/${name}`, null)), digest, name);
+	assert.equal(hash(await read('public/schema/v7/runtime.json', null)), '7f95cf78217d0a94219cb0d9dd6f0b952fb854ac95c8e91ec1dd8367830e8799', 'v7/runtime.json');
 	assert.equal(JSON.parse(await read('public/schema/v8/route.json')).$id, 'https://endroit.org/schema/v8/route.json');
 	assert.equal(JSON.parse(await read('public/schema/v9/workplace.json')).$id, 'https://endroit.org/schema/v9/workplace.json');
 	assert.equal(JSON.parse(await read('public/schema/work/v1alpha2.json')).$id, 'https://endroit.org/schema/work/v1alpha2.json');
