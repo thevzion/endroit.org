@@ -147,7 +147,7 @@ test('the static build emits every supported route and machine contract', async 
 	assert.deepEqual(await read('dist/llms.txt', null), await read('public/llms.txt', null));
 	const landing = await read('dist/index.html');
 	const install = await read('dist/install/index.html');
-	for (const phrase of ['Agents produce. Your workplace compounds.', 'Context that knows its place.', 'What remains is your agentic capital.']) assert.match(landing, new RegExp(phrase.replaceAll('.', '\\.')));
+	for (const phrase of ['Move the system. Keep the decisions human.', 'Agents execute. The Workplace carries continuity.', 'Endroit gives each Meeting the context, methods and Sites it needs—so work compounds without handing direction to the agent.', 'Context that knows its place.', 'What remains is your agentic capital.']) assert.match(landing, new RegExp(phrase.replaceAll('.', '\\.')));
 	assert.equal([...install.matchAll(/<h1(?:\s|>)/g)].length, 1);
 	assert.doesNotMatch(install, /<h1[^>]*>Install Endroit<\/h1>/);
 });

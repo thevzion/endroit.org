@@ -101,7 +101,7 @@
       },
       {
         "path": "surfaces/home/SURFACE.md",
-        "sha256": "75a8d8236750ffdee22cc387845c66376dcdeecdccff5562726a62f71d86e5cb"
+        "sha256": "782a47dae899f04b2964b5f9eb353e2efbc0932333b0c7f372dc212b81ff928d"
       },
       {
         "path": "src/lib/surface.mjs",
@@ -128,7 +128,7 @@
     ],
     "render": {
       "path": "dist/index.html",
-      "sha256": "cb1ab2a63526e91752761ffef8d10f7d15375417d34d5841d9413cf362b01ce5",
+      "sha256": "def1fada92cce9b0a0827e61749ebfda2c7277c9b6c30667addf3026696675a8",
       "assets": [
         {
           "href": "/_astro/global.Bk6ZAFbN.css",

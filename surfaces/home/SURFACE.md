@@ -43,14 +43,12 @@ kind: "content"
 id: "hero"
 ```
 
-### Agents produce. Your workplace compounds.
+### Move the system. Keep the decisions human.
 
-> The next agent starts ahead, not over.
+> Agents execute. The Workplace carries continuity.
 
-Endroit is the local-first framework for Workplace-first software craft. It
-turns the context, decisions, methods and bounded reach of human-agent work
-into durable, owned capacity, so each new agent resolves what remained instead
-of asking you to rebuild it.
+Endroit gives each Meeting the context, methods and Sites it needs—so work
+compounds without handing direction to the agent.
 
 - [Run the proof](#capital)
 - [Install Endroit](/install/)
