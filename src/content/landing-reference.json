@@ -1,38 +1,109 @@
 {
-  "schemaVersion": 2,
-  "referenceArtifact": {
-    "site": "interface-lab",
-    "freezeCommit": "b0c4bf23f7d9ee882619a2d3c39049760feb2104",
-    "lockCommit": "fd30ccb7826c040410f95c91ac4bd32cfe338910",
-    "manifestSchemaVersion": 2,
-    "manifestSha256": "7ce0089c2e6b462fc14fd7f9c47bc31b69d2058cd33880cd967f24c334a391c1",
-    "candidate": "endroit-024",
-    "route": "/experiments/endroit.org/024-context-that-knows-its-place/",
-    "entrypoint": "src/experiments/endroit.org/iterations/024-context-that-knows-its-place/Page.astro",
-    "manifestBaseCommit": "f4d7e154407ad26d8a88461aa9f5d38c7a24599e",
-    "path": "src/experiments/endroit.org/iterations/024-context-that-knows-its-place",
-    "manifest": "evidence/selected-landings-freeze/manifest.json",
-    "sourceHashes": {
-      "PRODUCT.md": "485e4a045ac82cb04d65dc0b1070cd8ec2ab80cbbc00576017960479762542a3",
-      "Page.astro": "5b04f296ceb7d3299273a54c24cb40842df7f100696c880ba242414202de7e2b",
-      "instrument.mjs": "18bdd4b0d3081815cf7e54b8974a1c902ec524e7c375072c879603d48b9a8089",
-      "bench.css": "dfb2e25b44c7bdbc3fc2d210cb8e21663313129f6cf657ccc239e5c965de530f",
-      "DESIGN.md": "77c5093c56fac2a94a34e4a5834d4449f54075f3c91042c4238345b570ed3236",
-      "CalTag.astro": "12baa63457f75c073c4e101ecfb3e1c7127b46b6a34b7e8379d64e50cc7c46c2",
-      "candidate.test.mjs": "b720010b668447d2e54b99a2eed209efcc2b088cd663ed94cccc19eafd39cc26"
+  "schemaVersion": 3,
+  "explorationReceipt": {
+    "site": "endroit.org",
+    "route": "/",
+    "entrypoint": "src/pages/index.astro",
+    "northStar": "The Consignment Set",
+    "directionContract": "surfaces/home/DIRECTION.md",
+    "seed": "7568bf67",
+    "baseRevision": "23863b77b1e11a0b39019091d47294c42f3a4dab",
+    "derivedFrom": "site:endroit.org own materials: consignment forms, manifests, reason codes, stamps, Routes, receipts",
+    "accepted": false,
+    "delivered": false,
+    "reviewPending": "human Content, Design and CTA review",
+    "scope": [
+      "The landing route only: src/pages/index.astro and the components, data and stylesheet exclusive to it.",
+      "Secondary routes keep BaseLayout and the incumbent src/styles/global.css bench system, untouched.",
+      "public/social-card.png still renders the retired bench world and needs a replacement before any delivery."
+    ],
+    "sourceFiles": [
+      {
+        "path": "PRODUCT.md",
+        "sha256": "6337a61f9ac7df586b6474af6a90ea308f859d7116569eec62d343bc090e79fc"
+      },
+      {
+        "path": "DESIGN.md",
+        "sha256": "a7578dc542cb9ee6cada14cf1048401aa50b7a789deca04d4ee1f1f70e9be774"
+      },
+      {
+        "path": ".impeccable/design.json",
+        "sha256": "ac50847691477813bbc9106d9b418f014e63bac338860c7a6fcf20577d5e70f3"
+      },
+      {
+        "path": "src/pages/index.astro",
+        "sha256": "6dc7b408edeb25f5f8bdd4026ae6cac31a19b9932500dcf8d73ce7dc661e6883"
+      },
+      {
+        "path": "src/components/SheetHead.astro",
+        "sha256": "c389459e5f942b60ede938683d4d10b7dfa1ebd5d0da10891f3f391dbfcd21ff"
+      },
+      {
+        "path": "src/components/Stamp.astro",
+        "sha256": "570b243325d31af902498f629d994a5349877bd64cb83e0c87a5b118bf38e19c"
+      },
+      {
+        "path": "src/lib/consignment.mjs",
+        "sha256": "22b36fe58b73250714d412a50dd76a57254b60d1a87746b3793177ee820a46b7"
+      },
+      {
+        "path": "src/lib/surface.mjs",
+        "sha256": "1902ed22c17845773812a2336ae3e0077ec37d98506c53a51b566f6ef11a73e3"
+      },
+      {
+        "path": "src/styles/consignment.css",
+        "sha256": "7497c4507b0119e0e47b294cd016aeedeba9ace86eecc3f8ad4b0f4097f19b17"
+      },
+      {
+        "path": "surfaces/home/SURFACE.md",
+        "sha256": "9415dc9b4103284cfbd8e5d1e9ef4256728f2570def1269373bfb52af86f0de5"
+      },
+      {
+        "path": "surfaces/home/DIRECTION.md",
+        "sha256": "289b208a13810de45c87bfd7b526163a9f206223ea3ea1abf94766b9024a5655"
+      }
+    ],
+    "publicAssets": [
+      {
+        "path": "public/favicon.svg",
+        "sha256": "dfc2c082fc0a54aac116afa7cf738895be19f907a7dd2a8677686cae476dc395"
+      },
+      {
+        "path": "public/social-card.png",
+        "sha256": "d810852b308a869300a18bb8bf4ec64061b7e0ef31c52f7ab782327994f012e6"
+      }
+    ],
+    "render": {
+      "path": "dist/index.html",
+      "sha256": "b2a6aaa1acf69b750736ee2e724da4edd8f0952cb2b26e085f32f966d0781367",
+      "assets": [
+        {
+          "href": "/_astro/index.CoDjjkMW.css",
+          "path": "dist/_astro/index.CoDjjkMW.css",
+          "sha256": "790711b8054d2a2ab94600704c6a168c91cfe45f6c9d88dd37fcb1f961909960"
+        }
+      ]
     }
   },
-  "productionDeltas": [
-    "Remove the Interface Lab frame and noindex directive.",
-    "Resolve component, data, stylesheet, navigation and asset paths for the production Site.",
-    "Add production canonical, social and WebSite JSON-LD metadata.",
-    "Replace experiment-only footer language with production source, roadmap and license links.",
-    "Extend the frozen bench stylesheet only for secondary public routes and shared production chrome.",
-    "Record the production direction contract and exact reference provenance.",
-    "Align the public claims with the current open-workplace/0.2-draft Protocol.",
-    "Move owned landing composition and copy into the Site-owned Surface Artifact without redesigning the native Astro renderer.",
-    "Render the accepted, honestly bootstrapping Endroit Discord destination."
-  ],
+  "supersedes": {
+    "site": "interface-lab",
+    "candidate": "endroit-024",
+    "northStar": "The Bench Logic-Analyzer",
+    "freezeCommit": "b0c4bf23f7d9ee882619a2d3c39049760feb2104",
+    "lockCommit": "fd30ccb7826c040410f95c91ac4bd32cfe338910",
+    "manifestBaseCommit": "f4d7e154407ad26d8a88461aa9f5d38c7a24599e",
+    "manifestSchemaVersion": 2,
+    "manifestSha256": "7ce0089c2e6b462fc14fd7f9c47bc31b69d2058cd33880cd967f24c334a391c1",
+    "route": "/experiments/endroit.org/024-context-that-knows-its-place/",
+    "entrypoint": "src/experiments/endroit.org/iterations/024-context-that-knows-its-place/Page.astro",
+    "manifest": "evidence/selected-landings-freeze/manifest.json",
+    "renderSha256": "def1fada92cce9b0a0827e61749ebfda2c7277c9b6c30667addf3026696675a8",
+    "retiredModules": [
+      "src/lib/instrument.mjs",
+      "src/components/CalTag.astro"
+    ],
+    "note": "The promoted 024 world remains the delivered public landing until a human accepts a replacement. Its exact bytes stay recoverable from the ecosystem-2026-08-02 release branch; this exploration does not overwrite that history."
+  },
   "contentReceipt": {
     "release": "ecosystem-2026-08-02",
     "availability": "candidate",
@@ -70,72 +141,5 @@
         "sha256": "1990de0f5c072c35cde7739d758e22b4cfbe4db8ce8d0054835ded918175287f"
       }
     ]
-  },
-  "unchangedReferenceModules": [
-    "src/components/CalTag.astro"
-  ],
-  "promotionReceipt": {
-    "site": "endroit.org",
-    "route": "/",
-    "entrypoint": "src/pages/index.astro",
-    "sourceFiles": [
-      {
-        "path": "PRODUCT.md",
-        "sha256": "6337a61f9ac7df586b6474af6a90ea308f859d7116569eec62d343bc090e79fc"
-      },
-      {
-        "path": "DESIGN.md",
-        "sha256": "6f1d2b37e67f22fd77dc690f3c32a92d437fdcfcbfdb934bb7b682e5c221cea7"
-      },
-      {
-        "path": ".impeccable/design.json",
-        "sha256": "16d75922512e88a699ceaaabd64b67cef1a82ddb6c9cc7c5481a2c7da4022dcb"
-      },
-      {
-        "path": "src/pages/index.astro",
-        "sha256": "e47bb0ed050d338f0bd590c2f9dd7f5637697730c450d9f11f3f570b7e894eba"
-      },
-      {
-        "path": "src/lib/instrument.mjs",
-        "sha256": "bdab59f8d258c239f8e3b25301aa5f6a7657c453e3c8b18ed28fe17238a6fb5a"
-      },
-      {
-        "path": "surfaces/home/SURFACE.md",
-        "sha256": "782a47dae899f04b2964b5f9eb353e2efbc0932333b0c7f372dc212b81ff928d"
-      },
-      {
-        "path": "src/lib/surface.mjs",
-        "sha256": "aae2887ae0e12af7fc0b5042c0bd736fdfda807a19fd72cd7487bf1d32590816"
-      },
-      {
-        "path": "src/styles/global.css",
-        "sha256": "d5cdf7a1451bf20c066ad1b1163f46fae91fd28ba12dc317ae0dd8eef7be2c78"
-      },
-      {
-        "path": "src/components/CalTag.astro",
-        "sha256": "12baa63457f75c073c4e101ecfb3e1c7127b46b6a34b7e8379d64e50cc7c46c2"
-      }
-    ],
-    "publicAssets": [
-      {
-        "path": "public/favicon.svg",
-        "sha256": "dfc2c082fc0a54aac116afa7cf738895be19f907a7dd2a8677686cae476dc395"
-      },
-      {
-        "path": "public/social-card.png",
-        "sha256": "d810852b308a869300a18bb8bf4ec64061b7e0ef31c52f7ab782327994f012e6"
-      }
-    ],
-    "render": {
-      "path": "dist/index.html",
-      "sha256": "def1fada92cce9b0a0827e61749ebfda2c7277c9b6c30667addf3026696675a8",
-      "assets": [
-        {
-          "href": "/_astro/global.Bk6ZAFbN.css",
-          "path": "dist/_astro/global.Bk6ZAFbN.css",
-          "sha256": "ad0932164cc0bad625959f8c6426be4dcf96352fb1fbc13ef71bf71a65df9513"
-        }
-      ]
-    }
   }
 }

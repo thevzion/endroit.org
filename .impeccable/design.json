@@ -1,32 +1,35 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-08-04T00:58:50+02:00",
+  "generatedAt": "2026-08-05T00:00:00+02:00",
   "title": "Design System: Endroit",
   "extensions": {
     "colorMeta": {
-      "phosphor": { "role": "primary", "displayName": "Phosphor Signal", "canonical": "#6fe6a1", "tonalRamp": ["#092519", "#123b28", "#1e5639", "#2f754d", "#439661", "#59bd7e", "#6fe6a1", "#d9f9e5"] },
-      "amber-trigger": { "role": "secondary", "displayName": "Amber Trigger", "canonical": "#e2a43e", "tonalRamp": ["#291b05", "#48310b", "#694913", "#8e641d", "#b78129", "#d99a38", "#e2a43e", "#f8e6c5"] },
-      "alarm": { "role": "tertiary", "displayName": "Alarm Red", "canonical": "#b23920", "tonalRamp": ["#260905", "#45110a", "#681b10", "#8b2818", "#b23920", "#d85b41", "#eb8f7d", "#f8ddd7"] },
-      "warm-steel": { "role": "neutral", "displayName": "Warm Steel", "canonical": "#d9dbd4", "tonalRamp": ["#222420", "#3c3f39", "#5c5f58", "#7e8179", "#a0a39b", "#c1c4bc", "#d9dbd4", "#f4f5f0"] },
-      "silkscreen": { "role": "neutral", "displayName": "Silkscreen Ink", "canonical": "#22272a", "tonalRamp": ["#101214", "#22272a", "#3a4043", "#555c5f", "#737b7e", "#9ba1a3", "#c7cbcc", "#f2f3f3"] },
-      "screen": { "role": "neutral", "displayName": "Graticule Screen", "canonical": "#0e1512", "tonalRamp": ["#08100c", "#0e1512", "#1c2922", "#35453d", "#53665c", "#7d8d84", "#b1bbb5", "#eef1ef"] }
+      "board": { "role": "neutral", "displayName": "Pressboard Binding", "canonical": "#1b2027", "tonalRamp": ["#0e1216", "#1b2027", "#232b34", "#37424e", "#55636f", "#7d8b96", "#9aa7b2", "#e9ece6"] },
+      "stock-original": { "role": "neutral", "displayName": "Bond Original", "canonical": "#eef0e9", "tonalRamp": ["#20231f", "#3a3e37", "#5a5f56", "#7d8278", "#a3a89d", "#c8ccc2", "#eef0e9", "#fbfaf7"] },
+      "stock-carrier": { "role": "primary", "displayName": "Canary Carrier Copy", "canonical": "#ecd66b", "tonalRamp": ["#2a2408", "#4a3f0d", "#6b5b14", "#8e7a1d", "#b39c2c", "#d4bd47", "#ecd66b", "#f9f0c6"] },
+      "stock-consignee": { "role": "secondary", "displayName": "Blue Consignee Copy", "canonical": "#a2bfd6", "tonalRamp": ["#0d1a24", "#16303f", "#20475d", "#2c4857", "#5b87a4", "#7fa5c0", "#a2bfd6", "#e0ebf3"] },
+      "stamp": { "role": "tertiary", "displayName": "Stamp Oxide", "canonical": "#a4301c", "tonalRamp": ["#240a05", "#421209", "#651b0e", "#872516", "#a4301c", "#c9503a", "#e4897a", "#f8dcd6"] },
+      "seal": { "role": "tertiary", "displayName": "Receipt Seal", "canonical": "#1a573a", "tonalRamp": ["#06170f", "#0d2d1e", "#14422c", "#1a573a", "#2c7d55", "#48a375", "#7ec3a0", "#d7ecdf"] }
     },
     "typographyMeta": {
-      "display": { "displayName": "Bench Declaration", "purpose": "One dominant first-viewport claim." },
+      "declared": { "displayName": "Declaration", "purpose": "One dominant claim per sheet, sentence case on a hard rule." },
       "body": { "displayName": "Plain Consequence", "purpose": "Mechanism and consequence in direct language." },
-      "label": { "displayName": "Instrument Readout", "purpose": "Signals, states, paths, maturity and provenance." }
+      "preprinted": { "displayName": "Pre-printed Matter", "purpose": "Everything the form itself says: labels, plates, sheet heads." },
+      "filled": { "displayName": "Filled-in Entry", "purpose": "Everything about the visitor's actual work: objectives, addresses, paths, versions." }
     },
     "shadows": [
-      { "name": "screen-inset", "value": "inset 0 6px 24px rgba(0, 0, 0, 0.55)", "purpose": "Bounded depth inside graticule screens only." },
-      { "name": "phosphor-signal", "value": "0 0 8px rgba(111, 230, 161, 0.35)", "purpose": "Energy halo on active traces only." }
+      { "name": "copy-beneath", "value": "9px 9px 0 -1px var(--under), 9px 9px 0 0 var(--ink)", "purpose": "Hard offset sliver showing the next stock in the set; dropped below 720px." }
     ],
     "motion": [
-      { "name": "state-fast", "value": "160ms ease-out", "purpose": "Button and resolver state changes." },
-      { "name": "trace-sweep", "value": "7s linear infinite", "purpose": "Single hero-screen calibration sweep; disabled for reduced motion." }
+      { "name": "strike", "value": "150ms cubic-bezier(0.2, 0.9, 0.3, 1)", "purpose": "A stamp landing on a sheet after a human act." },
+      { "name": "impression", "value": "240ms ease-out", "purpose": "The matching ledger state line rising into place." },
+      { "name": "slide", "value": "150ms ease-out", "purpose": "A carbon copy coming to the top of the set; transform only, never opacity." }
     ],
     "breakpoints": [
-      { "name": "stack", "value": "960px" },
-      { "name": "compact", "value": "640px" },
+      { "name": "hero-split", "value": "1000px" },
+      { "name": "two-col", "value": "900px" },
+      { "name": "bar-compact", "value": "800px" },
+      { "name": "flat-sheet", "value": "720px" },
       { "name": "floor", "value": "320px" }
     ]
   },
@@ -34,64 +37,75 @@
     {
       "name": "Primary Action",
       "kind": "button",
-      "refersTo": "button-primary",
+      "refersTo": "action-primary",
       "description": "The explicit next human action.",
-      "html": "<button class=\"ds-action-primary\">RUN THE PROOF</button>",
-      "css": ".ds-action-primary { min-height: 3rem; padding: .7rem 1.3rem; border: 1.5px solid var(--silk, #22272a); border-radius: 0; background: var(--silk, #22272a); color: var(--phos, #6fe6a1); font: 800 .8rem/1.4 Helvetica, Arial, sans-serif; letter-spacing: .07em; text-transform: uppercase; } .ds-action-primary:hover { background: #000; } .ds-action-primary:focus-visible { outline: 3px solid var(--focus, #14507a); outline-offset: 3px; }"
+      "html": "<button class=\"ds-action-primary\">INSTALL ENDROIT</button>",
+      "css": ".ds-action-primary { padding: .72rem 1.15rem; border: 2px solid #14181c; border-radius: 0; background: #14181c; color: #ecd66b; font: 700 .6875rem/1 'Helvetica Neue', Helvetica, Arial, sans-serif; letter-spacing: .14em; text-transform: uppercase; } .ds-action-primary:hover { background: #a4301c; border-color: #a4301c; color: #fbfaf7; } .ds-action-primary:focus-visible { outline: 3px solid #14507a; outline-offset: 2px; }"
     },
     {
       "name": "Secondary Action",
       "kind": "button",
-      "refersTo": "button-secondary",
-      "description": "A bounded alternative without competing for primary emphasis.",
-      "html": "<button class=\"ds-action-secondary\">VIEW THE SOURCE</button>",
-      "css": ".ds-action-secondary { min-height: 3rem; padding: .7rem 1.3rem; border: 1.5px solid var(--silk, #22272a); border-radius: 0; background: transparent; color: var(--silk, #22272a); font: 800 .8rem/1.4 Helvetica, Arial, sans-serif; letter-spacing: .07em; text-transform: uppercase; } .ds-action-secondary:hover { background: var(--silk, #22272a); color: var(--bezel, #d9dbd4); } .ds-action-secondary:focus-visible { outline: 3px solid var(--focus, #14507a); outline-offset: 3px; }"
+      "refersTo": "action",
+      "description": "A bounded alternative that does not compete for primary emphasis.",
+      "html": "<button class=\"ds-action\">VIEW THE SOURCE</button>",
+      "css": ".ds-action { padding: .72rem 1.15rem; border: 2px solid #14181c; border-radius: 0; background: transparent; color: #14181c; font: 700 .6875rem/1 'Helvetica Neue', Helvetica, Arial, sans-serif; letter-spacing: .14em; text-transform: uppercase; } .ds-action:hover { background: #14181c; color: #ecd66b; } .ds-action:focus-visible { outline: 3px solid #14507a; outline-offset: 2px; }"
     },
     {
-      "name": "Bench Navigation",
-      "kind": "nav",
-      "description": "Persistent orientation across one public instrument.",
-      "html": "<nav class=\"ds-nav\"><a href=\"#\">INSTRUMENT</a><a class=\"ds-current\" href=\"#\">HOMES</a><a href=\"#\">ROADMAP</a></nav>",
-      "css": ".ds-nav { display: flex; gap: 1.5rem; padding: .8rem 1.25rem; border-bottom: 2px solid #22272a; background: #d9dbd4; } .ds-nav a { color: #4c534f; font: 700 .76rem/1.4 Helvetica, Arial, sans-serif; letter-spacing: .08em; text-decoration: none; } .ds-nav a:hover, .ds-nav a:focus-visible { color: #22272a; } .ds-nav .ds-current { color: #22272a; text-decoration: underline; text-decoration-color: #7c5410; text-decoration-thickness: 2px; text-underline-offset: .2em; }"
-    },
-    {
-      "name": "Graticule Screen",
+      "name": "Sheet Head",
       "kind": "custom",
-      "refersTo": "screen",
-      "description": "A bounded proof surface for traces, states and addresses.",
-      "html": "<figure class=\"ds-screen\"><div><span>SIGNAL</span><b>RESOLVED</b></div><figcaption>Plain-language interpretation of the readout.</figcaption></figure>",
-      "css": ".ds-screen { margin: 0; } .ds-screen div { display: grid; gap: .75rem; padding: 1.4rem 1.5rem; border: 2px solid #263028; border-radius: 6px; background: repeating-linear-gradient(to right, rgba(111,230,161,.05) 0 1px, transparent 1px 10%), #0e1512; box-shadow: inset 0 6px 24px rgba(0,0,0,.55); color: #6fe6a1; font: 700 .78rem/1.5 ui-monospace, monospace; } .ds-screen figcaption { margin-top: .9rem; color: #4c534f; font: 400 .86rem/1.6 Helvetica, Arial, sans-serif; }"
+      "description": "Pre-printed identity of one sheet in the set: number, plate, which copy, form code.",
+      "html": "<p class=\"ds-sheet-head\"><span>Sheet 05</span><span>Consignee's copy</span><span>Copy 3 : the consignee's</span><span class=\"ds-form\">FORM E-0.10</span></p>",
+      "css": ".ds-sheet-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: .35rem 1.1rem; margin: 0; padding-bottom: .55rem; border-bottom: 2px solid #14181c; font: 700 .625rem/1.35 'Helvetica Neue', Helvetica, Arial, sans-serif; letter-spacing: .16em; text-transform: uppercase; color: #575f66; } .ds-sheet-head span:nth-child(-n+2) { color: #14181c; } .ds-sheet-head .ds-form { margin-left: auto; font-family: ui-monospace, monospace; letter-spacing: .08em; }"
     },
     {
-      "name": "Calibration Record",
+      "name": "Manifest Line",
       "kind": "custom",
-      "description": "Native disclosure for claim provenance and maturity.",
-      "html": "<details class=\"ds-cal\"><summary><span></span>CAL / PROOF <b>CURRENT</b></summary><p>Mechanism, proof, source and action remain inspectable.</p></details>",
-      "css": ".ds-cal { border: 1.5px dashed #a7aba0; background: #f4f5f0; color: #22272a; font-family: ui-monospace, monospace; } .ds-cal summary { display: flex; align-items: center; gap: .7rem; padding: .55rem .9rem; cursor: pointer; font-size: .72rem; letter-spacing: .1em; } .ds-cal summary span { width: .6rem; height: .6rem; border: 1.5px solid #7c5410; border-radius: 50%; } .ds-cal[open] summary span { background: #e2a43e; } .ds-cal summary b { margin-left: auto; padding: .14rem .5rem; background: #1f6f43; color: #fff; font-size: .6rem; } .ds-cal p { margin: 0; padding: .9rem 1rem; border-top: 1px dashed #a7aba0; }"
+      "description": "One resolved source, or one deliberately excluded source with its reason code.",
+      "html": "<ul class=\"ds-manifest\"><li><span>ROOM/payments</span><span><b>Room · payments</b> · owns this objective</span></li><li class=\"ds-out\"><span>R-05</span><span><b>Site · infra repository</b> · no Route declared</span></li></ul>",
+      "css": ".ds-manifest { margin: 0; padding: 0; list-style: none; } .ds-manifest li { display: grid; grid-template-columns: 6.2rem minmax(0,1fr); gap: 0 .7rem; padding: .34rem 0; border-top: 1px solid #b6bcb8; font: 400 .82rem/1.45 'Helvetica Neue', Helvetica, Arial, sans-serif; color: #575f66; } .ds-manifest li > span:first-child { font: 400 .72rem/1.6 ui-monospace, monospace; color: #575f66; } .ds-manifest b { color: #14181c; } .ds-manifest .ds-out { opacity: 1; } .ds-manifest .ds-out > span:first-child { color: #a4301c; font-weight: 700; } .ds-manifest .ds-out b { color: #a4301c; text-decoration: line-through; text-decoration-thickness: 1.5px; }"
+    },
+    {
+      "name": "Stamp",
+      "kind": "badge",
+      "refersTo": "stamp",
+      "description": "State, exclusion, consent or an observed effect, struck onto the sheet.",
+      "html": "<span class=\"ds-stamp ds-consent\">CONSENT GIVEN</span> <span class=\"ds-stamp ds-received\">RECEIVED IN GOOD ORDER</span>",
+      "css": ".ds-stamp { display: inline-block; padding: .28rem .55rem .24rem; border: 2px solid currentColor; background: color-mix(in srgb, currentColor 8%, #fbfaf7); font: 700 .625rem/1 'Helvetica Neue', Helvetica, Arial, sans-serif; letter-spacing: .16em; text-transform: uppercase; transform: rotate(-1.1deg); } .ds-consent { color: #a4301c; } .ds-received { color: #1a573a; }"
+    },
+    {
+      "name": "Signature Step",
+      "kind": "custom",
+      "description": "One human act: a control, its stamp, and the consequence in plain language.",
+      "html": "<li class=\"ds-step\"><p class=\"ds-control\"><button class=\"ds-step-btn\">Retain this finding.</button><span class=\"ds-stamp ds-consent\">RETAINED</span></p><div><h3>One line signed for</h3><p>It becomes owned Material in Room · payments.</p></div></li>",
+      "css": ".ds-step { display: grid; grid-template-columns: 12.5rem minmax(0,1fr); gap: .55rem 1rem; padding: .95rem; list-style: none; border-bottom: 1px solid #b6bcb8; box-shadow: inset 3px 0 0 #14181c; background: #fbfaf7; } .ds-control { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem; margin: 0; } .ds-step-btn { padding: .6rem .85rem; border: 2px solid #14181c; background: #fbfaf7; color: #14181c; font: 700 .625rem/1.15 'Helvetica Neue', Helvetica, Arial, sans-serif; letter-spacing: .12em; text-transform: uppercase; text-align: left; } .ds-step-btn:disabled { border-style: dashed; border-color: #b6bcb8; color: #575f66; } .ds-step h3 { margin: 0; font: 800 1rem/1.25 'Helvetica Neue', Helvetica, Arial, sans-serif; letter-spacing: -.02em; } .ds-step div p { margin: .3rem 0 0; font-size: .88rem; color: #575f66; }"
     }
   ],
   "narrative": {
-    "northStar": "The Bench Logic-Analyzer",
-    "overview": "Endroit presents itself as a precise instrument built by people who care how software is made. Warm steel is the work surface; silkscreen typography labels each bounded responsibility; dark graticule screens make system behavior observable rather than merely asserted.",
+    "northStar": "The Consignment Set",
+    "overview": "Endroit presents itself as a bound book of numbered multi-part forms. A pressboard binding holds sheets of form stock, and the stock colour names the party whose authority a section is about: bond for the shipper who directs and signs, canary for the carrier that runs the agent, blue for the consignee Site that owns its own destination.",
     "keyCharacteristics": [
-      "One warm work surface with bounded dark readouts.",
-      "Meaning expressed through traces, latches, states, addresses and exclusions.",
-      "Dense technical labels paired with plain-language consequences.",
-      "Static-first behavior with full no-JavaScript reading."
+      "Stock colour is semantic: it names the party, never the rhythm.",
+      "Type is semantic: pre-printed, filled-in and stamped are three distinct registers.",
+      "Mechanisms appear as records (manifest lines, ledger states, stamps), not as illustrations of records.",
+      "No webfont, no client framework, no third-party request; the whole argument reads with JavaScript off."
     ],
     "rules": [
-      { "name": "Signal Has Meaning", "body": "Never use phosphor, amber or alarm red as arbitrary decoration.", "section": "colors" },
-      { "name": "Readout Is Not the Message", "body": "Monospace labels identify a signal or contract; they do not replace explanatory prose.", "section": "typography" },
-      { "name": "Bounded Insert", "body": "Dark material appears only as a screen, readout or control—not as the page background.", "section": "elevation" }
+      { "name": "Stock Names the Party", "body": "Never choose a stock for rhythm. If a section is not about the carrier or the consignee, it prints on bond.", "section": "colors" },
+      { "name": "Verbatim Identifier", "body": "A version, path or protocol id inside pre-printed matter resets text-transform and letter-spacing; casing must never rewrite 0.10.0-alpha.0.", "section": "typography" },
+      { "name": "Bounded Board", "body": "The binding may be the page ground, the bar, the footer and the audit sheets. Long-form reading always happens on stock.", "section": "layout" },
+      { "name": "Exclusion Is a Record", "body": "A not-aboard line keeps full opacity and carries a reason code; it is never a de-emphasised row.", "section": "components" }
     ],
     "dos": [
-      "Do make inclusion and exclusion equally inspectable.",
-      "Do preserve keyboard completion, visible focus, AA contrast, reduced motion and full no-JavaScript reading."
+      "Do print exclusion as legibly as inclusion, with its reason.",
+      "Do keep a claim, its mechanism, its proof and its maturity in one record.",
+      "Do preserve keyboard completion, visible focus, AA contrast, reduced motion and the full no-JavaScript reading.",
+      "Do treat 320px as a first-class printing of the same form set."
     ],
     "donts": [
-      "Don't turn the Site into an IDE, fake terminal, decorative dashboard or all-dark developer template.",
-      "Don't add ornamental glows or accent colors without a semantic state.",
-      "Don't hide product claims behind interaction."
+      "Don't use a stock, an oxide mark or a green seal without the meaning it names.",
+      "Don't add a fake terminal, an IDE frame, a node graph, a decorative dashboard, a purple gradient or an all-dark developer template.",
+      "Don't let pre-printed casing rewrite a version string, path or protocol id.",
+      "Don't hide a product claim behind an interaction, or imply automatic memory, silent retention, an any-agent guarantee or a measured productivity gain."
     ]
   }
 }

@@ -5,8 +5,8 @@ id: "home"
 owner: "site:endroit.org"
 artifact_contract: "endroit/release/public-surface/v1alpha1"
 material_state: "retained"
-currentness: "current"
-derived_from: ["interface-lab:endroit-024"]
+currentness: "exploration"
+derived_from: ["site:endroit.org/surfaces/home/DIRECTION.md"]
 ---
 
 # Endroit
@@ -41,16 +41,20 @@ owning the layout, components or design tokens.
 ```endroit
 kind: "content"
 id: "hero"
+sheet: "01"
+stock: "original"
+plate: "CONSIGNMENT NOTE"
 ```
 
-### Move the system. Keep the decisions human.
+### A harness runs the agent. Endroit runs the work around it.
 
-> Agents execute. The Workplace carries continuity.
+> Agents execute. You still direct, accept and deliver.
 
-Endroit gives each Meeting the context, methods and Sites it needs—so work
-compounds without handing direction to the agent.
+Endroit is a framework for structuring work around coding agents. Every
+Meeting gets one written objective, a manifest of exactly which owned sources
+are aboard, declared destinations, and a signature block that never leaves
+your hands.
 
-- [Run the proof](#capital)
 - [Install Endroit](/install/)
 - [View the source](https://github.com/thevzion/endroit)
 
@@ -59,80 +63,105 @@ compounds without handing direction to the agent.
 ```endroit
 kind: "content"
 id: "problem"
+sheet: "02"
+stock: "original"
+plate: "WHY A MANIFEST"
 ```
 
-### A longer context window is not continuity.
+### A bigger context window is a bigger truck. It is not a manifest.
 
-Each session starts warm-up again: what we work on, which decisions are
-current, where results belong, what the agent may change. A bigger window
-holds more tokens for one session. It gives none of it a place, an owner, or a
-life beyond the session.
+Every session re-opens the same four questions: what are we working on, which
+decisions still hold, where does the result belong, and what is this agent
+allowed to change. A longer window carries more tokens for one trip. It gives
+none of them an owner, a place, or a life after the trip ends.
 
-> Context windows hold tokens. Workplaces hold meaning.
+> Capacity is not continuity.
 
-## Resolver
+Endroit reduces ambiguity about the situation an agent works in. That is not a
+measured claim about model intelligence or accuracy, and it does not remove
+the need for your correction.
+
+## Carbon
 
 ```endroit
 kind: "content"
-id: "resolver"
+id: "carbon"
+sheet: "03"
+stock: "carrier"
+plate: "CARRIER'S COPY"
 ```
 
-### Context that knows its place.
+### One original. A compiled copy for every provider.
 
-Your agent does not need all your context. It needs the right context, with
-its meaning intact. Endroit keeps working context semantically typed, so
-composition preserves boundaries instead of flattening them.
+Your context lives once, as Markdown you own and can open in any editor.
+Endroit compiles the provider copies from it: `AGENTS.md`, `CLAUDE.md`, Skills
+and other projections. You edit the original; the copies are rebuilt output,
+never the source and never hand-maintained.
 
-> Don’t dump context. Resolve it.
+> Edit the original. The copies are output.
 
-## Capital
+- Optional startup hooks make this smoother. The plain-file model requires none.
+- Other harnesses can read the `AGENTS.md` convention. Codex and Claude are the projection-qualified providers, which is not an any-agent claim.
+
+## Signature
 
 ```endroit
 kind: "content"
-id: "capital"
+id: "signature"
+sheet: "04"
+stock: "original"
+plate: "SIGNATURE BLOCK"
 ```
 
-### End the Meeting. Watch what remains.
+### Nothing survives a Meeting unless you sign for it.
 
-One capture, four phases. The names are illustrative; the transitions are the
-product. Nothing durable happens without your verb.
+A Meeting is bounded on purpose. It holds one objective, the resolved context
+and the ephemeral work. When it closes, the conversation goes. What you signed
+for stays, as a file with an owner, a place and a state, and the next Meeting
+resolves it without inheriting a transcript.
 
-## Relations
+> Close the Meeting. Keep the consignment.
+
+## Consignee
 
 ```endroit
 kind: "content"
-id: "relations"
+id: "consignee"
+sheet: "05"
+stock: "consignee"
+plate: "CONSIGNEE'S COPY"
 ```
 
-### Capital needs more than storage.
+### The destination signs for itself.
 
-Retention, acceptance, delivery and archive stay explicit. Nothing is
-captured silently, and no background agent learns your organization.
+A repository you can reach is not a repository you may change. A Route
+declares reach to one Site and revalidates it before any mutation. Consent is
+a separate act. Delivery exists when the effect is observed in the Site, not
+when an agent reports success.
 
-## Craft
+> Reach is not consent.
 
-```endroit
-kind: "content"
-id: "craft"
-```
-
-### Software craftsmanship, one level up.
-
-You already care about source, boundaries, ownership and lifecycle in code.
-Endroit brings the same craft to the system around the code: the context an
-agent enters, the places results land, the authority every change crosses.
-The exoskeleton isn’t the agent. It’s the workplace around it.
-
-> Craft the system that crafts the software.
+- Accepted is not delivered.
+- A valid Route is not consent.
+- A generated file is not a delivered page.
 
 ## Stack
 
 ```endroit
 kind: "content"
 id: "stack"
+sheet: "06"
+stock: "original"
+plate: "PARTIES AND LIMITS"
 ```
 
-### Open Workplace supplies the grammar. Endroit gives it a place.
+### The harness is not the framework. Neither is the repository.
+
+Endroit sits between your judgment and the runtimes that execute. It owns the
+file-based representation of the work: places, manifests, projections, Routes
+and receipts. It owns nothing else.
+
+> Remove every agent and the Workplace is still Markdown you can read.
 
 Open Workplace is an open proposal, not an established standard. Its current
 experimental Protocol is `open-workplace/0.2-draft`. The qualified local
@@ -149,19 +178,26 @@ cannot be inferred.
 ```endroit
 kind: "content"
 id: "availability"
+sheet: "07"
+stock: "board"
+plate: "CONDITION OF THIS RELEASE"
 ```
 
-### Available now. Candidate next. Research beyond.
+### Available now. Candidate next. Draft beyond.
 
-The public page separates the published alpha, the qualified local candidate
-and the research frontier. A candidate is never presented as an observed
-release.
+Ambition is only useful when its maturity is legible. This register separates
+the published alpha, the qualified local candidate, the experimental protocol
+and the two projection-qualified providers. A candidate is never presented as
+an observed release.
 
 ## Community
 
 ```endroit
 kind: "content"
 id: "community"
+sheet: "08"
+stock: "original"
+plate: "CORRESPONDENCE"
 ```
 
 ### Join the new Discord
@@ -171,13 +207,37 @@ share Workplace experiments and help qualify the release.
 
 - [Join the new Discord](https://discord.gg/HW4Hs9sEp)
 
+## Close
+
+```endroit
+kind: "content"
+id: "close"
+sheet: "09"
+stock: "board"
+plate: "DISPATCH"
+```
+
+### Direct the work. Let the agents execute.
+
+Start with a Workplace. Bring whichever qualified agent you like. Keep the part
+that was worth keeping, and let the next Meeting begin from it.
+
+- [Install Endroit](/install/)
+- [View the source](https://github.com/thevzion/endroit)
+- [Read the roadmap](/roadmap/)
+
 ## Provenance
 
 ```endroit
 kind: "content"
 id: "provenance"
+sheet: "10"
+stock: "board"
+plate: "PROVENANCE"
 ```
 
-The visual language derives historically from Interface Lab reference 024.
-The Site-owned source, renderer and design receipt now carry the production
-contract; Interface Lab is not read by build or release qualification.
+This landing exploration derives its visual world from the Site's own
+materials rather than from an Interface Lab reference: multi-part consignment
+forms, manifests, reason codes, stamps, Routes and receipts. The direction
+contract is `surfaces/home/DIRECTION.md`. The exploration has not been
+accepted, published or deployed.

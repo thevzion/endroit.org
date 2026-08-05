@@ -1,0 +1,8 @@
+---
+// A struck stamp. Tone names the meaning, never decoration: state marks the
+// lifecycle, exclude marks something deliberately left out, consent marks a
+// human act, received marks an observed effect.
+const { tone = 'state', label } = Astro.props;
+---
+
+<span class:list={['stamp', `stamp-${tone}`]}>{label}</span>

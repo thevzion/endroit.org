@@ -1,22 +1,31 @@
 ---
-import CalTag from '../components/CalTag.astro';
+import SheetHead from '../components/SheetHead.astro';
+import Stamp from '../components/Stamp.astro';
 import {
-	availability,
-	capitalDefinition,
+	carbonSet,
+	closedNotes,
+	condition,
+	deliveryStamps,
 	externalLinks,
-	intents,
-	latchPhases,
-	modules,
-	relations,
-	signalTypes,
-	spine,
-} from '../lib/instrument.mjs';
+	ledger,
+	manifest,
+	note,
+	notThis,
+	parties,
+	projectionProofs,
+	retainedTerm,
+	schedule,
+	signatureSteps,
+} from '../lib/consignment.mjs';
 import { publicSurface } from '../lib/surface.mjs';
-import '../styles/global.css';
+import '../styles/consignment.css';
 
-const module = Object.fromEntries(modules.map((item) => [item.id, item]));
-const { hero, problem, resolver, capital, relations: relationsCopy, craft, stack, availability: availabilityCopy, community } = publicSurface;
+const { hero, problem, carbon, signature, consignee, stack, availability, community, close, provenance } = publicSurface;
 void externalLinks;
+
+const title = 'Endroit · A harness runs the agent. Endroit runs the work around it.';
+const description =
+	'Endroit is a framework for structuring work around coding agents: one written objective per Meeting, a manifest of exactly which owned sources are aboard, declared destinations, and human acceptance and delivery consent.';
 ---
 
 <!doctype html>
@@ -24,28 +33,25 @@ void externalLinks;
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
-		<meta
-			name="description"
-			content="Endroit gives human-agent work typed context, durable continuity, and an owned place to compound across sessions and repositories."
-		/>
+		<meta name="description" content={description} />
 		<link rel="canonical" href="https://endroit.org/" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="theme-color" content="#d9dbd4" />
+		<meta name="theme-color" content="#1b2027" />
 		<meta property="og:type" content="website" />
 		<meta property="og:site_name" content="Endroit" />
-		<meta property="og:title" content="Endroit · Agents produce. Your workplace compounds." />
-		<meta property="og:description" content="Context that knows its place. The next agent starts ahead, not over." />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content="Every Meeting gets one objective, a manifest of exactly what is aboard, declared destinations, and a signature block that stays yours." />
 		<meta property="og:url" content="https://endroit.org/" />
 		<meta property="og:image" content="https://endroit.org/social-card.png" />
 		<meta property="og:image:type" content="image/png" />
 		<meta property="og:image:width" content="1200" />
 		<meta property="og:image:height" content="630" />
-		<meta property="og:image:alt" content="Endroit — Agents produce. Your workplace compounds." />
+		<meta property="og:image:alt" content="Endroit: a harness runs the agent, Endroit runs the work around it." />
 		<meta name="twitter:card" content="summary_large_image" />
-		<meta name="twitter:title" content="Endroit · Agents produce. Your workplace compounds." />
-		<meta name="twitter:description" content="Context that knows its place. The next agent starts ahead, not over." />
+		<meta name="twitter:title" content={title} />
+		<meta name="twitter:description" content="Every Meeting gets one objective, a manifest of exactly what is aboard, declared destinations, and a signature block that stays yours." />
 		<meta name="twitter:image" content="https://endroit.org/social-card.png" />
-		<meta name="twitter:image:alt" content="Endroit — Agents produce. Your workplace compounds." />
+		<meta name="twitter:image:alt" content="Endroit: a harness runs the agent, Endroit runs the work around it." />
 		<script is:inline type="application/ld+json" set:html={JSON.stringify({
 			'@context': 'https://schema.org',
 			'@type': 'WebSite',
@@ -54,441 +60,533 @@ void externalLinks;
 			description: 'The Workplace-first application framework.',
 			publisher: { '@type': 'Organization', name: 'The VZion', url: 'https://thevzion.com/' },
 		})} />
-		<title>Endroit · Agents produce. Your workplace compounds.</title>
+		<title>{title}</title>
 	</head>
 	<body>
 		<!--
-		THESIS: Agents produce, the workplace compounds; this production landing is a bench instrument that proves typed context and the capital latch, refusing dark dev-tool theater and feature grids.
-		OWN-WORLD: Bench logic-analyzer: warm steel bezel, silkscreen labels, dark graticule screens as bounded inserts, phosphor-green traces, amber trigger accents, red exclusion markers, mono readouts.
-		STORY: An engineer sees the restart trace, arms an intent and watches context resolve with visible exclusions, runs the latch sequence, meets the name agentic capital only after experiencing it, then installs.
-		FIRST VIEWPORT: Silkscreen title block left (category signal, spine, promise); right, one screen with two traces: agent bursts decaying, workplace staircase holding. Primary action: Run the proof.
-		FORM: Oscilloscope and logic-analyzer bench instrument · pinned Endroit 024 world · seed 35010d6f.
+		THESIS: The unit of agentic work is a dispatched consignment, one written objective with an itemised manifest, a declared destination and a human signature; this page refuses the dark dev-tool hero with a fake terminal and feature grid, and refuses the agent-memory framing.
+		OWN-WORLD: The Consignment Set: pressboard binding #1b2027 holding multi-part form sheets whose stock names the party, bond #eef0e9 for you, canary #ecd66b for the carrier, blue #a9c4d8 for the consignee Site; hairline ruling, tint field blocks, boxed oxide #a4301c stamps, green #1a573a receipt seal; pre-printed tracked caps versus monospace fill versus struck stamp.
+		STORY: A craftsperson reads one filled consignment note, sees exactly what is aboard and what was left out with reason codes, learns the original compiles a copy for every provider, signs three separate acts and watches the ledger survive the Meeting, then reads the condition register and installs.
+		FIRST VIEWPORT: Left column, sheet head then the declaration, lede, two actions and the maturity plate; right column, consignment note 0142 with four filled fields over the aboard and not-aboard manifest. Primary action sits under the lede at left.
+		FORM: Multi-part consignment form and bill of lading · candidate 3 of the grounded list · seed 7568bf67.
 		FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, and DESIGN.md
 		-->
-		<a class="skip-link" href="#main">Skip to the bench</a>
+		<a class="skip-link" href="#main">Skip to the consignment note</a>
 
-		<header class="bench-bar">
-			<a class="brand" href="/" aria-label="Endroit home">endroit</a>
-			<nav aria-label="Modules">
-				<a href="#problem">The problem</a>
-				<a href="#resolver">The resolver</a>
-				<a href="#capital">The proof</a>
-				<a href="#availability">Availability</a>
-			</nav>
-			<div class="bar-tools">
-				<button type="button" class="cal-toggle" data-cal-toggle aria-pressed="false" hidden>CAL</button>
-				<a class="bar-install" href="/install/">Install</a>
+		<header class="bindery">
+			<div class="bindery-inner">
+				<a class="brand" href="/" aria-label="Endroit home">endroit</a>
+				<nav aria-label="Sheets">
+					<a href="#manifest">The manifest</a>
+					<a href="#carbon">The copies</a>
+					<a href="#signature">The signature</a>
+					<a href="#consignee">The destination</a>
+					<a href="#condition">Condition</a>
+				</nav>
+				<p class="bindery-code">Form E-0.10 · Protocol 0.2-draft</p>
+				<a class="action action-primary" href="/install/">Install</a>
 			</div>
 		</header>
 
 		<main id="main">
-			<!-- MODULE 1 · HERO -->
-			<section class="module module-hero" aria-labelledby="hero-title">
-				<div class="hero-plate">
-					<p class="silkscreen-category">{spine.category}</p>
-					<h1 id="hero-title">{hero.title}</h1>
-					<p class="hero-promise">{hero.punch}</p>
-					<p class="hero-lede">{hero.intro}</p>
-					<div class="hero-actions">
-						{hero.actions.map((action, index) => <a class:list={['action', { 'action-primary': index === 0 }]} href={action.href}>{action.label}</a>)}
-					</div>
-					<p class="hero-meta">
-						Published package <code>0.8.0-alpha.1</code> · Qualified local candidate <code>0.10.0-alpha.0</code> ·
-						not yet published or deployed
-					</p>
-				</div>
-
-				<figure class="screen hero-screen" aria-labelledby="hero-screen-caption">
-					<div class="screen-face" aria-hidden="true">
-						<div class="trace-row">
-							<p class="trace-label">AGENT SESSIONS</p>
-							<div class="trace trace-agent">
-								<span class="seg low w1"></span><span class="seg high w2"></span><span class="seg low w1"></span>
-								<span class="seg high w2"></span><span class="seg low w1"></span><span class="seg high w2"></span>
-								<span class="seg low w1"></span>
-							</div>
+			<!-- SHEET 01 · THE CONSIGNMENT NOTE -->
+			<section class="sheet" data-stock="original" id="manifest" aria-labelledby="hero-title">
+				<SheetHead sheet={hero.sheet} plate={hero.plate} copy="Original: retained by you" />
+				<div class="sheet-hero">
+					<div class="hero-say">
+						<h1 class="declared" id="hero-title">{hero.title}</h1>
+						<p class="lede">{hero.intro}</p>
+						<p class="punch">{hero.punch}</p>
+						<div class="actions">
+							{hero.actions.map((action, index) => (
+								<a class:list={['action', { 'action-primary': index === 0 }]} href={action.href}>{action.label}</a>
+							))}
 						</div>
-						<div class="trace-row">
-							<p class="trace-label">YOUR WORKPLACE</p>
-							<div class="trace trace-workplace">
-								<span class="seg step-0 w3"></span><span class="seg step-1 w3"></span><span class="seg step-2 w3"></span>
-								<span class="seg step-3 w3"></span>
-							</div>
+						<div class="hero-meta pre">
+							<span>Published alpha <code>0.8.0-alpha.1</code></span>
+							<span>Qualified local candidate <code>0.10.0-alpha.0</code>: not published, not deployed</span>
+							<span>Experimental protocol <code>open-workplace/0.2-draft</code></span>
+							<span>Projection-qualified providers: Codex and Claude</span>
 						</div>
 					</div>
-					<figcaption id="hero-screen-caption">
-						Two signals, one difference: sessions return to zero; the Workplace holds what you decided to keep.
-					</figcaption>
-				</figure>
-				<CalTag module={module.hero} />
-			</section>
 
-			<!-- MODULE 2 · PROBLEM -->
-			<section class="module" id="problem" aria-labelledby="problem-title">
-				<p class="module-plate">MODULE · THE PROBLEM</p>
-				<h2 id="problem-title">{problem.title}</h2>
-				<div class="module-body">
-					<div class="module-copy">
-						<p>{problem.intro}</p>
-						<p class="module-punch">{problem.punch}</p>
-					</div>
-					<figure class="screen" aria-labelledby="restart-caption">
-						<div class="screen-face" aria-hidden="true">
-							<div class="trace-row">
-								<p class="trace-label">SESSION 1</p>
-								<div class="trace"><span class="seg ramp w4"></span><span class="seg drop w1"></span><span class="seg low w4"></span></div>
+					<div class="note">
+						<p class="note-bar">
+							<span>Consignment note</span>
+							<span class="note-number">No. {note.number} · sheet 1 of {note.sheetsInSet}</span>
+						</p>
+						<dl class="note-fields">
+							{note.fields.map((field) => (
+								<div class="note-field">
+									<dt class="pre">{field.label}</dt>
+									<dd>
+										<span class="note-value">{field.value}</span>
+										<span class="note-hint">{field.note}</span>
+									</dd>
+								</div>
+							))}
+						</dl>
+
+						<div class="manifest">
+							<div class="manifest-head">
+								<p class="pre">Aboard · resolved for this objective</p>
+								<Stamp tone="state" label={`${manifest.aboard.length} lines`} />
 							</div>
-							<div class="trace-row">
-								<p class="trace-label">SESSION 2</p>
-								<div class="trace"><span class="seg low w2"></span><span class="seg ramp w4"></span><span class="seg drop w1"></span><span class="seg low w2"></span></div>
-							</div>
-							<div class="trace-row">
-								<p class="trace-label">SESSION 3</p>
-								<div class="trace"><span class="seg low w4"></span><span class="seg ramp w4"></span><span class="seg drop w1"></span></div>
-							</div>
+							<ul class="manifest-lines">
+								{manifest.aboard.map((line) => (
+									<li class="line">
+										<span class="line-key">{line.address}</span>
+										<span><span class="line-item">{line.item}</span> <span class="line-why">· {line.why}</span></span>
+									</li>
+								))}
+							</ul>
 						</div>
-						<figcaption id="restart-caption">The restart trace: three sessions, three warm-ups, nothing carried.</figcaption>
-					</figure>
-				</div>
-				<CalTag module={module.problem} />
-			</section>
 
-			<!-- MODULE 3 · RESOLVER -->
-			<section class="module" id="resolver" aria-labelledby="resolver-title">
-				<p class="module-plate">MODULE · THE RESOLVER</p>
-				<h2 id="resolver-title">{resolver.title}</h2>
-				<p class="module-lede">{resolver.intro}</p>
-
-				<dl class="type-table">
-					{signalTypes.map((entry) => (
-						<div>
-							<dt>{entry.not}</dt>
-							<dd><span class="preserves">{entry.preserves}</span> {entry.detail}</dd>
+						<div class="manifest">
+							<div class="manifest-head">
+								<p class="pre">Not aboard · left out on purpose</p>
+								<Stamp tone="exclude" label={`${manifest.notAboard.length} excluded`} />
+							</div>
+							<ul class="manifest-lines">
+								{manifest.notAboard.map((line) => (
+									<li class="line line-out">
+										<span class="line-key">{line.code}</span>
+										<span><span class="line-item">{line.item}</span> <span class="line-why">· {line.reason}</span></span>
+									</li>
+								))}
+							</ul>
+							<p class="note-hint">
+								Illustrative record. Endroit composes the smallest relevant set of owned sources and writes down what it left
+								out, with a reason.
+							</p>
 						</div>
-					))}
-				</dl>
-
-				<div class="resolver" data-resolver>
-					<div class="resolver-rail" data-resolver-rail hidden>
-						<p class="rail-label" id="resolver-rail-label">Trigger · your intent</p>
-						<div class="rail-list" role="tablist" aria-labelledby="resolver-rail-label"></div>
-					</div>
-
-					<div class="resolver-panels">
-						{intents.map((intent) => (
-							<article class="capture" data-capture id={`capture-${intent.id}`} aria-labelledby={`capture-${intent.id}-title`}>
-								<header class="capture-head">
-									<h3 id={`capture-${intent.id}-title`}>“{intent.label}”</h3>
-									<p class="capture-readout">IN {intent.armed.length} · OUT {intent.excluded.length} · smallest relevant composition</p>
-								</header>
-								<ul class="channel-list">
-									{intent.armed.map((line) => (
-										<li class={`channel channel-armed channel-${line.kind}`}>
-											<span class="channel-name">{line.channel}</span>
-											<span class="channel-trace" aria-hidden="true"></span>
-											<span class="channel-note">{line.note}</span>
-										</li>
-									))}
-									{intent.excluded.map((line) => (
-										<li class="channel channel-excluded">
-											<span class="channel-name">{line.channel}</span>
-											<span class="channel-trace" aria-hidden="true"></span>
-											<span class="channel-note">excluded · {line.reason}</span>
-										</li>
-									))}
-								</ul>
-							</article>
-						))}
 					</div>
 				</div>
-
-				<p class="module-punch">{resolver.punch}</p>
-				<p class="module-note">
-					Resolution reduces environmental ambiguity by design. It is not a measured claim about model intelligence
-					or accuracy, and it does not remove the need for human correction.
-				</p>
-				<CalTag module={module.resolver} />
 			</section>
 
-			<!-- MODULE 4 · CAPITAL -->
-			<section class="module" id="capital" aria-labelledby="capital-title">
-				<p class="module-plate">MODULE · THE PROOF</p>
-				<h2 id="capital-title">{capital.title}</h2>
-				<p class="module-lede">{capital.intro}</p>
+			<!-- SHEET 02 · WHY A MANIFEST -->
+			<section class="sheet" data-stock="original" aria-labelledby="problem-title">
+				<SheetHead sheet={problem.sheet} plate={problem.plate} copy="Original" />
+				<div class="two-col">
+					<div>
+						<h2 class="declared" id="problem-title">{problem.title}</h2>
+						<p class="lede">{problem.paragraphs[0]}</p>
+						<p class="punch">{problem.punch}</p>
+						<p class="note-fine">{problem.paragraphs[1]}</p>
+					</div>
+					<div>
+						<p class="pre">Three closed notes · nothing signed for</p>
+						<ul class="stubs">
+							{closedNotes.map((closed) => (
+								<li class="stub">
+									<span class="stub-what">
+										<span class="stub-no">No. {closed.number}</span>
+										<span class="stub-objective">{closed.objective}</span>
+									</span>
+									<Stamp tone="exclude" label={`closed · retained ${closed.retained}`} />
+								</li>
+							))}
+						</ul>
+						<p class="note-fine">
+							Three trips, three warm-ups, nothing carried. The work happened; none of it was given a place, so none of it
+							came back.
+						</p>
+					</div>
+				</div>
+			</section>
 
-				<div class="latch" data-latch data-phase="0">
-					<figure class="screen latch-screen">
-						<div class="screen-face">
-							<div class="trace-row" data-channel="occ1">
-								<p class="trace-label">OCCUPANT 1 · claude</p>
-								<div class="trace">
-									<span class="seg high w3" data-ph="0"></span><span class="seg high w3" data-ph="1"></span>
-									<span class="seg drop w1" data-ph="2"></span><span class="seg low w2" data-ph="2"></span>
-									<span class="seg low w3" data-ph="3"></span>
-								</div>
-							</div>
-							<div class="trace-row" data-channel="material">
-								<p class="trace-label">ROOM · payments / Material</p>
-								<div class="trace">
-									<span class="seg low w3" data-ph="0"></span><span class="seg latch w3" data-ph="1"></span>
-									<span class="seg latch w3" data-ph="2"></span><span class="seg latch w3" data-ph="3"></span>
-								</div>
-							</div>
-							<div class="trace-row" data-channel="occ2">
-								<p class="trace-label">OCCUPANT 2 · codex</p>
-								<div class="trace">
-									<span class="seg low w3" data-ph="0"></span><span class="seg low w3" data-ph="1"></span>
-									<span class="seg low w3" data-ph="2"></span><span class="seg high w3" data-ph="3"></span>
-								</div>
-							</div>
+			<!-- SHEET 03 · THE CARBON SET -->
+			<section class="sheet" data-stock="carrier" id="carbon" aria-labelledby="carbon-title">
+				<SheetHead sheet={carbon.sheet} plate={carbon.plate} copy="Copy 2: the carrier's" />
+				<div class="two-col">
+					<div>
+						<h2 class="declared" id="carbon-title">{carbon.title}</h2>
+						<p class="lede" set:html={carbon.prose[0]} />
+						<p class="punch">{carbon.punch}</p>
+						<ul class="caveats">
+							{carbon.fineProse.map((item) => (
+								<li set:html={item} />
+							))}
+						</ul>
+					</div>
+					<div>
+						<div class="carbon" data-carbon>
+							<div class="carbon-tabs" role="tablist" aria-label="Copies of one owned source" data-carbon-tabs></div>
+							{carbonSet.map((copy, index) => (
+								<article class="copy" data-copy id={`copy-${copy.id}`} data-source={index === 0 ? 'true' : undefined}>
+									<div class="copy-head">
+										<span class="copy-file">{copy.file}</span>
+										<span class="copy-role">{copy.role}</span>
+									</div>
+									<pre>{copy.lines.join('\n')}</pre>
+								</article>
+							))}
 						</div>
-						<figcaption class="latch-status" data-latch-status aria-live="polite">
-							{latchPhases[0].title} — {latchPhases[0].note}
-						</figcaption>
-					</figure>
+						<div class="proofs">
+							<p class="pre">This Site does the same thing, check it</p>
+							{projectionProofs.map((proof) => (
+								<p class="proof">
+									<a href={proof.href}>{proof.label}</a>
+									<span>{proof.proves}</span>
+								</p>
+							))}
+						</div>
+					</div>
+				</div>
+			</section>
 
-					<ol class="latch-phases">
-						{latchPhases.map((phase, index) => (
-							<li class="latch-phase" data-latch-phase={index}>
-								<p class="phase-control">
+			<!-- SHEET 04 · THE SIGNATURE BLOCK -->
+			<section class="sheet" data-stock="original" id="signature" aria-labelledby="signature-title">
+				<SheetHead sheet={signature.sheet} plate={signature.plate} copy="Original: your signature" />
+				<div class="two-col">
+					<div>
+						<h2 class="declared" id="signature-title">{signature.title}</h2>
+						<p class="lede">{signature.intro}</p>
+						<p class="punch">{signature.punch}</p>
+					</div>
+					<div>
+						<p class="pre">Three acts, in order</p>
+						<p class="note-fine">
+							Retain, then close, then open the next note. Each one is a separate gesture you make, and none of them
+							happens because an agent decided the work went well. Reset the note to run it again.
+						</p>
+					</div>
+				</div>
+
+				<div class="signature" style="margin-top:1.9rem">
+					<ol class="steps" data-steps>
+						{signatureSteps.map((step, index) => (
+							<li class="step" data-step={index}>
+								<p class="step-control">
 									{index === 0 ? (
-										<span class="phase-start">{phase.control}</span>
+										<span class="step-hand">{step.control}</span>
 									) : (
-										<button type="button" class="phase-button" data-latch-control={index} disabled={index !== 1}>
-											{phase.control}
+										<button type="button" class="step-button" data-step-control={index} disabled={index !== 1} hidden>
+											{step.control}
 										</button>
 									)}
+									<Stamp tone={index === 0 ? 'state' : 'consent'} label={step.stamp} />
 								</p>
-								<div class="phase-text">
-									<h3>{phase.title}</h3>
-									<p>{phase.note}</p>
+								<div class="step-text">
+									<h3>{step.title}</h3>
+									<p>{step.note}</p>
 								</div>
 							</li>
 						))}
 					</ol>
-					<p class="latch-reset"><button type="button" class="reset-button" data-latch-reset hidden>Reset the capture</button></p>
-				</div>
 
-				<aside class="capital-reveal" data-capital-reveal aria-labelledby="capital-reveal-title">
-					<h3 id="capital-reveal-title">{capitalDefinition.reveal}</h3>
-					<p>{capitalDefinition.meaning}</p>
-					<p class="reveal-isnot-head">It is not:</p>
-					<ul class="reveal-isnot">
-						{capitalDefinition.isNot.map((item) => (
-							<li>{item}</li>
-						))}
-					</ul>
-					<p class="module-punch">{capitalDefinition.honest}</p>
-				</aside>
-				<CalTag module={module.capital} />
-			</section>
-
-			<!-- MODULE 5 · RELATIONS -->
-			<section class="module" aria-labelledby="relations-title">
-				<p class="module-plate">MODULE · THE LEGEND</p>
-				<h2 id="relations-title">{relationsCopy.title}</h2>
-				<dl class="legend">
-					{relations.map((relation) => (
-						<div>
-							<dt>{relation.name}</dt>
-							<dd>{relation.behavior}</dd>
+					<div>
+						<div class="ledger">
+							<p class="ledger-bar">
+								<span>Room ledger</span>
+								<span class="note-number">payments</span>
+							</p>
+							<div class="ledger-body" data-ledger>
+								<p class="ledger-empty" data-ledger-empty hidden>
+									Nothing signed for yet. Ending the Meeting here would leave this Room exactly as it was.
+								</p>
+								<p class="ledger-file" data-ledger-file>{ledger[0].path}</p>
+								{ledger.map((line) => (
+									<div class="ledger-line" data-ledger-line={line.id}>
+										<span class="ledger-state">{line.state}</span>
+										<span class="ledger-meta">{line.by}</span>
+									</div>
+								))}
+							</div>
 						</div>
-					))}
-				</dl>
-				<p class="module-note">{relationsCopy.intro}</p>
-				<CalTag module={module.relations} />
-			</section>
-
-			<!-- MODULE 6 · CRAFT -->
-			<section class="module module-craft" aria-labelledby="craft-title">
-				<p class="module-plate">MODULE · THE CRAFT</p>
-				<h2 id="craft-title">{craft.title}</h2>
-				<p class="craft-copy">{craft.intro}</p>
-				<p class="module-punch">{craft.punch}</p>
-				<CalTag module={module.craft} />
-			</section>
-
-			<!-- MODULE 7 · STACK -->
-			<section class="module" aria-labelledby="stack-title">
-				<p class="module-plate">MODULE · THE GRAMMAR</p>
-				<h2 id="stack-title">{stack.title}</h2>
-				<div class="module-body">
-					<ol class="stack-rows">
-						<li><strong>Workplace-first</strong><span>the paradigm</span></li>
-						<li><strong>Open Workplace</strong><span>the shared model · experimental protocol · independent</span></li>
-						<li class="stack-here"><strong>Endroit</strong><span>the application framework</span></li>
-						<li><strong>Your Workplace</strong><span>the durable result</span></li>
-					</ol>
-					<div class="module-copy">
-						<p>{stack.intro}</p>
-						<p class="stack-links">
-							<a href="https://open-workplace.org/proposal/">Read the proposal</a>
-							<a href="https://open-workplace.org/protocol/">Read the protocol</a>
-							<a href="/profile.md">Inspect the candidate Profile</a>
-							<a href="https://github.com/open-workplace/open-workplace">View the Open Workplace source</a>
+						<p class="reset"><button type="button" data-steps-reset hidden>Reset the note</button></p>
+						<p class="note-fine" style="margin-top:0.9rem" data-static-note>
+							Printed here in sequence. In the product each stamp is a separate human act, and the transcript is never one of
+							the things that survives.
 						</p>
 					</div>
 				</div>
-				<CalTag module={module.stack} />
+
+				<aside class="term" data-term aria-labelledby="term-title">
+					<p class="term-gate pre">Run the three stamps above to see what is left when the Meeting closes.</p>
+					<h3 id="term-title">What remains is your {retainedTerm.name}.</h3>
+					<p>{retainedTerm.meaning}</p>
+					<ul class="term-isnot">
+						<li>It is not:</li>
+						{retainedTerm.isNot.map((item) => (
+							<li>{item}</li>
+						))}
+					</ul>
+					<p class="punch" style="max-width:46ch">{retainedTerm.honest}</p>
+				</aside>
 			</section>
 
-			<!-- MODULE 8 · AVAILABILITY -->
-			<section class="module" id="availability" aria-labelledby="availability-title">
-				<p class="module-plate">MODULE · CONDITION</p>
-				<h2 id="availability-title">{availabilityCopy.title}</h2>
-				<ul class="condition-row">
-					{availability.map((item) => (
-						<li class={`condition condition-${item.state}`}>
-							<p class="condition-state">{item.state}</p>
-							<h3>{item.label}</h3>
-							<p>{item.detail}</p>
-						</li>
-					))}
-				</ul>
-				<div class="closing">
-					<p class="closing-line">{spine.action}</p>
-					<div class="hero-actions">
-						<a class="action action-primary" href="/install/">Install Endroit</a>
-						<a class="action" href="https://github.com/thevzion/endroit">View the source</a>
-						<a class="action" href="/roadmap/">Read the roadmap</a>
+			<!-- SHEET 05 · THE CONSIGNEE -->
+			<section class="sheet" data-stock="consignee" id="consignee" aria-labelledby="consignee-title">
+				<SheetHead sheet={consignee.sheet} plate={consignee.plate} copy="Copy 3: the consignee's" />
+				<div class="two-col">
+					<div>
+						<h2 class="declared" id="consignee-title">{consignee.title}</h2>
+						<p class="lede">{consignee.intro}</p>
+						<p class="punch">{consignee.punch}</p>
+					</div>
+					<div>
+						<p class="pre">Declare the destination once</p>
+						<p class="note-fine">
+							A Route carries the Site, the revision and the bounded checkout, so the logistics of a trip stop being a
+							decision you re-make every time. What stays a decision is whether to use it.
+						</p>
 					</div>
 				</div>
-				<CalTag module={module.availability} />
+
+				<div class="receipt">
+					{deliveryStamps.map((part) => (
+						<div class="receipt-part">
+							<Stamp tone={part.tone} label={part.stamp} />
+							<h3>{part.title}</h3>
+							<p>{part.note}</p>
+						</div>
+					))}
+				</div>
+
+				<ul class="refusals">
+					{consignee.fine.map((item) => (
+						<li>{item}</li>
+					))}
+				</ul>
 			</section>
 
-			<!-- MODULE 9 · COMMUNITY -->
-			<section class="module" id="community" aria-labelledby="community-title">
-				<p class="module-plate">MODULE · COMMUNITY</p>
-				<h2 id="community-title">{community.title}</h2>
-				<p class="module-lede">{community.intro}</p>
-				<div class="hero-actions">
-					{community.actions.map((action) => <a class="action action-primary" href={action.href}>{action.label}</a>)}
+			<!-- SHEET 06 · PARTIES AND LIMITS -->
+			<section class="sheet" data-stock="original" aria-labelledby="stack-title">
+				<SheetHead sheet={stack.sheet} plate={stack.plate} copy="Original" />
+				<h2 class="declared" id="stack-title">{stack.title}</h2>
+				<p class="lede" style="margin-top:1.1rem">{stack.paragraphs[0]}</p>
+				<p class="punch" style="max-width:46ch">{stack.punch}</p>
+
+				<dl class="parties">
+					{parties.map((party) => (
+						<div class:list={['party', { 'party-self': party.self }]}>
+							<dt>{party.party}</dt>
+							<dd>{party.owns}</dd>
+						</div>
+					))}
+				</dl>
+
+				<p class="pre" style="margin-top:1.3rem">Endroit is not</p>
+				<ul class="not-this">
+					{notThis.map((item) => (
+						<li>{item}</li>
+					))}
+				</ul>
+
+				<div class="grammar">
+					<p class="pre">Open Workplace supplies the grammar</p>
+					<p class="note-fine" set:html={stack.prose[1]} />
+					<p class="link-row">
+						{stack.actions.map((action) => (
+							<a href={action.href}>{action.label}</a>
+						))}
+					</p>
 				</div>
-				<CalTag module={module.community} />
+			</section>
+
+			<!-- SHEET 07 · CONDITION AND SCHEDULE A -->
+			<section class="sheet board" id="condition" aria-labelledby="condition-title">
+				<SheetHead sheet={availability.sheet} plate={availability.plate} copy="File copy" />
+				<h2 class="declared" id="condition-title">{availability.title}</h2>
+				<p class="lede" style="margin-top:1.1rem">{availability.intro}</p>
+
+				<dl class="condition">
+					{condition.map((row) => (
+						<div class="condition-row">
+							<div class="condition-key">
+								<Stamp tone={row.state === 'available' ? 'received' : 'state'} label={row.register} />
+								<dt class="condition-subject">{row.subject}</dt>
+							</div>
+							<dd><p>{row.detail}</p></dd>
+						</div>
+					))}
+				</dl>
+
+				<h3 class="pre" style="margin-top:2.2rem" id="schedule-title">Schedule A · every claim on this sheet set, its mechanism and its proof</h3>
+				<div class="schedule" aria-labelledby="schedule-title">
+					{schedule.map((clause) => (
+						<article class="clause">
+							<div class="clause-bar">
+								<span class="clause-ref">{clause.ref}</span>
+								<Stamp tone="state" label={clause.maturity} />
+							</div>
+							<p class="clause-claim">{clause.claim}</p>
+							<dl>
+								<dt>Mechanism</dt>
+								<dd>{clause.mechanism}</dd>
+								<dt>Proof</dt>
+								<dd>{clause.proof}</dd>
+								<dt>Source</dt>
+								<dd>{clause.source}</dd>
+							</dl>
+						</article>
+					))}
+				</div>
+			</section>
+
+			<!-- SHEET 08 · CORRESPONDENCE -->
+			<section class="sheet" data-stock="original" aria-labelledby="community-title">
+				<SheetHead sheet={community.sheet} plate={community.plate} copy="Original" />
+				<div class="two-col">
+					<div>
+						<h2 class="declared" id="community-title">{community.title}</h2>
+						<p class="lede">{community.intro}</p>
+						<div class="actions">
+							{community.actions.map((action) => (
+								<a class="action action-primary" href={action.href}>{action.label}</a>
+							))}
+						</div>
+					</div>
+					<div>
+						<p class="pre">Claim on file</p>
+						<p class="note-fine">
+							New and bootstrapping. This Site does not present it as an established community, and the destination is
+							recorded as an accepted release destination rather than a growth metric.
+						</p>
+					</div>
+				</div>
+			</section>
+
+			<!-- SHEET 09 · DISPATCH -->
+			<section class="sheet board" aria-labelledby="close-title">
+				<SheetHead sheet={close.sheet} plate={close.plate} copy="File copy" />
+				<div class="close-grid">
+					<div>
+						<h2 class="declared close-say" id="close-title">{close.title}</h2>
+						<p class="lede" style="margin-top:1.1rem">{close.intro}</p>
+					</div>
+					<div class="actions">
+						{close.actions.map((action, index) => (
+							<a class:list={['action', { 'action-primary': index === 0 }]} href={action.href}>{action.label}</a>
+						))}
+					</div>
+				</div>
 			</section>
 		</main>
 
-		<footer class="bench-foot">
+		<footer class="colophon">
+			<p set:html={provenance.prose[0]} />
 			<p>
-				Category on file: <strong>{spine.accepted}</strong> (accepted). The headline spine on this page is candidate
-				copy under evaluation on this surface. Every module carries a calibration tag: open any of them, press
-				<kbd>Alt</kbd>+<kbd>I</kbd>, or use the CAL switch. The Site-owned <code>SURFACE.md</code> carries the
-				public composition and copy; Astro keeps the renderer and visual system.
+				This landing is rendered from the Site-owned <code>surfaces/home/SURFACE.md</code>, which holds its public
+				composition and copy; Astro keeps the layout, components and design tokens. Schedule A above is the page auditing
+				itself: every material claim, its mechanism, its inspectable proof and its maturity.
 			</p>
 			<p>
 				Endroit implements <a href="https://open-workplace.org/">Open Workplace</a> ·
-				<a href="https://github.com/thevzion/endroit">source</a> · <a href="/roadmap/">roadmap</a> · MIT licensed
+				<a href="https://github.com/thevzion/endroit">source</a> · <a href="/roadmap/">roadmap</a> ·
+				<a href="/homes/">Workplace anatomy</a> · <a href="/schema/">public contracts</a> · MIT licensed
 			</p>
 		</footer>
 
 		<script>
-			// The resolver: three captures exist in document order; JavaScript adds
-			// the intent trigger rail over them.
-			const resolver = document.querySelector('[data-resolver]');
-			const captures = [...document.querySelectorAll('[data-capture]')];
-			const resolverRail = document.querySelector('[data-resolver-rail]');
-			const resolverList = document.querySelector('[data-resolver-rail] .rail-list');
+			// The carbon set: every copy is printed in document order without
+			// JavaScript. Enhancement adds the tabbed edge of the form set.
+			const carbon = document.querySelector('[data-carbon]');
+			const tabList = document.querySelector('[data-carbon-tabs]');
+			const copies = [...document.querySelectorAll('[data-copy]')];
 
-			if (resolver instanceof HTMLElement && resolverRail && resolverList && captures.length > 0) {
+			if (carbon instanceof HTMLElement && tabList && copies.length > 0) {
 				const tabs: HTMLButtonElement[] = [];
+				const labels = ['Original', 'AGENTS.md', 'CLAUDE.md', 'Skill'];
 				const show = (index: number, focusTab = false) => {
-					captures.forEach((capture, i) => {
-						capture.toggleAttribute('hidden', i !== index);
-						capture.setAttribute('role', 'tabpanel');
-						capture.setAttribute('tabindex', '0');
-						capture.setAttribute('aria-labelledby', `resolver-tab-${i}`);
+					copies.forEach((copy, i) => {
+						copy.toggleAttribute('hidden', i !== index);
+						copy.setAttribute('role', 'tabpanel');
+						copy.setAttribute('tabindex', '0');
+						copy.setAttribute('aria-labelledby', `copy-tab-${i}`);
 					});
 					tabs.forEach((tab, i) => {
 						tab.setAttribute('aria-selected', String(i === index));
-						tab.setAttribute('tabindex', i === index ? '0' : '-1');
+						tab.tabIndex = i === index ? 0 : -1;
 					});
 					if (focusTab) tabs[index]?.focus();
 				};
 
-				captures.forEach((capture, index) => {
+				copies.forEach((copy, index) => {
 					const tab = document.createElement('button');
 					tab.type = 'button';
+					tab.id = `copy-tab-${index}`;
 					tab.setAttribute('role', 'tab');
-					tab.id = `resolver-tab-${index}`;
-					tab.setAttribute('aria-controls', capture.id);
-					tab.textContent = capture.querySelector('h3')?.textContent?.replace(/[“”]/g, '') ?? '';
+					tab.setAttribute('aria-controls', copy.id);
+					tab.textContent = labels[index] ?? `Copy ${index + 1}`;
 					tab.addEventListener('click', () => show(index, true));
 					tab.addEventListener('keydown', (event) => {
-						if (!(event instanceof KeyboardEvent) || !['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'Home', 'End'].includes(event.key)) return;
+						if (!(event instanceof KeyboardEvent)) return;
+						if (!['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'Home', 'End'].includes(event.key)) return;
 						event.preventDefault();
 						const target =
 							event.key === 'Home' ? 0
-							: event.key === 'End' ? captures.length - 1
-							: ['ArrowRight', 'ArrowDown'].includes(event.key) ? Math.min(captures.length - 1, index + 1)
+							: event.key === 'End' ? copies.length - 1
+							: ['ArrowRight', 'ArrowDown'].includes(event.key) ? Math.min(copies.length - 1, index + 1)
 							: Math.max(0, index - 1);
 						show(target, true);
 					});
-					resolverList.append(tab);
+					tabList.append(tab);
 					tabs.push(tab);
 				});
 
-				resolver.setAttribute('data-enhanced', 'true');
-				resolverList.setAttribute('aria-orientation', 'vertical');
-				resolverRail.toggleAttribute('hidden', false);
+				carbon.dataset.enhanced = 'true';
 				show(0);
 			}
 
-			// The latch sequence: phases advance only through the explicit verbs.
-			const latch = document.querySelector('[data-latch]');
-			const latchStatus = document.querySelector('[data-latch-status]');
-			const latchControls = [...document.querySelectorAll('[data-latch-control]')];
-			const latchReset = document.querySelector('[data-latch-reset]');
-			const reveal = document.querySelector('[data-capital-reveal]');
-			const phaseTitles = [...document.querySelectorAll('[data-latch-phase] h3')].map((h) => h.textContent ?? '');
-			const phaseNotes = [...document.querySelectorAll('[data-latch-phase] .phase-text p')].map((p) => p.textContent ?? '');
+			// The signature block: without JavaScript the four states are printed in
+			// sequence. Enhancement makes each stamp a separate human act.
+			const steps = document.querySelector('[data-steps]');
+			const stepItems = [...document.querySelectorAll('[data-step]')];
+			const stepControls = [...document.querySelectorAll('[data-step-control]')];
+			const stepsReset = document.querySelector('[data-steps-reset]');
+			const ledgerLines = [...document.querySelectorAll('[data-ledger-line]')];
+			const ledgerFile = document.querySelector('[data-ledger-file]');
+			const ledgerEmpty = document.querySelector('[data-ledger-empty]');
+			const staticNote = document.querySelector('[data-static-note]');
+			const term = document.querySelector('[data-term]');
 
 			if (
-				latch instanceof HTMLElement &&
-				latchStatus &&
-				reveal instanceof HTMLElement &&
-				latchReset instanceof HTMLButtonElement &&
-				latchControls.length === 3
+				steps instanceof HTMLElement &&
+				term instanceof HTMLElement &&
+				stepsReset instanceof HTMLButtonElement &&
+				stepControls.length === 3 &&
+				stepItems.length === 4
 			) {
-				const setPhase = (phase: number) => {
-					latch.dataset.phase = String(phase);
-					latchStatus.textContent = `${phaseTitles[phase] ?? ''} — ${phaseNotes[phase] ?? ''}`;
-					latchControls.forEach((control) => {
-						if (!(control instanceof HTMLButtonElement)) return;
-						const index = Number(control.dataset.latchControl);
-						control.disabled = index !== phase + 1;
+				const setStage = (stage: number, struck = false) => {
+					steps.dataset.stage = String(stage);
+					stepItems.forEach((item, index) => {
+						item.toggleAttribute('data-pending', index > stage);
+						const stamp = item.querySelector('.stamp');
+						if (!(stamp instanceof HTMLElement)) return;
+						stamp.hidden = index > stage;
+						stamp.toggleAttribute('data-struck', struck && index === stage);
 					});
-					reveal.toggleAttribute('data-revealed', phase === 3);
-					latchReset.toggleAttribute('hidden', phase === 0);
+					for (const control of stepControls) {
+						if (!(control instanceof HTMLButtonElement)) continue;
+						const index = Number(control.dataset.stepControl);
+						control.hidden = false;
+						control.disabled = index !== stage + 1;
+					}
+					ledgerLines.forEach((line, index) => {
+						const visible = index <= stage - 1;
+						line.toggleAttribute('hidden', !visible);
+						line.toggleAttribute('data-impression', struck && index === stage - 1);
+					});
+					if (ledgerFile instanceof HTMLElement) ledgerFile.hidden = stage === 0;
+					if (ledgerEmpty instanceof HTMLElement) ledgerEmpty.hidden = stage > 0;
+					stepsReset.hidden = stage === 0;
+					term.toggleAttribute('data-revealed', stage === 3);
 				};
 
-				latch.dataset.enhanced = 'true';
-				reveal.setAttribute('data-gated', 'true');
-				for (const control of latchControls) {
+				steps.dataset.enhanced = 'true';
+				term.setAttribute('data-gated', 'true');
+				if (staticNote instanceof HTMLElement) staticNote.hidden = true;
+
+				for (const control of stepControls) {
 					control.addEventListener('click', () => {
 						if (!(control instanceof HTMLButtonElement)) return;
-						setPhase(Number(control.dataset.latchControl));
+						setStage(Number(control.dataset.stepControl), true);
 					});
 				}
-				latchReset.addEventListener('click', () => setPhase(0));
-				setPhase(0);
-			}
-
-			// Calibration tags: one switch, plus the i key for inspectors.
-			const calToggle = document.querySelector('[data-cal-toggle]');
-			const calTags = [...document.querySelectorAll('[data-cal-tag]')];
-			if (calToggle instanceof HTMLButtonElement) {
-				const setCal = (on: boolean) => {
-					document.body.classList.toggle('calibrating', on);
-					calToggle.setAttribute('aria-pressed', String(on));
-					for (const tag of calTags) tag.toggleAttribute('open', on);
-				};
-				calToggle.toggleAttribute('hidden', false);
-				calToggle.addEventListener('click', () => setCal(!document.body.classList.contains('calibrating')));
-				document.addEventListener('keydown', (event) => {
-					if (!(event instanceof KeyboardEvent) || !event.altKey || event.code !== 'KeyI' || event.metaKey || event.ctrlKey) return;
-					event.preventDefault();
-					setCal(!document.body.classList.contains('calibrating'));
-				});
+				stepsReset.addEventListener('click', () => setStage(0));
+				setStage(0);
 			}
 		</script>
 	</body>

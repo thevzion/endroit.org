@@ -102,20 +102,24 @@ test('all public pages use one production bench system and keep the accepted com
 	const files = ['src/pages/index.astro', 'src/pages/homes.astro', 'src/pages/install.astro', 'src/pages/roadmap.astro', 'src/pages/schema/index.astro', 'src/pages/404.astro'];
 	const sources = await Promise.all(files.map((file) => read(file)));
 	for (const [index, source] of sources.entries()) {
-		assert.match(source, index === 0 ? /bench-bar/ : /BaseLayout/, files[index]);
+		// The landing exploration owns its own shell; every secondary route stays
+		// on the shared BaseLayout and its incumbent bench system.
+		assert.match(source, index === 0 ? /class="bindery"/ : /BaseLayout/, files[index]);
 		if (index > 0) assert.doesNotMatch(source, /discord\.gg/i, files[index]);
+		if (index > 0) assert.doesNotMatch(source, /consignment\.css/, files[index]);
 	}
 	for (const page of sources.slice(1)) assert.match(page, /module|page-instrument/);
 	const layout = await read('src/layouts/BaseLayout.astro');
 	assert.match(layout, /<body>\s*<!--[\s\S]*THESIS:[\s\S]*FINISH:/);
 });
 
-test('the shipped visual system is documented from the frozen world', async () => {
+test('the landing visual system is documented from the built world', async () => {
 	const [design, sidecar] = await Promise.all([read('DESIGN.md'), read('.impeccable/design.json').then(JSON.parse)]);
-	assert.match(design, /Creative North Star: "The Bench Logic-Analyzer"/);
-	assert.match(design, /b0c4bf23f7d9ee882619a2d3c39049760feb2104/);
+	assert.match(design, /Creative North Star: "The Consignment Set"/);
+	// The record must say out loud that the secondary routes were not converted.
+	assert.match(design, /secondary public routes still run the\nprevious bench system/);
 	assert.equal(sidecar.schemaVersion, 2);
-	assert.equal(sidecar.narrative.northStar, 'The Bench Logic-Analyzer');
+	assert.equal(sidecar.narrative.northStar, 'The Consignment Set');
 });
 
 test('SEO, headers and historical redirects remain explicit', async () => {
@@ -149,7 +153,15 @@ test('the static build emits every supported route and machine contract', async 
 	assert.deepEqual(await read('dist/llms.txt', null), await read('public/llms.txt', null));
 	const landing = await read('dist/index.html');
 	const install = await read('dist/install/index.html');
-	for (const phrase of ['Move the system. Keep the decisions human.', 'Agents execute. The Workplace carries continuity.', 'Endroit gives each Meeting the context, methods and Sites it needs—so work compounds without handing direction to the agent.', 'Context that knows its place.', 'What remains is your agentic capital.']) assert.match(landing, new RegExp(phrase.replaceAll('.', '\\.')));
+	for (const phrase of [
+		'A harness runs the agent. Endroit runs the work around it.',
+		'Agents execute. You still direct, accept and deliver.',
+		'Endroit is a framework for structuring work around coding agents.',
+		'Nothing survives a Meeting unless you sign for it.',
+		'What remains is your agentic capital.',
+		'RECEIVED IN GOOD ORDER',
+		'Qualified local candidate',
+	]) assert.match(landing, new RegExp(phrase.replaceAll('.', '\\.')));
 	assert.equal([...install.matchAll(/<h1(?:\s|>)/g)].length, 1);
 	assert.doesNotMatch(install, /<h1[^>]*>Install Endroit<\/h1>/);
 });

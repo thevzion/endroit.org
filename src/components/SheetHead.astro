@@ -1,0 +1,13 @@
+---
+// The pre-printed head of one sheet in the consignment set. Pre-printed matter
+// only: the sheet number, the party whose copy this is, and the form code.
+// Nothing here is filled in, so nothing here is a product claim.
+const { sheet, plate, copy } = Astro.props;
+---
+
+<p class="sheet-head">
+	<span class="sheet-no">Sheet {sheet}</span>
+	<span class="sheet-plate">{plate}</span>
+	{copy ? <span class="sheet-copy">{copy}</span> : null}
+	<span class="sheet-form" aria-hidden="true">FORM E-0.10</span>
+</p>

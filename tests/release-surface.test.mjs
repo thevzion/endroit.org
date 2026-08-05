@@ -17,9 +17,12 @@ test('the Site-owned Surface is the native landing source', async () => {
 	assert.equal(publicSurface.fragments.filter(({ kind }) => kind === 'site_export').length, 1);
 	assert.ok(publicSurface.fragments.filter(({ kind }) => kind === 'content').length >= 1);
 	assert.equal(new Set(publicSurface.fragments.map(({ id }) => id)).size, publicSurface.fragments.length);
-	assert.equal(publicSurface.hero.title, 'Move the system. Keep the decisions human.');
-	assert.equal(publicSurface.hero.punch, 'Agents execute. The Workplace carries continuity.');
-	assert.equal(publicSurface.hero.intro, 'Endroit gives each Meeting the context, methods and Sites it needs—so work compounds without handing direction to the agent.');
+	assert.equal(publicSurface.hero.title, 'A harness runs the agent. Endroit runs the work around it.');
+	assert.equal(publicSurface.hero.punch, 'Agents execute. You still direct, accept and deliver.');
+	assert.equal(
+		publicSurface.hero.intro,
+		'Endroit is a framework for structuring work around coding agents. Every Meeting gets one written objective, a manifest of exactly which owned sources are aboard, declared destinations, and a signature block that never leaves your hands.',
+	);
 	assert.deepEqual(publicSurface.community.actions, [{ label: 'Join the new Discord', href: 'https://discord.gg/HW4Hs9sEp' }]);
 	assert.match(await read('src/pages/index.astro'), /publicSurface/);
 });

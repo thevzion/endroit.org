@@ -1,0 +1,1489 @@
+/* Landing exploration · THE CONSIGNMENT SET
+   A bound book of numbered multi-part forms. The stock colour of a sheet names
+   whose authority that section is about: bond original = you, canary = the
+   carrier that runs the agent, blue = the consignee Site. Type is semantic:
+   pre-printed matter is tracked grotesque caps in soft ink, filled-in matter is
+   monospace struck in full ink, stamps are boxed and inked. Local to this
+   Surface: secondary routes keep their own stylesheet. */
+
+:root {
+	/* the binding */
+	--board: #1b2027;
+	--board-2: #232b34;
+	--board-rule: #37424e;
+	--board-ink: #e9ece6;
+	--board-soft: #9aa7b2;
+
+	/* the stocks */
+	--stock-original: #eef0e9;
+	--stock-carrier: #ecd66b;
+	--stock-consignee: #a2bfd6;
+
+	/* inks. --ink-hard is the literal sheet ink and is never re-declared, so
+	   stamps and struck controls stay dark even on a board sheet that flips
+	   --ink to the light board value. */
+	--ink: #14181c;
+	--ink-hard: #14181c;
+	--ink-soft: #575f66;
+	--rule: #b6bcb8;
+	--tint: rgba(20, 24, 28, 0.055);
+	--stamp: #a4301c;
+	--seal: #1a573a;
+	--paper: #fbfaf7;
+
+	--focus: #14507a;
+	--focus-board: #7fb4e4;
+
+	--pre: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	--fill: ui-monospace, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+
+	--shell: min(1200px, calc(100% - 2.5rem));
+	--under: var(--stock-carrier);
+}
+
+* {
+	box-sizing: border-box;
+}
+
+/* Several elements below set an explicit display, which would otherwise beat
+   the user-agent rule and leave enhancement-only nodes visible. */
+[hidden] {
+	display: none !important;
+}
+
+html {
+	background: var(--board);
+	scroll-behavior: smooth;
+	-webkit-text-size-adjust: 100%;
+}
+
+body {
+	margin: 0;
+	min-width: 320px;
+	background: var(--board);
+	color: var(--ink);
+	font-family: var(--pre);
+	font-size: 1rem;
+	line-height: 1.6;
+}
+
+h1,
+h2,
+h3,
+h4,
+p,
+ul,
+ol,
+dl,
+dd,
+figure {
+	margin: 0;
+}
+
+ul,
+ol {
+	padding: 0;
+	list-style: none;
+}
+
+a {
+	color: inherit;
+}
+
+code {
+	font-family: var(--fill);
+	font-size: 0.92em;
+	letter-spacing: -0.01em;
+}
+
+::selection {
+	background: var(--ink);
+	color: var(--stock-carrier);
+}
+
+:focus-visible {
+	outline: 3px solid var(--focus);
+	outline-offset: 2px;
+}
+
+.board :focus-visible,
+.bindery :focus-visible {
+	outline-color: var(--focus-board);
+}
+
+.skip-link {
+	position: absolute;
+	left: -9999px;
+	top: 0;
+	z-index: 20;
+	padding: 0.7rem 1.1rem;
+	background: var(--stock-carrier);
+	color: var(--ink);
+	font: 700 0.75rem/1 var(--pre);
+	letter-spacing: 0.14em;
+	text-transform: uppercase;
+	text-decoration: none;
+}
+
+.skip-link:focus {
+	left: 0.75rem;
+	top: 0.75rem;
+}
+
+.sr-only {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip-path: inset(50%);
+	white-space: nowrap;
+}
+
+/* ---------- pre-printed, filled-in, declared, stamped ---------- */
+
+.pre {
+	font: 700 0.625rem/1.35 var(--pre);
+	letter-spacing: 0.16em;
+	text-transform: uppercase;
+	color: var(--ink-soft);
+}
+
+/* A version string, path or protocol id is a verbatim identifier: pre-printed
+   casing must never rewrite it. */
+.pre code,
+.sheet-head code,
+.note-bar code,
+.ledger-bar code {
+	text-transform: none;
+	letter-spacing: 0;
+	font-weight: 700;
+}
+
+.fill {
+	font-family: var(--fill);
+	font-size: 0.875rem;
+	line-height: 1.5;
+	color: var(--ink);
+}
+
+.declared {
+	font-weight: 800;
+	line-height: 0.99;
+	letter-spacing: -0.032em;
+	text-wrap: balance;
+}
+
+h1.declared {
+	font-size: clamp(2.05rem, 5vw, 4rem);
+}
+
+h2.declared {
+	font-size: clamp(1.6rem, 3.1vw, 2.5rem);
+}
+
+.lede {
+	max-width: 46ch;
+	font-size: clamp(1rem, 1.15vw, 1.1rem);
+	color: var(--ink);
+}
+
+.punch {
+	margin-top: 1.15rem;
+	padding-top: 0.85rem;
+	border-top: 2px solid var(--ink);
+	font: 800 clamp(1.05rem, 1.5vw, 1.3rem)/1.25 var(--pre);
+	letter-spacing: -0.022em;
+}
+
+.note-fine {
+	font-size: 0.875rem;
+	color: var(--ink-soft);
+}
+
+.stamp {
+	display: inline-block;
+	padding: 0.28rem 0.55rem 0.24rem;
+	border: 2px solid currentColor;
+	background: var(--paper);
+	background: color-mix(in srgb, currentColor 8%, var(--paper));
+	font: 700 0.625rem/1 var(--pre);
+	letter-spacing: 0.16em;
+	text-transform: uppercase;
+	white-space: nowrap;
+	transform: rotate(-1.1deg);
+}
+
+.stamp-state,
+.stamp-route {
+	color: var(--ink-hard);
+}
+
+.stamp-exclude,
+.stamp-consent {
+	color: var(--stamp);
+}
+
+.stamp-received {
+	color: var(--seal);
+}
+
+.stamp[data-struck] {
+	animation: strike 150ms cubic-bezier(0.2, 0.9, 0.3, 1) both;
+}
+
+@keyframes strike {
+	from {
+		transform: rotate(-4deg) scale(1.16);
+		opacity: 0;
+	}
+	60% {
+		opacity: 1;
+	}
+	to {
+		transform: rotate(-1.1deg) scale(1);
+		opacity: 1;
+	}
+}
+
+/* ---------- the binding ---------- */
+
+.bindery {
+	position: sticky;
+	top: 0;
+	z-index: 10;
+	background: var(--board);
+	border-bottom: 1px solid var(--board-rule);
+	color: var(--board-ink);
+}
+
+.bindery-inner {
+	width: var(--shell);
+	margin: 0 auto;
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 0.6rem 1.4rem;
+	padding: 0.7rem 0;
+}
+
+.brand {
+	font: 800 1.0625rem/1 var(--pre);
+	letter-spacing: -0.03em;
+	text-decoration: none;
+}
+
+.brand::after {
+	content: "";
+	display: inline-block;
+	width: 0.42rem;
+	height: 0.42rem;
+	margin-left: 0.4rem;
+	background: var(--stock-carrier);
+}
+
+.bindery nav {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.15rem 1.15rem;
+	margin-right: auto;
+}
+
+.bindery nav a {
+	font: 700 0.625rem/1.35 var(--pre);
+	letter-spacing: 0.16em;
+	text-transform: uppercase;
+	color: var(--board-soft);
+	text-decoration: none;
+	padding: 0.2rem 0;
+	border-bottom: 2px solid transparent;
+}
+
+.bindery nav a:hover,
+.bindery nav a:focus-visible {
+	color: var(--board-ink);
+	border-bottom-color: var(--stock-carrier);
+}
+
+.bindery-code {
+	font: 700 0.625rem/1.35 var(--pre);
+	letter-spacing: 0.16em;
+	text-transform: uppercase;
+	color: var(--board-soft);
+}
+
+/* Narrow: brand and the install action hold the first row, the sheet index
+   wraps beneath, and the form code drops rather than eating three rows of a
+   sticky bar. */
+@media (max-width: 800px) {
+	.brand {
+		order: 1;
+	}
+
+	.bindery .action {
+		order: 2;
+		margin-left: auto;
+		padding: 0.55rem 0.9rem;
+	}
+
+	.bindery nav {
+		order: 3;
+		flex-basis: 100%;
+		margin-right: 0;
+	}
+
+	.bindery-code {
+		display: none;
+	}
+}
+
+/* ---------- actions ---------- */
+
+.actions {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.6rem;
+}
+
+.action {
+	display: inline-block;
+	padding: 0.72rem 1.15rem;
+	border: 2px solid var(--ink);
+	background: transparent;
+	color: var(--ink);
+	font: 700 0.6875rem/1 var(--pre);
+	letter-spacing: 0.14em;
+	text-transform: uppercase;
+	text-decoration: none;
+}
+
+.action:hover,
+.action:focus-visible {
+	background: var(--ink);
+	color: var(--stock-carrier);
+}
+
+.action-primary {
+	background: var(--ink);
+	color: var(--stock-carrier);
+}
+
+.action-primary:hover,
+.action-primary:focus-visible {
+	background: var(--stamp);
+	border-color: var(--stamp);
+	color: var(--paper);
+}
+
+.board .action,
+.bindery .action {
+	border-color: var(--board-ink);
+	color: var(--board-ink);
+}
+
+.board .action:hover,
+.board .action:focus-visible,
+.bindery .action:hover,
+.bindery .action:focus-visible {
+	background: var(--board-ink);
+	color: var(--board);
+}
+
+.board .action-primary,
+.bindery .action-primary {
+	background: var(--stock-carrier);
+	border-color: var(--stock-carrier);
+	color: var(--ink-hard);
+}
+
+.board .action-primary:hover,
+.board .action-primary:focus-visible,
+.bindery .action-primary:hover,
+.bindery .action-primary:focus-visible {
+	background: var(--paper);
+	border-color: var(--paper);
+	color: var(--ink-hard);
+}
+
+/* ---------- the sheets ---------- */
+
+main {
+	display: block;
+	width: var(--shell);
+	margin: 0 auto;
+	padding: 0.75rem 0 0;
+}
+
+.sheet {
+	position: relative;
+	margin-bottom: 0.75rem;
+	padding: clamp(1.4rem, 3.2vw, 2.9rem);
+	border: 1px solid var(--ink);
+	background: var(--stock-original);
+}
+
+@media (min-width: 720px) {
+	.sheet {
+		box-shadow:
+			9px 9px 0 -1px var(--under),
+			9px 9px 0 0 var(--ink);
+		margin-bottom: 1.5rem;
+	}
+}
+
+.sheet[data-stock="carrier"] {
+	--rule: #b09f3c;
+	--ink-soft: #5d5222;
+	--tint: rgba(20, 24, 28, 0.075);
+	--under: var(--stock-consignee);
+	background: var(--stock-carrier);
+}
+
+.sheet[data-stock="consignee"] {
+	--rule: #6c8aa2;
+	--ink-soft: #2c4857;
+	--tint: rgba(20, 24, 28, 0.075);
+	--under: var(--stock-original);
+	background: var(--stock-consignee);
+}
+
+.sheet.board {
+	--ink: var(--board-ink);
+	--ink-soft: var(--board-soft);
+	--rule: var(--board-rule);
+	--tint: rgba(255, 255, 255, 0.045);
+	--under: var(--board-2);
+	background: var(--board);
+	border-color: var(--board-rule);
+	color: var(--board-ink);
+}
+
+/* Grid and flex children default to min-width: auto, which lets one dense
+   record push the whole sheet past the 320px floor. Every track that holds a
+   record is allowed to shrink instead. */
+.sheet-hero > *,
+.two-col > *,
+.signature > *,
+.close-grid > *,
+.note,
+.carbon,
+.steps,
+.ledger,
+.receipt-part,
+.clause,
+.condition-row > * {
+	min-width: 0;
+}
+
+.sheet-head {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: baseline;
+	gap: 0.35rem 1.1rem;
+	padding-bottom: 0.55rem;
+	margin-bottom: clamp(1.2rem, 2.4vw, 1.9rem);
+	border-bottom: 2px solid var(--ink);
+	font: 700 0.625rem/1.35 var(--pre);
+	letter-spacing: 0.16em;
+	text-transform: uppercase;
+	color: var(--ink-soft);
+}
+
+.sheet-no {
+	color: var(--ink);
+}
+
+.sheet-plate {
+	color: var(--ink);
+}
+
+.sheet-copy {
+	color: var(--ink-soft);
+}
+
+.sheet-form {
+	margin-left: auto;
+	font-family: var(--fill);
+	letter-spacing: 0.08em;
+}
+
+/* ---------- sheet 01 · the consignment note ---------- */
+
+.sheet-hero {
+	display: grid;
+	gap: clamp(1.8rem, 3vw, 3rem);
+}
+
+@media (min-width: 1000px) {
+	.sheet-hero {
+		grid-template-columns: minmax(0, 1fr) minmax(0, 1.04fr);
+		align-items: start;
+	}
+}
+
+.hero-say > * + * {
+	margin-top: 1.15rem;
+}
+
+.hero-meta {
+	display: grid;
+	gap: 0.35rem;
+	padding-top: 0.9rem;
+	border-top: 1px solid var(--rule);
+}
+
+.hero-meta span {
+	display: block;
+}
+
+.hero-meta code {
+	color: var(--ink);
+}
+
+.note {
+	border: 2px solid var(--ink);
+	background: var(--paper);
+}
+
+.note-bar {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: baseline;
+	gap: 0.3rem 0.9rem;
+	padding: 0.55rem 0.85rem;
+	background: var(--ink);
+	color: var(--stock-original);
+	font: 700 0.625rem/1.35 var(--pre);
+	letter-spacing: 0.16em;
+	text-transform: uppercase;
+}
+
+.note-number {
+	margin-left: auto;
+	font-family: var(--fill);
+	letter-spacing: 0.05em;
+	color: var(--stock-carrier);
+}
+
+.note-fields {
+	display: grid;
+	border-bottom: 2px solid var(--ink);
+}
+
+.note-field {
+	display: grid;
+	gap: 0.1rem 1rem;
+	padding: 0.7rem 0.85rem;
+	border-bottom: 1px solid var(--rule);
+}
+
+.note-field:last-child {
+	border-bottom: 0;
+}
+
+@media (min-width: 520px) {
+	.note-field {
+		grid-template-columns: 6.5rem minmax(0, 1fr);
+		align-items: baseline;
+	}
+}
+
+.note-field dd {
+	min-width: 0;
+}
+
+.note-value {
+	font-family: var(--fill);
+	font-size: 0.875rem;
+	font-weight: 600;
+	color: var(--ink);
+	overflow-wrap: anywhere;
+}
+
+.note-hint {
+	display: block;
+	margin-top: 0.15rem;
+	font-size: 0.8125rem;
+	line-height: 1.45;
+	color: var(--ink-soft);
+}
+
+/* the manifest */
+
+.manifest {
+	padding: 0.85rem;
+}
+
+.manifest + .manifest {
+	border-top: 2px solid var(--ink);
+	background: var(--tint);
+}
+
+.manifest-head {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: baseline;
+	justify-content: space-between;
+	gap: 0.3rem 0.8rem;
+	margin-bottom: 0.6rem;
+}
+
+.manifest-lines {
+	display: grid;
+	gap: 0.1rem;
+}
+
+.line {
+	display: grid;
+	gap: 0 0.7rem;
+	padding: 0.34rem 0;
+	border-top: 1px solid var(--rule);
+	font-size: 0.8125rem;
+	line-height: 1.45;
+}
+
+@media (min-width: 420px) {
+	.line {
+		grid-template-columns: 6.2rem minmax(0, 1fr);
+	}
+}
+
+.line-key {
+	font-family: var(--fill);
+	font-size: 0.75rem;
+	letter-spacing: 0.02em;
+	color: var(--ink-soft);
+	padding-top: 0.1rem;
+}
+
+.line-item {
+	font-weight: 700;
+	color: var(--ink);
+}
+
+.line-why {
+	color: var(--ink-soft);
+}
+
+.line-out {
+	opacity: 1;
+}
+
+.line-out .line-key {
+	color: var(--stamp);
+	font-weight: 700;
+}
+
+.line-out .line-item {
+	color: var(--stamp);
+	text-decoration: line-through;
+	text-decoration-thickness: 1.5px;
+}
+
+.line-out .line-why {
+	color: var(--ink-soft);
+}
+
+/* ---------- sheet 02 · closed notes ---------- */
+
+.two-col {
+	display: grid;
+	gap: clamp(1.6rem, 3vw, 2.8rem);
+}
+
+@media (min-width: 900px) {
+	.two-col {
+		grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+		align-items: start;
+	}
+}
+
+.two-col > div > * + * {
+	margin-top: 1.05rem;
+}
+
+.stubs {
+	display: grid;
+	gap: 0.55rem;
+}
+
+.stub {
+	display: grid;
+	gap: 0.35rem 0.9rem;
+	padding: 0.7rem 0.85rem;
+	border: 1px solid var(--ink);
+	background: var(--tint);
+}
+
+@media (min-width: 480px) {
+	.stub {
+		grid-template-columns: minmax(0, 1fr) auto;
+		align-items: center;
+	}
+}
+
+.stub-what {
+	min-width: 0;
+}
+
+.stub-no {
+	font-family: var(--fill);
+	font-size: 0.75rem;
+	letter-spacing: 0.06em;
+	color: var(--ink-soft);
+	display: block;
+}
+
+.stub-objective {
+	font-family: var(--fill);
+	font-size: 0.875rem;
+	color: var(--ink);
+	overflow-wrap: anywhere;
+}
+
+/* ---------- sheet 03 · the carbon set ---------- */
+
+.carbon {
+	border: 2px solid var(--ink);
+	background: var(--paper);
+}
+
+.carbon-tabs {
+	display: none;
+	flex-wrap: wrap;
+	gap: 0;
+	border-bottom: 2px solid var(--ink);
+	background: var(--ink);
+}
+
+.carbon[data-enhanced] .carbon-tabs {
+	display: flex;
+}
+
+.carbon-tabs button {
+	flex: 1 1 5.5rem;
+	min-width: 0;
+	appearance: none;
+	border: 0;
+	border-right: 1px solid var(--board-rule);
+	padding: 0.7rem 0.9rem;
+	background: transparent;
+	color: var(--board-soft);
+	font: 700 0.625rem/1.2 var(--pre);
+	letter-spacing: 0.14em;
+	text-transform: uppercase;
+	cursor: pointer;
+}
+
+.carbon-tabs button:last-child {
+	border-right: 0;
+}
+
+.carbon-tabs button[aria-selected="true"] {
+	background: var(--paper);
+	color: var(--ink);
+}
+
+.copy {
+	padding: 0.85rem;
+	border-top: 1px solid var(--rule);
+}
+
+.copy:first-of-type {
+	border-top: 0;
+}
+
+.carbon[data-enhanced] .copy {
+	border-top: 0;
+}
+
+.carbon[data-enhanced] .copy:not([hidden]) {
+	animation: slide-in 150ms ease-out both;
+}
+
+@keyframes slide-in {
+	from {
+		transform: translateX(-8px);
+	}
+	to {
+		transform: translateX(0);
+	}
+}
+
+.copy-head {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: baseline;
+	gap: 0.25rem 0.8rem;
+	margin-bottom: 0.55rem;
+}
+
+.copy-file {
+	font-family: var(--fill);
+	font-size: 0.8125rem;
+	font-weight: 700;
+	letter-spacing: 0.01em;
+	color: var(--ink);
+	overflow-wrap: anywhere;
+}
+
+.copy-role {
+	font-size: 0.8125rem;
+	color: var(--ink-soft);
+}
+
+.copy pre {
+	margin: 0;
+	padding: 0.75rem 0.85rem;
+	overflow-x: auto;
+	background: var(--tint);
+	border: 1px solid var(--rule);
+	font-family: var(--fill);
+	font-size: 0.8125rem;
+	line-height: 1.65;
+	color: var(--ink);
+	tab-size: 2;
+}
+
+/* The original is the authority: it gets the full ink frame, the compiled
+   copies keep the hairline. */
+.copy[data-source] pre {
+	border-color: var(--ink);
+}
+
+.proofs {
+	display: grid;
+	gap: 0.1rem;
+	margin-top: 1.15rem;
+}
+
+.proof {
+	display: grid;
+	gap: 0.1rem 0.9rem;
+	padding: 0.5rem 0;
+	border-top: 1px solid var(--rule);
+	font-size: 0.875rem;
+}
+
+@media (min-width: 560px) {
+	.proof {
+		grid-template-columns: 11rem minmax(0, 1fr);
+		align-items: baseline;
+	}
+}
+
+.proof a {
+	font-family: var(--fill);
+	font-size: 0.8125rem;
+	font-weight: 700;
+	color: var(--ink);
+	text-decoration-thickness: 1.5px;
+	text-underline-offset: 3px;
+}
+
+.proof span {
+	color: var(--ink-soft);
+}
+
+/* ---------- sheet 04 · the signature block ---------- */
+
+.signature {
+	display: grid;
+	gap: clamp(1.4rem, 2.6vw, 2.2rem);
+}
+
+@media (min-width: 940px) {
+	.signature {
+		grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+		align-items: start;
+	}
+}
+
+.steps {
+	display: grid;
+	gap: 0;
+	border: 2px solid var(--ink);
+	background: var(--paper);
+	counter-reset: step;
+}
+
+.step {
+	display: grid;
+	gap: 0.55rem 1rem;
+	padding: 0.95rem;
+	border-bottom: 1px solid var(--rule);
+}
+
+.step:last-child {
+	border-bottom: 0;
+}
+
+@media (min-width: 620px) {
+	.step {
+		grid-template-columns: 12.5rem minmax(0, 1fr);
+		align-items: start;
+	}
+}
+
+.step-control {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 0.5rem;
+}
+
+.step-button {
+	appearance: none;
+	padding: 0.6rem 0.85rem;
+	border: 2px solid var(--ink);
+	background: var(--paper);
+	color: var(--ink);
+	font: 700 0.625rem/1.15 var(--pre);
+	letter-spacing: 0.12em;
+	text-transform: uppercase;
+	cursor: pointer;
+	text-align: left;
+}
+
+.step-button:hover:not(:disabled),
+.step-button:focus-visible:not(:disabled) {
+	background: var(--ink);
+	color: var(--stock-carrier);
+}
+
+.step-button:disabled {
+	border-color: var(--rule);
+	color: var(--ink-soft);
+	border-style: dashed;
+	cursor: not-allowed;
+}
+
+.step-hand {
+	font-family: var(--fill);
+	font-size: 0.75rem;
+	letter-spacing: 0.06em;
+	text-transform: uppercase;
+	color: var(--ink-soft);
+}
+
+.step-text h3 {
+	font: 800 1rem/1.25 var(--pre);
+	letter-spacing: -0.02em;
+}
+
+.step-text p {
+	margin-top: 0.3rem;
+	font-size: 0.875rem;
+	color: var(--ink-soft);
+}
+
+/* A pending act keeps every word readable; only its edge marker changes. */
+.steps[data-enhanced] .step {
+	box-shadow: inset 3px 0 0 var(--ink);
+}
+
+.steps[data-enhanced] .step[data-pending] {
+	box-shadow: inset 3px 0 0 var(--rule);
+}
+
+.steps[data-enhanced] .step[data-pending] .step-text {
+	opacity: 1;
+}
+
+.steps[data-enhanced] .step[data-pending] .step-text h3 {
+	color: var(--ink-soft);
+}
+
+.reset {
+	margin-top: 0.8rem;
+}
+
+.reset button {
+	appearance: none;
+	padding: 0.45rem 0.7rem;
+	border: 1px dashed var(--ink-soft);
+	background: transparent;
+	color: var(--ink-soft);
+	font: 700 0.625rem/1 var(--pre);
+	letter-spacing: 0.14em;
+	text-transform: uppercase;
+	cursor: pointer;
+}
+
+.ledger {
+	border: 2px solid var(--ink);
+	background: var(--paper);
+	position: sticky;
+	top: 4.5rem;
+}
+
+.ledger-bar {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.3rem 0.8rem;
+	align-items: baseline;
+	padding: 0.55rem 0.85rem;
+	background: var(--ink);
+	color: var(--stock-original);
+	font: 700 0.625rem/1.35 var(--pre);
+	letter-spacing: 0.16em;
+	text-transform: uppercase;
+}
+
+.ledger-body {
+	padding: 0.85rem;
+}
+
+/* One owned file, three states. The path is printed once; each stamp adds a
+   state line beneath it. */
+.ledger-file {
+	display: block;
+	padding-bottom: 0.6rem;
+	border-bottom: 2px solid var(--ink);
+	font-family: var(--fill);
+	font-size: 0.8125rem;
+	font-weight: 700;
+	color: var(--ink);
+	overflow-wrap: anywhere;
+}
+
+.ledger-line {
+	display: grid;
+	gap: 0.15rem;
+	padding: 0.55rem 0;
+	border-bottom: 1px solid var(--rule);
+}
+
+.ledger-line:last-child {
+	border-bottom: 0;
+}
+
+.ledger-state {
+	font: 700 0.625rem/1.35 var(--pre);
+	letter-spacing: 0.16em;
+	text-transform: uppercase;
+	color: var(--ink);
+}
+
+.ledger-meta {
+	font-size: 0.8125rem;
+	color: var(--ink-soft);
+}
+
+.ledger-line[data-impression] {
+	animation: impression 240ms ease-out both;
+}
+
+@keyframes impression {
+	from {
+		opacity: 0;
+		transform: translateY(-3px);
+	}
+	to {
+		opacity: 1;
+		transform: none;
+	}
+}
+
+.ledger-empty {
+	display: block;
+	font-size: 0.875rem;
+	color: var(--ink-soft);
+}
+
+.term {
+	margin-top: clamp(1.4rem, 2.6vw, 2.2rem);
+	padding: clamp(1rem, 2vw, 1.5rem);
+	border: 2px solid var(--ink);
+	background: var(--tint);
+}
+
+/* Gating dims the frame, never the words: the definition and its limits stay
+   readable at full contrast with JavaScript off or the sequence unrun. */
+.term[data-gated]:not([data-revealed]) {
+	border-style: dashed;
+	border-color: var(--ink-soft);
+}
+
+.term[data-gated]:not([data-revealed]) .term-gate {
+	display: block;
+}
+
+.term-gate {
+	display: none;
+	margin-bottom: 0.7rem;
+}
+
+.term h3 {
+	font: 800 clamp(1.1rem, 1.7vw, 1.45rem)/1.2 var(--pre);
+	letter-spacing: -0.025em;
+}
+
+.term p {
+	margin-top: 0.6rem;
+	max-width: 62ch;
+}
+
+.term-isnot {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.2rem 0.7rem;
+	margin-top: 0.6rem;
+	font-size: 0.875rem;
+	color: var(--ink-soft);
+}
+
+/* ---------- sheet 05 · the consignee ---------- */
+
+.receipt {
+	display: grid;
+	gap: 0.75rem;
+	margin-top: 1.4rem;
+}
+
+@media (min-width: 860px) {
+	.receipt {
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+	}
+}
+
+.receipt-part {
+	display: grid;
+	align-content: start;
+	gap: 0.55rem;
+	padding: 0.95rem;
+	border: 2px solid var(--ink);
+	background: var(--paper);
+}
+
+.receipt-part h3 {
+	font: 800 1rem/1.25 var(--pre);
+	letter-spacing: -0.02em;
+}
+
+.receipt-part p {
+	font-size: 0.875rem;
+	color: var(--ink-soft);
+}
+
+.refusals {
+	display: grid;
+	gap: 0.35rem;
+	margin-top: 1.3rem;
+	padding-top: 0.9rem;
+	border-top: 2px solid var(--ink);
+}
+
+/* Block, not flex: these items carry inline <code> and must wrap as prose. */
+.refusals li {
+	position: relative;
+	padding-left: 1.35rem;
+	font-weight: 700;
+	font-size: 1rem;
+}
+
+.refusals li::before {
+	content: "\00d7";
+	position: absolute;
+	left: 0;
+	top: 0;
+	color: var(--stamp);
+	font-size: 1.15em;
+}
+
+/* Clarifications, not refusals: a neutral rule instead of the oxide cross, so
+   the exclusion colour keeps meaning only exclusion. */
+.caveats {
+	display: grid;
+	gap: 0.45rem;
+	margin-top: 1.2rem;
+	padding-top: 0.9rem;
+	border-top: 1px solid var(--rule);
+}
+
+.caveats li {
+	position: relative;
+	padding-left: 1.35rem;
+	font-size: 0.875rem;
+	color: var(--ink-soft);
+}
+
+.caveats li::before {
+	content: "";
+	position: absolute;
+	left: 0;
+	top: 0.62em;
+	width: 0.75rem;
+	height: 2px;
+	background: var(--ink-soft);
+}
+
+/* ---------- sheet 06 · parties and limits ---------- */
+
+.parties {
+	display: grid;
+	border: 2px solid var(--ink);
+	background: var(--paper);
+	margin-top: 1.4rem;
+}
+
+.party {
+	display: grid;
+	gap: 0.2rem 1.2rem;
+	padding: 0.85rem 0.95rem;
+	border-bottom: 1px solid var(--rule);
+}
+
+.party:last-child {
+	border-bottom: 0;
+}
+
+@media (min-width: 620px) {
+	.party {
+		grid-template-columns: 11rem minmax(0, 1fr);
+		align-items: baseline;
+	}
+}
+
+.party dt {
+	font: 800 1rem/1.3 var(--pre);
+	letter-spacing: -0.015em;
+}
+
+.party dd {
+	font-size: 0.875rem;
+	color: var(--ink-soft);
+}
+
+.party-self {
+	background: var(--stock-carrier);
+	box-shadow: inset 4px 0 0 var(--ink);
+}
+
+.party-self dd {
+	color: #5d5222;
+}
+
+.not-this {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.4rem;
+	margin-top: 1.2rem;
+}
+
+.not-this li {
+	padding: 0.35rem 0.6rem;
+	border: 1px dashed var(--stamp);
+	color: var(--stamp);
+	font: 700 0.6875rem/1.2 var(--pre);
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+}
+
+.grammar {
+	margin-top: 1.4rem;
+	padding-top: 1.1rem;
+	border-top: 1px solid var(--rule);
+}
+
+.grammar > * + * {
+	margin-top: 0.9rem;
+}
+
+.link-row {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.35rem 1.3rem;
+}
+
+.link-row a {
+	font: 700 0.6875rem/1.3 var(--pre);
+	letter-spacing: 0.12em;
+	text-transform: uppercase;
+	text-decoration-thickness: 2px;
+	text-underline-offset: 4px;
+}
+
+/* ---------- sheet 07 · condition ---------- */
+
+.condition {
+	display: grid;
+	border: 1px solid var(--rule);
+	margin-top: 1.5rem;
+}
+
+.condition-row {
+	display: grid;
+	gap: 0.45rem 1.4rem;
+	padding: 1rem;
+	border-bottom: 1px solid var(--rule);
+}
+
+.condition-row:last-child {
+	border-bottom: 0;
+}
+
+@media (min-width: 780px) {
+	.condition-row {
+		grid-template-columns: 13.5rem minmax(0, 1fr);
+		align-items: start;
+	}
+}
+
+.condition-key {
+	display: grid;
+	gap: 0.35rem;
+	justify-items: start;
+}
+
+.condition-subject {
+	font-family: var(--fill);
+	font-size: 0.875rem;
+	font-weight: 700;
+	color: var(--ink);
+}
+
+.condition-row p {
+	font-size: 0.875rem;
+	color: var(--ink-soft);
+	max-width: 62ch;
+}
+
+/* A stamp keeps its own near-white field and dark ink on a board sheet, so the
+   register stays readable where --ink has flipped to the board value. */
+.board .stamp {
+	background: var(--paper);
+	background: color-mix(in srgb, currentColor 8%, var(--paper));
+}
+
+/* ---------- schedule A ---------- */
+
+.schedule {
+	display: grid;
+	gap: 0.75rem;
+	margin-top: 1.5rem;
+}
+
+@media (min-width: 900px) {
+	.schedule {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+}
+
+.clause {
+	display: grid;
+	align-content: start;
+	gap: 0.5rem;
+	padding: 0.95rem;
+	border: 1px solid var(--rule);
+	background: var(--tint);
+}
+
+.clause-bar {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: baseline;
+	justify-content: space-between;
+	gap: 0.3rem 0.8rem;
+}
+
+.clause-ref {
+	font-family: var(--fill);
+	font-size: 0.75rem;
+	font-weight: 700;
+	letter-spacing: 0.1em;
+	color: var(--ink);
+}
+
+.clause-claim {
+	font: 800 1rem/1.3 var(--pre);
+	letter-spacing: -0.015em;
+	color: var(--ink);
+}
+
+.clause dl {
+	display: grid;
+	gap: 0.3rem 0.8rem;
+}
+
+@media (min-width: 460px) {
+	.clause dl {
+		grid-template-columns: 5.5rem minmax(0, 1fr);
+	}
+}
+
+.clause dt {
+	font: 700 0.625rem/1.5 var(--pre);
+	letter-spacing: 0.14em;
+	text-transform: uppercase;
+	color: var(--ink-soft);
+}
+
+.clause dd {
+	font-size: 0.875rem;
+	color: var(--ink-soft);
+}
+
+/* ---------- close and colophon ---------- */
+
+.close-say {
+	max-width: 34ch;
+}
+
+.close-grid {
+	display: grid;
+	gap: clamp(1.4rem, 2.6vw, 2.4rem);
+}
+
+@media (min-width: 860px) {
+	.close-grid {
+		grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+		align-items: end;
+	}
+}
+
+.colophon {
+	width: var(--shell);
+	margin: 0 auto;
+	padding: 2.2rem 0 3rem;
+	border-top: 1px solid var(--board-rule);
+	color: var(--board-soft);
+	font-size: 0.875rem;
+	line-height: 1.65;
+}
+
+.colophon > * + * {
+	margin-top: 0.7rem;
+}
+
+.colophon a {
+	color: var(--board-ink);
+	text-underline-offset: 3px;
+}
+
+.colophon strong {
+	color: var(--board-ink);
+}
+
+.colophon code {
+	color: var(--stock-carrier);
+}
+
+/* ---------- reduced motion ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+	html {
+		scroll-behavior: auto;
+	}
+
+	.stamp[data-struck],
+	.ledger-line[data-impression],
+	.carbon[data-enhanced] .copy:not([hidden]) {
+		animation: none;
+	}
+
+	* {
+		transition-duration: 0.01ms !important;
+	}
+}
