@@ -1,7 +1,15 @@
+---
+import releaseDestinations from '../content/release-destinations.json';
+
+const discord = releaseDestinations.destinations.find(({ id, render }) => id === 'endroit-discord' && render);
+---
+
 <footer class="bench-foot page-bench-foot">
 	<p><strong>Endroit</strong> · Software craftsmanship, for the agentic generation.</p>
 	<p>
 		<a href="https://github.com/thevzion/endroit">Source</a> ·
+		{discord && <><a href={discord.url}>{discord.cta}</a> ·</>}
+		<a href="/profile.md">Profile 0.10</a> ·
 		<a href="/roadmap/">Roadmap</a> ·
 		<a href="https://github.com/thevzion/endroit/blob/main/LICENSE">MIT</a>
 	</p>

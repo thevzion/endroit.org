@@ -12,69 +12,76 @@ const siteRoot = fileURLToPath(new URL('..', import.meta.url));
 const read = (path, encoding = 'utf8') => readFile(resolve(siteRoot, path), encoding);
 const hash = (content) => createHash('sha256').update(content).digest('hex');
 
-test('owned publication projection has an explicit owner, exact bytes and no silent fallback', async () => {
-	const [landing, manifest, script] = await Promise.all([
-		read('src/content/endroit-landing.md'),
-		read('src/content/projections.json').then(JSON.parse),
-		read('scripts/sync-owned-sources.mjs'),
-	]);
-	assert.equal(hash(landing), manifest.projections.landing.sha256);
-	assert.equal(manifest.projections.landing.source, 'artifact:desk/endroit/publishing/work/endroit-public-entrypoint/publication/endroit-landing#content');
-	assert.match(script, /ENDROIT_HOME_ROOT is required/);
-	assert.doesNotMatch(script, /ENDROIT_HOME_ROOT \?\?/);
-
-	const withoutOwner = spawnSync(process.execPath, ['scripts/sync-owned-sources.mjs', 'landing'], {
+test('source synchronization refuses to guess the Endroit release checkout', async () => {
+	const script = await read('scripts/sync-owned-sources.mjs');
+	assert.match(script, /ENDROIT_SOURCE_ROOT is required/);
+	assert.doesNotMatch(script, /integrated-main/);
+	const withoutOwner = spawnSync(process.execPath, ['scripts/sync-owned-sources.mjs', 'documents'], {
 		cwd: siteRoot,
-		env: Object.fromEntries(Object.entries(process.env).filter(([key]) => key !== 'ENDROIT_HOME_ROOT')),
+		env: Object.fromEntries(Object.entries(process.env).filter(([key]) => key !== 'ENDROIT_SOURCE_ROOT')),
 		encoding: 'utf8',
 	});
 	assert.notEqual(withoutOwner.status, 0);
-	assert.match(withoutOwner.stderr, /ENDROIT_HOME_ROOT is required/);
-
-	if (process.env.ENDROIT_HOME_ROOT) {
-		const owner = resolve(process.env.ENDROIT_HOME_ROOT, '.desk/rooms/endroit/publishing/work/endroit-public-entrypoint/publication/endroit-landing/content.md');
-		assert.ok(existsSync(owner), `owned source is absent: ${owner}`);
-		assert.deepEqual(await readFile(owner), Buffer.from(landing));
-	}
+	assert.match(withoutOwner.stderr, /ENDROIT_SOURCE_ROOT is required/);
 });
 
-test('human and machine install surfaces share one owned Site source', async () => {
-	const [source, machine, manifest, page] = await Promise.all([
-		read('src/content/install.md'), read('public/install.md'), read('src/content/projections.json').then(JSON.parse), read('src/pages/install.astro'),
+test('human and machine documents project one exact Endroit candidate', async () => {
+	const [source, machine, adopt, profile, reference, migration, manifest, page] = await Promise.all([
+		read('src/content/install.md'), read('public/install.md'), read('public/adopt.md'), read('public/profile.md'), read('public/docs/reference.md'), read('public/docs/migration-0.10.md'), read('src/content/projections.json').then(JSON.parse), read('src/pages/install.astro'),
 	]);
-	assert.equal(source, machine);
-	assert.equal(hash(source), manifest.projections.install.sha256);
-	assert.equal(manifest.projections.install.source, 'site:endroit.org/src/content/install.md');
-	assert.equal(manifest.projections.install.releaseSource, 'thevzion/endroit@0.8.0-alpha.1:INSTALL.md');
+	assert.equal(hash(source), manifest.projections.install.sourceSha256);
+	assert.equal(hash(machine), manifest.projections.install.sha256);
+	assert.equal(manifest.projections.install.transform, 'normalize raw ADOPT.md link to /adopt.md');
+	assert.match(machine, /\[ADOPT\.md\]\(\/adopt\.md\)/);
+	assert.match(manifest.projections.install.source, /^site:endroit@[0-9a-f]{40}:INSTALL\.md$/);
+	assert.match(manifest.projections.adopt.source, /^site:endroit@[0-9a-f]{40}:ADOPT\.md$/);
+	assert.match(manifest.projections.profile.source, /^site:endroit@[0-9a-f]{40}:PROFILE\.md$/);
+	assert.equal(hash(adopt), manifest.projections.adopt.sha256);
+	assert.equal(hash(profile), manifest.projections.profile.sha256);
+	assert.equal(hash(reference), manifest.projections.reference.sha256);
+	assert.equal(hash(migration), manifest.projections.migration010.sha256);
+	for (const projection of ['adopt', 'profile', 'reference', 'migration010', 'migrationRouteV9']) {
+		assert.equal(manifest.projections.install.sourceCommit, manifest.projections[projection].sourceCommit);
+	}
 	assert.match(page, /import \* as installContract from '\.\.\/content\/install\.md'/);
 	assert.match(page, /<h1 id="install-title">/);
 	assert.match(page, /compiledContent\(\)/);
+	assert.match(page, /replaceAll\('href="docs\//);
+	assert.match(page, /replace\('href="ADOPT\.md"', 'href="\/adopt\.md"'\)/);
 	assert.match(page, /<Fragment set:html=\{renderedContract\} \/>/);
-	assert.match(source, /@endroit\/cli@0\.8\.0-alpha\.1/);
+	assert.match(source, /@endroit\/cli@0\.10\.0-alpha\.0/);
+	assert.match(profile, /protocol: "open-workplace\/0\.2-draft"/);
 	assert.doesNotMatch(source, /curl\s.*\|\s*(?:ba)?sh|@latest/);
 });
 
-test('llms discovery is generated, manifested and excludes unpublished surfaces', async () => {
+test('llms discovery is generated, manifested and labels the candidate honestly', async () => {
 	const [llms, manifest, script, sitemap, robots] = await Promise.all([
 		read('public/llms.txt'), read('src/content/projections.json').then(JSON.parse), read('scripts/sync-owned-sources.mjs'), read('public/sitemap.xml'), read('public/robots.txt'),
 	]);
 	assert.equal(hash(llms), manifest.projections.llms.sha256);
 	assert.equal(manifest.projections.llms.source, 'site:endroit.org/scripts/sync-owned-sources.mjs#llms');
 	assert.match(script, /## Public surfaces/);
-	for (const route of ['/', '/homes/', '/install/', '/install.md', '/roadmap/', '/schema/', '/llms.txt']) assert.match(sitemap, new RegExp(`endroit\\.org${route.replace('.', '\\.').replace('/', '\\/')}`));
+	for (const route of ['/', '/homes/', '/install/', '/install.md', '/adopt.md', '/profile.md', '/roadmap/', '/schema/', '/llms.txt']) assert.match(sitemap, new RegExp(`endroit\\.org${route.replace('.', '\\.').replace('/', '\\/')}`));
 	assert.match(robots, /User-agent: OAI-SearchBot\s+Allow: \//);
-	assert.doesNotMatch(`${llms}\n${sitemap}`, /WORKPLACE\.md|adopt\.md|work-resolution|feed|rss|atom/i);
+	assert.match(llms, /0\.10 candidate without implying npm publication/);
+	assert.doesNotMatch(`${llms}\n${sitemap}`, /active community|feed|rss|atom/i);
 });
 
 test('public schema bytes remain immutable and match their manifest', async () => {
 	const manifest = await read('public/schema/manifest.json').then(JSON.parse);
-	assert.equal(manifest.release, '0.9.0-alpha.0');
-	assert.equal(manifest.contracts.length, 14);
-	assert.equal(new Set(manifest.contracts.map(({ path }) => path)).size, 14);
+	assert.equal(manifest.release, '0.10.0-alpha.0');
+	assert.equal(manifest.availability, 'candidate');
+	assert.match(manifest.sourceCommit, /^[0-9a-f]{40}$/);
+	assert.equal(manifest.contracts.length, 26);
+	assert.equal(new Set(manifest.contracts.map(({ path }) => path)).size, 26);
 	for (const contract of manifest.contracts) {
 		const publicContent = await read(`public${contract.path}`, null);
 		assert.equal(hash(publicContent), contract.sha256, contract.path);
 		assert.doesNotMatch(contract.path, /latest/);
+		if (/^\/schema\/(?:v9|work)\//.test(contract.path)) {
+			assert.equal(JSON.parse(publicContent).$id, `https://endroit.org${contract.path}`, contract.path);
+			assert.match(contract.source, new RegExp(`^thevzion/endroit@${manifest.sourceCommit}:`));
+		}
 	}
 	const historical = {
 		'home.json': '57bfae48f1288a684b60a56a73a82b79d6907c5ead7f968da316850e8bfa109b',
@@ -85,14 +92,15 @@ test('public schema bytes remain immutable and match their manifest', async () =
 	};
 	for (const [name, digest] of Object.entries(historical)) assert.equal(hash(await read(`public/schema/${name}`, null)), digest, name);
 	assert.equal(JSON.parse(await read('public/schema/v8/route.json')).$id, 'https://endroit.org/schema/v8/route.json');
+	assert.equal(JSON.parse(await read('public/schema/v9/workplace.json')).$id, 'https://endroit.org/schema/v9/workplace.json');
+	assert.equal(JSON.parse(await read('public/schema/work/v1alpha2.json')).$id, 'https://endroit.org/schema/work/v1alpha2.json');
 });
 
-test('all public pages use one production bench system and keep unpublished contracts out of navigation', async () => {
+test('all public pages use one production bench system', async () => {
 	const files = ['src/pages/index.astro', 'src/pages/homes.astro', 'src/pages/install.astro', 'src/pages/roadmap.astro', 'src/pages/schema/index.astro', 'src/pages/404.astro'];
 	const sources = await Promise.all(files.map((file) => read(file)));
 	for (const [index, source] of sources.entries()) {
 		assert.match(source, index === 0 ? /bench-bar/ : /BaseLayout/, files[index]);
-		assert.doesNotMatch(source, /WORKPLACE\.md|adopt\.md|work-resolution/i, files[index]);
 	}
 	for (const page of sources.slice(1)) assert.match(page, /module|page-instrument/);
 	const layout = await read('src/layouts/BaseLayout.astro');
@@ -120,7 +128,7 @@ test('SEO, headers and historical redirects remain explicit', async () => {
 	assert.equal(card.toString('ascii', 1, 4), 'PNG');
 	assert.equal(card.readUInt32BE(16), 1200);
 	assert.equal(card.readUInt32BE(20), 630);
-	assert.match(nginx, /location = \/install\.md[\s\S]*default_type text\/markdown/);
+	assert.match(nginx, /location ~\* \\\.md\$[\s\S]*default_type text\/markdown/);
 	assert.match(nginx, /location = \/llms\.txt[\s\S]*default_type text\/plain/);
 	assert.match(nginx, /location ~ \^\/schema\/\.\*\\\.json\$/);
 	assert.match(nginx, /application\/schema\+json/);
@@ -131,7 +139,7 @@ test('SEO, headers and historical redirects remain explicit', async () => {
 });
 
 test('the static build emits every supported route and machine contract', async () => {
-	for (const path of ['dist/index.html', 'dist/homes/index.html', 'dist/install/index.html', 'dist/roadmap/index.html', 'dist/schema/index.html', 'dist/404.html', 'dist/install.md', 'dist/llms.txt', 'dist/robots.txt', 'dist/sitemap.xml', 'dist/schema/manifest.json', 'dist/schema/v7/home.json', 'dist/schema/v8/route.json', 'dist/schema/home.json']) {
+	for (const path of ['dist/index.html', 'dist/homes/index.html', 'dist/install/index.html', 'dist/roadmap/index.html', 'dist/schema/index.html', 'dist/404.html', 'dist/install.md', 'dist/adopt.md', 'dist/profile.md', 'dist/docs/reference.md', 'dist/docs/migration-0.10.md', 'dist/docs/migration-route-v9.md', 'dist/llms.txt', 'dist/robots.txt', 'dist/sitemap.xml', 'dist/schema/manifest.json', 'dist/schema/v7/home.json', 'dist/schema/v8/route.json', 'dist/schema/v9/workplace.json', 'dist/schema/work/v1alpha2.json', 'dist/schema/home.json']) {
 		assert.ok(existsSync(resolve(siteRoot, path)), path);
 	}
 	assert.deepEqual(await read('dist/install.md', null), await read('public/install.md', null));
@@ -141,6 +149,23 @@ test('the static build emits every supported route and machine contract', async 
 	for (const phrase of ['Agents produce. Your workplace compounds.', 'Context that knows its place.', 'What remains is your agentic capital.']) assert.match(landing, new RegExp(phrase.replaceAll('.', '\\.')));
 	assert.equal([...install.matchAll(/<h1(?:\s|>)/g)].length, 1);
 	assert.doesNotMatch(install, /<h1[^>]*>Install Endroit<\/h1>/);
+});
+
+test('the accepted Discord destination renders without claiming an established community', async () => {
+	const destination = await read('src/content/release-destinations.json').then(JSON.parse);
+	assert.equal(destination.release, 'ecosystem-2026-08');
+	assert.deepEqual(destination.destinations, [{
+		id: 'endroit-discord',
+		url: 'https://discord.gg/HW4Hs9sEp',
+		cta: 'Join the new Discord',
+		status: 'accepted',
+		render: true,
+		claim: 'bootstrapping',
+	}]);
+	const built = await read('dist/index.html');
+	assert.match(built, /https:\/\/discord\.gg\/HW4Hs9sEp/);
+	assert.match(built, /Join the new Discord/);
+	assert.doesNotMatch(built, /active community/i);
 });
 
 test('the built Site makes no third-party runtime requests and keeps shipped JavaScript under 25 KiB gzip', async () => {

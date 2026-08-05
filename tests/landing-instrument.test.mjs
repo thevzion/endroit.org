@@ -12,6 +12,7 @@ import {
 	signalTypes,
 	spine,
 } from '../src/lib/instrument.mjs';
+import releaseDestinations from '../src/content/release-destinations.json' with { type: 'json' };
 
 const site = new URL('..', import.meta.url);
 const [page, styles, reference, product] = await Promise.all([
@@ -71,17 +72,19 @@ test('agentic capital is experienced before it is named and honestly bounded', (
 
 test('claim boundaries and verified public destinations hold', () => {
 	assert.doesNotMatch(corpus, /The Workplace is the source of truth|works? with any agent|docs\.endroit\.org/i);
-	assert.doesNotMatch(page, /open-workplace\.org\/protocol/);
+	assert.match(page, /https:\/\/open-workplace\.org\/protocol\//);
 	assert.match(corpus, /not an “any agent” claim/);
-	assert.match(corpus, /publication cannot be inferred/);
+	assert.match(corpus, /npm publication, schema delivery and deployment cannot be inferred/);
 	const hrefs = [...page.matchAll(/<a[^>]+href="(https?:\/\/[^\"]+)"/g)].map(([, href]) => href);
-	for (const href of hrefs) assert.ok(externalLinks.includes(href), href);
+	const verifiedExternalLinks = [...externalLinks, ...releaseDestinations.destinations.filter(({ render }) => render).map(({ url }) => url)];
+	for (const href of hrefs) assert.ok(verifiedExternalLinks.includes(href), href);
 });
 
-test('the current Open Workplace protocol boundary stays explicit', () => {
+test('the current Open Workplace protocol and Endroit candidate boundary stay explicit', () => {
 	assert.match(corpus, /current experimental Protocol is <code>open-workplace\/0\.2-draft<\/code>/);
-	assert.match(corpus, /superseded <code>open-workplace\/0\.1<\/code>/);
-	assert.match(corpus, /compatibility with the current draft is not implied/);
+	assert.match(corpus, /Endroit <code>0\.10\.0-alpha\.0<\/code> candidate/);
+	assert.match(corpus, /<code>endroit\/0\.10<\/code> Profile/);
+	assert.match(corpus, /Publication, deployment and broader conformance cannot be inferred/);
 	assert.match(product, /current Open Workplace experimental Protocol is\s+`open-workplace\/0\.2-draft`/);
 });
 
@@ -107,7 +110,7 @@ test('the production surface records the frozen reference and exact permitted de
 	assert.equal(reference.referenceArtifact.freezeCommit, 'b0c4bf23f7d9ee882619a2d3c39049760feb2104');
 	assert.equal(reference.referenceArtifact.manifestBaseCommit, 'f4d7e154407ad26d8a88461aa9f5d38c7a24599e');
 	assert.equal(reference.referenceArtifact.sourceHashes['Page.astro'], '5b04f296ceb7d3299273a54c24cb40842df7f100696c880ba242414202de7e2b');
-	assert.equal(reference.productionDeltas.length, 7);
+	assert.equal(reference.productionDeltas.length, 8);
 	for (const path of reference.unchangedReferenceModules) {
 		const content = await readFile(new URL(path, site));
 		const expectedKey = path.endsWith('instrument.mjs') ? 'instrument.mjs' : 'CalTag.astro';

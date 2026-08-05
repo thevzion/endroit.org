@@ -4,6 +4,8 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 const legacy = ['home', 'desk', 'asset', 'runtime', 'artifact'];
 const v7 = ['home', 'desk', 'member', 'equipment', 'site', 'route', 'runtime', 'artifact'];
 const v8 = ['route'];
+const v9 = ['artifact', 'desk', 'document', 'equipment', 'member', 'profile', 'room', 'route', 'site', 'workplace'];
+const work = ['v1alpha1', 'v1alpha2'];
 ---
 
 <BaseLayout title="Schema contracts | Endroit" description="Stable public addresses for Endroit's immutable JSON Schema contracts." path="/schema/" current="schema">
@@ -23,9 +25,12 @@ const v8 = ['route'];
 		<section class="module" aria-labelledby="schema-rack">
 			<p class="module-plate">MODULE · PUBLIC CONTRACTS</p>
 			<h2 id="schema-rack">Select an address. Inspect the contract.</h2>
+			<p class="module-lede">The v9 and Work contracts below are prepared from the exact Endroit 0.10 release candidate. They become public only after this Site is deployed and the HTTP status, media type, CORS header, identifier and digest are observed.</p>
 			<div class="schema-racks">
-				<article><p class="card-signal signal-live">V7 · ENDROIT 0.8</p><h3>Current baseline</h3><ul>{v7.map((name) => <li><a href={`/schema/v7/${name}.json`}><code>{name}.json</code></a></li>)}</ul></article>
-				<article><p class="card-signal">V8 · ROUTE CONTRACT</p><h3>Published next contract</h3><ul>{v8.map((name) => <li><a href={`/schema/v8/${name}.json`}><code>{name}.json</code></a></li>)}</ul></article>
+				<article><p class="card-signal signal-live">V9 · ENDROIT 0.10 CANDIDATE</p><h3>Prepared current contracts</h3><ul>{v9.map((name) => <li><a href={`/schema/v9/${name}.json`}><code>{name}.json</code></a></li>)}</ul></article>
+				<article><p class="card-signal signal-live">WORK · VERSIONED</p><h3>Compatibility and current source</h3><ul>{work.map((name) => <li><a href={`/schema/work/${name}.json`}><code>{name}.json</code></a></li>)}</ul></article>
+				<article><p class="card-signal">V8 · ROUTE CONTRACT</p><h3>Preserved 0.9 contract</h3><ul>{v8.map((name) => <li><a href={`/schema/v8/${name}.json`}><code>{name}.json</code></a></li>)}</ul></article>
+				<article><p class="card-signal">V7 · ENDROIT 0.8</p><h3>Frozen compatibility contracts</h3><ul>{v7.map((name) => <li><a href={`/schema/v7/${name}.json`}><code>{name}.json</code></a></li>)}</ul></article>
 				<article><p class="card-signal">V6 · HISTORICAL</p><h3>Preserved 0.7 bytes</h3><ul>{legacy.map((name) => <li><a href={`/schema/${name}.json`}><code>{name}.json</code></a></li>)}</ul></article>
 			</div>
 		</section>

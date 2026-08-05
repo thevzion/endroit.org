@@ -2,21 +2,21 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 
 const objects = [
-	['HOME', 'Shared constitution and trust boundary.'],
-	['MEMBER', 'The human who belongs to the Home.'],
-	['DESK', 'One Member’s local continuity and Routes.'],
-	['ROOM', 'A durable semantic domain and its Material.'],
-	['MEETING', 'The bounded work event happening now.'],
-	['OCCUPANT', 'A temporary human or agent participant.'],
+	['WORKPLACE', 'Declared durable boundary and shared constitution.'],
+	['MEMBER', 'A durable human identity in the Workplace.'],
+	['DESK', 'Optional local continuity and Route ownership for one Member.'],
+	['ROOM', 'A durable domain with its own mission and Material.'],
 	['EQUIPMENT', 'A reusable way of working and its projections.'],
-	['SITE', 'A sovereign repository, service or publication.'],
-	['ROUTE', 'Bounded local access from a Desk to a Site.'],
+	['SITE', 'A sovereign external authority, usually a Git repository.'],
+	['ROUTE', 'A Desk-owned relationship to one Site.'],
+	['CHECKOUT', 'The derived local address of a Route, never its owner.'],
+	['MEETING', 'The current ephemeral work event.'],
 ];
 ---
 
 <BaseLayout
 	title="Homes in practice | Endroit"
-	description="How an Endroit Home composes Rooms, Meetings, Equipment, Sites and Routes into a durable human-agent workplace."
+	description="How the Endroit 0.10 Profile composes owned Documents, Material, Equipment, Sites and Routes into a durable human-agent Workplace."
 	path="/homes/"
 	current="homes"
 >
@@ -25,15 +25,16 @@ const objects = [
 			<div>
 				<p class="module-plate">FIELD GUIDE · HOME / 01</p>
 				<h1 id="homes-title">Start with the place that survives the session.</h1>
-				<p class="page-lede">A Home is not a giant prompt or a persistent agent. It is an owned workplace whose meaning remains legible when the occupant changes.</p>
+				<p class="page-lede">A Workplace is not a giant prompt or a persistent agent. It is a declared durable boundary whose owned meaning remains legible when the executor changes.</p>
 				<div class="hero-actions">
-					<a class="action action-primary" href="/#create-a-home">Create a Home</a>
+					<a class="action action-primary" href="/install/">Create a Workplace</a>
+					<a class="action" href="/profile.md">Read the Profile source</a>
 					<a class="action" href="https://github.com/thevzion/endroit">Inspect the source</a>
 				</div>
 			</div>
 			<figure class="screen page-screen">
 				<div class="screen-face home-map" aria-hidden="true">
-					<span>HOME</span><i></i><span>ROOM</span><i></i><span>MEETING</span>
+					<span>WORKPLACE</span><i></i><span>ROOM</span><i></i><span>MEETING</span>
 					<b>owns</b><b>locates</b><b>expires</b>
 				</div>
 				<figcaption>Durable place on the left. Ephemeral work on the right. Ownership stays visible all the way through.</figcaption>
@@ -44,24 +45,23 @@ const objects = [
 			<p class="module-plate">MODULE · MINIMUM VIABLE PLACE</p>
 			<h2 id="bootstrap-title">A Member, a Desk and one Room are enough to begin.</h2>
 			<div class="page-two-up">
-				<pre class="source-tree"><code>my-home/
-├── endroit.json
-├── HOME.md
+			<pre class="source-tree"><code>my-workplace/
+├── WORKPLACE.md
 ├── members/me/MEMBER.md
 ├── rooms/home/ROOM.md
 └── .desk/
-    ├── desk.json
-    └── DESK.md</code></pre>
+	    └── DESK.md</code></pre>
 				<div class="module-copy">
-					<p><code>endroit create</code> keeps the initial Desk in the Home Git by default. <code>endroit init</code> uses a separate nested Desk repository by default. <code>--desk tracked|separate|later</code> makes that boundary explicit.</p>
+					<p><code>endroit create</code> keeps the initial Desk in the Workplace Git by default. <code>endroit init</code> uses a separate nested Desk repository by default. <code>--desk tracked|separate|later</code> makes that boundary explicit.</p>
 					<p>Provider front doors are generated from owned sources. More Rooms, Sites and Equipment appear only when real work needs them.</p>
+					<p class="module-note">The <code>0.10.0-alpha.0</code> candidate writes native v9 Workplace, Member, Desk and Route Documents. Room, Site and most Equipment and Artifact writers remain on their documented compatibility surfaces.</p>
 				</div>
 			</div>
 		</section>
 
 		<section class="module" aria-labelledby="objects-title">
-			<p class="module-plate">MODULE · SEMANTIC PROTOCOL</p>
-			<h2 id="objects-title">Each object owns one durable responsibility.</h2>
+			<p class="module-plate">MODULE · ENDROIT PROFILE</p>
+			<h2 id="objects-title">One concrete vocabulary for shared responsibilities.</h2>
 			<div class="signal-table object-table">
 				{objects.map(([name, copy], index) => (
 					<div class="signal-row"><span class="signal-index">{String(index + 1).padStart(2, '0')}</span><strong>{name}</strong><span>{copy}</span></div>
@@ -73,17 +73,17 @@ const objects = [
 			<p class="module-plate">MODULE · COMPOSITION</p>
 			<h2 id="composition-title">Methods equip a place. They do not own it.</h2>
 			<div class="bench-cards">
-				<article><p class="card-signal">ROOM</p><h3>Start from the domain</h3><p>Give one coherent subject a mission, Material and continuity before choosing a runtime or methodology.</p></article>
+				<article><p class="card-signal">ROOM</p><h3>Start from the domain</h3><p>Give one coherent subject a mission, Material and continuity before choosing a runtime or method.</p></article>
 				<article><p class="card-signal">EQUIPMENT</p><h3>Add a way of working</h3><p>Research, planning or publishing can be installed and removed without absorbing the Room.</p></article>
-				<article><p class="card-signal">MEETING</p><h3>Compose for now</h3><p>Humans, agents, Roles and Equipment meet temporarily. Nothing becomes durable by accident.</p></article>
-				<article><p class="card-signal signal-live">SITE + ROUTE</p><h3>Deliver without absorption</h3><p>A repository keeps its authority while a Desk declares bounded local access.</p></article>
+				<article><p class="card-signal">MEETING</p><h3>Execute for now</h3><p>The work event is ephemeral. Retention, acceptance and external effects remain distinct explicit transitions.</p></article>
+				<article><p class="card-signal signal-live">SITE + ROUTE</p><h3>Relate without absorption</h3><p>A Site keeps its authority while a Desk declares a Route and Endroit derives a local Checkout address.</p></article>
 			</div>
 		</section>
 
 		<section class="module page-terminal" aria-labelledby="home-question">
 			<p class="module-plate">TRIGGER · START WITH THE PLACE</p>
 			<h2 id="home-question">What should still make sense when the agent changes?</h2>
-			<p class="module-lede">That is the first question a Home answers.</p>
+			<p class="module-lede">That is the first question a Workplace answers.</p>
 			<a class="action action-primary" href="/install/">Install Endroit</a>
 		</section>
 	</main>

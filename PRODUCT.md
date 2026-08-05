@@ -50,17 +50,21 @@ unrelated Rooms and unauthorized Sites visibly excluded.
   remains after an agent leaves. Never: automatic memory, retained
   transcripts, a pile of files, zero-effort compounding. Honest promise: it
   compounds through the work, not after it.
-- Same claim boundaries as iteration 023: alpha 0.8.0-alpha.1 published,
-  alpha.2 local candidate only, Codex and Claude L1-qualified, no measured
-  intelligence or accuracy claims, delivery = observed effect, no private
-  paths.
+- Release boundary: `0.8.0-alpha.1` remains the observed public package.
+  `0.10.0-alpha.0` is the qualified local release candidate; it must never be
+  described as published or deployed before those effects are observed.
 - Protocol boundary: the current Open Workplace experimental Protocol is
-  `open-workplace/0.2-draft`. Endroit `0.8.0-alpha.2` remains a local candidate
-  targeting the superseded `open-workplace/0.1`; compatibility with the
-  current draft is not implied.
+  `open-workplace/0.2-draft`. The Endroit `0.10.0-alpha.0` candidate declares
+  the versioned `endroit/0.10` Profile targeting that draft. This is one
+  observed implementation relationship, not a standard or conformance claim.
+- Source boundary: product capabilities, Profile, installation contract and
+  schemas come from one exact Endroit commit. This Site owns their public
+  transposition and delivery, never their product truth.
 - Verified public links only: endroit.org/install/, endroit.org/roadmap/,
   open-workplace.org/, open-workplace.org/proposal/,
   github.com/thevzion/endroit, github.com/open-workplace/open-workplace.
+- The accepted Endroit Discord invitation renders only as `Join the new
+  Discord`; the Site must not imply an established community.
 - Static-first, progressive enhancement, no client framework, keyboard
   complete, 320px, reduced motion, honest without JavaScript.
 
