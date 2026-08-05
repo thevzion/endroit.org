@@ -1,7 +1,7 @@
 {
   "release": "0.10.0-alpha.0",
   "availability": "candidate",
-  "sourceCommit": "2fd1770fb25bc93b9d72c6f24c956e92c10546ae",
+  "sourceCommit": "cb52fb779b1a7ae303c2f1768927d68c106f9fca",
   "contracts": [
     {
       "path": "/schema/home.json",
@@ -75,62 +75,62 @@
     },
     {
       "path": "/schema/v9/artifact.json",
-      "source": "thevzion/endroit@2fd1770fb25bc93b9d72c6f24c956e92c10546ae:schemas/v9/artifact.schema.json",
+      "source": "thevzion/endroit@cb52fb779b1a7ae303c2f1768927d68c106f9fca:schemas/v9/artifact.schema.json",
       "sha256": "34eb28a3f61c07fcb7507ec586769c46270be7d50540b87484e74689390d221a"
     },
     {
       "path": "/schema/v9/desk.json",
-      "source": "thevzion/endroit@2fd1770fb25bc93b9d72c6f24c956e92c10546ae:schemas/v9/desk.schema.json",
+      "source": "thevzion/endroit@cb52fb779b1a7ae303c2f1768927d68c106f9fca:schemas/v9/desk.schema.json",
       "sha256": "8b094324b6da879a73f80373350c8938c9a568b54fbc0bc0ecda5933b2d05808"
     },
     {
       "path": "/schema/v9/document.json",
-      "source": "thevzion/endroit@2fd1770fb25bc93b9d72c6f24c956e92c10546ae:schemas/v9/document.schema.json",
+      "source": "thevzion/endroit@cb52fb779b1a7ae303c2f1768927d68c106f9fca:schemas/v9/document.schema.json",
       "sha256": "3b2b4f3388f8de9fa93d82a9242692a14b45cdc17596c6adcf0729284e70602a"
     },
     {
       "path": "/schema/v9/equipment.json",
-      "source": "thevzion/endroit@2fd1770fb25bc93b9d72c6f24c956e92c10546ae:schemas/v9/equipment.schema.json",
+      "source": "thevzion/endroit@cb52fb779b1a7ae303c2f1768927d68c106f9fca:schemas/v9/equipment.schema.json",
       "sha256": "406d455dd0a7ba4f250a2e39b2a17a91a613e802bacb0b4b2f6b22053e9752b0"
     },
     {
       "path": "/schema/v9/member.json",
-      "source": "thevzion/endroit@2fd1770fb25bc93b9d72c6f24c956e92c10546ae:schemas/v9/member.schema.json",
+      "source": "thevzion/endroit@cb52fb779b1a7ae303c2f1768927d68c106f9fca:schemas/v9/member.schema.json",
       "sha256": "1b55729af1e2f41987a2d7555777d94ae623e7ef073e56934f36bce0f9566dad"
     },
     {
       "path": "/schema/v9/profile.json",
-      "source": "thevzion/endroit@2fd1770fb25bc93b9d72c6f24c956e92c10546ae:schemas/v9/profile.schema.json",
+      "source": "thevzion/endroit@cb52fb779b1a7ae303c2f1768927d68c106f9fca:schemas/v9/profile.schema.json",
       "sha256": "2122f9aff7f36bd610d64528710ba2ead2d8b2d9f7eb4e1057ab4819f409e8f7"
     },
     {
       "path": "/schema/v9/room.json",
-      "source": "thevzion/endroit@2fd1770fb25bc93b9d72c6f24c956e92c10546ae:schemas/v9/room.schema.json",
+      "source": "thevzion/endroit@cb52fb779b1a7ae303c2f1768927d68c106f9fca:schemas/v9/room.schema.json",
       "sha256": "fa85eae4377725ffdbca6fcdf3a92a9c04bfc6bb4e12e8379d8702f5882d10ba"
     },
     {
       "path": "/schema/v9/route.json",
-      "source": "thevzion/endroit@2fd1770fb25bc93b9d72c6f24c956e92c10546ae:schemas/v9/route.schema.json",
+      "source": "thevzion/endroit@cb52fb779b1a7ae303c2f1768927d68c106f9fca:schemas/v9/route.schema.json",
       "sha256": "6a1c02b3c839c8b324fec9d7fd1f88e7feba76c952d7793aa554dcc2a4b408c7"
     },
     {
       "path": "/schema/v9/site.json",
-      "source": "thevzion/endroit@2fd1770fb25bc93b9d72c6f24c956e92c10546ae:schemas/v9/site.schema.json",
+      "source": "thevzion/endroit@cb52fb779b1a7ae303c2f1768927d68c106f9fca:schemas/v9/site.schema.json",
       "sha256": "86c67ca2a70bfefb94c0128a3837b58a32f1c2fc4ead09977c6e5c24b9633c36"
     },
     {
       "path": "/schema/v9/workplace.json",
-      "source": "thevzion/endroit@2fd1770fb25bc93b9d72c6f24c956e92c10546ae:schemas/v9/workplace.schema.json",
+      "source": "thevzion/endroit@cb52fb779b1a7ae303c2f1768927d68c106f9fca:schemas/v9/workplace.schema.json",
       "sha256": "9e5ef5a807861f1fb4eedc4436e9b4e6f597869becb78f2f62d65c5fa227986d"
     },
     {
       "path": "/schema/work/v1alpha1.json",
-      "source": "thevzion/endroit@2fd1770fb25bc93b9d72c6f24c956e92c10546ae:schemas/work/v1alpha1.json",
+      "source": "thevzion/endroit@cb52fb779b1a7ae303c2f1768927d68c106f9fca:schemas/work/v1alpha1.json",
       "sha256": "cb5beb1108817eeffcdcd0acb08cac8e4a9ecfe4bf62520f38f4e7b612adc111"
     },
     {
       "path": "/schema/work/v1alpha2.json",
-      "source": "thevzion/endroit@2fd1770fb25bc93b9d72c6f24c956e92c10546ae:schemas/work/v1alpha2.json",
+      "source": "thevzion/endroit@cb52fb779b1a7ae303c2f1768927d68c106f9fca:schemas/work/v1alpha2.json",
       "sha256": "a7307d41da47e0754dce513bade8a7579541042d68eba022566b12c7a9fd2428"
     }
   ]

@@ -11,7 +11,7 @@ import test from 'node:test';
 const siteRoot = fileURLToPath(new URL('..', import.meta.url));
 const read = (path, encoding = 'utf8') => readFile(resolve(siteRoot, path), encoding);
 const hash = (content) => createHash('sha256').update(content).digest('hex');
-const endroitSourceCommit = '2fd1770fb25bc93b9d72c6f24c956e92c10546ae';
+const endroitSourceCommit = 'cb52fb779b1a7ae303c2f1768927d68c106f9fca';
 
 test('source synchronization refuses to guess the Endroit release checkout', async () => {
 	const script = await read('scripts/sync-owned-sources.mjs');
