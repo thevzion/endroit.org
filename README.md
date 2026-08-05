@@ -2,7 +2,8 @@
 
 The product site for [Endroit](https://github.com/thevzion/endroit).
 
-**The place layer for agentic work.** Give agentic work a place to compound.
+**The place layer for Workplace-first software engineering.** From intent to
+verified effect.
 
 Endroit is a lightweight, local-first framework for building and operating
 file-based [Open Workplaces](https://open-workplace.org/proposal/). It is also
@@ -29,11 +30,16 @@ npm run dev
 ## Product truth
 
 - Endroit 0.8 alpha is projection-qualified at L1 for Codex and Claude.
+- The published release remains `0.8.0-alpha.1`; the locally qualified
+  `0.8.0-alpha.2` candidate adds Work Resolution and
+  `/schema/work/v1alpha1.json`.
 - The 0.8 baseline adds Members, explicit workplace verbs and read-only Home
   Hygiene without claiming Presence or autonomous maintenance.
 - Other runtimes and specialized Homes are marked as product direction.
 - The Endroit repository owns installation, architecture, lifecycle,
   reference, security and release truth.
+- [docs.endroit.org](https://docs.endroit.org/) owns the documentation renderer,
+  navigation and immutable projection lock; Endroit remains the source owner.
 
 The Home Publications own the exact landing wording. This Site owns its layout,
 rendering and delivery. Run `npm run sync:sources` from the connected Home to

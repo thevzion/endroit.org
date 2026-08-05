@@ -10,7 +10,7 @@ interface Props {
 const { title, description, path } = Astro.props;
 const canonical = new URL(path, Astro.site);
 const socialCard = new URL('/social-card.png', Astro.site);
-const socialAlt = 'Endroit — The place layer for agentic work.';
+const socialAlt = 'Endroit — From intent to verified effect. An architectural Home connected to sovereign Sites.';
 ---
 
 <!doctype html>
@@ -41,6 +41,14 @@ const socialAlt = 'Endroit — The place layer for agentic work.';
 		<title>{title}</title>
 	</head>
 	<body>
+		<!--
+		THESIS: Endroit recognizes the work already present and connects it through one owned Home; it refuses the generic SaaS hero-and-cards landing.
+		OWN-WORLD: Ivory drafting paper, architectural navy, copper routes, Libre Caslon display type and an isometric Home atlas.
+		STORY: See existing Sites, recognize a boundary, transpose responsibilities without moving sources, then prove continuity in a fresh session.
+		FIRST VIEWPORT: Promise and actions lead on the left; a large connected Home and its sovereign Sites occupy the right, with the primary adoption action above the fold.
+		FORM: Architectural atlas, pinned by the accepted social-card authority; seed key pinned-endroit-atlas-2026-08.
+		FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, and DESIGN.md
+		-->
 		<a class="skip-link" href="#content">Skip to content</a>
 		<div id="content">
 			<slot />

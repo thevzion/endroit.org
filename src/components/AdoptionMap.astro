@@ -1,0 +1,352 @@
+---
+interface Props {
+	recognizeHtml: string;
+	transposeHtml: string;
+}
+
+const { recognizeHtml, transposeHtml } = Astro.props;
+---
+
+<section class="adoption-map" data-adoption-map aria-labelledby="recognize-choose-the-right-boundary">
+	<div class="journey-route" aria-label="Adoption journey">
+		<div class="page-shell">
+			<ol>
+				<li data-map-step="existing" aria-current="step"><a href="#before-the-pieces-are-already-there">Existing</a></li>
+				<li data-map-step="recognize"><a href="#recognize-choose-the-right-boundary">Recognize</a></li>
+				<li data-map-step="transpose"><a href="#nothing-moved-responsibilities-became-explicit">Transpose</a></li>
+				<li data-map-step="continue"><a href="#prove-it-in-a-fresh-session">Continue</a></li>
+			</ol>
+		</div>
+	</div>
+
+	<div class="recognize-stage" data-adoption-stage="recognize">
+		<div class="page-shell" set:html={recognizeHtml} />
+	</div>
+
+	<div class="transpose-stage" data-adoption-stage="transpose">
+		<div class="page-shell transpose-layout">
+			<div class="transpose-copy" set:html={transposeHtml} />
+			<div class="ownership-route" aria-label="Ownership after transposition">
+				<div class="owned-home">
+					<span>New owned layer</span>
+					<strong>product-home/</strong>
+					<small>Home · Room · Equipment · Routes</small>
+				</div>
+				<div class="route-line" aria-hidden="true"><i></i></div>
+				<div class="sovereign-sites">
+					<span>Existing truth</span>
+					<strong>product/</strong>
+					<strong>docs/</strong>
+					<small>Source · history · permissions</small>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<script is:inline>
+	(() => {
+		const map = document.querySelector('[data-adoption-map]');
+		if (!map || !('IntersectionObserver' in window)) return;
+		const links = [...map.querySelectorAll('[data-map-step]')];
+		const activate = (name) => links.forEach((item) => {
+			if (item.dataset.mapStep === name) item.setAttribute('aria-current', 'step');
+			else item.removeAttribute('aria-current');
+		});
+		map.dataset.enhanced = 'true';
+		const observer = new IntersectionObserver((entries) => {
+			const entry = entries.filter((item) => item.isIntersecting).sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+			if (entry) activate(entry.target.dataset.adoptionStage);
+		}, { rootMargin: '-28% 0px -58%', threshold: [0, 0.15, 0.45] });
+		document.querySelectorAll('[data-adoption-stage]').forEach((stage) => observer.observe(stage));
+	})();
+</script>
+
+<style>
+	.adoption-map {
+		background: #fbf7ef;
+	}
+
+	.journey-route {
+		position: sticky;
+		top: 4.75rem;
+		z-index: 10;
+		border-block: 1px solid var(--atlas-rule);
+		background: rgb(246 240 229 / 94%);
+		backdrop-filter: blur(12px);
+	}
+
+	.journey-route ol {
+		display: grid;
+		grid-template-columns: repeat(4, 1fr);
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+
+	.journey-route li {
+		position: relative;
+		margin: 0;
+		border-right: 1px solid var(--atlas-rule);
+	}
+
+	.journey-route li:last-child {
+		border-right: 0;
+	}
+
+	.journey-route li::after {
+		position: absolute;
+		right: 0;
+		bottom: -1px;
+		left: 0;
+		height: 2px;
+		background: transparent;
+		content: "";
+		transform: scaleX(0.25);
+		transition: background-color 260ms cubic-bezier(0.22, 1, 0.36, 1), transform 480ms cubic-bezier(0.22, 1, 0.36, 1);
+	}
+
+	.journey-route li[aria-current="step"]::after {
+		background: var(--atlas-copper);
+		transform: scaleX(1);
+	}
+
+	.journey-route a {
+		display: flex;
+		min-height: 58px;
+		align-items: center;
+		justify-content: center;
+		color: #536071;
+		font-size: 0.83rem;
+		letter-spacing: 0.035em;
+		text-decoration: none;
+	}
+
+	.journey-route li[aria-current="step"] a,
+	.journey-route a:hover {
+		color: var(--atlas-copper);
+	}
+
+	.recognize-stage > .page-shell {
+		padding-block: clamp(6rem, 11vw, 11rem);
+	}
+
+	.recognize-stage :global(h2) {
+		color: var(--atlas-blue);
+	}
+
+	.recognize-stage :global(> p) {
+		max-width: 72ch;
+	}
+
+	.recognize-stage :global(ol) {
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		margin: clamp(3rem, 6vw, 6rem) 0 2.5rem;
+		padding: 0;
+		border-block: 1px solid var(--atlas-rule);
+		list-style: none;
+		counter-reset: candidates;
+	}
+
+	.recognize-stage :global(li) {
+		position: relative;
+		min-width: 0;
+		padding: 4.5rem clamp(1.25rem, 3vw, 2.75rem) 2.25rem;
+		border-right: 1px solid var(--atlas-rule);
+		counter-increment: candidates;
+	}
+
+	.recognize-stage :global(li:last-child) {
+		border-right: 0;
+		background: rgb(169 81 47 / 7%);
+		color: var(--atlas-copper);
+	}
+
+	.recognize-stage :global(li::before) {
+		position: absolute;
+		top: 1.2rem;
+		left: clamp(1.25rem, 3vw, 2.75rem);
+		color: #536071;
+		font-size: 0.7rem;
+		font-weight: 800;
+		letter-spacing: 0.08em;
+		content: "Candidate " counter(candidates);
+		text-transform: uppercase;
+	}
+
+	.recognize-stage :global(li:last-child::after) {
+		position: absolute;
+		top: 1.2rem;
+		right: clamp(1.25rem, 3vw, 2.75rem);
+		font-size: 0.7rem;
+		font-weight: 800;
+		letter-spacing: 0.08em;
+		content: "Recommended";
+		text-transform: uppercase;
+	}
+
+	.transpose-stage {
+		background: var(--atlas-blue);
+		color: var(--atlas-ivory);
+	}
+
+	.transpose-layout {
+		display: grid;
+		grid-template-columns: minmax(0, 1.05fr) minmax(24rem, 0.95fr);
+		gap: clamp(3rem, 8vw, 8rem);
+		align-items: center;
+		padding-block: clamp(6rem, 11vw, 11rem);
+	}
+
+	.transpose-copy :global(h2) {
+		color: #fff5e7;
+	}
+
+	.transpose-copy :global(p) {
+		color: #d3dbe2;
+	}
+
+	.transpose-copy :global(strong) {
+		color: #fff5e7;
+	}
+
+	.transpose-copy :global(pre) {
+		margin-block: 2rem;
+		padding-block: 1.35rem;
+		border-block: 1px solid rgb(246 240 229 / 24%);
+		color: #fff5e7;
+	}
+
+	.ownership-route {
+		position: relative;
+		display: grid;
+		gap: 2.5rem;
+		min-height: 29rem;
+		align-content: center;
+		padding: clamp(2rem, 5vw, 4.5rem);
+		border: 1px solid rgb(246 240 229 / 22%);
+		background: #0f355a;
+	}
+
+	.owned-home,
+	.sovereign-sites {
+		position: relative;
+		z-index: 1;
+		display: grid;
+		gap: 0.35rem;
+	}
+
+	.owned-home {
+		width: min(80%, 22rem);
+		padding: 1.5rem;
+		background: var(--atlas-ivory);
+		color: var(--atlas-blue);
+	}
+
+	.sovereign-sites {
+		justify-self: end;
+		width: min(72%, 18rem);
+		padding-top: 1.25rem;
+		border-top: 1px solid var(--atlas-copper-bright);
+	}
+
+	.ownership-route span,
+	.ownership-route small {
+		font-size: 0.72rem;
+		letter-spacing: 0.035em;
+	}
+
+	.ownership-route strong {
+		font-family: "Libre Caslon Display", Georgia, serif;
+		font-size: 2rem;
+		font-weight: 400;
+		line-height: 1;
+	}
+
+	.route-line {
+		position: absolute;
+		top: 49%;
+		left: 24%;
+		width: 53%;
+		height: 4.6rem;
+		border-right: 2px solid var(--atlas-copper-bright);
+		border-bottom: 2px solid var(--atlas-copper-bright);
+	}
+
+	.route-line i {
+		position: absolute;
+		right: -0.38rem;
+		bottom: -0.38rem;
+		width: 0.7rem;
+		height: 0.7rem;
+		border: 2px solid var(--atlas-copper-bright);
+		border-radius: 50%;
+		background: var(--atlas-blue);
+	}
+
+	@media (max-width: 860px) {
+		.journey-route {
+			position: static;
+		}
+
+		.recognize-stage :global(ol),
+		.transpose-layout {
+			grid-template-columns: 1fr;
+		}
+
+		.recognize-stage :global(li),
+		.recognize-stage :global(li:last-child) {
+			padding: 3.8rem 0 1.5rem;
+			border-right: 0;
+			border-bottom: 1px solid var(--atlas-rule);
+			background: transparent;
+		}
+
+		.recognize-stage :global(li:last-child) {
+			border-bottom: 0;
+		}
+
+		.recognize-stage :global(li::before) {
+			left: 0;
+		}
+
+		.recognize-stage :global(li:last-child::after) {
+			right: 0;
+		}
+	}
+
+	@media (max-width: 1023px) and (min-width: 861px) {
+		.journey-route {
+			top: 4rem;
+		}
+	}
+
+	@media (max-width: 520px) {
+		.journey-route .page-shell {
+			padding-inline: 0;
+		}
+
+		.journey-route a {
+			min-height: 52px;
+			padding-inline: 0.25rem;
+			font-size: 0.7rem;
+		}
+
+		.ownership-route {
+			min-height: 24rem;
+			padding: 1.35rem;
+		}
+
+		.owned-home,
+		.sovereign-sites {
+			width: 86%;
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.journey-route li::after {
+			transition: none;
+		}
+	}
+</style>

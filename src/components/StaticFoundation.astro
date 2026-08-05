@@ -1,0 +1,323 @@
+---
+interface Props {
+	staticHtml: string;
+	dailyHtml: string;
+	ownershipHtml: string;
+	installHtml: string;
+	alphaHtml: string;
+	finalHtml: string;
+}
+
+const { staticHtml, dailyHtml, ownershipHtml, installHtml, alphaHtml, finalHtml } = Astro.props;
+---
+
+<section class="foundation-stage" aria-labelledby="static-core-optional-runtime">
+	<div class="page-shell foundation-grid">
+		<article class="static-core" set:html={staticHtml} />
+		<article class="daily-work" set:html={dailyHtml} />
+	</div>
+	<div class="ownership-band">
+		<div class="page-shell ownership-copy" set:html={ownershipHtml} />
+	</div>
+</section>
+
+<section class="start-stage" aria-labelledby="install-the-foundation">
+	<div class="page-shell start-layout">
+		<div class="install-copy" set:html={installHtml} />
+		<details class="alpha-disclosure">
+			<summary>Alpha boundaries</summary>
+			<div set:html={alphaHtml} />
+		</details>
+	</div>
+	<div class="final-call">
+		<div class="page-shell final-copy" set:html={finalHtml} />
+	</div>
+</section>
+
+<style>
+	.foundation-stage {
+		background: #f0e6d7;
+		color: var(--atlas-blue);
+	}
+
+	.foundation-grid {
+		display: grid;
+		grid-template-columns: minmax(0, 1.2fr) minmax(20rem, 0.8fr);
+		gap: clamp(3rem, 8vw, 9rem);
+		padding-block: clamp(6rem, 11vw, 11rem);
+	}
+
+	.static-core,
+	.daily-work {
+		min-width: 0;
+	}
+
+	.static-core :global(h2),
+	.daily-work :global(h2),
+	.ownership-copy :global(h2) {
+		color: var(--atlas-blue);
+	}
+
+	.static-core :global(pre),
+	.daily-work :global(pre) {
+		margin-top: 2rem;
+		padding-block: 1.5rem;
+		border-block: 1px solid rgb(11 43 77 / 22%);
+		white-space: pre-wrap;
+	}
+
+	.daily-work {
+		align-self: end;
+		padding-left: clamp(2rem, 5vw, 5rem);
+		border-left: 1px solid rgb(11 43 77 / 22%);
+	}
+
+	.daily-work :global(h2) {
+		font-size: clamp(2.5rem, 4.8vw, 4.7rem);
+	}
+
+	.daily-work :global(details) {
+		margin-top: 2.25rem;
+		border-block: 1px solid rgb(11 43 77 / 22%);
+	}
+
+	.daily-work :global(summary),
+	.ownership-copy :global(summary) {
+		display: flex;
+		min-height: 54px;
+		align-items: center;
+		justify-content: space-between;
+		gap: 1rem;
+		font-weight: 760;
+		list-style: none;
+	}
+
+	.daily-work :global(summary::-webkit-details-marker),
+	.ownership-copy :global(summary::-webkit-details-marker),
+	.alpha-disclosure summary::-webkit-details-marker {
+		display: none;
+	}
+
+	.daily-work :global(summary::after),
+	.ownership-copy :global(summary::after),
+	.alpha-disclosure summary::after {
+		font-family: "Libre Caslon Display", Georgia, serif;
+		font-size: 1.6rem;
+		font-weight: 400;
+		content: "+";
+	}
+
+	.daily-work :global(details[open] summary::after),
+	.ownership-copy :global(details[open] summary::after),
+	.alpha-disclosure[open] summary::after {
+		content: "−";
+	}
+
+	.daily-work :global(details > :not(summary)) {
+		padding-bottom: 1.75rem;
+	}
+
+	.ownership-band {
+		border-top: 1px solid rgb(11 43 77 / 20%);
+		background: #e6d8c5;
+	}
+
+	.ownership-copy {
+		padding-block: clamp(6rem, 10vw, 10rem);
+	}
+
+	.ownership-copy :global(> p:first-of-type) {
+		max-width: 54ch;
+		font-family: "Libre Caslon Display", Georgia, serif;
+		font-size: clamp(1.55rem, 2.4vw, 2.25rem);
+		line-height: 1.18;
+	}
+
+	.ownership-copy :global(> pre) {
+		margin-block: 3rem;
+		padding: clamp(1.5rem, 4vw, 3rem);
+		border: 1px solid rgb(11 43 77 / 22%);
+		background: rgb(246 240 229 / 58%);
+		color: var(--atlas-blue);
+	}
+
+	.ownership-copy :global(details) {
+		max-width: 64rem;
+		border-top: 1px solid rgb(11 43 77 / 22%);
+	}
+
+	.ownership-copy :global(details:last-child) {
+		border-bottom: 1px solid rgb(11 43 77 / 22%);
+	}
+
+	.ownership-copy :global(details > :not(summary)) {
+		padding-bottom: 2rem;
+	}
+
+	.ownership-copy :global(details h2) {
+		margin-top: 1.5rem;
+		font-size: clamp(2rem, 3.4vw, 3.4rem);
+	}
+
+	.ownership-copy :global(details pre) {
+		white-space: pre-wrap;
+	}
+
+	.start-stage {
+		background: #fbf7ef;
+	}
+
+	.start-layout {
+		display: grid;
+		grid-template-columns: minmax(0, 1.15fr) minmax(20rem, 0.85fr);
+		gap: clamp(3rem, 9vw, 10rem);
+		align-items: start;
+		padding-block: clamp(6rem, 11vw, 11rem);
+	}
+
+	.install-copy :global(h2) {
+		color: var(--atlas-blue);
+	}
+
+	.install-copy :global(pre) {
+		margin-block: 1.5rem;
+		padding: 1.35rem;
+		background: var(--atlas-blue);
+		color: #fff6e8;
+	}
+
+	.install-copy :global(a) {
+		color: var(--atlas-copper);
+	}
+
+	.alpha-disclosure {
+		margin-top: 1.2rem;
+		border-block: 1px solid var(--atlas-rule);
+	}
+
+	.alpha-disclosure summary {
+		display: flex;
+		min-height: 58px;
+		align-items: center;
+		justify-content: space-between;
+		gap: 1rem;
+		color: var(--atlas-blue);
+		font-family: "Libre Caslon Display", Georgia, serif;
+		font-size: 1.55rem;
+		list-style: none;
+	}
+
+	.alpha-disclosure > div {
+		padding-bottom: 2rem;
+	}
+
+	.alpha-disclosure :global(h2) {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		overflow: hidden;
+		clip-path: inset(50%);
+		white-space: nowrap;
+	}
+
+	.alpha-disclosure :global(ul) {
+		padding-left: 1.25rem;
+	}
+
+	.alpha-disclosure :global(li) {
+		font-size: 0.93rem;
+	}
+
+	.final-call {
+		position: relative;
+		isolation: isolate;
+		overflow: hidden;
+		background: var(--atlas-copper);
+		color: #fff8ed;
+	}
+
+	.final-call::before,
+	.final-call::after {
+		position: absolute;
+		z-index: -1;
+		border: 1px solid rgb(255 248 237 / 28%);
+		content: "";
+		transform: rotate(45deg);
+	}
+
+	.final-call::before {
+		top: -12rem;
+		right: 7vw;
+		width: 29rem;
+		height: 29rem;
+	}
+
+	.final-call::after {
+		right: 22vw;
+		bottom: -17rem;
+		width: 24rem;
+		height: 24rem;
+	}
+
+	.final-copy {
+		padding-block: clamp(6rem, 11vw, 11rem);
+	}
+
+	.final-copy :global(h2) {
+		max-width: 13ch;
+		margin-bottom: 2.25rem;
+		color: #fff8ed;
+		font-size: clamp(3.4rem, 7vw, 7rem);
+	}
+
+	.final-copy :global(p) {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.7rem;
+	}
+
+	.final-copy :global(a) {
+		display: inline-flex;
+		min-height: 48px;
+		align-items: center;
+		justify-content: center;
+		padding: 0.72rem 1rem;
+		border: 1px solid rgb(255 248 237 / 75%);
+		color: #fff8ed;
+		text-decoration: none;
+	}
+
+	.final-copy :global(a:first-child) {
+		border-color: var(--atlas-blue);
+		background: var(--atlas-blue);
+	}
+
+	.final-copy :global(a:hover) {
+		border-color: #fff8ed;
+		background: #fff8ed;
+		color: var(--atlas-blue);
+	}
+
+	@media (max-width: 800px) {
+		.foundation-grid,
+		.start-layout {
+			grid-template-columns: 1fr;
+		}
+
+		.daily-work {
+			padding: 3rem 0 0;
+			border-top: 1px solid rgb(11 43 77 / 22%);
+			border-left: 0;
+		}
+	}
+
+	@media (max-width: 480px) {
+		.final-copy :global(p) {
+			display: grid;
+		}
+
+		.final-copy :global(a) {
+			width: 100%;
+		}
+	}
+</style>

@@ -26,15 +26,25 @@ const current = ['home', 'desk', 'member', 'equipment', 'site', 'route', 'runtim
 		<article class="learn-content shell">
 			<section>
 				<p class="section-index">01 · Endroit 0.8</p>
-				<h2>Current v7 contracts</h2>
-				<p>Endroit 0.8 uses only these versioned identifiers. There is no mutable <code>latest</code> alias.</p>
+				<h2>Published v7 contracts</h2>
+				<p>The published <code>0.8.0-alpha.1</code> release uses these versioned identifiers. There is no mutable <code>latest</code> alias.</p>
 				<ul>
 					{current.map((name) => <li><a href={`/schema/v7/${name}.json`}><code>{`/schema/v7/${name}.json`}</code></a></li>)}
 				</ul>
 			</section>
 
 			<section>
-				<p class="section-index">02 · Historical</p>
+				<p class="section-index">02 · Alpha.2 candidate</p>
+				<h2>Experimental Work contract</h2>
+				<p>
+					The locally qualified alpha.2 candidate adds <a href="/schema/work/v1alpha1.json"><code>/schema/work/v1alpha1.json</code></a>.
+					It is inspectable here without claiming that <code>@endroit/cli@0.8.0-alpha.2</code> has been published.
+				</p>
+				<p><a class="button button-secondary" href="https://docs.endroit.org/work-resolution/">Read Work Resolution documentation ↗</a></p>
+			</section>
+
+			<section>
+				<p class="section-index">03 · Historical</p>
 				<h2>Endroit 0.7 contracts</h2>
 				<p>These unversioned URLs preserve the exact bytes published with <code>@endroit/cli@0.7.0-alpha.0</code>.</p>
 				<ul>
@@ -43,7 +53,7 @@ const current = ['home', 'desk', 'member', 'equipment', 'site', 'route', 'runtim
 			</section>
 
 			<section>
-				<p class="section-index">03 · Provenance</p>
+				<p class="section-index">04 · Provenance</p>
 				<h2>Inspect the hashes</h2>
 				<p>The generated manifest records the source and SHA-256 of every served contract.</p>
 				<p><a class="button button-secondary" href="/schema/manifest.json">Open the schema manifest</a></p>

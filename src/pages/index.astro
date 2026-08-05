@@ -1,171 +1,178 @@
 ---
-import { Content } from '../content/endroit-landing.md';
-import HomeInspector from '../components/HomeInspector';
+import { compiledContent } from '../content/endroit-landing.md';
+import AdoptionMap from '../components/AdoptionMap.astro';
+import FreshSessionProof from '../components/FreshSessionProof.astro';
 import SiteFooter from '../components/SiteFooter.astro';
 import SiteHeader from '../components/SiteHeader.astro';
+import StaticFoundation from '../components/StaticFoundation.astro';
+import WorkplaceHero from '../components/WorkplaceHero.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
+
+const html = await compiledContent();
+
+const heading = (level: 2 | 3, id: string) => `<h${level} id="${id}">`;
+const take = (start: string | null, end: string | null) => {
+	const startIndex = start ? html.indexOf(start) : 0;
+	const endIndex = end ? html.indexOf(end) : html.length;
+	if (startIndex < 0 || endIndex < 0 || startIndex >= endIndex) {
+		throw new Error(`Endroit landing projection boundary is missing or out of order: ${start ?? 'start'} → ${end ?? 'end'}`);
+	}
+	return html.slice(startIndex, endIndex);
+};
+const normalizeActions = (value: string) => value.replace(/<\/a>\s*·\s*<a/g, '</a><a');
+const normalizeHero = (value: string) => normalizeActions(value)
+	.replace('<blockquote>', '<div class="hero-proposition">')
+	.replace('</blockquote>', '</div>');
+
+const ids = {
+	hero: 'from-intent-to-verified-effect',
+	paths: 'two-ways-in',
+	bring: 'bring-what-you-have',
+	fresh: 'start-fresh',
+	before: 'before-the-pieces-are-already-there',
+	recognize: 'recognize-choose-the-right-boundary',
+	transpose: 'nothing-moved-responsibilities-became-explicit',
+	prove: 'prove-it-in-a-fresh-session',
+	static: 'static-core-optional-runtime',
+	daily: 'work-this-way-every-day',
+	ownership: 'what-owns-what',
+	install: 'install-the-foundation',
+	alpha: 'alpha-boundaries',
+	final: 'engineer-the-path-from-intent-to-verified-effect',
+} as const;
 ---
 
 <BaseLayout
-	title="Endroit — The place layer for agentic work"
-	description="A more intuitive way to work with agents: one inspectable Home across sessions, providers and repositories."
+	title="Endroit — From intent to verified effect."
+	description="The place layer for Workplace-first software engineering: resolved for agents, readable by humans and versioned with Git."
 	path="/"
 >
 	<SiteHeader />
-	<main class="publication-landing endroit-landing">
-		<div class="page-shell publication-copy">
-			<Content />
-
-			<div id="home-inspector-placement">
-				<HomeInspector client:load />
-				<noscript>
-					<div class="inspector-fallback" aria-label="Home Inspector static overview">
-						<section>
-							<h3>Retain</h3>
-							<p>Claude produces a candidate. The human retains it as inspectable, non-authoritative Room Material.</p>
-						</section>
-						<section>
-							<h3>Reuse</h3>
-							<p>Codex enters in a later Meeting and builds on the same owned Room and Material without receiving Claude's private memory.</p>
-						</section>
-						<section>
-							<h3>Maintain &amp; deliver</h3>
-							<p>Hygiene inspects read-only. A human-approved, revalidated Route carries the result to its sovereign Site.</p>
-						</section>
-					</div>
-				</noscript>
-			</div>
-
-			<div id="adoption-map-placement">
-				<section class="adoption-map" aria-labelledby="adoption-map-title">
-					<div class="visual-heading">
-						<p>Progressive control</p>
-						<h2 id="adoption-map-title">Start with conversation. Add precision when it matters.</h2>
-					</div>
-					<ol class="adoption-ladder">
-						<li><span>01</span><strong>Talk</strong><p>Work in normal conversation.</p></li>
-						<li><span>02</span><strong>Inspect</strong><p>Read the shared Home and its owners.</p></li>
-						<li><span>03</span><strong>Gestures</strong><p>Name authority, persistence and destination.</p></li>
-						<li><span>04</span><strong>CLI</strong><p>Apply deterministic structural operations.</p></li>
-					</ol>
-					<div class="gesture-families" aria-label="Endroit gesture families">
-						<article><span>Enter</span><strong>Recover the place</strong><code>enter-the-home</code></article>
-						<article><span>Equip</span><strong>Add a way of working</strong><code>use-research</code></article>
-						<article><span>Keep</span><strong>Control durability</strong><code>retain-this</code></article>
-						<article><span>Reach</span><strong>Name the destination</strong><code>work-on-&lt;site&gt;</code></article>
-						<article><span>Maintain</span><strong>Inspect the whole Home</strong><code>maintain-the-home</code></article>
-					</div>
-					<p class="adoption-note">Commands are optional. A natural sentence with the same explicit meaning works too; an acknowledgement alone never causes a durable transition.</p>
-				</section>
-			</div>
-
-			<div id="floor-plan-placement">
-				<section class="floor-plan-card" aria-labelledby="floor-plan-title">
-					<div class="visual-heading">
-						<p>Default standalone <code>create</code></p>
-						<h2 id="floor-plan-title">Small source. Complete address.</h2>
-					</div>
-					<div class="floor-plan-grid">
-						<pre aria-label="Default Endroit Home floor plan"><code>my-home/
-├── endroit.json
-├── HOME.md
-├── members/owner/MEMBER.md
-├── rooms/home/
-│   ├── ROOM.md
-│   └── inbox.md
-├── equipment/
-├── .desk/
-│   ├── desk.json
-│   └── DESK.md
-├── endroit.mjs
-├── AGENTS.md        generated
-├── CLAUDE.md        generated
-├── .agents/         generated
-├── .claude/         generated
-└── .endroit/        rebuildable</code></pre>
-						<div class="floor-plan-legend">
-							<article><span>Owned</span><strong>Home sources</strong><p>Human-readable files carry identity, rules and durable placement.</p></article>
-							<article><span>Projected</span><strong>Provider interfaces</strong><p>Codex and Claude receive generated Front Doors, Skills and Commands.</p></article>
-							<article><span>When needed</span><strong>Sites and checkouts</strong><p><code>sites/</code>, <code>.desk/routes/</code> and <code>checkouts/</code> appear only when operations need them.</p></article>
-						</div>
-					</div>
-					<p class="visual-note">Meetings stay ephemeral by default. No Material or persisted Meeting appears until a human explicitly retains work.</p>
-				</section>
-			</div>
-
-			<div id="execution-map-placement">
-				<section class="execution-map" aria-labelledby="execution-map-title">
-					<div class="visual-heading">
-						<p>Execution and ownership</p>
-						<h2 id="execution-map-title">The provider runs the session. The Workplace holds the work.</h2>
-					</div>
-					<div class="execution-flow">
-						<article class="execution-node provider-node"><span>Provider / Harness</span><strong>Model · tools · sandbox</strong><small>Execution and hot state</small></article>
-						<div class="flow-arrow"><span aria-hidden="true">→</span><small>temporary Occupant</small></div>
-						<article class="execution-node meeting-node"><span>Endroit Home</span><strong>Human ↔ Meeting</strong><small>Owned context and destinations</small></article>
-						<div class="flow-arrow"><span aria-hidden="true">→</span><small>candidate</small></div>
-						<article class="execution-node transition-node"><span>Human transition</span><strong>retain · accept · archive</strong><small>or approve delivery</small></article>
-						<div class="flow-arrow"><span aria-hidden="true">→</span><small>approved Route</small></div>
-						<article class="execution-node site-node"><span>Sovereign Site</span><strong>Observed external truth</strong><small>Repository history and permissions remain its own</small></article>
-					</div>
-					<p class="visual-note">Responsibilities, not a required stack. Provider projections may change; Workplace ownership does not.</p>
-				</section>
-			</div>
-
-			<section id="responsibility-shift" class="responsibility-shift" aria-labelledby="responsibility-shift-title">
-				<div class="shift-heading">
-					<p>Same pieces · explicit owners</p>
-					<h2 id="responsibility-shift-title">Stop asking two technical surfaces to own the whole Workplace.</h2>
-				</div>
-				<div class="shift-grid">
-					<div class="overloaded-stack">
-						<p>Implicit Workplace</p>
-						<article><code>AGENTS.md</code><span>constitution · preferences · orientation · rules · decisions · state</span></article>
-						<article><code>Skills/</code><span>procedures · knowledge · methods · agents · outputs</span></article>
-					</div>
-					<div class="shift-arrow" aria-hidden="true"><span>→</span><small>place first</small></div>
-					<div class="owned-stack">
-						<p>Owned Workplace</p>
-						<div><strong>Home</strong><span>composition</span></div>
-						<div><strong>Desk</strong><span>personal continuity</span></div>
-						<div><strong>Room</strong><span>durable domain</span></div>
-						<div><strong>Equipment</strong><span>reusable method</span></div>
-						<div><strong>Site</strong><span>sovereign truth</span></div>
-						<div><strong>Route</strong><span>declared access</span></div>
-					</div>
-				</div>
-				<p class="shift-note">Technical formats still matter. They become projections of responsibilities that already have an owner.</p>
-			</section>
-		</div>
+	<main class="endroit-landing">
+		<WorkplaceHero
+			heroHtml={normalizeHero(take(null, heading(2, ids.paths)))}
+			pathsIntroHtml={take(heading(2, ids.paths), heading(3, ids.bring))}
+			bringHtml={take(heading(3, ids.bring), heading(3, ids.fresh))}
+			freshHtml={take(heading(3, ids.fresh), heading(2, ids.before))}
+			beforeHtml={take(heading(2, ids.before), heading(2, ids.recognize))}
+		/>
+		<AdoptionMap
+			recognizeHtml={take(heading(2, ids.recognize), heading(2, ids.transpose))}
+			transposeHtml={take(heading(2, ids.transpose), heading(2, ids.prove))}
+		/>
+		<FreshSessionProof proofHtml={take(heading(2, ids.prove), heading(2, ids.static))} />
+		<StaticFoundation
+			staticHtml={take(heading(2, ids.static), heading(2, ids.daily))}
+			dailyHtml={take(heading(2, ids.daily), heading(2, ids.ownership))}
+			ownershipHtml={take(heading(2, ids.ownership), heading(2, ids.install))}
+			installHtml={take(heading(2, ids.install), heading(2, ids.alpha))}
+			alphaHtml={take(heading(2, ids.alpha), heading(2, ids.final))}
+			finalHtml={normalizeActions(take(heading(2, ids.final), null))}
+		/>
 	</main>
 	<SiteFooter />
 </BaseLayout>
 
-<script is:inline>
-	const copy = document.querySelector('.publication-copy');
-	if (copy) {
-		const headings = [...copy.querySelectorAll(':scope > h2')];
-		const findHeading = (text) => headings.find((heading) => heading.textContent?.trim() === text);
-		const replaceSourceSection = (visualId, headingText) => {
-			const visual = document.querySelector(visualId);
-			const heading = findHeading(headingText);
-			if (!visual || !heading) return;
-			copy.insertBefore(visual, heading);
-			let source = heading;
-			while (source && (source === heading || source.tagName !== 'H2')) {
-				const next = source.nextElementSibling;
-				source.hidden = true;
-				source = next;
-			}
-		};
-
-		replaceSourceSection('#home-inspector-placement', 'One Home. Several sessions. More to build on.');
-		replaceSourceSection('#adoption-map-placement', 'Start with conversation. Add precision when it matters.');
-		replaceSourceSection('#floor-plan-placement', 'The Home stays inspectable');
-		replaceSourceSection('#execution-map-placement', 'Providers execute. The Home remembers.');
-
-		const shift = document.querySelector('#responsibility-shift');
-		const pieces = findHeading('You already have the pieces');
-		if (shift && pieces) copy.insertBefore(shift, pieces);
+<style is:global>
+	@font-face {
+		font-family: "Libre Caslon Display";
+		font-style: normal;
+		font-weight: 400;
+		font-display: swap;
+		src: url("/fonts/libre-caslon-display-latin-400-normal.woff2") format("woff2");
 	}
-</script>
+
+	body:has(main.endroit-landing) .nav-cta {
+		display: none;
+	}
+
+	.endroit-landing {
+		--atlas-blue: #0b2b4d;
+		--atlas-blue-soft: #173f63;
+		--atlas-copper: #a9512f;
+		--atlas-copper-bright: #d17543;
+		--atlas-ivory: #f6f0e5;
+		--atlas-rule: rgb(11 43 77 / 18%);
+		--atlas-copy: min(70ch, 100%);
+		overflow: clip;
+		background: var(--atlas-ivory);
+	}
+
+	.endroit-landing h1,
+	.endroit-landing h2,
+	.endroit-landing h3,
+	.endroit-landing p,
+	.endroit-landing ul,
+	.endroit-landing ol,
+	.endroit-landing pre {
+		margin-top: 0;
+	}
+
+	.endroit-landing h1,
+	.endroit-landing h2,
+	.endroit-landing h3 {
+		font-family: "Libre Caslon Display", Georgia, serif;
+		font-weight: 400;
+		letter-spacing: -0.025em;
+	}
+
+	.endroit-landing h2 {
+		max-width: 17ch;
+		margin-bottom: 1.35rem;
+		font-size: clamp(2.65rem, 5.8vw, 5.8rem);
+		line-height: 0.96;
+	}
+
+	.endroit-landing h3 {
+		font-size: clamp(1.75rem, 3vw, 2.75rem);
+		line-height: 1;
+	}
+
+	.endroit-landing p,
+	.endroit-landing li {
+		max-width: var(--atlas-copy);
+		font-size: clamp(1rem, 1.2vw, 1.12rem);
+		line-height: 1.7;
+	}
+
+	.endroit-landing a {
+		font-weight: 760;
+		text-underline-offset: 0.22em;
+	}
+
+	.endroit-landing pre {
+		max-width: 100%;
+		overflow-x: auto;
+		font-size: clamp(0.78rem, 1.05vw, 0.9rem);
+		line-height: 1.72;
+	}
+
+	.endroit-landing summary {
+		cursor: pointer;
+	}
+
+	.endroit-landing [id] {
+		scroll-margin-top: 9rem;
+	}
+
+	@media (max-width: 480px) {
+		.endroit-landing h2 {
+			font-size: clamp(2.35rem, 11vw, 3.65rem);
+		}
+
+		.endroit-landing [id] {
+			scroll-margin-top: 5.5rem;
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.endroit-landing *,
+		.endroit-landing *::before,
+		.endroit-landing *::after {
+			scroll-behavior: auto !important;
+			animation-duration: 0.001ms !important;
+			animation-iteration-count: 1 !important;
+			transition-duration: 0.001ms !important;
+		}
+	}
+</style>

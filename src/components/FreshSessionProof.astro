@@ -1,0 +1,198 @@
+---
+interface Props {
+	proofHtml: string;
+}
+
+const { proofHtml } = Astro.props;
+---
+
+<section class="fresh-proof" data-adoption-stage="continue" aria-labelledby="prove-it-in-a-fresh-session">
+	<div class="page-shell proof-layout">
+		<div class="proof-copy" set:html={proofHtml} />
+		<figure class="fresh-entry">
+			<div class="agent-entry">
+				<span>New session</span>
+				<strong>Temporary Agent</strong>
+			</div>
+			<div class="entry-line" aria-hidden="true"><i></i></div>
+			<div class="home-directory">
+				<header>
+					<span>Generated Front Door</span>
+					<strong>product-home</strong>
+				</header>
+				<dl>
+					<div><dt>Home</dt><dd>ownership boundary</dd></div>
+					<div><dt>Room</dt><dd>current Material</dd></div>
+					<div><dt>Sites</dt><dd>sovereign sources</dd></div>
+					<div><dt>Routes</dt><dd>declared reach</dd></div>
+				</dl>
+			</div>
+			<figcaption>Fresh-agent confirmation uses the owned files, not the adoption conversation.</figcaption>
+		</figure>
+	</div>
+</section>
+
+<style>
+	.fresh-proof {
+		position: relative;
+		background: #dfe8e7;
+		color: var(--atlas-blue);
+	}
+
+	.fresh-proof::before {
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		left: max(20px, calc((100vw - 1360px) / 2 + 40px));
+		width: 1px;
+		background: rgb(11 43 77 / 18%);
+		content: "";
+	}
+
+	.proof-layout {
+		display: grid;
+		grid-template-columns: minmax(0, 0.82fr) minmax(28rem, 1.18fr);
+		gap: clamp(3rem, 8vw, 9rem);
+		align-items: center;
+		padding-block: clamp(6rem, 11vw, 11rem);
+	}
+
+	.proof-copy :global(h2) {
+		color: var(--atlas-blue);
+	}
+
+	.proof-copy :global(ul) {
+		margin: 2.5rem 0 0;
+		padding: 0;
+		border-top: 1px solid rgb(11 43 77 / 22%);
+		list-style: none;
+	}
+
+	.proof-copy :global(li) {
+		padding: 0.9rem 0;
+		border-bottom: 1px solid rgb(11 43 77 / 22%);
+	}
+
+	.proof-copy :global(p:last-child) {
+		margin-top: 1.7rem;
+		color: #3f5366;
+	}
+
+	.fresh-entry {
+		position: relative;
+		min-height: 34rem;
+		margin: 0;
+		padding: clamp(2rem, 5vw, 4.5rem);
+		border: 1px solid rgb(11 43 77 / 22%);
+		background: rgb(246 240 229 / 44%);
+	}
+
+	.agent-entry {
+		display: grid;
+		gap: 0.25rem;
+		width: min(52%, 16rem);
+		padding-bottom: 1.2rem;
+		border-bottom: 1px solid var(--atlas-copper);
+	}
+
+	.agent-entry span,
+	.home-directory span {
+		color: #536071;
+		font-size: 0.72rem;
+		font-weight: 760;
+		letter-spacing: 0.05em;
+		text-transform: uppercase;
+	}
+
+	.agent-entry strong,
+	.home-directory header strong {
+		font-family: "Libre Caslon Display", Georgia, serif;
+		font-size: clamp(1.7rem, 3vw, 2.4rem);
+		font-weight: 400;
+		line-height: 1;
+	}
+
+	.entry-line {
+		position: absolute;
+		top: 8.1rem;
+		left: clamp(2rem, 5vw, 4.5rem);
+		width: 2px;
+		height: 4.6rem;
+		background: var(--atlas-copper);
+	}
+
+	.entry-line i {
+		position: absolute;
+		bottom: -0.34rem;
+		left: -0.29rem;
+		width: 0.7rem;
+		height: 0.7rem;
+		border: 2px solid var(--atlas-copper);
+		border-radius: 50%;
+		background: #eaf0ed;
+	}
+
+	.home-directory {
+		margin-top: 4.5rem;
+		border-block: 1px solid rgb(11 43 77 / 25%);
+	}
+
+	.home-directory header {
+		display: grid;
+		gap: 0.2rem;
+		padding-block: 1.5rem;
+	}
+
+	.home-directory dl {
+		margin: 0;
+	}
+
+	.home-directory dl div {
+		display: grid;
+		grid-template-columns: minmax(5rem, 0.4fr) 1fr;
+		gap: 1rem;
+		padding-block: 0.75rem;
+		border-top: 1px solid rgb(11 43 77 / 16%);
+	}
+
+	.home-directory dt {
+		font-weight: 800;
+	}
+
+	.home-directory dd {
+		margin: 0;
+		color: #41566a;
+	}
+
+	.fresh-entry figcaption {
+		margin-top: 1.5rem;
+		max-width: 44ch;
+		color: #43586b;
+		font-size: 0.78rem;
+		line-height: 1.5;
+	}
+
+	@media (max-width: 820px) {
+		.proof-layout {
+			grid-template-columns: 1fr;
+		}
+
+		.fresh-entry {
+			min-height: auto;
+		}
+	}
+
+	@media (max-width: 480px) {
+		.fresh-entry {
+			padding: 1.25rem;
+		}
+
+		.entry-line {
+			left: 1.25rem;
+		}
+
+		.agent-entry {
+			width: 78%;
+		}
+	}
+</style>

@@ -1,0 +1,359 @@
+---
+interface Props {
+	heroHtml: string;
+	pathsIntroHtml: string;
+	bringHtml: string;
+	freshHtml: string;
+	beforeHtml: string;
+}
+
+const { heroHtml, pathsIntroHtml, bringHtml, freshHtml, beforeHtml } = Astro.props;
+---
+
+<section class="workplace-hero" aria-labelledby="from-intent-to-verified-effect">
+	<div class="page-shell hero-frame">
+		<header class="hero-copy" set:html={heroHtml} />
+		<figure class="home-atlas">
+			<picture>
+				<source media="(max-width: 640px)" srcset="/assets/endroit-home-720.webp" width="720" height="480" />
+				<img
+					src="/assets/endroit-home-1200.webp"
+					width="1200"
+					height="800"
+					alt="An architectural Home connected by copper routes to four independent Sites."
+					fetchpriority="high"
+					decoding="async"
+				/>
+			</picture>
+			<figcaption>
+				<strong>One owned Home</strong>
+				<span>Existing Sites stay sovereign</span>
+			</figcaption>
+		</figure>
+	</div>
+</section>
+
+<section class="entry-stage" aria-labelledby="two-ways-in">
+	<div class="page-shell">
+		<div class="entry-intro" set:html={pathsIntroHtml} />
+		<div class="entry-paths">
+			<article class="bring-path" set:html={bringHtml} />
+			<article class="fresh-path" set:html={freshHtml} />
+		</div>
+	</div>
+	<div class="existing-stage" data-adoption-stage="existing">
+		<div class="page-shell before-copy" set:html={beforeHtml} />
+	</div>
+</section>
+
+<style>
+	.workplace-hero {
+		position: relative;
+		isolation: isolate;
+		border-bottom: 1px solid var(--atlas-rule);
+		background:
+			linear-gradient(90deg, rgb(246 240 229 / 100%) 0 42%, rgb(246 240 229 / 70%) 59%, rgb(246 240 229 / 20%) 100%),
+			var(--atlas-ivory);
+	}
+
+	.hero-frame {
+		display: grid;
+		grid-template-columns: minmax(20rem, 0.86fr) minmax(32rem, 1.14fr);
+		gap: clamp(2rem, 5vw, 6rem);
+		align-items: center;
+		min-height: calc(100svh - 4.75rem);
+		padding-block: clamp(3.5rem, 8vw, 7rem);
+	}
+
+	.hero-copy {
+		position: relative;
+		z-index: 1;
+	}
+
+	.hero-copy :global(h1) {
+		max-width: 8.5ch;
+		margin-bottom: 1.5rem;
+		color: var(--atlas-blue);
+		font-size: clamp(4.3rem, 7.4vw, 7.1rem);
+		line-height: 0.84;
+	}
+
+	.hero-copy :global(.hero-proposition) {
+		max-width: 28ch;
+		margin-bottom: 1.25rem;
+		color: var(--atlas-copper);
+		font-family: "Libre Caslon Display", Georgia, serif;
+		font-size: clamp(1.7rem, 2.6vw, 2.65rem);
+		line-height: 1.04;
+	}
+
+	.hero-copy :global(.hero-proposition p) {
+		font: inherit;
+		line-height: inherit;
+	}
+
+	.hero-copy :global(> p:not(:has(a)):not(:last-child)) {
+		max-width: 56ch;
+		color: #4c5260;
+	}
+
+	.hero-copy :global(> p:has(a)) {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.65rem;
+		margin: 1.7rem 0 1rem;
+	}
+
+	.hero-copy :global(> p:has(a) a) {
+		display: inline-flex;
+		min-height: 48px;
+		align-items: center;
+		justify-content: center;
+		padding: 0.72rem 1rem;
+		border: 1px solid var(--atlas-blue);
+		text-decoration: none;
+	}
+
+	.hero-copy :global(> p:has(a) a:first-child) {
+		background: var(--atlas-blue);
+		color: var(--atlas-ivory);
+	}
+
+	.hero-copy :global(> p:has(a) a:nth-child(2)) {
+		background: transparent;
+		color: var(--atlas-blue);
+	}
+
+	.hero-copy :global(> p:has(a) a:last-child) {
+		min-height: 44px;
+		border-color: transparent;
+		padding-inline: 0.25rem;
+		color: #4b5666;
+		text-decoration: underline;
+	}
+
+	.hero-copy :global(> p:has(a) a:hover) {
+		border-color: var(--atlas-copper);
+		background: var(--atlas-copper);
+		color: var(--atlas-ivory);
+	}
+
+	.hero-copy :global(> p:last-child) {
+		margin: 0;
+		color: #596170;
+		font-size: 0.78rem;
+		letter-spacing: 0.04em;
+	}
+
+	.home-atlas {
+		position: relative;
+		z-index: 0;
+		margin: 0 -2vw 0 -5vw;
+	}
+
+	.home-atlas::before {
+		position: absolute;
+		inset: 8% 9%;
+		z-index: -1;
+		background: rgb(11 43 77 / 9%);
+		content: "";
+		filter: blur(42px);
+	}
+
+	.home-atlas img {
+		display: block;
+		width: 100%;
+		height: auto;
+		mix-blend-mode: multiply;
+	}
+
+	.home-atlas figcaption {
+		position: absolute;
+		right: 6%;
+		bottom: 7%;
+		display: grid;
+		gap: 0.12rem;
+		max-width: 13rem;
+		padding: 0.75rem 0 0.75rem 1rem;
+		border-left: 1px solid var(--atlas-copper);
+		background: rgb(246 240 229 / 88%);
+		color: var(--atlas-blue);
+		backdrop-filter: blur(8px);
+	}
+
+	.home-atlas figcaption strong {
+		font-family: "Libre Caslon Display", Georgia, serif;
+		font-size: 1.3rem;
+		font-weight: 400;
+	}
+
+	.home-atlas figcaption span {
+		font-size: 0.75rem;
+		line-height: 1.35;
+	}
+
+	.entry-stage {
+		background: #fbf7ef;
+	}
+
+	.entry-stage > .page-shell {
+		padding-block: clamp(5rem, 9vw, 9rem);
+	}
+
+	.entry-intro {
+		max-width: 58rem;
+	}
+
+	.entry-intro :global(h2) {
+		color: var(--atlas-blue);
+	}
+
+	.entry-paths {
+		display: grid;
+		grid-template-columns: minmax(0, 1.45fr) minmax(0, 0.55fr);
+		margin-top: clamp(2.5rem, 6vw, 5rem);
+		border-block: 1px solid var(--atlas-rule);
+	}
+
+	.entry-paths article {
+		min-width: 0;
+		padding-block: clamp(2rem, 4vw, 3.5rem);
+	}
+
+	.bring-path {
+		padding-right: clamp(2rem, 6vw, 6rem);
+	}
+
+	.fresh-path {
+		padding-left: clamp(1.5rem, 4vw, 3.5rem);
+		border-left: 1px solid var(--atlas-rule);
+	}
+
+	.entry-paths :global(h3) {
+		margin-bottom: 0.9rem;
+		color: var(--atlas-blue);
+	}
+
+	.bring-path :global(h3) {
+		color: var(--atlas-copper);
+		font-size: clamp(2.7rem, 5.4vw, 5.2rem);
+	}
+
+	.entry-paths :global(p) {
+		margin-bottom: 0;
+	}
+
+	.fresh-path :global(p:last-child) {
+		margin-top: 1.5rem;
+		padding-top: 1rem;
+		border-top: 1px solid var(--atlas-rule);
+		color: #525b67;
+		font-size: 0.88rem;
+	}
+
+	.existing-stage {
+		border-top: 1px solid var(--atlas-rule);
+		background: var(--atlas-blue);
+		color: var(--atlas-ivory);
+	}
+
+	.before-copy {
+		display: grid;
+		grid-template-columns: minmax(0, 0.75fr) minmax(26rem, 1.25fr);
+		gap: clamp(2.5rem, 7vw, 8rem);
+		align-items: start;
+		padding-block: clamp(5rem, 9vw, 9rem);
+	}
+
+	.before-copy :global(h2),
+	.before-copy :global(> p) {
+		grid-column: 1;
+	}
+
+	.before-copy :global(h2) {
+		color: #fff6e8;
+	}
+
+	.before-copy :global(> p) {
+		color: #d1d8df;
+	}
+
+	.before-copy :global(pre) {
+		grid-column: 2;
+		grid-row: 1 / span 4;
+		margin: 0;
+		padding: clamp(1.5rem, 4vw, 3rem);
+		border-block: 1px solid rgb(246 240 229 / 26%);
+		color: #fff6e8;
+	}
+
+	@media (max-width: 960px) {
+		.workplace-hero {
+			background: var(--atlas-ivory);
+		}
+
+		.hero-frame {
+			grid-template-columns: 1fr;
+			gap: 2rem;
+			min-height: auto;
+			padding-block: 3rem 2.5rem;
+		}
+
+		.home-atlas {
+			margin: 0 -4vw;
+		}
+	}
+
+	@media (max-width: 760px) {
+		.hero-copy :global(h1) {
+			font-size: clamp(3.5rem, 15vw, 5.6rem);
+		}
+
+		.home-atlas {
+			margin: 0 -8vw;
+		}
+
+		.home-atlas figcaption {
+			right: 8%;
+			bottom: 3%;
+		}
+
+		.entry-paths,
+		.before-copy {
+			grid-template-columns: 1fr;
+		}
+
+		.entry-paths article {
+			padding: 2rem 0;
+		}
+
+		.fresh-path {
+			border-top: 1px solid var(--atlas-rule);
+			border-left: 0;
+		}
+
+		.before-copy :global(pre) {
+			grid-column: 1;
+			grid-row: auto;
+		}
+	}
+
+	@media (max-width: 480px) {
+		.hero-copy :global(> p:has(a)) {
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+		}
+
+		.hero-copy :global(> p:has(a) a:first-child),
+		.hero-copy :global(> p:has(a) a:last-child) {
+			grid-column: 1 / -1;
+		}
+
+		.home-atlas figcaption {
+			position: static;
+			margin-inline: 8%;
+			background: transparent;
+			backdrop-filter: none;
+		}
+	}
+</style>
