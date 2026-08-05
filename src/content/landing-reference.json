@@ -59,7 +59,7 @@
     "manifests": [
       {
         "path": "public/schema/manifest.json",
-        "sha256": "4457ff7716417e14777f5b5838b22b660255e32236b08934a5e94c174bc2c26e"
+        "sha256": "a40f14b968d8e2f11532240dbb08b92c3b175707029b136750f69184a1b8d2c0"
       },
       {
         "path": "src/content/projections.json",
