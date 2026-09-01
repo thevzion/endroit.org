@@ -30,36 +30,33 @@ const surfaceCopy = publicSurface.sheets.map(({ title, paragraphs, quotes, fine 
 const corpus = `${page}\n${surfaceCopy}\n${JSON.stringify({ condition, deliveryStamps, manifest, note, parties, retainedTerm, schedule, signatureSteps })}`;
 
 test('the landing states one thesis and answers the eight visitor questions', () => {
-	assert.equal(publicSurface.hero.title, 'A harness runs the agent. Endroit runs the work around it.');
-	assert.equal(publicSurface.hero.punch, 'Agents execute. You still direct, accept and deliver.');
+	assert.equal(publicSurface.hero.title, 'Give agentic work a world you own.');
+	assert.equal(publicSurface.hero.punch, 'Humans and configured agents share one language for where work belongs, who may decide, what can change and what should remain.');
 	for (const statement of [
-		'A bigger context window is a bigger truck. It is not a manifest.',
-		'One original. A compiled copy for every provider.',
-		'Nothing survives a Meeting unless you sign for it.',
-		'The destination signs for itself.',
-		'The harness is not the framework. Neither is the repository.',
-		'Available now. Candidate next. Draft beyond.',
-		'Direct the work. Let the agents execute.',
+		'A new session should enter the work instead of reconstructing its world.',
+		'The view changes. Ownership, authority, lifecycle and destination keep the same meaning.',
+		'You choose what the Workplace carries forward.',
+		'Access creates reach. The human still controls authority and delivery.',
+		'Endroit compiles the place around agent reasoning. It does not replace the reasoning.',
+		'Source-only, current and bounded.',
+		'Give the next session a place to enter.',
 	]) assert.ok(surfaceCopy.includes(statement), statement);
-	// The paradigm shift, not a prompt-quality or memory claim.
-	assert.match(corpus, /structuring work around coding agents/);
+	assert.match(corpus, /share one language/);
 	assert.doesNotMatch(corpus, /better prompts|prompt engineering|agent memory|multi-agent orchestration/i);
 });
 
 test('the exact maturity register is preserved and never softened', () => {
 	assert.deepEqual(condition.map(({ register, subject }) => `${register}: ${subject}`), [
-		'Published alpha: Endroit 0.8.0-alpha.1',
-		'Qualified local candidate: Endroit 0.10.0-alpha.0',
-		'Experimental protocol: Open Workplace 0.2-draft',
-		'Projection-qualified: Codex and Claude',
+		'Source-only pre-release: Endroit v0.1.0-rc.1',
+		'Verified source: develop@7388d63',
+		'Shared model: Open Workplace',
+		'Configured surfaces: Provider bindings',
 	]);
-	assert.match(corpus, /npm publication, schema delivery and deployment cannot/);
-	assert.match(corpus, /not an any-agent claim/);
-	assert.match(corpus, /Not an established standard/);
-	assert.match(corpus, /Optional startup hooks make this smoother\. The plain-file model requires none\./);
-	assert.match(corpus, /Other harnesses can read the `?AGENTS\.md`? convention/);
-	// A candidate must never be dressed as an observed release.
-	assert.doesNotMatch(corpus, /0\.10\.0-alpha\.0 is (?:published|released|deployed|available now)/i);
+	assert.match(corpus, /package is private/i);
+	assert.match(corpus, /not a universal provider-support claim/i);
+	assert.match(corpus, /Fresh-agent convergence remains qualification work/);
+	assert.match(corpus, /Canonical meaning lives in ordinary owned files/);
+	assert.doesNotMatch(corpus, /v0\.1\.0-rc\.1 is (?:published|deployed|available from npm)/i);
 	// HUD stays out until its full implementation chain is verified.
 	assert.doesNotMatch(corpus, /\bHUD\b/);
 });
@@ -80,7 +77,7 @@ test('context resolution is shown as a manifest with named exclusions', () => {
 	assert.ok(closedNotes.every(({ retained }) => retained === 'none'));
 	// Exclusion is a record, never a de-emphasised row.
 	assert.match(styles, /\.line-out\s*\{\s*opacity:\s*1;/);
-	assert.match(corpus, /not a\s+measured claim about model intelligence or accuracy/);
+	assert.match(corpus, /no universal provider, autonomous delivery, automatic memory or model-intelligence claim/);
 });
 
 test('owned sources compile into provider projections, with real proofs to check', () => {
@@ -88,8 +85,12 @@ test('owned sources compile into provider projections, with real proofs to check
 	assert.equal(carbonSet[0].role, 'Owned Markdown. You edit this one.');
 	for (const copy of carbonSet.slice(1)) assert.match(copy.role, /projection/i);
 	for (const copy of carbonSet) assert.ok(copy.lines.length > 3, copy.id);
-	// Every proof link is a route this Site actually serves.
-	assert.deepEqual(projectionProofs.map(({ href }) => href), ['/profile.md', '/install.md', '/llms.txt', '/schema/']);
+	assert.deepEqual(projectionProofs.map(({ href }) => href), [
+		'https://github.com/thevzion/endroit/blob/develop/docs/projections.md',
+		'https://github.com/thevzion/endroit/blob/develop/docs/front-doors.md',
+		'https://github.com/thevzion/endroit/blob/develop/docs/meetings.md',
+		'https://github.com/thevzion/endroit/blob/develop/INSTALL.md',
+	]);
 	for (const proof of projectionProofs) assert.ok(proof.proves.length > 0, proof.href);
 });
 
@@ -109,7 +110,7 @@ test('every lifecycle transition is a separate human act, and the term follows t
 test('Site authority, Route reach and delivery consent stay three separate things', () => {
 	assert.deepEqual(deliveryStamps.map(({ id }) => id), ['route', 'consent', 'received']);
 	assert.deepEqual(deliveryStamps.map(({ stamp }) => stamp), ['ROUTE DECLARED', 'CONSENT GIVEN', 'RECEIVED IN GOOD ORDER']);
-	for (const refusal of ['Accepted is not delivered.', 'A valid Route is not consent.', 'A generated file is not a delivered page.']) {
+	for (const refusal of ['Retained Material is not accepted judgment.', 'A Route does not grant delivery consent.', 'An agent report does not prove an external effect.']) {
 		assert.ok(publicSurface.consignee.fine.includes(refusal), refusal);
 	}
 	assert.match(corpus, /Reach is not consent/);
@@ -132,11 +133,10 @@ test('Schedule A binds every material claim to a mechanism, a proof and a maturi
 
 test('the Open Workplace and Endroit candidate boundary stays explicit in the owned Surface', () => {
 	const stack = publicSurface.fragments.find(({ id }) => id === 'stack').body;
-	assert.match(stack, /current\s+experimental Protocol is `open-workplace\/0\.2-draft`/);
-	assert.match(stack, /Endroit `0\.10\.0-alpha\.0` candidate/);
-	assert.match(stack, /`endroit\/0\.10`\s+Profile/);
-	assert.match(stack, /Publication, deployment and broader conformance\s+cannot be inferred/);
-	assert.match(product, /current Open Workplace experimental Protocol is\s+`open-workplace\/0\.2-draft`/);
+	assert.match(stack, /Open Workplace publishes the shared implementation-neutral model/);
+	assert.match(stack, /Endroit provides a local-first file-based compiler/);
+	assert.match(stack, /no universal\s+provider, autonomous delivery, automatic memory or model-intelligence claim/);
+	assert.match(product, /Open Workplace/);
 });
 
 test('only verified public destinations are linked', async () => {
@@ -149,10 +149,7 @@ test('only verified public destinations are linked', async () => {
 	assert.ok(external.length >= 4);
 	for (const href of external) assert.ok(externalLinks.includes(href), href);
 	for (const href of anchors.filter((h) => h.startsWith('/'))) {
-		assert.ok(
-			['/', '/install/', '/roadmap/', '/homes/', '/schema/', '/profile.md', '/install.md', '/llms.txt'].includes(href),
-			href,
-		);
+		assert.equal(href, '/');
 	}
 	for (const href of anchors.filter((h) => h.startsWith('#'))) {
 		assert.ok(built.includes(`id="${href.slice(1)}"`), `dangling anchor ${href}`);
@@ -188,5 +185,5 @@ test('the direction contract survives in the markup and in the Surface', () => {
 	assert.match(page, /seed 7568bf67/);
 	assert.match(direction, /## Editorial thesis[\s\S]*## First proof[\s\S]*## Visual idea[\s\S]*## Interaction grammar[\s\S]*## Deliberately removed/);
 	assert.equal(publicSurface.metadata.currentness, 'exploration', 'an unaccepted exploration never claims to be current');
-	assert.match(publicSurface.provenance.paragraphs.join(' '), /has not been accepted, published or deployed/);
+	assert.match(publicSurface.provenance.paragraphs.join(' '), /have not been accepted, published or deployed/);
 });

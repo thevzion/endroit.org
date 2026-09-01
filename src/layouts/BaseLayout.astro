@@ -13,7 +13,7 @@ interface Props {
 const { title, description, path, current } = Astro.props;
 const canonical = new URL(path, Astro.site);
 const socialCard = new URL('/social-card.png', Astro.site);
-const socialAlt = 'Endroit — Agents produce. Your workplace compounds.';
+const socialAlt = 'Endroit: Give agentic work a world you own.';
 const website = {
 	'@context': 'https://schema.org',
 	'@type': 'WebSite',

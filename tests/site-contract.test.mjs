@@ -154,19 +154,19 @@ test('the static build emits every supported route and machine contract', async 
 	const landing = await read('dist/index.html');
 	const install = await read('dist/install/index.html');
 	for (const phrase of [
-		'A harness runs the agent. Endroit runs the work around it.',
-		'Agents execute. You still direct, accept and deliver.',
-		'Endroit is a framework for structuring work around coding agents.',
-		'Nothing survives a Meeting unless you sign for it.',
+		'Give agentic work a world you own.',
+		'Humans and configured agents share one language',
+		'A session starts with a partial view of your work.',
+		'Conversation ends. Selected work remains.',
 		'What remains is your agentic capital.',
 		'RECEIVED IN GOOD ORDER',
-		'Qualified local candidate',
+		'Source-only pre-release',
 	]) assert.match(landing, new RegExp(phrase.replaceAll('.', '\\.')));
 	assert.equal([...install.matchAll(/<h1(?:\s|>)/g)].length, 1);
 	assert.doesNotMatch(install, /<h1[^>]*>Install Endroit<\/h1>/);
 });
 
-test('the accepted Discord destination renders with an honest bootstrapping claim', async () => {
+test('the historical Discord destination is not rendered by the source-only candidate', async () => {
 	const destination = await read('src/content/release-destinations.json').then(JSON.parse);
 	assert.equal(destination.release, 'ecosystem-2026-08-02');
 	assert.deepEqual(destination.destinations, [{
@@ -178,9 +178,9 @@ test('the accepted Discord destination renders with an honest bootstrapping clai
 		claim: 'bootstrapping',
 	}]);
 	const built = await read('dist/index.html');
-	assert.match(built, /https:\/\/discord\.gg\/HW4Hs9sEp/);
-	assert.match(built, /Join the new Discord/);
-	assert.match(built, /new and bootstrapping/);
+	assert.doesNotMatch(built, /https:\/\/discord\.gg\/HW4Hs9sEp/);
+	assert.doesNotMatch(built, /Join the new Discord/);
+	assert.match(built, /The package remains private/);
 });
 
 test('the built Site makes no third-party runtime requests and keeps shipped JavaScript under 25 KiB gzip', async () => {

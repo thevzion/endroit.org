@@ -14,23 +14,20 @@ re-explain context daily; they distrust both hype and magic-memory claims.
 
 ## Product Purpose
 
-This Site presents the proof-carrying message architecture: the candidate
-spine `Agents produce. Your workplace compounds.`, the category signal
-`Software craftsmanship, for the agentic generation.`, and the promise `The
-next agent starts ahead, not over.` The mechanism made tangible is
-semantically typed working context and its operation, context resolution:
-`Context that knows its place.` The visitor must experience agentic capital
-(retain, end the Meeting, change the Occupant, observe what remains) before
-the page names it.
+This Site presents one product thesis: `Give agentic work a world you own.`
+The visitor should understand that the Workplace is a shared operational world
+for people, decisions, methods, repositories and time; that Open Workplace
+provides its common language; and that Endroit compiles owned sources into
+human and configured-agent views. The page demonstrates this through context
+resolution, explicit lifecycle transitions and sovereign Site boundaries.
 
 ## Positioning
 
-Endroit is the local-first framework for Workplace-first software craft. It
-turns the context, decisions, methods and bounded reach of human-agent work
-into durable agentic capital, so each new agent starts ahead instead of
-starting over. The accepted category (Decision 0008) remains `THE
-WORKPLACE-FIRST APPLICATION FRAMEWORK`; the spine lines above are candidate
-copy under test in this iteration.
+Endroit is a local-first implementation of Open Workplace. It materialises the
+place around agentic work as readable files, deterministic views and explicit
+operations. Humans and configured agents share terms for where work belongs,
+who may decide, what can change and what should remain. The hero line remains
+candidate copy under test in this iteration.
 
 ## Operating Context
 
@@ -50,22 +47,21 @@ unrelated Rooms and unauthorized Sites visibly excluded.
   remains after an agent leaves. Never: automatic memory, retained
   transcripts, a pile of files, zero-effort compounding. Honest promise: it
   compounds through the work, not after it.
-- Release boundary: `0.8.0-alpha.1` remains the observed public package.
-  `0.10.0-alpha.0` is the qualified local release candidate; it must never be
-  described as published or deployed before those effects are observed.
-- Protocol boundary: the current Open Workplace experimental Protocol is
-  `open-workplace/0.2-draft`. The Endroit `0.10.0-alpha.0` candidate declares
-  the versioned `endroit/0.10` Profile targeting that draft. This is one
-  observed implementation relationship, not a standard or conformance claim.
+- Release boundary: Endroit `v0.1.0-rc.1` is source-only and its package is
+  private. It must not be described as published, deployed or installable from
+  npm.
+- Qualification boundary: Endroit source `develop@7388d63` passed typecheck
+  and 114 tests on 2026-09-02. Fresh-agent convergence remains qualification
+  work.
+- Model boundary: Open Workplace is the shared implementation-neutral model;
+  Endroit is one implementation. This is not a standard, broad conformance or
+  universal provider-support claim.
 - Source boundary: product capabilities, Profile, installation contract and
   schemas come from one exact Endroit commit. This Site owns their public
   transposition and delivery, never their product truth.
-- Verified public links only: endroit.org/install/, endroit.org/roadmap/,
-  open-workplace.org/, open-workplace.org/proposal/,
-  github.com/thevzion/endroit, github.com/open-workplace/open-workplace.
-- The retained Endroit Discord invitation is a pending release destination.
-  It may render only after human acceptance, and then only as `Join the new
-  Discord`; the Site must not imply an established community.
+- Verified public links only: open-workplace.org,
+  open-workplace.org/proposal, github.com/thevzion/endroit and exact files on
+  the Endroit `develop` branch.
 - Static-first, progressive enhancement, no client framework, keyboard
   complete, 320px, reduced motion, honest without JavaScript.
 

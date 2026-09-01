@@ -23,9 +23,9 @@ import '../styles/consignment.css';
 const { hero, problem, carbon, signature, consignee, stack, availability, community, close, provenance } = publicSurface;
 void externalLinks;
 
-const title = 'Endroit · A harness runs the agent. Endroit runs the work around it.';
+const title = 'Endroit · Give agentic work a world you own.';
 const description =
-	'Endroit is a framework for structuring work around coding agents: one written objective per Meeting, a manifest of exactly which owned sources are aboard, declared destinations, and human acceptance and delivery consent.';
+	'Endroit gives humans and configured agents one owned, inspectable Workplace for context, authority, lifecycle and destination.';
 ---
 
 <!doctype html>
@@ -40,18 +40,18 @@ const description =
 		<meta property="og:type" content="website" />
 		<meta property="og:site_name" content="Endroit" />
 		<meta property="og:title" content={title} />
-		<meta property="og:description" content="Every Meeting gets one objective, a manifest of exactly what is aboard, declared destinations, and a signature block that stays yours." />
+		<meta property="og:description" content={description} />
 		<meta property="og:url" content="https://endroit.org/" />
 		<meta property="og:image" content="https://endroit.org/social-card.png" />
 		<meta property="og:image:type" content="image/png" />
 		<meta property="og:image:width" content="1200" />
 		<meta property="og:image:height" content="630" />
-		<meta property="og:image:alt" content="Endroit: a harness runs the agent, Endroit runs the work around it." />
+		<meta property="og:image:alt" content="Endroit: Give agentic work a world you own." />
 		<meta name="twitter:card" content="summary_large_image" />
 		<meta name="twitter:title" content={title} />
-		<meta name="twitter:description" content="Every Meeting gets one objective, a manifest of exactly what is aboard, declared destinations, and a signature block that stays yours." />
+		<meta name="twitter:description" content={description} />
 		<meta name="twitter:image" content="https://endroit.org/social-card.png" />
-		<meta name="twitter:image:alt" content="Endroit: a harness runs the agent, Endroit runs the work around it." />
+		<meta name="twitter:image:alt" content="Endroit: Give agentic work a world you own." />
 		<script is:inline type="application/ld+json" set:html={JSON.stringify({
 			'@context': 'https://schema.org',
 			'@type': 'WebSite',
@@ -64,27 +64,27 @@ const description =
 	</head>
 	<body>
 		<!--
-		THESIS: The unit of agentic work is a dispatched consignment, one written objective with an itemised manifest, a declared destination and a human signature; this page refuses the dark dev-tool hero with a fake terminal and feature grid, and refuses the agent-memory framing.
+		THESIS: Endroit materialises a shared operational world for human-agent work: durable places, common terms, explicit authority and owned continuity outside any provider session.
 		OWN-WORLD: The Consignment Set: pressboard binding #1b2027 holding multi-part form sheets whose stock names the party, bond #eef0e9 for you, canary #ecd66b for the carrier, blue #a9c4d8 for the consignee Site; hairline ruling, tint field blocks, boxed oxide #a4301c stamps, green #1a573a receipt seal; pre-printed tracked caps versus monospace fill versus struck stamp.
-		STORY: A craftsperson reads one filled consignment note, sees exactly what is aboard and what was left out with reason codes, learns the original compiles a copy for every provider, signs three separate acts and watches the ledger survive the Meeting, then reads the condition register and installs.
-		FIRST VIEWPORT: Left column, sheet head then the declaration, lede, two actions and the maturity plate; right column, consignment note 0142 with four filled fields over the aboard and not-aboard manifest. Primary action sits under the lede at left.
+		STORY: A visitor starts with the world around one objective, sees its shared language projected for each participant, chooses what outlives the conversation, preserves Site sovereignty and reaches an exact source-only boundary.
+		FIRST VIEWPORT: Left column, sheet head then the declaration, lede, two actions and the source status; right column, consignment note 0142 with four filled fields over the aboard and not-aboard manifest. Primary action sits under the lede at left.
 		FORM: Multi-part consignment form and bill of lading · candidate 3 of the grounded list · seed 7568bf67.
 		FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, and DESIGN.md
 		-->
-		<a class="skip-link" href="#main">Skip to the consignment note</a>
+		<a class="skip-link" href="#main">Skip to the Workplace record</a>
 
 		<header class="bindery">
 			<div class="bindery-inner">
 				<a class="brand" href="/" aria-label="Endroit home">endroit</a>
 				<nav aria-label="Sheets">
-					<a href="#manifest">The manifest</a>
-					<a href="#carbon">The copies</a>
-					<a href="#signature">The signature</a>
-					<a href="#consignee">The destination</a>
+					<a href="#manifest">The world</a>
+					<a href="#carbon">The language</a>
+					<a href="#signature">What remains</a>
+					<a href="#consignee">The Site</a>
 					<a href="#condition">Condition</a>
 				</nav>
-				<p class="bindery-code">Form E-0.10 · Protocol 0.2-draft</p>
-				<a class="action action-primary" href="/install/">Install</a>
+				<p class="bindery-code">Form E-RC1 · Source-only</p>
+				<a class="action action-primary" href="https://github.com/thevzion/endroit">Source</a>
 			</div>
 		</header>
 
@@ -103,10 +103,10 @@ const description =
 							))}
 						</div>
 						<div class="hero-meta pre">
-							<span>Published alpha <code>0.8.0-alpha.1</code></span>
-							<span>Qualified local candidate <code>0.10.0-alpha.0</code>: not published, not deployed</span>
-							<span>Experimental protocol <code>open-workplace/0.2-draft</code></span>
-							<span>Projection-qualified providers: Codex and Claude</span>
+							<span>Source-only pre-release <code>v0.1.0-rc.1</code></span>
+							<span>Verified source <code>7388d63</code>: typecheck + 114 tests</span>
+							<span>Private package · run from the repository</span>
+							<span>Configured provider surfaces · no universal support claim</span>
 						</div>
 					</div>
 
@@ -223,7 +223,7 @@ const description =
 							))}
 						</div>
 						<div class="proofs">
-							<p class="pre">This Site does the same thing, check it</p>
+							<p class="pre">Inspect the current source contracts</p>
 							{projectionProofs.map((proof) => (
 								<p class="proof">
 									<a href={proof.href}>{proof.label}</a>
@@ -439,10 +439,10 @@ const description =
 						</div>
 					</div>
 					<div>
-						<p class="pre">Claim on file</p>
+						<p class="pre">Current boundary</p>
 						<p class="note-fine">
-							New and bootstrapping. This Site does not present it as an established community, and the destination is
-							recorded as an accepted release destination rather than a growth metric.
+							The package remains private. Run the compiler, examples and checks from the repository, and inspect every
+							proposed file before consent.
 						</p>
 					</div>
 				</div>
@@ -474,8 +474,9 @@ const description =
 			</p>
 			<p>
 				Endroit implements <a href="https://open-workplace.org/">Open Workplace</a> ·
-				<a href="https://github.com/thevzion/endroit">source</a> · <a href="/roadmap/">roadmap</a> ·
-				<a href="/homes/">Workplace anatomy</a> · <a href="/schema/">public contracts</a> · MIT licensed
+				<a href="https://github.com/thevzion/endroit">source</a> ·
+				<a href="https://github.com/thevzion/endroit/blob/develop/README.md">current README</a> ·
+				<a href="https://github.com/thevzion/endroit/blob/develop/ROADMAP.md">roadmap</a> · MIT licensed
 			</p>
 		</footer>
 

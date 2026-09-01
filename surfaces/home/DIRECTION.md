@@ -1,18 +1,19 @@
 # Landing exploration: direction contract
 
-Status: local exploration on the exact `ecosystem-2026-08-02` revision.
-Not accepted, not committed, not delivered. Human Content, Design and CTA
-review has not happened.
+Status: local candidate on `work/landing-canonical`, checked against Endroit
+source `7388d63` on 2026-09-02. Not accepted, published or delivered. Human
+Content, Design and CTA review remains pending.
 
 ## Editorial thesis
 
-**A harness runs the agent. Endroit runs the work around it.**
+**Give agentic work a world you own.**
 
-One idea owns the page: the unit of work stops being a code change and becomes
-a *dispatched consignment*: one written objective, an itemised manifest of
-exactly which owned sources are aboard, a declared destination, and a
-signature block that never leaves the human's hands. Everything else on the
-page is that one idea seen from a different party's copy.
+One idea owns the page: agentic work needs a durable, shared operational world
+outside any provider session. Open Workplace gives humans and agents common
+terms for place, ownership, authority, lifecycle and destination. Endroit
+materialises that model as owned files and configured views. The consignment
+set makes those relationships visible without turning the product into an
+abstract ontology.
 
 The page refuses the two arrangements this category always ships: the dark
 developer-tool hero with a fake terminal and a feature grid, and the

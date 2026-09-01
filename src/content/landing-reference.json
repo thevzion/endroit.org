@@ -14,13 +14,25 @@
     "reviewPending": "human Content, Design and CTA review",
     "scope": [
       "The landing route only: src/pages/index.astro and the components, data and stylesheet exclusive to it.",
-      "Secondary routes keep BaseLayout and the incumbent src/styles/global.css bench system, untouched.",
-      "public/social-card.png still renders the retired bench world and needs a replacement before any delivery."
+      "Secondary routes keep the incumbent src/styles/global.css bench system; BaseLayout changes only the shared social-card alternative text.",
+      "public/social-card.png carries the candidate hero at 1200 by 630 pixels."
     ],
     "sourceFiles": [
       {
+        "path": "package.json",
+        "sha256": "da41de75b1cd94a6b31fd744a68bf8489f9abe0af96fb16f135fe2ffe4d06ffc"
+      },
+      {
+        "path": "package-lock.json",
+        "sha256": "ae4a0010c9979cf12d270de8b4f1cd9dd01919ed0bd7ffcb8a33c40c64d09d99"
+      },
+      {
+        "path": "README.md",
+        "sha256": "73530558eb49350df273cefe492932aeeea7c42f8df15276d8209e3dd01f3caa"
+      },
+      {
         "path": "PRODUCT.md",
-        "sha256": "6337a61f9ac7df586b6474af6a90ea308f859d7116569eec62d343bc090e79fc"
+        "sha256": "362c1e86c90148aebc0753455f1cacc708bfb21726de4b11dbfe77cfe024ccbb"
       },
       {
         "path": "DESIGN.md",
@@ -32,11 +44,15 @@
       },
       {
         "path": "src/pages/index.astro",
-        "sha256": "6dc7b408edeb25f5f8bdd4026ae6cac31a19b9932500dcf8d73ce7dc661e6883"
+        "sha256": "42cf1f1d35a71b9d1ecb172bc40b21b80dfa3694c7171cbe4adc77fd27d4ba16"
+      },
+      {
+        "path": "src/layouts/BaseLayout.astro",
+        "sha256": "59d07060332516e760ab94ccadbc66b52a5202da9733026b25e80fe07ce62de6"
       },
       {
         "path": "src/components/SheetHead.astro",
-        "sha256": "c389459e5f942b60ede938683d4d10b7dfa1ebd5d0da10891f3f391dbfcd21ff"
+        "sha256": "4219eb2ea3cedfafd3530b2db86258d8be5a9b24a50ade538c1a09b77b1bea47"
       },
       {
         "path": "src/components/Stamp.astro",
@@ -44,7 +60,7 @@
       },
       {
         "path": "src/lib/consignment.mjs",
-        "sha256": "22b36fe58b73250714d412a50dd76a57254b60d1a87746b3793177ee820a46b7"
+        "sha256": "f83d187be0507ff7bbc6ab06a36d349fef3ad2c42e85cbedc0cb4b8a466e77dc"
       },
       {
         "path": "src/lib/surface.mjs",
@@ -56,11 +72,11 @@
       },
       {
         "path": "surfaces/home/SURFACE.md",
-        "sha256": "9415dc9b4103284cfbd8e5d1e9ef4256728f2570def1269373bfb52af86f0de5"
+        "sha256": "d8e8dab356a70c8cdd0a996476bd8f0cdc834089e4704e962df26470531b1867"
       },
       {
         "path": "surfaces/home/DIRECTION.md",
-        "sha256": "289b208a13810de45c87bfd7b526163a9f206223ea3ea1abf94766b9024a5655"
+        "sha256": "5688063093228293ecb960d1b3e5545f1c315c85e8dabf80b40401bce7ee9bd9"
       }
     ],
     "publicAssets": [
@@ -70,12 +86,12 @@
       },
       {
         "path": "public/social-card.png",
-        "sha256": "d810852b308a869300a18bb8bf4ec64061b7e0ef31c52f7ab782327994f012e6"
+        "sha256": "e133820aab1322d88322252f7e6490ff8a0e182df2c900e55180af179f913c6b"
       }
     ],
     "render": {
       "path": "dist/index.html",
-      "sha256": "b2a6aaa1acf69b750736ee2e724da4edd8f0952cb2b26e085f32f966d0781367",
+      "sha256": "8dc8dcbdfac05aca4fe277ebcfe72730029cdc73332cf3db6514e683f9666914",
       "assets": [
         {
           "href": "/_astro/index.CoDjjkMW.css",
@@ -105,41 +121,21 @@
     "note": "The promoted 024 world remains the delivered public landing until a human accepts a replacement. Its exact bytes stay recoverable from the ecosystem-2026-08-02 release branch; this exploration does not overwrite that history."
   },
   "contentReceipt": {
-    "release": "ecosystem-2026-08-02",
+    "release": "source-only-2026-09-02",
     "availability": "candidate",
     "facts": {
-      "package": "0.10.0-alpha.0",
-      "profile": "endroit/0.10",
-      "protocol": "open-workplace/0.2-draft",
-      "publishedPackage": "0.8.0-alpha.1"
+      "package": "0.1.0-rc.1",
+      "packageAvailability": "private",
+      "source": "develop@7388d63",
+      "verification": "typecheck + 114 tests"
     },
     "sources": [
       {
         "site": "endroit",
-        "commit": "32dda906242e2dc0e8746a3b35eeff9152ef2d2b",
-        "path": "PROFILE.md",
-        "projection": "public/profile.md"
-      },
-      {
-        "site": "open-workplace",
-        "commit": "2f484206b8c3a7cd0f55ada455222e122daf8924",
-        "path": "PROTOCOL.md",
-        "sha256": "0388741005eb318e920cd8ee5407e1f81e16c0d8d547212affa3ceb76ea31a70"
+        "commit": "7388d6303f36688adc4ca16b798c295701744aed",
+        "path": "README.md"
       }
     ],
-    "manifests": [
-      {
-        "path": "public/schema/manifest.json",
-        "sha256": "4d98852bed849486d294b08edc91e670189a8376a1ed51730fc16f700231e4ac"
-      },
-      {
-        "path": "src/content/projections.json",
-        "sha256": "e420f41c89104dc6fd59ecdbb3a133fb904730769ad2813621dda83d6447a8bc"
-      },
-      {
-        "path": "src/content/release-destinations.json",
-        "sha256": "1990de0f5c072c35cde7739d758e22b4cfbe4db8ce8d0054835ded918175287f"
-      }
-    ]
+    "manifests": []
   }
 }

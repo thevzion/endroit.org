@@ -16,8 +16,8 @@ export const note = {
 		},
 		{
 			label: 'Carrier',
-			value: 'claude-code',
-			note: 'supplies the model, tools and sandbox, not the authority',
+			value: 'configured agent',
+			note: 'supplies an execution surface, not the authority',
 		},
 		{
 			label: 'Place',
@@ -26,7 +26,7 @@ export const note = {
 		},
 		{
 			label: 'Book',
-			value: 'Workplace · acme-home · endroit/0.10',
+			value: 'Workplace · acme-home',
 			note: 'durable; this note is not',
 		},
 	],
@@ -80,12 +80,12 @@ export const carbonSet = [
 		id: 'agents',
 		tab: 'AGENTS.md',
 		file: 'AGENTS.md',
-		role: 'Compiled projection. Read by harnesses that follow the convention.',
+		role: 'Compiled projection for a configured provider surface.',
 		lines: [
 			'# Workplace',
 			'',
 			'Identity: acme-home',
-			'Profile: endroit/0.10',
+			'Revision: sha256:b3ab862c…',
 			'',
 			'## Payments',
 			'',
@@ -97,12 +97,11 @@ export const carbonSet = [
 		id: 'claude',
 		tab: 'CLAUDE.md',
 		file: 'CLAUDE.md',
-		role: 'Compiled projection for a projection-qualified provider.',
+		role: 'Compiled projection for another configured provider surface.',
 		lines: [
 			'# Workplace',
 			'',
 			'Identity: acme-home',
-			'Profile: endroit/0.10',
 			'Revision: sha256:b3ab862c…',
 			'',
 			'## Payments',
@@ -131,10 +130,10 @@ export const carbonSet = [
 // Real, served projections of owned sources on this Site. These are the
 // inspectable proofs for the carbon-set claim.
 export const projectionProofs = [
-	{ href: '/profile.md', label: '/profile.md', proves: 'the candidate Workplace Profile, projected from one exact Endroit commit' },
-	{ href: '/install.md', label: '/install.md', proves: 'the installation contract, machine-readable, hashed against its source' },
-	{ href: '/llms.txt', label: '/llms.txt', proves: 'a generated discovery projection, not a hand-written page' },
-	{ href: '/schema/', label: '/schema/', proves: 'immutable public contracts, each recorded with its source commit and SHA-256' },
+	{ href: 'https://github.com/thevzion/endroit/blob/develop/docs/projections.md', label: 'projections.md', proves: 'how owned sources become deterministic provider views' },
+	{ href: 'https://github.com/thevzion/endroit/blob/develop/docs/front-doors.md', label: 'front-doors.md', proves: 'how provider entrypoints remain projections, not canonical truth' },
+	{ href: 'https://github.com/thevzion/endroit/blob/develop/docs/meetings.md', label: 'meetings.md', proves: 'how bounded conversations and durable outcomes remain distinct' },
+	{ href: 'https://github.com/thevzion/endroit/blob/develop/INSTALL.md', label: 'INSTALL.md', proves: 'the current source-only installation and adoption boundary' },
 ];
 
 // The signature block. Each step is a separate human act.
@@ -228,7 +227,7 @@ export const parties = [
 	},
 	{
 		party: 'The harness',
-		owns: 'The model, tools, sandbox and the running agent. Claude Code and Codex are the projection-qualified providers.',
+		owns: 'The model, tools, sandbox and running agent. Endroit targets only surfaces declared by the Workplace.',
 		self: false,
 	},
 	{
@@ -250,28 +249,28 @@ export const notThis = [
 // The exact maturity register. These four distinctions are preserved verbatim.
 export const condition = [
 	{
-		state: 'available',
-		register: 'Published alpha',
-		subject: 'Endroit 0.8.0-alpha.1',
-		detail: 'The observed public package. File-based Workplaces, Rooms, Equipment, Sites and Routes with deterministic provider projections.',
-	},
-	{
 		state: 'candidate',
-		register: 'Qualified local candidate',
-		subject: 'Endroit 0.10.0-alpha.0',
-		detail: 'Declares the endroit/0.10 Profile, native v9 Workplace Documents, deterministic resolution and pathless Routes with derived Checkouts. Qualified locally: npm publication, schema delivery and deployment cannot be inferred.',
+		register: 'Source-only pre-release',
+		subject: 'Endroit v0.1.0-rc.1',
+		detail: 'The package is private. Run the compiler, examples and checks from the repository.',
 	},
 	{
-		state: 'draft',
-		register: 'Experimental protocol',
-		subject: 'Open Workplace 0.2-draft',
-		detail: 'An open proposal under active revision. Not an established standard, and not a conformance claim.',
+		state: 'verified',
+		register: 'Verified source',
+		subject: 'develop@7388d63',
+		detail: 'Typecheck and 114 tests passed on 2026-09-02. Fresh-agent convergence remains qualification work.',
 	},
 	{
-		state: 'qualified',
-		register: 'Projection-qualified',
-		subject: 'Codex and Claude',
-		detail: 'The two providers whose projections are qualified. Other harnesses may consume the AGENTS.md convention; that is not support for every runtime.',
+		state: 'model',
+		register: 'Shared model',
+		subject: 'Open Workplace',
+		detail: 'An implementation-neutral model for durable places, ownership, authority and lifecycle around agentic work.',
+	},
+	{
+		state: 'configured',
+		register: 'Configured surfaces',
+		subject: 'Provider bindings',
+		detail: 'A Workplace may compile provider-specific views. This is not a universal provider-support claim.',
 	},
 ];
 
@@ -281,11 +280,11 @@ export const condition = [
 export const schedule = [
 	{
 		ref: 'A1',
-		claim: 'A harness runs the agent. Endroit runs the work around it.',
-		mechanism: 'Endroit owns the file-based representation of the work; the provider owns the model, tools and sandbox.',
-		proof: 'The parties register on sheet 06, and the candidate Profile at /profile.md.',
+		claim: 'Humans and configured agents can share one operational world.',
+		mechanism: 'Open Workplace gives places, ownership, authority, lifecycle and destination stable names; Endroit makes them readable and executable.',
+		proof: 'The parties register on sheet 06 and the owned Surface behind this page.',
 		maturity: 'current',
-		source: 'Accepted product direction',
+		source: 'Retained product direction',
 	},
 	{
 		ref: 'A2',
@@ -297,11 +296,11 @@ export const schedule = [
 	},
 	{
 		ref: 'A3',
-		claim: 'One owned original compiles into a copy for every provider.',
-		mechanism: 'Owned Markdown produces AGENTS.md, CLAUDE.md, Skills and other projections deterministically.',
-		proof: 'This Site does it too: /profile.md, /install.md and /llms.txt are compiled projections, each hashed against its source commit in /schema/.',
+		claim: 'One owned original can compile into configured participant views.',
+		mechanism: 'Owned Markdown produces revision-bound Front Doors and provider projections deterministically.',
+		proof: 'The carbon set on sheet 03 and the current projection documentation in the source repository.',
 		maturity: 'current',
-		source: 'Observed projection manifest on this Site',
+		source: 'Current Endroit projection documentation',
 	},
 	{
 		ref: 'A4',
@@ -329,37 +328,39 @@ export const schedule = [
 	},
 	{
 		ref: 'A7',
-		claim: 'Startup hooks are an improvement, not a requirement.',
-		mechanism: 'The Workplace is ordinary Markdown; hooks only pre-load orientation.',
-		proof: 'The adoption contract at /install.md and the candidate Profile at /profile.md.',
+		claim: 'The Workplace remains readable without a provider.',
+		mechanism: 'Canonical meaning lives in ordinary owned files; provider entrypoints are rebuildable views.',
+		proof: 'The original and compiled copies on sheet 03, plus README.md in the source repository.',
 		maturity: 'current',
 		source: 'Installation contract',
 	},
 	{
 		ref: 'A8',
-		claim: 'The published alpha and the local candidate are different things.',
-		mechanism: 'The Site separates the observed public package from the locally qualified candidate.',
-		proof: 'The condition register on sheet 07, and the release metadata in /schema/manifest.json.',
+		claim: 'The current Endroit pre-release is source-only.',
+		mechanism: 'The package is private and the documented path runs the repository with Bun.',
+		proof: 'The condition register on sheet 07 and the current README and INSTALL documents.',
 		maturity: 'current',
 		source: 'Release boundary',
 	},
 	{
 		ref: 'A9',
-		claim: 'The Endroit Discord is new and bootstrapping.',
-		mechanism: 'An accepted release destination for candidate feedback, declared with its honest maturity.',
-		proof: 'The Site-owned Surface declares the destination and the claim.',
-		maturity: 'bootstrapping',
-		source: 'Accepted release destination',
+		claim: 'Open Workplace and Endroit own different responsibilities.',
+		mechanism: 'Open Workplace defines the implementation-neutral model; Endroit implements a local-first compiler and checks.',
+		proof: 'The model and implementation register on sheet 06.',
+		maturity: 'experimental',
+		source: 'Open Workplace proposal and current Endroit source',
 	},
 ];
 
 export const externalLinks = [
-	'https://endroit.org/install/',
-	'https://endroit.org/roadmap/',
 	'https://github.com/thevzion/endroit',
+	'https://github.com/thevzion/endroit/blob/develop/README.md',
+	'https://github.com/thevzion/endroit/blob/develop/README.md#quick-start',
+	'https://github.com/thevzion/endroit/blob/develop/INSTALL.md',
+	'https://github.com/thevzion/endroit/blob/develop/ROADMAP.md',
+	'https://github.com/thevzion/endroit/blob/develop/docs/projections.md',
+	'https://github.com/thevzion/endroit/blob/develop/docs/front-doors.md',
+	'https://github.com/thevzion/endroit/blob/develop/docs/meetings.md',
 	'https://open-workplace.org/',
 	'https://open-workplace.org/proposal/',
-	'https://open-workplace.org/protocol/',
-	'https://github.com/open-workplace/open-workplace',
-	'https://discord.gg/HW4Hs9sEp',
 ];

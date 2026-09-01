@@ -49,17 +49,16 @@ test('every exploration source and public asset matches the receipt', async () =
 });
 
 test('the landing facts are pinned to the release sources and local manifests', async () => {
-	assert.equal(receipt.contentReceipt.release, 'ecosystem-2026-08-02');
+	assert.equal(receipt.contentReceipt.release, 'source-only-2026-09-02');
 	assert.equal(receipt.contentReceipt.availability, 'candidate');
 	assert.deepEqual(receipt.contentReceipt.facts, {
-		package: '0.10.0-alpha.0',
-		profile: 'endroit/0.10',
-		protocol: 'open-workplace/0.2-draft',
-		publishedPackage: '0.8.0-alpha.1',
+		package: '0.1.0-rc.1',
+		packageAvailability: 'private',
+		source: 'develop@7388d63',
+		verification: 'typecheck + 114 tests',
 	});
 	assert.deepEqual(receipt.contentReceipt.sources.map(({ site, commit }) => ({ site, commit })), [
-		{ site: 'endroit', commit: '32dda906242e2dc0e8746a3b35eeff9152ef2d2b' },
-		{ site: 'open-workplace', commit: '2f484206b8c3a7cd0f55ada455222e122daf8924' },
+		{ site: 'endroit', commit: '7388d6303f36688adc4ca16b798c295701744aed' },
 	]);
 	for (const artifact of receipt.contentReceipt.manifests) {
 		assert.equal(sha256(await read(artifact.path)), artifact.sha256, artifact.path);

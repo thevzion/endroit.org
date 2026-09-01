@@ -2,16 +2,17 @@
 
 The product site for [Endroit](https://github.com/thevzion/endroit).
 
-**The place layer for agentic work.** Give agentic work a place to compound.
+**Give agentic work a world you own.**
 
-Endroit is a local-first compiler for human-owned Workplace context and an
-implementation of the experimental
-[Open Workplace 0.2 draft](https://open-workplace.org/protocol/).
+This repository owns the public Site for Endroit. Its candidate landing
+introduces Endroit as the local-first implementation of
+[Open Workplace](https://open-workplace.org/): one shared operational world
+for humans and configured agents, expressed through owned files and explicit
+authority boundaries.
 
 The [Workplace-first Proposal](https://open-workplace.org/proposal/) is an open
 proposal, not a standard or a prerequisite for using Endroit. This Site owns
-Endroit product positioning, current capabilities and the conceptual direction
-of specialized Homes.
+Endroit product positioning and its public presentation.
 
 ## Development
 
@@ -25,22 +26,21 @@ npm run dev
 `npm run build` type-checks the Astro project and emits the static site to
 `dist/`.
 
-## Product truth
+## Candidate boundary
 
-- `0.8.0-alpha.1` remains the observed public package.
-- `0.10.0-alpha.0` is a qualified local candidate, not yet published or
-  deployed. It declares Profile `endroit/0.10` targeting
-  `open-workplace/0.2-draft`.
-- v9 and Work schemas are projected from one exact Endroit source commit; the
-  manifest records that commit and every digest.
+- The landing is a local candidate. It is not accepted, published or deployed.
+- Endroit `v0.1.0-rc.1` is source-only and the package is private.
+- The copy was checked against Endroit `develop@7388d63`: typecheck and 114
+  tests passed on 2026-09-02.
+- Fresh-agent convergence remains qualification work.
 - The Endroit repository owns installation, architecture, lifecycle,
   reference, security and release truth.
 
 The Endroit Site owns the landing, product contracts and documentation
 transposition. `surfaces/home/SURFACE.md` owns the landing composition and
-copy; Astro owns its renderer and visual system. Interface Lab is retained as
-historical design provenance and is never read by the build or release
-qualification. Run `npm run sync:sources` with an explicit
+copy; Astro owns its renderer and visual system. `src/content/landing-reference.json`
+locks the candidate sources, public assets and build output. Run
+`npm run sync:sources` with an explicit
 `ENDROIT_SOURCE_ROOT` to refresh product projections without guessing their
 owner.
 

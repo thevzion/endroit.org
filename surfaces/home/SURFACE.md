@@ -6,7 +6,7 @@ owner: "site:endroit.org"
 artifact_contract: "endroit/release/public-surface/v1alpha1"
 material_state: "retained"
 currentness: "exploration"
-derived_from: ["site:endroit.org/surfaces/home/DIRECTION.md"]
+derived_from: ["meeting:desk/endroit/update-site-hard-reset-landing", "material:desk/open-workplace/workplace-as-owned-operational-world-model", "material:desk/endroit/domain-language-of-agentic-work"]
 ---
 
 # Endroit
@@ -43,20 +43,19 @@ kind: "content"
 id: "hero"
 sheet: "01"
 stock: "original"
-plate: "CONSIGNMENT NOTE"
+plate: "WORKPLACE RECORD"
 ```
 
-### A harness runs the agent. Endroit runs the work around it.
+### Give agentic work a world you own.
 
-> Agents execute. You still direct, accept and deliver.
+Your work spans people, decisions, methods, repositories and time. Endroit
+turns those relationships into an owned, inspectable Workplace that survives
+the session.
 
-Endroit is a framework for structuring work around coding agents. Every
-Meeting gets one written objective, a manifest of exactly which owned sources
-are aboard, declared destinations, and a signature block that never leaves
-your hands.
+> Humans and configured agents share one language for where work belongs, who may decide, what can change and what should remain.
 
-- [Install Endroit](/install/)
-- [View the source](https://github.com/thevzion/endroit)
+- [See the shared language](#carbon)
+- [Inspect the source](https://github.com/thevzion/endroit)
 
 ## Problem
 
@@ -65,21 +64,20 @@ kind: "content"
 id: "problem"
 sheet: "02"
 stock: "original"
-plate: "WHY A MANIFEST"
+plate: "PARTIAL VIEW"
 ```
 
-### A bigger context window is a bigger truck. It is not a manifest.
+### A session starts with a partial view of your work.
 
-Every session re-opens the same four questions: what are we working on, which
-decisions still hold, where does the result belong, and what is this agent
-allowed to change. A longer window carries more tokens for one trip. It gives
-none of them an owner, a place, or a life after the trip ends.
+The prompt carries an objective. The repository carries code and history.
+Provider instructions shape one execution environment. You still reconnect
+the objective to the current decisions, methods, owners, authority and
+destination.
 
-> Capacity is not continuity.
+> A new session should enter the work instead of reconstructing its world.
 
-Endroit reduces ambiguity about the situation an agent works in. That is not a
-measured claim about model intelligence or accuracy, and it does not remove
-the need for your correction.
+Endroit gives those relationships durable addresses outside the provider
+session. The provider can change while the work keeps its place.
 
 ## Carbon
 
@@ -88,20 +86,20 @@ kind: "content"
 id: "carbon"
 sheet: "03"
 stock: "carrier"
-plate: "CARRIER'S COPY"
+plate: "SHARED LANGUAGE"
 ```
 
-### One original. A compiled copy for every provider.
+### One owned world, projected for each participant.
 
-Your context lives once, as Markdown you own and can open in any editor.
-Endroit compiles the provider copies from it: `AGENTS.md`, `CLAUDE.md`, Skills
-and other projections. You edit the original; the copies are rebuilt output,
-never the source and never hand-maintained.
+Open Workplace names durable responsibilities such as Room, Meeting,
+Equipment, Material, Site and Route. Endroit compiles their owned meaning into
+human Views and provider Front Doors.
 
-> Edit the original. The copies are output.
+> The view changes. Ownership, authority, lifecycle and destination keep the same meaning.
 
-- Optional startup hooks make this smoother. The plain-file model requires none.
-- Other harnesses can read the `AGENTS.md` convention. Codex and Claude are the projection-qualified providers, which is not an any-agent claim.
+- Humans read ordinary Markdown.
+- Configured agents receive revision-bound `FRONTDOOR.md`, `AGENTS.md` or `CLAUDE.md` Views.
+- A Skill, command or API can address the same semantic operation in its native form.
 
 ## Signature
 
@@ -110,17 +108,15 @@ kind: "content"
 id: "signature"
 sheet: "04"
 stock: "original"
-plate: "SIGNATURE BLOCK"
+plate: "WHAT REMAINS"
 ```
 
-### Nothing survives a Meeting unless you sign for it.
+### Conversation ends. Selected work remains.
 
-A Meeting is bounded on purpose. It holds one objective, the resolved context
-and the ephemeral work. When it closes, the conversation goes. What you signed
-for stays, as a file with an owner, a place and a state, and the next Meeting
-resolves it without inheriting a transcript.
+A Meeting holds one bounded collaboration event. Its conversation remains
+ephemeral until you choose a result that should continue as owned Material.
 
-> Close the Meeting. Keep the consignment.
+> You choose what the Workplace carries forward.
 
 ## Consignee
 
@@ -129,21 +125,20 @@ kind: "content"
 id: "consignee"
 sheet: "05"
 stock: "consignee"
-plate: "CONSIGNEE'S COPY"
+plate: "SOVEREIGN SITE"
 ```
 
-### The destination signs for itself.
+### Repositories keep their own truth.
 
-A repository you can reach is not a repository you may change. A Route
-declares reach to one Site and revalidates it before any mutation. Consent is
-a separate act. Delivery exists when the effect is observed in the Site, not
-when an agent reports success.
+A Site owns its source, history, permissions and delivery. A Route records how
+a Desk reaches it. Endroit keeps workplace context and Site truth in separate
+ownership boundaries.
 
-> Reach is not consent.
+> Access creates reach. The human still controls authority and delivery.
 
-- Accepted is not delivered.
-- A valid Route is not consent.
-- A generated file is not a delivered page.
+- Retained Material is not accepted judgment.
+- A Route does not grant delivery consent.
+- An agent report does not prove an external effect.
 
 ## Stack
 
@@ -152,26 +147,24 @@ kind: "content"
 id: "stack"
 sheet: "06"
 stock: "original"
-plate: "PARTIES AND LIMITS"
+plate: "MODEL AND IMPLEMENTATION"
 ```
 
-### The harness is not the framework. Neither is the repository.
+### Open Workplace defines the model. Endroit implements it.
 
-Endroit sits between your judgment and the runtimes that execute. It owns the
-file-based representation of the work: places, manifests, projections, Routes
-and receipts. It owns nothing else.
+Workplace-first puts the durable place around agentic work at the center of
+design. Open Workplace publishes the shared implementation-neutral model.
+Endroit provides a local-first file-based compiler, source formats, commands
+and checks.
 
-> Remove every agent and the Workplace is still Markdown you can read.
+> Endroit compiles the place around agent reasoning. It does not replace the reasoning.
 
-Open Workplace is an open proposal, not an established standard. Its current
-experimental Protocol is `open-workplace/0.2-draft`. The qualified local
-Endroit `0.10.0-alpha.0` candidate declares the versioned `endroit/0.10`
-Profile targeting that draft. Publication, deployment and broader conformance
-cannot be inferred.
+The current source targets configured provider surfaces. It makes no universal
+provider, autonomous delivery, automatic memory or model-intelligence claim.
 
-- [Read the proposal](https://open-workplace.org/proposal/)
-- [Read the protocol](https://open-workplace.org/protocol/)
-- [Inspect the candidate Profile](/profile.md)
+- [Read the Workplace-first Proposal](https://open-workplace.org/proposal/)
+- [Inspect Open Workplace](https://open-workplace.org/)
+- [Inspect Endroit](https://github.com/thevzion/endroit)
 
 ## Availability
 
@@ -180,15 +173,14 @@ kind: "content"
 id: "availability"
 sheet: "07"
 stock: "board"
-plate: "CONDITION OF THIS RELEASE"
+plate: "CURRENT CONDITION"
 ```
 
-### Available now. Candidate next. Draft beyond.
+### Source-only, current and bounded.
 
-Ambition is only useful when its maturity is legible. This register separates
-the published alpha, the qualified local candidate, the experimental protocol
-and the two projection-qualified providers. A candidate is never presented as
-an observed release.
+`v0.1.0-rc.1` is a source-only pre-release. The package is private. The static
+compiler, examples and checks run from the repository. Fresh-agent convergence
+remains qualification work.
 
 ## Community
 
@@ -197,15 +189,23 @@ kind: "content"
 id: "community"
 sheet: "08"
 stock: "original"
-plate: "CORRESPONDENCE"
+plate: "RUN FROM SOURCE"
 ```
 
-### Join the new Discord
+### Create a small Workplace and inspect every proposed file.
 
-The Endroit Discord is new and bootstrapping. Join to follow the candidate,
-share Workplace experiments and help qualify the release.
+Use Bun `1.3.14`. The wizard previews its files, provider surfaces, Git guards
+and commits before it asks for consent.
 
-- [Join the new Discord](https://discord.gg/HW4Hs9sEp)
+```sh
+bun install --frozen-lockfile
+bun run typecheck
+bun run test
+bun src/cli.ts new ./endroit-fresh
+```
+
+- [Read the current commands](https://github.com/thevzion/endroit/blob/develop/INSTALL.md)
+- [Follow the roadmap](https://github.com/thevzion/endroit/blob/develop/ROADMAP.md)
 
 ## Close
 
@@ -214,17 +214,17 @@ kind: "content"
 id: "close"
 sheet: "09"
 stock: "board"
-plate: "DISPATCH"
+plate: "NEXT ENTRY"
 ```
 
-### Direct the work. Let the agents execute.
+### Give the next session a place to enter.
 
-Start with a Workplace. Bring whichever qualified agent you like. Keep the part
-that was worth keeping, and let the next Meeting begin from it.
+Start with the source. The current wizard creates a small Workplace and no
+Room, Work, Site, remote, hosting or delivery by default.
 
-- [Install Endroit](/install/)
-- [View the source](https://github.com/thevzion/endroit)
-- [Read the roadmap](/roadmap/)
+- [Inspect the source](https://github.com/thevzion/endroit)
+- [Run from source](https://github.com/thevzion/endroit/blob/develop/README.md#quick-start)
+- [Read the roadmap](https://github.com/thevzion/endroit/blob/develop/ROADMAP.md)
 
 ## Provenance
 
@@ -236,8 +236,8 @@ stock: "board"
 plate: "PROVENANCE"
 ```
 
-This landing exploration derives its visual world from the Site's own
-materials rather than from an Interface Lab reference: multi-part consignment
-forms, manifests, reason codes, stamps, Routes and receipts. The direction
-contract is `surfaces/home/DIRECTION.md`. The exploration has not been
-accepted, published or deployed.
+This candidate derives from the Endroit public-proof Initiative, the retained
+Workplace-as-world-model Material and the shared language of agentic work. Its
+current claims were checked against Endroit source revision `7388d63` on
+2026-09-02: typecheck and 114 tests passed. The copy and implementation remain
+candidates. They have not been accepted, published or deployed.
