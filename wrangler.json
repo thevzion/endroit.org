@@ -1,0 +1,17 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "endroit-site",
+  "account_id": "c46cbafdbae4ec3e42c3f87999a3417e",
+  "compatibility_date": "2026-10-08",
+  "workers_dev": false,
+  "preview_urls": false,
+  "routes": [
+    { "pattern": "endroit.org", "custom_domain": true },
+    { "pattern": "www.endroit.org", "custom_domain": true }
+  ],
+  "assets": {
+    "directory": "./dist",
+    "html_handling": "auto-trailing-slash",
+    "not_found_handling": "404-page"
+  }
+}

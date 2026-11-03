@@ -41,6 +41,22 @@ refresh the landing, installation contract and public schema projections.
 
 ## Deployment
 
-The static build will be served by the `endroit` Fly.io app behind Cloudflare.
-Pushes to `main` deploy through GitHub Actions using an app-scoped Fly deploy
-token. Run `flyctl deploy` for a manual deployment.
+The Cloudflare Workers Static Assets configuration serves the same Astro build:
+
+| Target | Worker | Configuration | Hostnames |
+| --- | --- | --- | --- |
+| Production | `endroit-site` | `wrangler.json` | `endroit.org`, `www.endroit.org` |
+| Private staging | Nginx on the existing VPS | `nginx.staging.conf` | `staging.endroit.org` through NetBird |
+
+Staging serves the same artifact through the existing private NetBird/Coolify
+entrypoint. `wrangler.staging.json` is for local Cloudflare compatibility checks
+only; it declares no domain and disables `workers.dev` and preview URLs, as does
+production. No analytics script is included in either build; staging receives
+`noindex` on every Nginx response.
+
+GitHub Actions builds, tests and retains a static artifact for 30 days. It does
+not deploy and needs no Fly or Cloudflare deployment secret. The Fly deployment
+files remain available as historical rollback material, outside the CI path.
+
+See [Cloudflare delivery and rollback](docs/cloudflare-delivery.md) for the VZT-48
+migration procedure, checks and ownership boundaries.

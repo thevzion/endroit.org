@@ -11,6 +11,7 @@
     "dev": "astro dev",
     "build": "astro check && astro build",
     "test": "npm run build && node --test tests/*.test.mjs",
+    "check:http": "node scripts/check-static-http.mjs",
     "sync:sources": "node scripts/sync-owned-sources.mjs",
     "preview": "astro preview",
     "astro": "astro"
@@ -27,6 +28,7 @@
     "@astrojs/check": "^0.9.9",
     "@types/react": "^19.2.17",
     "@types/react-dom": "^19.2.3",
-    "typescript": "^6.0.3"
+    "typescript": "^6.0.3",
+    "wrangler": "4.157.0"
   }
 }

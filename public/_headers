@@ -1,0 +1,12 @@
+/*
+  Cache-Control: no-transform
+
+/install.md
+  Content-Type: text/markdown
+  Access-Control-Allow-Origin: *
+  X-Content-Type-Options: nosniff
+
+/schema/*.json
+  Content-Type: application/schema+json
+  Access-Control-Allow-Origin: *
+  X-Content-Type-Options: nosniff
